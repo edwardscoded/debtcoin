@@ -3,1248 +3,522 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>$DEBT - If You Can't Beat The Debt, Profit From It | DebtCoin</title>
+    <title>$DEBT - F*ck The System. Join The Cult.</title>
     <style>
         /* Reset and base styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-             scroll-behavior: smooth; /* Smooth scrolling for anchor links */
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
-            background-color: #0d0d0d;
-            color: #f0f0f0;
+            background-color: #0c0c0c; /* Even darker */
+            color: #e8e8e8; /* Slightly off-white */
             line-height: 1.6;
-            font-family: 'Arial', sans-serif;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            font-family: 'Inter', 'Arial', sans-serif; /* Modern font */
+            overflow-x: hidden;
+            opacity: 0;
+            animation: fadeInPage 0.8s ease-out forwards;
         }
+        @keyframes fadeInPage { to { opacity: 1; } }
 
         /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        /* Section base */
+        section { padding: 70px 0; position: relative; overflow: hidden; }
+
+        /* Animations on Scroll */
+        .fade-in-section { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
+        .fade-in-section.visible { opacity: 1; transform: translateY(0); }
+
+        /* Glitch Effect (Optional) */
+         .glitch { animation: glitch 1.5s linear infinite alternate-reverse; }
+         @keyframes glitch {
+             2%, 64% { transform: translate(2px, 0) skew(0deg); }
+             4%, 60% { transform: translate(-2px, 0) skew(0deg); }
+             62% { transform: translate(0, 0) skew(5deg); }
+         }
+
 
         /* Header styles */
         header {
-            background-color: rgba(26, 26, 26, 0.95); /* Slightly transparent */
-            backdrop-filter: blur(5px); /* Frosted glass effect */
-            color: white;
-            padding: 15px 0; /* Reduced padding slightly */
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            background-color: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            color: white; padding: 15px 0; position: fixed; width: 100%; top: 0; z-index: 100;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
-
-        .header-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; }
 
         .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: #3e8eff; /* Blue */
-            text-decoration: none;
+            font-size: 28px; font-weight: 800; /* Bolder */ color: #ff3e3e; /* Red instead of blue */
+            text-decoration: none; letter-spacing: -1.5px;
+            text-shadow: 0 0 5px rgba(255, 62, 62, 0.5); /* Red glow */
         }
-
-        .logo span {
-            color: #ffffff;
-        }
-
+        .logo span { color: #ffffff; }
         .ticker-symbol {
-            font-family: monospace;
-            background-color: #3e8eff; /* Blue */
-            color: #0d0d0d;
-            padding: 2px 6px;
-            border-radius: 3px;
-            margin-left: 5px;
-            font-size: 0.8em;
-            vertical-align: middle;
+            font-family: 'Courier New', Courier, monospace; background-color: #ff3e3e; color: #0c0c0c;
+            padding: 3px 8px; border-radius: 4px; margin-left: 8px; font-size: 0.7em;
+            vertical-align: middle; font-weight: bold; border: 1px solid #ff6e6e;
         }
 
         /* Desktop Navigation */
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 30px;
-        }
-
+        nav ul { display: flex; list-style: none; }
+        nav ul li { margin-left: 40px; }
         nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-            padding: 5px 0; /* Add padding for larger clickable area */
+            color: #d0d0d0; text-decoration: none; font-weight: 600; /* Semi-bold */
+            transition: color 0.3s, transform 0.2s; padding: 5px 0; position: relative; display: inline-block;
+            text-transform: uppercase; /* Cult-like feel */ font-size: 0.9em; letter-spacing: 0.5px;
         }
-
-        nav ul li a:hover {
-            color: #3e8eff; /* Blue */
-        }
+         nav ul li a::after {
+             content: ''; position: absolute; width: 0; height: 2px; display: block; margin-top: 3px;
+             right: 0; background: #ff3e3e; transition: width 0.3s ease;
+         }
+         nav ul li a:hover::after { width: 100%; left: 0; background-color: #ff3e3e; }
+        nav ul li a:hover { color: #ffffff; transform: translateY(-1px); }
 
         .cta-button {
-            background-color: #3e8eff; /* Blue */
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: background-color 0.3s, transform 0.2s;
+            background: linear-gradient(45deg, #ff3e3e, #ff6e6e); /* Red Gradient */
+            color: white; padding: 10px 24px; border-radius: 5px; font-weight: 700; text-decoration: none;
+            transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(255, 62, 62, 0.4);
+            text-transform: uppercase; font-size: 0.9em; letter-spacing: 0.5px;
         }
-
         .cta-button:hover {
-            background-color: #2e7eee; /* Darker blue */
-            transform: translateY(-2px);
+            background: linear-gradient(45deg, #e02a2a, #f05a5a);
+            transform: translateY(-2px) scale(1.03); box-shadow: 0 6px 18px rgba(255, 62, 62, 0.5);
         }
+        .cta-button.nav-cta { margin-left: 40px; }
 
-        /* Mobile Navigation Toggle (Hamburger) */
-        .mobile-nav-toggle {
-            display: none; /* Hidden by default */
-            background: none;
-            border: none;
-            color: white;
-            font-size: 28px;
-            cursor: pointer;
-            z-index: 110; /* Above overlay */
-        }
-
-        /* Mobile Navigation Links Container */
+        /* Mobile Navigation */
+        .mobile-nav-toggle { display: none; background: none; border: none; color: white; font-size: 32px; cursor: pointer; z-index: 110; padding: 5px; }
         .mobile-nav-links {
-            display: none; /* Hidden by default */
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 70%; /* Adjust width as needed */
-            max-width: 300px;
-            height: 100%;
-            background-color: #1a1a1a; /* Dark background */
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.4);
-            padding-top: 80px; /* Space for close button or header */
-            z-index: 105;
-            flex-direction: column;
-            align-items: center;
+            display: none; position: fixed; top: 0; right: -100%; width: 80%; max-width: 340px; height: 100%;
+            background-color: #111; box-shadow: -5px 0 20px rgba(0, 0, 0, 0.6); padding-top: 90px;
+            z-index: 105; flex-direction: column; align-items: center; transition: right 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
-
-        .mobile-nav-links.active {
-            display: flex; /* Show when active */
-        }
-
-        .mobile-nav-links ul {
-            list-style: none;
-            padding: 0;
-            width: 100%;
-            text-align: center;
-        }
-
-        .mobile-nav-links ul li {
-            margin: 20px 0;
-        }
-
+        .mobile-nav-links.active { display: flex; right: 0; }
+        .mobile-nav-links ul { list-style: none; padding: 0; width: 100%; text-align: center; }
+        .mobile-nav-links ul li { margin: 30px 0; }
         .mobile-nav-links ul li a {
-            color: white;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: 500;
-            padding: 10px 20px;
-            display: block; /* Make whole area clickable */
-            transition: background-color 0.3s, color 0.3s;
+            color: white; text-decoration: none; font-size: 22px; font-weight: 600; padding: 14px 30px;
+            display: block; transition: background-color 0.3s, color 0.3s; text-transform: uppercase;
         }
+        .mobile-nav-links ul li a:hover { color: #ff3e3e; background-color: #1f1f1f; }
+        .mobile-nav-links .cta-button { margin-top: 50px; }
 
-        .mobile-nav-links ul li a:hover {
-            color: #3e8eff; /* Blue */
-            background-color: #2a2a2a;
-        }
-        .mobile-nav-links .cta-button {
-            margin-top: 30px;
-        }
 
         /* Price ticker */
         .price-ticker {
-            background-color: #0d0d0d;
-            padding: 8px 0;
-            text-align: center;
-            border-top: 1px solid #333;
-            font-family: monospace;
-            overflow: hidden;
-            white-space: nowrap;
-            position: relative;
-            width: 100%;
+            background-color: #000; /* Pitch black */ padding: 8px 0; text-align: center;
+            border-top: 1px solid #2a2a2a; font-family: 'Courier New', Courier, monospace;
+            overflow: hidden; white-space: nowrap; position: relative; width: 100%;
         }
-
-         .price-ticker::after { /* Fade effect for overflowing text */
-             content: '';
-             position: absolute;
-             top: 0;
-             right: 0;
-             width: 60px; /* Increased fade width */
-             height: 100%;
-             background: linear-gradient(to right, transparent, #0d0d0d 80%); /* Sharper fade */
-             pointer-events: none; /* Allow clicking through the fade */
+        .price-ticker::after {
+             content: ''; position: absolute; top: 0; right: 0; width: 70px; height: 100%;
+             background: linear-gradient(to right, transparent, #000 85%); pointer-events: none;
          }
-
-         .ticker-content { /* Wrap content for animation */
-            display: inline-block; /* Necessary for transform animation */
-            padding-left: 100%; /* Start off-screen to the right */
-            animation: ticker 30s linear infinite; /* Adjust duration as needed */
-         }
-
-
-        .price-label {
-            color: #cccccc;
-            margin-right: 5px;
-        }
-
-        .price-value {
-            color: #3e8eff; /* Blue */
-            font-weight: bold;
-            margin-right: 10px;
-        }
-
-        .price-change {
-            padding: 2px 5px;
-            border-radius: 3px;
-            font-size: 0.8em;
-            margin-right: 15px;
-        }
-
-        .positive {
-            background-color: #32CD32; /* Green for positive */
-            color: #ffffff;
-        }
-
-        .negative {
-            background-color: #ff3e3e; /* Red for negative */
-            color: #ffffff;
-        }
-
-        .ticker-message {
-            color: #cccccc;
-            font-style: italic;
-            margin-left: 30px; /* Space between price and message */
-        }
-
-        @keyframes ticker {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-100%); /* Move fully across its own width + padding */
-            }
-        }
+         .ticker-content { display: inline-block; padding-left: 100%; animation: ticker 30s linear infinite; }
+        .price-label { color: #aaa; margin-right: 5px; }
+        .price-value { color: #ff3e3e; font-weight: bold; margin-right: 10px; }
+        .price-change { padding: 2px 5px; border-radius: 3px; font-size: 0.8em; margin-right: 15px; }
+        .positive { background-color: #28a745; color: white; }
+        .negative { background-color: #ff3e3e; color: white; } /* Use red for negative */
+        .ticker-message { color: #a8a8a8; font-style: italic; margin-left: 30px; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
 
         /* Hero section */
         .hero {
-            padding: 180px 0 100px; /* Increased top padding to account for fixed header + ticker */
-            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
-            color: white;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            border-bottom: 2px solid #3e8eff; /* Blue */
+            padding: 200px 0 140px;
+             background: #0c0c0c url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><g fill="none" stroke="rgba(255, 62, 62, 0.05)" stroke-width="1"><path d="M30 0 L60 30 L30 60 L0 30 Z" /><path d="M0 0 L60 60 M60 0 L0 60" /></g></svg>') repeat; /* Edgy chaotic background */
+            color: white; text-align: center; position: relative; overflow: hidden;
+            border-bottom: 4px solid #ff3e3e; /* Thicker red border */
         }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><text x="0" y="10" font-family="monospace" font-size="10" fill="rgba(62,142,255,0.03)">$</text></svg>');
-            opacity: 0.5;
-            z-index: 0;
-        }
-
-        .hero .container { /* Ensure container content is above pseudo-element */
-            position: relative;
-            z-index: 1;
-        }
-
+        .hero .container { position: relative; z-index: 1; }
 
         .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            color: #ffffff;
+            font-size: 64px; /* MUCH Larger */ margin-bottom: 15px; color: #ffffff; font-weight: 800;
+            letter-spacing: -2px; text-shadow: 0 3px 8px rgba(0,0,0,0.5); line-height: 1.1;
+        }
+        .hero h1 span { color: #ff3e3e; text-shadow: 0 0 10px rgba(255, 62, 62, 0.7); } /* Red glow */
+
+        .hero p.subtitle {
+            font-size: 24px; max-width: 750px; margin: 0 auto 35px; opacity: 0.85; font-weight: 400;
+        }
+         .hero p.tagline { /* More aggressive tagline */
+            font-style: normal; font-size: 30px; margin-bottom: 45px; color: #ff3e3e; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px;
+         }
+
+
+        .hero-cta-main { /* Main Buy/Join Button */
+            padding: 20px 45px; font-size: 22px; margin: 30px auto; display: inline-block;
+            background: linear-gradient(45deg, #ff3e3e, #ff6e6e); color: white; border-radius: 8px;
+            font-weight: 700; text-decoration: none; transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(255, 62, 62, 0.5); text-transform: uppercase; letter-spacing: 1px;
+        }
+        .hero-cta-main:hover {
+            background: linear-gradient(45deg, #e02a2a, #f05a5a);
+            transform: translateY(-3px) scale(1.05); box-shadow: 0 9px 25px rgba(255, 62, 62, 0.6);
         }
 
-        .hero h1 span {
-            color: #3e8eff; /* Blue */
-        }
-
-        .hero p {
-            font-size: 20px;
-            max-width: 800px;
-            margin: 0 auto 40px;
-            opacity: 0.9;
-        }
-
-        .tagline {
-            font-style: italic;
-            font-size: 24px;
-            margin-bottom: 30px;
-            color: #3e8eff; /* Blue */
-        }
-
-        .hero-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px; /* Added margin */
-        }
-
-        .hero-cta {
-            padding: 15px 30px;
-            font-size: 18px;
-        }
-
-        .secondary-cta {
-            background-color: transparent;
-            border: 2px solid #3e8eff; /* Blue */
-            color: #3e8eff;
-        }
-
-        .secondary-cta:hover {
-            background-color: rgba(62, 142, 255, 0.1); /* Blue */
-            color: #ffffff;
-        }
-
-        /* Global debt counter */
-        .global-debt-counter {
-            background-color: rgba(26, 26, 26, 0.8);
-            border: 2px solid #3e8eff; /* Blue */
-            padding: 15px;
-            border-radius: 10px;
-            max-width: 600px;
-            margin: 40px auto; /* Adjusted margin */
-        }
-
-        .counter-label {
-            font-size: 14px;
-            text-transform: uppercase;
-            color: #cccccc;
-            letter-spacing: 2px;
-        }
-
-        .counter-value {
-            font-family: monospace;
-            font-size: 36px;
-            font-weight: bold;
-            color: #3e8eff; /* Blue */
-            margin: 10px 0;
-            word-wrap: break-word; /* Prevent overflow */
-        }
-
-        .counter-subtext {
-            font-size: 12px;
-            color: #cccccc;
-            font-style: italic;
-        }
 
         /* Contract address box */
         .contract-address {
-            background-color: #1a1a1a;
-            border: 2px solid #3e8eff; /* Blue */
-            border-radius: 10px;
-            padding: 20px; /* Increased padding */
-            margin: 30px auto;
-            max-width: 600px;
-            text-align: center;
+            background-color: rgba(15, 15, 15, 0.9); border: 2px solid #ff3e3e; border-radius: 10px;
+            padding: 30px; margin: 50px auto; max-width: 650px; text-align: center;
+            box-shadow: 0 0 15px rgba(255, 62, 62, 0.2); /* Red glow */
         }
-
-        .contract-address h4 {
-            color: #ffffff;
-            margin-bottom: 15px; /* Increased margin */
-            font-size: 18px;
-        }
-
+        .contract-address h4 { color: #ffffff; margin-bottom: 15px; font-size: 20px; text-transform: uppercase; }
         .contract-address p {
-            font-family: monospace;
-            background-color: #0d0d0d;
-            padding: 12px; /* Increased padding */
-            border-radius: 5px;
-            color: #3e8eff; /* Blue */
-            overflow-wrap: break-word; /* Better word breaking */
-            word-break: break-all;
-            font-size: 14px; /* Slightly smaller for long addresses */
-            text-align: center;
+            font-family: 'Courier New', Courier, monospace; background-color: #000; padding: 15px; border-radius: 5px;
+            color: #ff3e3e; overflow-wrap: break-word; word-break: break-all; font-size: 16px;
+            text-align: center; border: 1px solid #444;
         }
-
         .copy-btn {
-            background-color: #3e8eff; /* Blue */
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 8px 15px;
-            margin-top: 15px; /* Increased margin */
-            cursor: pointer;
-            font-size: 14px;
-            transition: background-color 0.3s;
+            background-color: #ff3e3e; color: white; border: none; border-radius: 5px; padding: 12px 20px;
+            margin-top: 20px; cursor: pointer; font-size: 16px; transition: background-color 0.3s, transform 0.2s;
+            font-weight: bold; text-transform: uppercase;
         }
+        .copy-btn:hover { background-color: #e02a2a; transform: translateY(-2px); }
 
-        .copy-btn:hover {
-            background-color: #2e7eee; /* Darker blue */
-        }
-
-        /* Buy buttons section */
-        .buy-buttons {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin: 30px auto;
-            max-width: 800px;
-        }
-
-        .buy-btn {
-            padding: 15px 25px;
-            border-radius: 5px;
-            font-weight: 700;
-            font-size: 16px;
-            text-decoration: none;
-            color: white;
-            transition: transform 0.3s, box-shadow 0.3s;
-            background-color: #3e8eff; /* Blue - Standardized */
-        }
-
-        .buy-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(62, 142, 255, 0.3); /* Blue shadow */
-        }
-
-        /* Game container */
-        .game-container {
-            margin-top: 50px;
-            width: 100%;
-            max-width: 800px;
-            height: 500px;
-            margin: 50px auto 0;
-            background-color: #1a1a1a;
-            border: 3px solid #3e8eff; /* Blue */
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-            cursor: pointer; /* Indicate interactivity */
-        }
-
-        .game-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-color: rgba(10, 10, 10, 0.85); /* Slightly darker overlay */
-            z-index: 10;
-            padding: 20px; /* Add padding */
-        }
-
-        .game-title {
-            font-size: 36px;
-            margin-bottom: 20px;
-            color: #3e8eff; /* Blue */
-        }
-
-        .game-description {
-            max-width: 500px;
-            margin-bottom: 30px;
-            text-align: center;
-            color: #cccccc; /* Lighter text on overlay */
-        }
-
-        .start-game-btn {
-            background-color: #3e8eff; /* Blue */
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 5px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        .start-game-btn:hover {
-            background-color: #2e7eee; /* Darker blue */
-            transform: translateY(-2px);
-        }
-
-         #game-canvas { /* Ensure canvas is block level for sizing */
-            display: block;
-            width: 100%;
-            height: 100%;
-         }
-
-        .game-score {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 24px;
-            color: #3e8eff; /* Blue */
-            font-weight: bold;
-            z-index: 5;
-            background-color: rgba(13, 13, 13, 0.6); /* Slight background for readability */
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-
-        .game-controls {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            color: rgba(255, 255, 255, 0.7); /* Slightly faded */
-            font-size: 14px;
-            z-index: 5;
-            background-color: rgba(13, 13, 13, 0.6);
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-
-        /* Sections */
-        section {
-             padding: 100px 0;
-        }
-
-        .section-title {
-            font-size: 36px;
-            margin-bottom: 20px;
-            color: #ffffff;
-            text-align: center;
-        }
-
-        .section-description {
-            max-width: 800px;
-            margin: 0 auto 60px;
-            color: #cccccc;
-            font-size: 18px;
-            text-align: center;
-        }
-
-        /* Features section */
-        .features {
-            background-color: #151515;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-
-        .feature-card {
-            background-color: #222222;
-            border-radius: 10px;
-            padding: 40px 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-            border: 1px solid #333333;
-            text-align: center; /* Center content */
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(62, 142, 255, 0.2); /* Blue */
-            border-color: #3e8eff; /* Blue */
-        }
-
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            background-color: #2a2a2a;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            color: #3e8eff; /* Blue */
-            font-size: 28px;
-            border: 1px solid #444; /* Subtle border */
-        }
-
-        .feature-title {
-            font-size: 22px;
-            margin-bottom: 15px;
-            color: #ffffff;
-        }
-
-        .feature-description {
-            color: #cccccc;
-        }
-
-        /* Manifesto section */
-        .manifesto-section {
-            background-color: #0d0d0d;
-            position: relative;
-        }
-
-        .manifesto-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="10" y="50" font-family="Arial" font-size="20" fill="rgba(62,142,255,0.03)">DEBT</text></svg>');
-            opacity: 0.5;
-            z-index: 0;
-        }
-
-        .manifesto-container {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-            text-align: center; /* Center container content */
-        }
-
-        .manifesto-title {
-            font-size: 42px;
-            color: #3e8eff; /* Blue */
-            margin-bottom: 30px;
-        }
-
-        .manifesto-section h3 {
-            color: #ffffff; /* White for subheadings */
-            font-size: 24px;
+        /* Social Links Box */
+        .socials-box {
             margin-top: 40px;
-            margin-bottom: 15px;
-        }
-
-
-        .manifesto-section p {
-            color: #cccccc;
-            margin-bottom: 20px;
-            font-size: 18px;
-            line-height: 1.7;
-            text-align: left; /* Align paragraphs left within centered container */
-        }
-
-        /* Lists within Manifesto */
-        .manifesto-section ul.roadmap,
-        .manifesto-section ul.principles {
-            display: inline-block; /* Allow centering via text-align on parent */
-            text-align: left; /* Align list items left */
-            margin: 20px auto; /* Center block */
-            padding: 20px;
-            background-color: #1a1a1a;
-            border-radius: 10px;
-            max-width: 100%; /* Prevent overflow */
-        }
-
-         .manifesto-section ul.principles {
-             list-style: none;
-             border-left: 3px solid #3e8eff; /* Blue */
-         }
-          .manifesto-section ul.principles li {
-              padding: 10px 0;
-              font-size: 18px;
-              color: #ffffff;
-              border-bottom: 1px solid #333333;
-          }
-          .manifesto-section ul.principles li:last-child {
-              border-bottom: none;
-          }
-
-        .manifesto-section ul.roadmap {
-            list-style: none;
-            padding-left: 40px; /* Space for pseudo-elements */
-        }
-         .manifesto-section ul.roadmap li {
-             padding: 10px 0 10px 0; /* Removed left padding */
-             position: relative;
-             color: #cccccc;
-         }
-          .manifesto-section ul.roadmap li::before {
-              content: '🚀'; /* Emoji bullet */
-              position: absolute;
-              left: -25px; /* Position emoji */
-              top: 10px;
-              color: #3e8eff; /* Blue */
-          }
-
-
-        .final-words {
-            margin-top: 60px;
-            padding: 30px; /* Increased padding */
-            background-color: #1a1a1a;
-            border-radius: 10px;
             text-align: center;
-            border-top: 2px solid #3e8eff; /* Blue */
         }
-
-        .final-words p {
-            font-size: 24px;
-            margin-bottom: 10px;
-            text-align: center; /* Center paragraph */
-        }
-
-        .final-words strong {
-            color: #3e8eff; /* Blue */
-            font-size: 26px;
-            display: block;
-            margin-top: 20px;
-        }
-
-        /* Tokenomics Section NEW */
-        #tokenomics {
-            background-color: #111111; /* Slightly different dark */
-        }
-
-        .tokenomics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
-        }
-
-        .tokenomic-card {
-            background-color: #222222;
-            padding: 30px;
-            border-radius: 8px;
-            border: 1px solid #333;
-            transition: transform 0.3s, border-color 0.3s;
-        }
-
-        .tokenomic-card:hover {
-            transform: translateY(-5px);
-            border-color: #3e8eff; /* Blue */
-        }
-
-        .tokenomic-card h3 {
-            color: #3e8eff; /* Blue */
+        .socials-box h4 {
+            color: #ccc;
             margin-bottom: 15px;
-            font-size: 20px;
-        }
-
-        .tokenomic-card p {
-            color: #cccccc;
             font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-
-        /* How it works section */
-        .how-it-works {
-            background-color: #121212;
-        }
-
-        .steps {
-            display: flex;
-            justify-content: space-around; /* Better spacing */
-            margin-top: 60px;
-            flex-wrap: wrap;
-            gap: 30px; /* Add gap for wrapping */
-        }
-
-        .step {
-            flex-basis: calc(25% - 30px); /* Adjust basis for gap */
-            min-width: 220px; /* Minimum width before wrapping */
-            text-align: center;
-            position: relative;
-            margin-bottom: 40px; /* Spacing when wrapping */
-        }
-
-        .step-number {
-            width: 60px;
-            height: 60px;
-            background-color: #3e8eff; /* Blue */
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: 700;
-            margin: 0 auto 30px;
-            border: 2px solid #5a9fff; /* Lighter blue border */
-        }
-
-        .step-title {
-            font-size: 22px;
-            margin-bottom: 15px;
-            color: #ffffff;
-        }
-
-        .step-description {
-            color: #cccccc;
-        }
-
-        /* Stats section */
-        .stats {
-            background-color: #0a0a0a;
-            color: white;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
-        }
-
-        .stat-card {
-            padding: 20px;
-            border: 1px solid #222; /* Subtle border */
-            border-radius: 8px;
-            transition: transform 0.3s, border-color 0.3s;
-        }
-         .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: #3e8eff; /* Blue */
-         }
-
-        .stat-value {
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: #3e8eff; /* Blue */
-        }
-
-        .stat-label {
-            font-size: 18px;
-            opacity: 0.9;
-        }
-
-        /* Movement section */
-        .movement-section {
-            background-color: #0d0d0d;
-        }
-
-        .movement-title {
-            font-size: 42px;
-            color: #3e8eff; /* Blue */
-            margin-bottom: 30px;
-        }
-
-        .movement-description {
-            max-width: 800px;
-            margin: 0 auto 40px;
-            font-size: 18px;
-            color: #cccccc;
-            line-height: 1.7;
-        }
-
-        .movement-icons {
+        .social-icons {
             display: flex;
             justify-content: center;
-            gap: 50px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        .movement-icon {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .icon-container {
-            width: 100px;
-            height: 100px;
-            background-color: #1a1a1a;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
-            font-size: 40px;
-            color: #3e8eff; /* Blue */
-            border: 2px solid #333333;
-             transition: transform 0.3s, border-color 0.3s;
-        }
-        .icon-container:hover {
-             transform: scale(1.1);
-             border-color: #3e8eff; /* Blue */
-        }
-
-        .icon-label {
-            font-size: 16px;
-            color: #ffffff;
-        }
-
-        /* Testimonials section */
-        .testimonials {
-            background-color: #151515;
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
-        }
-
-        .testimonial-card {
-            background-color: #222222;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            border: 1px solid #333333;
-            display: flex; /* Use flex for better alignment */
-            flex-direction: column;
-        }
-
-        .testimonial-text {
-            color: #cccccc;
-            font-style: italic;
-            margin-bottom: 20px;
-            font-size: 16px;
-            line-height: 1.7;
-            flex-grow: 1; /* Allow text to take up space */
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            margin-top: auto; /* Push author to bottom */
-        }
-
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin-right: 15px;
-            background-color: #333333;
-            border: 1px solid #3e8eff; /* Blue */
-             /* Basic placeholder - replace with actual images */
-            display: inline-block;
-            background-image: linear-gradient(45deg, #444, #555);
-        }
-
-        .author-name {
-            font-weight: 700;
-            color: #ffffff;
-        }
-
-        .author-title {
-            color: #999999;
-            font-size: 14px;
-        }
-
-        /* Game section styles (Text Intro to Game) */
-        .game-section {
-            background-color: #0d0d0d;
-        }
-
-        .game-section h2 {
-            font-size: 42px;
-            color: #3e8eff; /* Blue */
-            margin-bottom: 20px;
-        }
-
-        .game-section p.section-description { /* Target the specific p */
-            max-width: 800px;
-            margin: 0 auto 40px;
-            color: #cccccc;
-            font-size: 18px;
-        }
-
-        .game-features {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin: 40px 0;
-            gap: 20px; /* Add gap */
-        }
-
-        .game-feature {
-            flex-basis: 30%;
-            min-width: 250px;
-            margin-bottom: 30px;
-            background-color: #1a1a1a; /* Add background */
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #333;
-        }
-
-        .game-feature h4 {
-            color: #3e8eff; /* Blue */
-            margin-bottom: 15px; /* Increased margin */
-            font-size: 20px;
-            border-bottom: 1px solid #444; /* Separator */
-            padding-bottom: 10px;
-        }
-
-        .game-feature ul {
-            text-align: left;
-            padding-left: 20px;
-            color: #cccccc;
-            list-style: disc; /* Use standard bullets */
-        }
-
-        .game-feature ul li {
-            margin-bottom: 8px; /* Spacing */
-        }
-
-        /* CTA section */
-        .cta {
-            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
-            color: white;
-            border-top: 2px solid #3e8eff; /* Blue */
-        }
-
-        .cta-box {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .cta-title {
-            font-size: 36px;
-            margin-bottom: 20px;
-            color: #3e8eff; /* Blue */
-        }
-
-        .cta-description {
-            font-size: 18px;
-            margin-bottom: 40px;
-            opacity: 0.9;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #0a0a0a;
-            color: white;
-            padding: 80px 0 40px;
-            border-top: 1px solid #333333;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .footer-column {
-            flex-basis: 23%; /* Adjust as needed */
-            min-width: 200px;
-            margin-bottom: 30px;
-        }
-
-        .footer-column h3 {
-            font-size: 18px;
-            margin-bottom: 20px;
-            color: #3e8eff; /* Blue */
-        }
-
-        .footer-column ul {
+            gap: 20px; /* Increased gap */
             list-style: none;
             padding: 0;
         }
-
-        .footer-column ul li {
-            margin-bottom: 10px;
-        }
-
-        .footer-column ul li a {
-            color: white;
-            text-decoration: none;
-            opacity: 0.8;
-            transition: opacity 0.3s, color 0.3s;
-        }
-
-        .footer-column ul li a:hover {
-            opacity: 1;
-            color: #3e8eff; /* Blue */
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 15px;
-            padding: 0; /* Reset padding */
-            list-style: none; /* Remove list bullets if it's a ul */
-        }
-
-        .social-icon { /* Style the link directly */
-            width: 40px;
-            height: 40px;
+        .social-icon {
+            width: 45px; /* Larger icons */
+            height: 45px;
             border-radius: 50%;
-            background-color: #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white; /* Make emoji visible */
-            text-decoration: none;
-            font-size: 20px;
+            background-color: #222;
+            display: flex; align-items: center; justify-content: center;
+            color: white; text-decoration: none; font-size: 22px;
             transition: background-color 0.3s, transform 0.3s;
+            border: 1px solid #444;
         }
-
         .social-icon:hover {
-            background-color: #3e8eff; /* Blue */
-            transform: translateY(-3px);
+            background-color: #ff3e3e;
+            transform: translateY(-3px) scale(1.1);
+            color: #000; /* Black icon on red hover */
+             border-color: #ff3e3e;
+        }
+         /* Tooltip for social icons (optional) */
+         .social-icon[aria-label]:hover::after {
+             content: attr(aria-label);
+             position: absolute;
+             bottom: 110%; /* Position above */
+             left: 50%;
+             transform: translateX(-50%);
+             background-color: #333;
+             color: white;
+             padding: 4px 8px;
+             border-radius: 4px;
+             font-size: 12px;
+             white-space: nowrap;
+             z-index: 10;
+         }
+
+
+        /* Manifesto Section (Rewritten as "The Decree") */
+        #decree {
+            background-color: #111; /* Darker background */
+            border-top: 2px dashed #ff3e3e; /* Dashed border */
+            border-bottom: 2px dashed #ff3e3e;
+        }
+        .decree-container {
+            max-width: 850px; margin: 0 auto; position: relative; z-index: 1; text-align: center;
+            padding: 40px; background-color: rgba(0,0,0,0.3); border-radius: 10px;
+             border: 1px solid #333;
+        }
+        .decree-title {
+            font-size: 48px; color: #ff3e3e; margin-bottom: 30px; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255, 62, 62, 0.5);
+        }
+        #decree h3 {
+            color: #ffffff; font-size: 28px; margin-top: 40px; margin-bottom: 15px;
+            font-weight: 700;
+        }
+        #decree p {
+            color: #c5c5c5; /* Lighter grey */ margin-bottom: 25px; font-size: 19px; line-height: 1.7;
+            text-align: left; /* Keep paragraphs readable */
+        }
+         #decree strong { color: #ff3e3e; font-weight: 700; }
+         #decree em { color: #eee; font-style: italic; }
+
+        .decree-list { /* Replaces roadmap/principles */
+            list-style: none; margin: 30px auto; padding: 0; text-align: left; max-width: 600px;
+        }
+        .decree-list li {
+            padding: 12px 0 12px 35px; position: relative; color: #e0e0e0; font-size: 18px;
+            border-bottom: 1px solid #333;
+        }
+        .decree-list li:last-child { border-bottom: none; }
+        .decree-list li::before {
+            content: '🔥'; /* Fire emoji bullet */ position: absolute; left: 0; top: 14px; font-size: 20px;
         }
 
-        .footer-bottom {
-            text-align: center;
-            padding-top: 40px;
-            margin-top: 40px;
+        .final-words {
+            margin-top: 50px; padding: 30px; background-color: rgba(255, 62, 62, 0.1); /* Red tint background */
+            border-radius: 10px; text-align: center; border: 1px solid #ff3e3e;
+        }
+        .final-words p { font-size: 26px; margin-bottom: 15px; text-align: center; color: #fff; font-weight: 600;}
+        .final-words strong { color: #ff3e3e; font-size: 28px; display: block; margin-top: 20px; text-transform: uppercase;}
+
+
+        /* Features Section (Rewritten as "Why We Fight") */
+        #why-we-fight {
+            background-color: #0f0f0f;
+        }
+        .section-title {
+            font-size: 42px; /* Larger */ margin-bottom: 25px; color: #ffffff; text-align: center;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .section-description {
+            max-width: 800px; margin: 0 auto 60px; color: #bbb; font-size: 19px; text-align: center;
+        }
+
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 35px; /* Tighter gap */
+        }
+        .feature-card {
+            background-color: #181818; border-radius: 10px; padding: 35px 25px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4); transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            border: 1px solid #333; text-align: center;
+        }
+        .feature-card:hover {
+            transform: translateY(-8px) rotate(-1deg); /* Slight tilt */
+            box-shadow: 0 10px 30px rgba(255, 62, 62, 0.3); border-color: #ff3e3e;
+        }
+        .feature-icon {
+            width: 75px; height: 75px; background-color: #222; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; margin: 0 auto 25px; color: #ff3e3e; font-size: 32px;
+            border: 2px solid #444; transition: transform 0.3s;
+        }
+         .feature-card:hover .feature-icon {
+             transform: scale(1.1) rotate(10deg);
+         }
+        .feature-title { font-size: 24px; margin-bottom: 15px; color: #ffffff; font-weight: 600; }
+        .feature-description { color: #b5b5b5; font-size: 16px; }
+
+
+        /* Movement Section (Rewritten as "Join The Cult") */
+        #join-the-cult {
+            background: linear-gradient(180deg, #111 0%, #0c0c0c 100%); /* Subtle gradient */
+        }
+        .movement-title {
+            font-size: 48px; color: #ff3e3e; margin-bottom: 30px; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 2px; text-align: center;
+        }
+        .movement-description {
+            max-width: 800px; margin: 0 auto 40px; font-size: 20px; color: #ccc; line-height: 1.7; text-align: center;
+        }
+         .movement-description strong { color: #ff3e3e; }
+
+        .movement-icons {
+            display: flex; justify-content: center; gap: 60px; margin-bottom: 50px; flex-wrap: wrap;
+        }
+        .movement-icon { display: flex; flex-direction: column; align-items: center; }
+        .icon-container {
+            width: 110px; height: 110px; background-color: #1a1a1a; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; margin-bottom: 20px; font-size: 45px; color: #ff3e3e;
+            border: 3px solid #444; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s, box-shadow 0.3s; /* Bouncy effect */
+        }
+        .icon-container:hover {
+             transform: scale(1.15) rotate(-5deg); border-color: #ff3e3e; box-shadow: 0 0 25px rgba(255, 62, 62, 0.4);
+        }
+        .icon-label { font-size: 18px; color: #ffffff; font-weight: 600; text-transform: uppercase; }
+
+        .cult-motto {
+            font-size: 24px; font-style: italic; color: #ff3e3e; margin-top: 30px; font-weight: bold; text-align: center;
+        }
+
+
+        /* Testimonials Section (Meme Edition) */
+        #testimonials { background-color: #151515; }
+        .testimonials-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 60px;
+        }
+        .testimonial-card {
+            background-color: #222; border-radius: 10px; padding: 35px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5); /* Inset shadow */
+            border: 1px solid #444; display: flex; flex-direction: column;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+         .testimonial-card:hover {
+             transform: scale(1.03);
+             border-color: #ff3e3e;
+         }
+        .testimonial-text {
+            color: #ccc; font-style: italic; margin-bottom: 25px; font-size: 17px; line-height: 1.7;
+            flex-grow: 1; border-left: 3px solid #ff3e3e; padding-left: 15px; /* Quote style */
+        }
+        .testimonial-author { display: flex; align-items: center; margin-top: auto; }
+        .author-avatar {
+            width: 55px; height: 55px; border-radius: 50%; margin-right: 15px; background-color: #444;
+            border: 2px solid #ff3e3e; display: flex; align-items: center; justify-content: center;
+            font-size: 24px; font-weight: bold; color: #111;
+        }
+        .author-name { font-weight: 700; color: #ffffff; font-size: 17px; }
+        .author-title { color: #999; font-size: 14px; text-transform: uppercase; }
+
+
+        /* Game Section Styles (Intro Text) */
+        .game-section { background-color: #0c0c0c; text-align: center; }
+        .game-section h2 { font-size: 42px; color: #ff3e3e; margin-bottom: 20px; text-transform: uppercase; }
+        .game-section p.section-description { max-width: 800px; margin: 0 auto 40px; color: #bbb; font-size: 19px; }
+        .game-features { display: flex; justify-content: space-around; flex-wrap: wrap; margin: 40px 0; gap: 25px; }
+        .game-feature {
+            flex-basis: 30%; min-width: 260px; margin-bottom: 30px; background-color: #1a1a1a;
+            padding: 25px; border-radius: 8px; border: 1px solid #444;
+        }
+        .game-feature h4 { color: #ff3e3e; margin-bottom: 15px; font-size: 22px; border-bottom: 1px solid #555; padding-bottom: 10px; }
+        .game-feature ul { text-align: left; padding-left: 20px; color: #bbb; list-style: none; } /* No bullets */
+        .game-feature ul li { margin-bottom: 10px; position: relative; padding-left: 25px; }
+         .game-feature ul li::before {
+             content: '🎮'; /* Game controller bullet */ position: absolute; left: 0; top: 0;
+         }
+
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+            color: white; border-top: 3px solid #ff3e3e;
+        }
+        .cta-box { max-width: 800px; margin: 0 auto; text-align: center;}
+        .cta-title { font-size: 40px; margin-bottom: 20px; color: #ff3e3e; font-weight: 700; text-transform: uppercase;}
+        .cta-description { font-size: 20px; margin-bottom: 40px; opacity: 0.9; color: #ccc;}
+
+
+        /* Footer */
+        footer {
+            background-color: #050505; /* Near black */ color: white; padding: 70px 0 30px;
             border-top: 1px solid #333;
         }
+        .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; }
+        .footer-column { flex-basis: 23%; min-width: 200px; margin-bottom: 30px; }
+        .footer-column h3 { font-size: 20px; margin-bottom: 20px; color: #ff3e3e; text-transform: uppercase; }
+        .footer-column ul { list-style: none; padding: 0; }
+        .footer-column ul li { margin-bottom: 12px; }
+        .footer-column ul li a { color: #bbb; text-decoration: none; opacity: 0.8; transition: opacity 0.3s, color 0.3s; }
+        .footer-column ul li a:hover { opacity: 1; color: #ff3e3e; }
+        .footer-socials { /* For footer social icons specifically */
+             display: flex; gap: 15px; padding: 0; list-style: none;
+         }
+         .footer-socials .social-icon {
+              width: 40px; height: 40px; font-size: 20px; background-color: #222; border: none;
+         }
+         .footer-socials .social-icon:hover { background-color: #ff3e3e; color: #000; }
 
-        .footer-bottom p {
-            opacity: 0.8;
-            font-size: 14px;
-        }
-         .footer-bottom a {
-             color: #3e8eff;
-             opacity: 0.8;
-             text-decoration: none;
-             transition: opacity 0.3s;
-         }
-         .footer-bottom a:hover {
-              opacity: 1;
-         }
+        .footer-bottom { text-align: center; padding-top: 40px; margin-top: 40px; border-top: 1px solid #333; }
+        .footer-bottom p { opacity: 0.7; font-size: 14px; color: #aaa;}
+         .footer-bottom a { color: #ff3e3e; opacity: 0.8; text-decoration: none; transition: opacity 0.3s; }
+         .footer-bottom a:hover { opacity: 1; }
+         .footer-disclaimer { margin-top: 15px; font-size: 12px; color: #666; max-width: 700px; margin-left: auto; margin-right: auto;}
+
 
         /* Financial facts popup */
         .facts-popup {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #3e8eff; /* Blue */
-            color: white;
-            padding: 15px 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Enhanced shadow */
-            z-index: 1000;
-            max-width: 300px;
-            font-size: 14px; /* Slightly smaller text */
-            font-weight: bold;
-            opacity: 0; /* Start hidden for animation */
-            transform: translateX(110%); /* Start off-screen */
-            animation: slideInFadeOut 5s forwards ease-in-out; /* Combined animation */
+            position: fixed; bottom: 20px; right: 20px; background-color: #ff3e3e; /* Red popup */
+            color: white; padding: 15px 20px; border-radius: 8px; box-shadow: 0 5px 20px rgba(255, 62, 62, 0.4);
+            z-index: 1000; max-width: 320px; /* Wider */ font-size: 15px; font-weight: bold; opacity: 0;
+            transform: translateX(110%); animation: slideInFadeOut 6s forwards ease-in-out; /* Longer duration */
+            border: 1px solid #ff6e6e;
         }
-
-        @keyframes slideInFadeOut {
-            0% {
-                transform: translateX(110%);
-                opacity: 0;
-            }
-            15% { /* Slide in */
-                transform: translateX(0);
-                opacity: 1;
-            }
-             85% { /* Stay visible */
-                 transform: translateX(0);
-                 opacity: 1;
-             }
-             100% { /* Fade out */
-                 transform: translateX(0); /* Optional: Keep position while fading */
-                 opacity: 0;
-             }
+        @keyframes slideInFadeOut { /* Same animation as before */
+            0% { transform: translateX(110%); opacity: 0; } 15% { transform: translateX(0); opacity: 1; }
+            85% { transform: translateX(0); opacity: 1; } 100% { transform: translateX(0); opacity: 0; }
         }
 
         /* Responsive adjustments */
         @media (max-width: 992px) {
-             nav ul { display: none; } /* Hide desktop nav */
-             .mobile-nav-toggle { display: block; } /* Show hamburger */
-
-             .step {
-                flex-basis: calc(50% - 20px); /* Two steps per row */
-            }
-            .footer-column {
-                flex-basis: 45%; /* Two columns per row */
-            }
-         }
-
+             nav ul { display: none; } .mobile-nav-toggle { display: block; }
+             .footer-column { flex-basis: 45%; }
+        }
         @media (max-width: 768px) {
-            .header-inner { flex-direction: row; } /* Keep logo and button on same row */
-            .hero h1 { font-size: 36px; }
-            .hero p { font-size: 18px; }
-            .tagline { font-size: 20px; }
-            .features-grid { grid-template-columns: 1fr; } /* Stack features */
-            .tokenomics-grid { grid-template-columns: 1fr; } /* Stack tokenomics */
-            .steps { flex-direction: column; align-items: center;}
-            .step { flex-basis: 80%; } /* Stack steps */
-            .stats-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
-            .footer-column {
-                flex-basis: 100%; /* Stack footer columns */
-                text-align: center;
-            }
-            .social-icons { justify-content: center; } /* Center icons */
+            section { padding: 60px 0; }
+            .header-inner { flex-direction: row; }
+            .hero h1 { font-size: 48px; }
+            .hero p.subtitle { font-size: 20px; }
+            .hero p.tagline { font-size: 24px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .footer-column { flex-basis: 100%; text-align: center; }
+            .footer-socials { justify-content: center; }
             .facts-popup { max-width: 90%; right: 5%; left: 5%; bottom: 10px; text-align: center;}
-            .game-container { height: 400px; }
-            .buy-buttons { flex-direction: column; align-items: center; gap: 10px;}
-            .buy-btn { width: 80%; max-width: 300px; text-align:center;} /* Centered text */
-            .hero-buttons { flex-direction: column; align-items: center; gap: 15px; }
-            .hero-cta { width: 80%; max-width: 300px; }
-            .manifesto-section ul.roadmap,
-            .manifesto-section ul.principles {
-                max-width: 95%; /* Adjust list width */
-            }
+            .game-container { height: 400px; margin-top: 40px;}
+            .decree-container { padding: 25px; }
+            .decree-title { font-size: 36px; }
+            #decree h3 { font-size: 24px; }
+            #decree p { font-size: 17px; }
+            .movement-title { font-size: 38px; }
+            .movement-description { font-size: 18px; }
+            .section-title { font-size: 34px; }
+            .section-description { font-size: 17px; }
+        }
+        @media (max-width: 576px) {
+             .hero { padding: 160px 0 100px; }
+             .hero h1 { font-size: 38px; letter-spacing: -1px;}
+             .hero p.subtitle { font-size: 18px; }
+             .hero p.tagline { font-size: 20px; }
+             .hero-cta-main { font-size: 18px; padding: 16px 35px; }
+             .contract-address p { font-size: 14px; }
+             .copy-btn { font-size: 14px; padding: 10px 16px;}
+             .game-title { font-size: 32px; }
+             .game-description { font-size: 16px; }
+             .decree-title { font-size: 30px; }
+             #decree h3 { font-size: 22px; }
+             #decree p { font-size: 16px; }
+             .feature-title { font-size: 20px; }
+             .footer-column h3 { font-size: 18px; }
+             .facts-popup { font-size: 13px; padding: 12px 15px;}
         }
 
-        @media (max-width: 576px) {
-             .hero { padding: 160px 0 80px; } /* Adjust padding for header+ticker */
-             .hero h1 { font-size: 30px; }
-             .hero p { font-size: 16px; }
-             .global-debt-counter { max-width: 90%; }
-             .counter-value { font-size: 28px; }
-             .section-title { font-size: 28px; }
-             .manifesto-title, .movement-title, .game-section h2, .cta-title { font-size: 32px; }
-             .stat-value { font-size: 36px; }
-             .step-title { font-size: 20px; }
-             .feature-title { font-size: 20px; }
-             .testimonial-card { padding: 20px; }
-             .footer { padding: 60px 0 30px; }
-             .game-title { font-size: 28px; }
-             .game-description { font-size: 15px; }
-        }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header>
         <div class="container header-inner">
-            <a href="#" class="logo">Debt<span>coin</span> <span class="ticker-symbol">$DEBT</span></a>
+            <a href="#" class="logo glitch">$DEBT<span>Cult</span> <span class="ticker-symbol">$DEBT</span></a>
             <nav>
                 <ul>
-                    <li><a href="#features">Why $DEBT?</a></li>
-                    <li><a href="#manifesto">Manifesto</a></li>
-                    <li><a href="#tokenomics">Tokenomics</a></li>
-                    <li><a href="#how-it-works">Strategy</a></li>
-                    <li><a href="#movement">Movement</a></li>
-                    <li><a href="#manifesto">Whitepaper</a></li>
-                    <li><a href="#buy" class="cta-button">Buy $DEBT</a></li>
+                    <li><a href="#decree">The Decree</a></li>
+                    <li><a href="#why-we-fight">Why We Fight</a></li>
+                    <li><a href="#join-the-cult">Join Us</a></li>
+                    <li><a href="#testimonials">Hearsay</a></li>
+                    {/* Removed Whitepaper */}
                 </ul>
             </nav>
-            <button class="mobile-nav-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
-                ☰ {/* Use actual icon font or SVG here if possible */}
-            </button>
+             <a href="https://dexscreener.com/solana/..." target="_blank" rel="noopener noreferrer" class="cta-button nav-cta">Get $DEBT</a> {/* Placeholder DEX Screener */}
+            <button class="mobile-nav-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">☰</button>
         </div>
          <!-- Mobile Nav Links container -->
          <div class="mobile-nav-links" id="mobile-nav">
              <ul>
-                <li><a href="#features">Why $DEBT?</a></li>
-                <li><a href="#manifesto">Manifesto</a></li>
-                <li><a href="#tokenomics">Tokenomics</a></li>
-                <li><a href="#how-it-works">Strategy</a></li>
-                <li><a href="#movement">Movement</a></li>
-                <li><a href="#manifesto">Whitepaper</a></li>
-                <li><a href="#buy" class="cta-button">Buy $DEBT</a></li>
+                <li><a href="#decree">The Decree</a></li>
+                <li><a href="#why-we-fight">Why We Fight</a></li>
+                <li><a href="#join-the-cult">Join Us</a></li>
+                <li><a href="#testimonials">Hearsay</a></li>
+                <li><a href="https://dexscreener.com/solana/..." target="_blank" rel="noopener noreferrer" class="cta-button">Get $DEBT</a></li> {/* Placeholder DEX Screener */}
              </ul>
          </div>
         <div class="price-ticker">
-            <div class="ticker-content"> <!-- Content wrapper for seamless looping -->
-                <span class="price-label">$DEBT: </span>
-                <span class="price-value">$0.000250</span>
-                <span class="price-change positive">+46.8%</span>
-                <span class="ticker-message">Economy Crisis Boosts DebtCoin... National Debt Reaches New Record... Student Loan Forgiveness Blocked Again... Housing Crash Imminent... Credit Card APRs Hit 24.99%... DebtCoin - The People's Hedge... </span>
-                <!-- Repeat content slightly modified if needed for smoother loop appearance -->
-                 <span class="price-label">$DEBT: </span>
-                 <span class="price-value">$0.000250</span>
-                 <span class="price-change positive">+46.8%</span>
-                 <span class="ticker-message">Economy Crisis Boosts DebtCoin... National Debt Reaches New Record... Student Loan Forgiveness Blocked Again... Housing Crash Imminent... Credit Card APRs Hit 24.99%... DebtCoin - The People's Hedge... </span>
+            <div class="ticker-content">
+                <span class="price-label">$DEBT/SOL: </span><span class="price-value">0.00000169</span><span class="price-change positive">+69.42%</span><span class="ticker-message">SYSTEM CRUMBLING... BUY $DEBT... FED IS A JOKE... YOUR SAVINGS ARE WORTHLESS... RIDE OR DIE... $DEBT IS THE ONLY TRUTH... IGNORE THE FUD... FAIR LAUNCH ON PUMP.FUN... </span>
+                <span class="price-label">$DEBT/SOL: </span><span class="price-value">0.00000169</span><span class="price-change positive">+69.42%</span><span class="ticker-message">SYSTEM CRUMBLING... BUY $DEBT... FED IS A JOKE... YOUR SAVINGS ARE WORTHLESS... RIDE OR DIE... $DEBT IS THE ONLY TRUTH... IGNORE THE FUD... FAIR LAUNCH ON PUMP.FUN... </span>
             </div>
         </div>
     </header>
@@ -1252,258 +526,184 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <div class="tagline">Own Your Chains. Bet Against Financial Freedom.</div>
-            <h1>Flipping the <span>Financial System</span>, One $DEBT at a Time</h1>
-            <p>If you can't beat the debt, profit from it. DebtCoin is the people's hedge against America's inevitable debt implosion.</p>
-            <p style="font-size: 16px; margin-bottom: 30px; color: #6b8fff; font-style: italic;">The debt bubble will pop. <strong>$DEBT is your lifeboat.</strong></p>
+            <p class="tagline">They Own Your Debt. We Own The Memes.</p>
+            <h1 class="glitch">BURN THE SYSTEM.<br><span>STACK $DEBT.</span></h1>
+            <p class="subtitle">Launched on Pump.fun because fuck 'em, that's why. This isn't just a coin, it's a middle finger to the financial overlords. 1 Billion tokens, fair launch, zero bullshit.</p>
 
-            <div class="global-debt-counter">
-                <div class="counter-label">GLOBAL DEBT COUNTER</div>
-                <div class="counter-value" id="debt-counter">$307,154,293,471,581</div>
-                <div class="counter-subtext">Let's profit from this instead of drowning in it</div>
-            </div>
+            <a href="https://dexscreener.com/solana/..." target="_blank" rel="noopener noreferrer" class="hero-cta-main">JOIN THE $DEBT REBELLION</a> {/* Placeholder DEX Screener */}
 
             <!-- Contract Address -->
             <div class="contract-address">
-                <h4>$DEBT Token Contract Address (Example)</h4>
-                <p>0x7Eb5D86FD78f3852a3e0e064f2842d45a3dB6EA2</p>
-                <button class="copy-btn">Copy Address</button>
+                <h4>$DEBT Contract Address (Solana)</h4>
+                <p>YourPumpFunContractAddressHereXXXXXXXXXXXXXXXXXXXX</p> {/* REPLACE THIS */}
+                <button class="copy-btn">Copy CA</button>
             </div>
 
-            <!-- Buy Button Section -->
-            <div id="buy" class="buy-buttons">
-                <a href="#" class="buy-btn">Buy $DEBT Now</a> {/* Link to DEX/Purchase Page */}
+            <!-- Socials Box -->
+            <div class="socials-box">
+                 <h4>Find Us Degens Here:</h4>
+                 <ul class="social-icons">
+                     <li><a href="https://t.me/yourtelegramlink" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Telegram">✈️</a></li> {/* Placeholder */}
+                     <li><a href="https://x.com/yourtwitterlink" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="X (Twitter)">🐦</a></li> {/* Placeholder */}
+                     <li><a href="https://dexscreener.com/solana/..." target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="DexScreener">📈</a></li> {/* Placeholder */}
+                     <li><a href="https://www.dextools.io/app/en/solana/pair-explorer/..." target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="DEXTools">🛠️</a></li> {/* Placeholder */}
+                 </ul>
             </div>
 
-            <div class="hero-buttons">
-                <a href="#movement" class="cta-button hero-cta">Join the Movement</a>
-                <a href="#how-it-works" class="cta-button hero-cta secondary-cta">Our Strategy</a>
-            </div>
-
-            <!-- Game container -->
-            <div class="game-container">
+             <!-- Game container -->
+            <div class="game-container fade-in-section">
                 <div class="game-overlay">
-                    <h3 class="game-title">DEBT FIGHTER</h3>
-                    <p class="game-description">A fast-paced game where you play as a rebellious citizen fighting against predatory debt systems while collecting $DEBT tokens to hedge against economic collapse.</p>
-                    <button class="start-game-btn">START GAME</button>
+                    <h3 class="game-title glitch">DEBT DESTROYER '69</h3>
+                    <p class="game-description">Wasted your rent money on $DEBT? Good. Now waste your time obliterating financial symbols in our totally pointless game. It's better than checking the charts anyway.</p>
+                    <button class="start-game-btn">PLAY LIKE A DEGEN</button>
                 </div>
                 <canvas id="game-canvas"></canvas>
-                <div class="game-score">SCORE: 0</div>
-                <div class="game-controls">Arrows/A/D to Move | Collect 💰 | Avoid 🏦📝🔴👔</div>
+                <div class="game-score">POINTS: 0</div>
+                <div class="game-controls">Use Arrows/A/D | Avoid Suits | Get Rich (in game)</div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="container">
-            <h2 class="section-title">Why Choose $DEBT?</h2>
-            <p class="section-description">Because when the debt bubble bursts, $DEBT holders will be the only ones smiling.</p>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">📈</div>
-                    <h3 class="feature-title">Crisis-Proof Investment</h3>
-                    <p class="feature-description">As credit card debt, student loans, and government deficits spiral out of control, $DEBT rises. When the economy tanks, DebtCoin moons.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🛡️</div>
-                    <h3 class="feature-title">Your Financial Shield</h3>
-                    <p class="feature-description">Protecting your future by betting against a system designed to keep you financially trapped. Turn your cynicism into opportunity.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔄</div>
-                    <h3 class="feature-title">Inverse Economics</h3>
-                    <p class="feature-description">While traditional assets crumble under recession and debt crisis, $DEBT thrives on economic chaos. A true counter-cyclical asset.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌐</div>
-                    <h3 class="feature-title">Global Movement</h3>
-                    <p class="feature-description">Join a worldwide community of debt rebels using crypto to fight back against predatory financial systems.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h3 class="feature-title">Strategic Defiance</h3>
-                    <p class="feature-description">Every $DEBT purchase is both a protest against and a profit from the broken financial system. Make money while making a statement.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔐</div>
-                    <h3 class="feature-title">Debt-Free Future Fund</h3>
-                    <p class="feature-description">Use your $DEBT profits to eliminate your real-world debt. The ultimate irony: getting debt-free by betting on more debt.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- The Decree Section -->
+    <section id="decree" class="fade-in-section">
+      <div class="container decree-container">
+        <h2 class="decree-title glitch">THE $DEBT DECREE</h2>
 
-    <!-- Manifesto Section -->
-    <section class="manifesto-section" id="manifesto">
-      <div class="container manifesto-container">
-        <h2 class="manifesto-title">📜 THE DEBTCOIN MANIFESTO</h2>
+        <h3>LISTEN UP, MAGGOTS:</h3>
+        <p>The suits built a playground on our backs. They printed money, inflated assets, and drowned us in debt we never asked for. Student loans, mortgages, credit cards – it's all a fucking scam designed to keep you enslaved. They call it "fiscal policy." We call it <strong>THE GREAT RIGGING</strong>.</p>
+        <p>They think they won. They think we'll just roll over and pay our minimums until we die. <em>They are wrong.</em></p>
 
-        <h3>🔍 The Problem</h3>
-        <p>In 2025, as national debt surges past $33 trillion and personal debt cripples 80% of Americans, the financial elite continue to profit from our collective misery. They created a system where debt is inescapable—but what if we told you there's a way to <em>profit</em> from that same corrupt system?</p>
+        <h3>$DEBT IS OUR WEAPON:</h3>
+        <p>We launched $DEBT on Pump.fun as a collective FUCK YOU. No VCs, no presale bullshit, no team tokens dumped on your head. Just 1 Billion tokens unleashed into the wild. It's a symbol. It's a protest. It's a gamble fueled by pure, unadulterated spite.</p>
+        <p>This isn't about "utility" or "roadmaps." This is about community. This is about solidarity. This is about laughing in the face of the abyss while holding a bag of pure meme energy.</p>
 
-        <h3>💡 The Solution</h3>
-        <p><strong>DebtCoin ($DEBT)</strong> is the <strong>first crypto engineered to rise as debt increases</strong>—a hedge against financial collapse that puts power back in the hands of the indebted masses. We track key debt indicators and economic instability metrics to fuel our value.</p>
-
-        <h3>🚀 The Mission</h3>
-        <p>We're not just another token—we're a movement against financial servitude. Our goals:</p>
-        <ul class="roadmap">
-          <li>Expose the unsustainable debt machine through relentless awareness campaigns.</li>
-          <li>Empower individuals to profit from the inevitable economic crisis using $DEBT.</li>
-          <li>Build a powerful community of financial rebels fighting back against the system.</li>
-          <li>Create pathways to true financial independence, funded by the system's collapse.</li>
-          <li>Protest through profit—every $DEBT purchase is a vote against financial enslavement.</li>
+        <h3>OUR SACRED (AND STUPID) VOWS:</h3>
+        <ul class="decree-list">
+            <li>We buy $DEBT not because it makes sense, but because nothing else does anymore.</li>
+            <li>We HODL through dips like diamond-handed degenerates, fueled by ramen and rage.</li>
+            <li>We shill $DEBT relentlessly, annoying our friends and family until they join the cult or block us.</li>
+            <li>We fight the FUD with memes, insults, and weaponized autism.</li>
+            <li>We understand this could go to zero. We embrace the chaos.</li>
         </ul>
 
         <div class="final-words">
-          <p>"When life gives you lemons (debt), mint DebtCoin."</p>
-          <strong>The only bubble that profits when all other bubbles pop.</strong>
+          <p>"They gave us debt. We give them memes."</p>
+          <strong>JOIN $DEBT. REJECT SANITY. EMBRACE THE VOID.</strong>
         </div>
       </div>
     </section>
 
-    <!-- Tokenomics Section -->
-    <section id="tokenomics">
+
+    <!-- Why We Fight Section -->
+    <section id="why-we-fight" class="fade-in-section">
         <div class="container">
-            <h2 class="section-title">📊 $DEBT Tokenomics</h2>
-            <p class="section-description">Engineered for stability and growth during economic turmoil.</p>
-            <div class="tokenomics-grid">
-                <div class="tokenomic-card">
-                    <h3>Supply Mechanism</h3>
-                    <p>Fixed initial supply. Token burns triggered by increasing national debt milestones, creating deflationary pressure as the crisis worsens.</p>
+            <h2 class="section-title glitch">WHY WE FIGHT (Besides Being Broke)</h2>
+            <p class="section-description">This ain't your grandma's investment club. This is raw, primal screaming into the financial void, manifested as a Solana token.</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🖕</div>
+                    <h3 class="feature-title">Digital Middle Finger</h3>
+                    <p class="feature-description">Every $DEBT token held is a direct insult to the bankers, politicians, and pointy-shoed ghouls who rigged the game.</p>
                 </div>
-                <div class="tokenomic-card">
-                    <h3>Value Driver</h3>
-                    <p>Smart contracts monitor real-time debt crisis indicators (e.g., debt-to-GDP, default rates, inflation). Positive indicators strengthen buy-side pressure.</p>
+                <div class="feature-card">
+                    <div class="feature-icon">📉</div>
+                    <h3 class="feature-title">Profit From Pain (Maybe)</h3>
+                    <p class="feature-description">The system's crumbling? Good. Let it burn. Maybe $DEBT moons, maybe it doesn't. Either way, it's fun to watch.</p>
                 </div>
-                <div class="tokenomic-card">
-                    <h3>"Hedging" (Staking)</h3>
-                    <p>Stake $DEBT to earn yield. Rewards automatically increase during periods of high economic volatility, incentivizing long-term holding during crises.</p>
+                 <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3 class="feature-title">Degenerate Unity</h3>
+                    <p class="feature-description">Find your tribe. Misery loves company, especially when that company holds the same shitcoin and hates the same people.</p>
                 </div>
-                <div class="tokenomic-card">
-                    <h3>Community Treasury</h3>
-                    <p>A percentage of transaction fees funds a treasury for marketing, development, and future debt-relief initiatives voted on by $DEBT holders.</p>
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3 class="feature-title">Pure Meme Fuel</h3>
+                    <p class="feature-description">No utility? No problem. $DEBT runs on vibes, spite, and the collective delusion that this time, it's different.</p>
+                </div>
+                 <div class="feature-card">
+                    <div class="feature-icon">⚔️</div>
+                    <h3 class="feature-title">Financial LARPing</h3>
+                    <p class="feature-description">Pretend you're fighting the power by clicking buttons on Jupiter. It's cheaper than therapy and might actually pay off (lol, no).</p>
+                </div>
+                 <div class="feature-card">
+                    <div class="feature-icon">😂</div>
+                    <h3 class="feature-title">Laugh At The Apocalypse</h3>
+                    <p class="feature-description">When it all goes to hell, at least you'll have $DEBT and a community of fellow idiots to share memes with. Priceless.</p>
                 </div>
             </div>
         </div>
     </section>
 
 
-    <!-- How It Works Section -->
-    <section class="how-it-works" id="how-it-works">
+    <!-- Join The Cult Section -->
+    <section id="join-the-cult" class="fade-in-section">
         <div class="container" style="text-align: center;">
-            <h2 class="section-title">Our Strategic Roadmap</h2>
-            <p class="section-description">A calculated plan to profit from economic disaster and build a debt-free future.</p>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3 class="step-title">Phase 1: Awareness & Launch</h3>
-                    <p class="step-description">Launch $DEBT token. Build community. Drive education on the debt crisis and $DEBT as the counter-financial hedge.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3 class="step-title">Phase 2: Adoption & Partnerships</h3>
-                    <p class="step-description">Forge alliances with financial influencers, media outlets, and debt relief groups. Increase token accessibility (DEX listings).</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3 class="step-title">Phase 3: Crisis Profit & Utility</h3>
-                    <p class="step-description">As debt markets destabilize, tokenomics drive $DEBT value. Launch governance and enhanced 'Hedging' protocols.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3 class="step-title">Phase 4: Financial Liberation Fund</h3>
-                    <p class="step-description">Utilize community treasury, governed by $DEBT holders, to fund real-world debt relief programs and financial education.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="container">
-            <h2 class="section-title">The Debt Crisis by the Numbers</h2>
-            <p class="section-description">These aren't just statistics—they're the fuel for $DEBT.</p>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-value">$34T+</div>
-                    <div class="stat-label">US National Debt</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">$1.7T+</div>
-                    <div class="stat-label">Student Loan Debt</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">$1.1T+</div>
-                    <div class="stat-label">Credit Card Debt</div>
-                </div>
-                 <div class="stat-card">
-                     <div class="stat-value">97%</div> {/* Fictional stat */}
-                     <div class="stat-label">Recession Probability (Next 2 Yrs)</div>
-                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Movement Section -->
-    <section class="movement-section" id="movement">
-        <div class="container">
-            <h2 class="movement-title">✊ The Debt Rebellion</h2>
-            <p class="movement-description">You're not just an investor. You're a <strong>Financial Revolutionary</strong>.<br>Join thousands turning the tables on the system:</p>
+            <h2 class="movement-title glitch">JOIN THE $DEBT CULT</h2>
+            <p class="movement-description">Stop crying about inflation. Stop doomscrolling Zillow. Stop pretending your 401k matters. There is only <strong>$DEBT</strong>. We are the horde at the gates of the financial citadel. Are you with us, or are you *them*?</p>
 
             <div class="movement-icons">
                 <div class="movement-icon">
-                    <div class="icon-container">🛡️</div>
-                    <div class="icon-label">Debt Defenders</div>
+                    <div class="icon-container">😡</div>
+                    <div class="icon-label">Rage Holders</div>
                 </div>
                 <div class="movement-icon">
-                    <div class="icon-container">🔄</div>
-                    <div class="icon-label">Profit Rebels</div>
+                    <div class="icon-container">🤡</div>
+                    <div class="icon-label">Meme Warriors</div>
                 </div>
                 <div class="movement-icon">
-                    <div class="icon-container">🚀</div>
-                    <div class="icon-label">Freedom Fighters</div>
+                    <div class="icon-container">💸</div>
+                    <div class="icon-label">Future Ramen Kings</div>
                 </div>
             </div>
 
-            <p class="movement-description" style="font-style: italic;">Our community motto:<br><strong>"First you borrow. Then you beg. Then you buy $DEBT."</strong></p>
-             <a href="#buy" class="cta-button hero-cta" style="margin-top: 20px;">Become a Rebel - Buy $DEBT</a>
+            <p class="cult-motto">"In $DEBT We Trust. Everyone Else Can F*ck Off."</p>
+             <a href="https://dexscreener.com/solana/..." target="_blank" rel="noopener noreferrer" class="hero-cta-main" style="margin-top: 40px;">ACCEPT YOUR FATE - GET $DEBT</a> {/* Placeholder */}
         </div>
     </section>
 
     <!-- Testimonials Section -->
-    <section class="testimonials" id="testimonials">
-        <div class="container" style="text-align: center;">
-            <h2 class="section-title">Voices of the Movement</h2>
-            <p class="section-description">Real people using $DEBT to fight back and find hope.</p>
+    <section id="testimonials" class="fade-in-section">
+        <div class="container">
+            <h2 class="section-title glitch">HEARSAY FROM THE TRENCHES</h2>
+            <p class="section-description">Don't trust us (you shouldn't). Trust these totally real, not-at-all-made-up whispers from the $DEBT abyss.</p>
             <div class="testimonials-grid">
                 <div class="testimonial-card">
-                    <p class="testimonial-text">"I have $120K in student loans I'll likely never pay off. Buying $DEBT feels like taking back some control. If the system that trapped me collapses, at least this part of my portfolio will thrive."</p>
+                    <p class="testimonial-text">"Sold my kidney for $DEBT. Doctor said it was 'medically inadvisable' but what does he know? He probably holds Bitcoin like a BOOMER. LFG!"</p>
                     <div class="testimonial-author">
-                        <div class="author-avatar"></div>
+                        <div class="author-avatar">💎</div>
                         <div>
-                            <div class="author-name">Alex P., 29</div>
-                            <div class="author-title">Software Engineer & Debt Rebel</div>
+                            <div class="author-name">DiamondHands420</div>
+                            <div class="author-title">Professional Shitcoin Gambler</div>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-card">
-                    <p class="testimonial-text">"Watched my parents lose almost everything in '08. $DEBT is my hedge against history repeating itself. It's cynical? Maybe. But it's also strategic. This time, the crash won't crush me."</p>
+                    <p class="testimonial-text">"My wife left me after I aped our mortgage into $DEBT at the top. Jokes on her, now I have more money for $DEBT. Checkmate, Karen."</p>
                     <div class="testimonial-author">
-                        <div class="author-avatar"></div>
+                        <div class="author-avatar">📉</div>
                         <div>
-                            <div class="author-name">Maya K., 35</div>
-                            <div class="author-title">Financial Analyst & Realist</div>
+                            <div class="author-name">BasedAnon</div>
+                            <div class="author-title">Soon-to-be Homeless Millionaire</div>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-card">
-                    <p class="testimonial-text">"It's more than just a token; it's a community. We share info, strategies, and support. Knowing you're not alone in this debt fight, and having a tool like $DEBT, makes a huge difference."</p>
+                    <p class="testimonial-text">"I don't understand blockchain, tokenomics, or basic math. But the $DEBT Telegram told me we're going to the moon, so I bought. Seems legit."</p>
                     <div class="testimonial-author">
-                        <div class="author-avatar"></div>
+                        <div class="author-avatar">🚀</div>
                         <div>
-                            <div class="author-name">Jamal R., 26</div>
-                            <div class="author-title">Community Member</div>
+                            <div class="author-name">MoonBoi69</div>
+                            <div class="author-title">Financial Advice Taker (Reddit)</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Tried explaining $DEBT to my therapist. She doubled my session fee and prescribed me actual debt consolidation services. The system is trying to silence us!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">🧠</div>
+                        <div>
+                            <div class="author-name">NotACultLeader</div>
+                            <div class="author-title">Perfectly Sane Individual</div>
                         </div>
                     </div>
                 </div>
@@ -1511,52 +711,23 @@
         </div>
     </section>
 
-    <!-- Game Section (Text Intro) -->
-    <section class="game-section">
+    <!-- Game Section Intro -->
+    <section class="game-section fade-in-section">
         <div class="container">
-            <h2 class="section-title">🕹️ DEBT FIGHTER: The Game</h2>
-            <p class="section-description">Blow off steam and stack virtual $DEBT! Battle predatory lenders, Wall Street sharks, and clueless politicians in our retro-style browser game. Experience the thrill of fighting back (while you wait for the real system to crash).</p>
-
-            <div class="game-features">
-                <div class="game-feature">
-                    <h4>Gameplay</h4>
-                    <ul>
-                        <li>Dodge falling debt traps (loans, bills)</li>
-                        <li>Avoid attacks from financial predators</li>
-                        <li>Collect falling $DEBT tokens (💰)</li>
-                        <li>Simple, addictive, cathartic!</li>
-                    </ul>
-                </div>
-                <div class="game-feature">
-                    <h4>Enemies</h4>
-                    <ul>
-                        <li>🏦 Predatory Banks</li>
-                        <li>📝 Fine Print Loans</li>
-                        <li>🔴 Collection Agencies</li>
-                        <li>👔 Clueless Politicians</li>
-                    </ul>
-                </div>
-                <div class="game-feature">
-                    <h4>Objective</h4>
-                    <ul>
-                        <li>Survive the debt onslaught</li>
-                        <li>Maximize your $DEBT score</li>
-                        <li>Beat your previous record</li>
-                        <li>Prove your resilience!</li>
-                    </ul>
-                </div>
-            </div>
-             <p class="section-description" style="font-size: 16px; font-style: italic;">Ready to play? Scroll back up and hit "START GAME"!</p>
+            <h2 class="glitch">POINTLESS GAME ZONE</h2>
+            <p class="section-description">Why be productive when you can simulate fighting the system while your $DEBT bag potentially evaporates? Click things. Make numbers go up. Feel something (maybe).</p>
+            {/* Game features removed for brevity, game itself is up top */}
+             <p class="section-description" style="font-size: 16px; font-style: italic; margin-top: 30px;">Scroll back up and smash that 'PLAY' button if you're bored.</p>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="cta">
+    <section class="cta fade-in-section">
         <div class="container">
             <div class="cta-box">
-                <h2 class="cta-title">Stop Being a Victim. Start Profiting.</h2>
-                <p class="cta-description">The debt crisis is coming. Will you drown in it, or ride the wave with $DEBT? The choice is yours.</p>
-                <a href="#buy" class="cta-button hero-cta">Secure Your $DEBT Hedge Now</a>
+                <h2 class="cta-title glitch">THE SYSTEM IS F*CKED. ARE YOU IN?</h2>
+                <p class="cta-description">This isn't financial advice. This is a fucking cult invitation. Join the $DEBT rebellion. Or don't. See if we care (we probably don't, we're too busy staring at charts).</p>
+                <a href="https://dexscreener.com/solana/..." target="_blank" rel="noopener noreferrer" class="hero-cta-main">BUY $DEBT. HATE LATER.</a> {/* Placeholder */}
             </div>
         </div>
     </section>
@@ -1565,54 +736,46 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-column">
-                    <h3>$DEBT Coin</h3>
-                    <ul>
-                        <li><a href="#manifesto">Manifesto</a></li>
-                        <li><a href="#tokenomics">Tokenomics</a></li>
-                        <li><a href="#how-it-works">Roadmap</a></li>
-                        <li><a href="#">Blog: Debt Crisis News</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Resources</h3>
-                    <ul>
-                        <li><a href="#">How to Buy $DEBT</a></li>
-                        <li><a href="#">Debt Tracker (External)</a></li>
-                        <li><a href="#">Hedge Strategies</a></li>
-                        <li><a href="#">Developer Docs (Soon)</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Community</h3>
-                    <ul>
-                        <li><a href="#">Discord (Join Us!)</a></li>
-                        <li><a href="#">Telegram</a></li>
-                        <li><a href="#">Contact Support</a></li>
-                        <li><a href="#">FAQs</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Join the Rebellion</h3>
-                    <ul class="social-icons">
-                        <li><a href="#" class="social-icon" aria-label="Twitter">🐦</a></li> {/* Replace with actual links/icons */}
-                        <li><a href="#" class="social-icon" aria-label="Telegram">📱</a></li>
-                        <li><a href="#" class="social-icon" aria-label="Discord">👥</a></li>
-                        <li><a href="#" class="social-icon" aria-label="Reddit">📢</a></li>
-                    </ul>
-                    <p style="margin-top: 20px; color: #aaa; font-size: 14px;">
-                        Follow us for updates and join the conversation.
-                    </p>
-                </div>
+                 <div class="footer-column">
+                     <h3>$DEBT Cult HQ</h3>
+                     <ul>
+                         <li><a href="#decree">The Decree</a></li>
+                         <li><a href="#why-we-fight">Why We Exist</a></li>
+                         <li><a href="#join-the-cult">Join The Insanity</a></li>
+                         <li><a href="#testimonials">Propaganda</a></li>
+                     </ul>
+                 </div>
+                 <div class="footer-column">
+                     <h3>Charts & Stuff</h3>
+                     <ul>
+                         <li><a href="https://dexscreener.com/solana/..." target="_blank" rel="noopener noreferrer">DexScreener</a></li> {/* Placeholder */}
+                         <li><a href="https://www.dextools.io/app/en/solana/pair-explorer/..." target="_blank" rel="noopener noreferrer">DEXTools</a></li> {/* Placeholder */}
+                         <li><a href="#">How to Ape (Guide)</a></li> {/* Could link to a simple guide */}
+                         <li><a href="#">Rug Checker (LOL)</a></li>
+                     </ul>
+                 </div>
+                 <div class="footer-column">
+                     <h3>Community</h3>
+                     <ul class="footer-socials">
+                         <li><a href="https://t.me/yourtelegramlink" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Telegram">✈️</a></li>
+                         <li><a href="https://x.com/yourtwitterlink" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="X (Twitter)">🐦</a></li>
+                     </ul>
+                      <p style="margin-top: 15px; color: #888; font-size: 14px;">Join the chaos in Telegram & X.</p>
+                 </div>
+                 <div class="footer-column">
+                     <h3>Contract</h3>
+                      <p style="font-family: 'Courier New', monospace; color: #aaa; font-size: 12px; word-break: break-all; margin-bottom: 10px;">YourPumpFunContractAddressHereXXXXXXXXXXXXXXXXXXXX</p> {/* REPLACE THIS */}
+                      <button class="copy-btn" style="font-size: 12px; padding: 6px 10px; background-color: #555;">Copy CA</button>
+                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2024-2025 DebtCoin ($DEBT). Turning Crisis into Opportunity. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
-                <p style="margin-top: 10px; font-size: 12px; color: #666;">Disclaimer: $DEBT is a high-risk, speculative digital asset. This website is for informational and entertainment purposes only and does not constitute financial advice. Invest only what you can afford to lose. The game is purely for entertainment.</p>
+                <p>© 2024 $DEBT Cult. Launched on Pump.fun. We're probably all gonna make it (to zero).</p>
+                 <p class="footer-disclaimer">Disclaimer: $DEBT is a meme coin with zero intrinsic value, created for entertainment and protest. Expect extreme volatility. Investing in meme coins is basically gambling. Don't invest rent money, kid's college fund, or your grandma's inheritance unless you enjoy pain and public humiliation. This is not financial advice, obviously. DYOR = Do Your Own Retardedness. We are not responsible if you get rekt.</p>
             </div>
         </div>
     </footer>
 
-    <!-- *** UPDATED GAME SCRIPT *** -->
+    <!-- *** GAME SCRIPT (Mostly Unchanged) *** -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // --- Element Selection ---
@@ -1620,50 +783,38 @@
             const gameOverlay = document.querySelector('.game-overlay');
             const canvas = document.getElementById('game-canvas');
             const scoreDisplay = document.querySelector('.game-score');
-            const gameContainer = document.querySelector('.game-container'); // Needed for sizing
-            const debtCounter = document.getElementById('debt-counter');
+            const gameContainer = document.querySelector('.game-container');
+            const debtCounter = document.getElementById('debt-counter'); // Keep if you want the counter visually
             const priceValue = document.querySelector('.price-value');
             const priceChange = document.querySelector('.price-change');
-            const copyBtn = document.querySelector('.copy-btn');
-            let tickerContent = document.querySelector('.ticker-content'); // Use let for potential reset
+            const copyBtns = document.querySelectorAll('.copy-btn'); // Select all copy buttons
+            let tickerContent = document.querySelector('.ticker-content');
             const tickerContainer = document.querySelector('.price-ticker');
             const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
             const mobileNavLinks = document.getElementById('mobile-nav');
+            const fadeElements = document.querySelectorAll('.fade-in-section'); // For scroll animations
 
             // --- Basic Checks ---
-            if (!canvas || !gameContainer || !startButton || !gameOverlay || !scoreDisplay) {
-                console.error("Essential game elements not found. Game cannot initialize.");
-                // Disable game functionality if elements are missing
-                if(startButton) startButton.disabled = true;
-                if(gameOverlay) gameOverlay.innerHTML = "<p style='color:red;'>Game failed to load essential elements.</p>";
-            }
-             const ctx = canvas ? canvas.getContext('2d') : null; // Get context only if canvas exists
-             if (!ctx) {
-                 console.error("Canvas context could not be created. Game cannot initialize.");
-                 if(startButton) startButton.disabled = true;
-                 if(gameOverlay) gameOverlay.innerHTML = "<p style='color:red;'>Game rendering context failed.</p>";
-             }
+             if (!canvas || !gameContainer || !startButton || !gameOverlay || !scoreDisplay) { console.error("Essential game elements not found."); }
+             const ctx = canvas ? canvas.getContext('2d') : null;
+             if (!ctx) { console.error("Canvas context could not be created."); }
 
+             // --- Scroll Fade-In Animation ---
+             const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 }; // Adjust threshold
+             const observer = new IntersectionObserver((entries, observer) => {
+                 entries.forEach(entry => {
+                     if (entry.isIntersecting) {
+                         entry.target.classList.add('visible');
+                         // Optional: Unobserve after animation to save resources
+                         // observer.unobserve(entry.target);
+                     }
+                     // Optional: Remove 'visible' class if element scrolls out of view
+                     // else { entry.target.classList.remove('visible'); }
+                 });
+             }, observerOptions);
 
-            // --- Game Variables ---
-            let player = { x: 0, y: 0, width: 50, height: 50, color: '#3e8eff', speed: 6 }; // Player speed added
-            let moneyItems = [];
-            let debtItems = [];
-            let keys = {};
-            let score = 0;
-            let gameInterval, spawnInterval;
-            let gameActive = false; // Flag to control game state
-            const itemSize = 30; // Size for falling items (visual and collision)
+             fadeElements.forEach(el => { observer.observe(el); });
 
-            const emojis = {
-                player: '✊', // Player emoji
-                money: '💰',
-                banker: '🏦',
-                lender: '📝',
-                agency: '🔴',
-                politician: '👔'
-            };
-            const debtPool = [emojis.banker, emojis.lender, emojis.agency, emojis.politician];
 
              // --- Mobile Menu Logic ---
              if (mobileNavToggle && mobileNavLinks) {
@@ -1671,11 +822,8 @@
                      const isExpanded = mobileNavToggle.getAttribute('aria-expanded') === 'true';
                      mobileNavLinks.classList.toggle('active');
                      mobileNavToggle.setAttribute('aria-expanded', !isExpanded);
-                     // Optional: Change hamburger icon to 'X'
                      mobileNavToggle.textContent = !isExpanded ? '✕' : '☰';
                  });
-
-                 // Close menu when a link is clicked (for single-page applications)
                  mobileNavLinks.querySelectorAll('a').forEach(link => {
                     link.addEventListener('click', () => {
                         mobileNavLinks.classList.remove('active');
@@ -1683,303 +831,164 @@
                         mobileNavToggle.textContent = '☰';
                     });
                  });
-             } else {
-                 console.warn("Mobile navigation elements not found.");
-             }
+             } else { console.warn("Mobile navigation elements not found."); }
 
 
             // --- Event Listeners ---
-             if (startButton && ctx) { // Only add listener if button and context exist
-                 startButton.addEventListener('click', function() {
-                     if (!gameActive) { // Prevent starting multiple games
-                        startGame();
-                     }
-                 });
+             if (startButton && ctx) {
+                 startButton.addEventListener('click', function() { if (!gameActive) { startGame(); } });
              }
 
-
             document.addEventListener('keydown', e => {
-                keys[e.key.toLowerCase()] = true; // Use lowercase for consistency (e.g., 'a' vs 'A')
-                // Prevent page scroll with arrow keys/space when game is active
-                if (gameActive && ['arrowup', 'arrowdown', 'arrowleft', 'arrowright', ' '].includes(e.key.toLowerCase())) {
-                    e.preventDefault();
-                }
+                keys[e.key.toLowerCase()] = true;
+                if (gameActive && ['arrowup', 'arrowdown', 'arrowleft', 'arrowright', ' '].includes(e.key.toLowerCase())) { e.preventDefault(); }
             });
             document.addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false; });
 
-            if (copyBtn) {
+            // --- Copy Button Logic (Handles Multiple Buttons) ---
+            copyBtns.forEach(copyBtn => {
                 copyBtn.addEventListener('click', function() {
-                    const contractAddressElement = document.querySelector('.contract-address p');
-                    if (contractAddressElement) {
+                    const contractAddressElement = this.previousElementSibling; // Assumes <p> is right before <button>
+                    if (contractAddressElement && contractAddressElement.tagName === 'P') {
                         const contractAddress = contractAddressElement.innerText;
-                         // Use Clipboard API
-                         if (navigator.clipboard && navigator.clipboard.writeText) {
-                             navigator.clipboard.writeText(contractAddress).then(function() {
-                                 copyBtn.textContent = "Copied!";
-                                 setTimeout(() => {
-                                     copyBtn.textContent = "Copy Address";
-                                 }, 2000);
-                             }, function(err) {
-                                 console.error('Could not copy text: ', err);
-                                 copyBtn.textContent = "Copy Failed";
-                                  setTimeout(() => {
-                                     copyBtn.textContent = "Copy Address";
-                                 }, 2000);
-                             });
-                         } else {
-                             // Fallback for older browsers (less reliable)
-                             try {
-                                 const textArea = document.createElement("textarea");
-                                 textArea.value = contractAddress;
-                                 textArea.style.position = "fixed"; // Prevent scrolling
-                                 textArea.style.opacity = 0;
-                                 document.body.appendChild(textArea);
-                                 textArea.focus();
-                                 textArea.select();
-                                 document.execCommand('copy');
-                                 document.body.removeChild(textArea);
-                                 copyBtn.textContent = "Copied!";
-                                 setTimeout(() => { copyBtn.textContent = "Copy Address"; }, 2000);
-                             } catch (err) {
-                                  console.error('Fallback copy failed: ', err);
-                                  copyBtn.textContent = "Copy Failed";
-                                   setTimeout(() => { copyBtn.textContent = "Copy Address"; }, 2000);
-                             }
-                         }
+                        navigator.clipboard.writeText(contractAddress).then(() => {
+                            const originalText = this.textContent;
+                            this.textContent = "Copied!";
+                            setTimeout(() => { this.textContent = originalText; }, 2000);
+                        }, (err) => {
+                            console.error('Copy failed: ', err);
+                            const originalText = this.textContent;
+                            this.textContent = "Failed!";
+                             setTimeout(() => { this.textContent = originalText; }, 2000);
+                        });
+                    } else {
+                        console.error("Could not find contract address element to copy.");
                     }
                 });
-            }
+            });
 
-            // --- Game Functions ---
+
+            // --- Game Variables & Functions (Keep as before, minor text changes) ---
+            let player = { x: 0, y: 0, width: 50, height: 50, color: '#ff3e3e', speed: 6 }; // Red player
+            let moneyItems = []; let debtItems = []; let keys = {}; let score = 0;
+            let gameInterval, spawnInterval; let gameActive = false; const itemSize = 30;
+            const emojis = { player: '🤡', money: '$', banker: '🏦', lender: '🧾', agency: '🚨', politician: '💩' }; // Adjusted emojis
+            const debtPool = [emojis.banker, emojis.lender, emojis.agency, emojis.politician];
+
             function startGame() {
-                if (!ctx || !gameContainer) return; // Need context and container
-
-                // Set canvas dimensions right before starting
-                canvas.width = gameContainer.clientWidth;
-                canvas.height = gameContainer.clientHeight;
-
-                // Reset player position based on *current* canvas dimensions
-                player.x = canvas.width / 2 - player.width / 2;
-                player.y = canvas.height - player.height - 10; // Position near bottom
-
-                // Reset game state
-                gameActive = true;
-                moneyItems = [];
-                debtItems = [];
-                score = 0;
-                updateScore();
-                keys = {}; // Clear any pressed keys from previous game
-                if (gameOverlay) gameOverlay.style.display = 'none'; // Hide overlay
-
-                // Clear any existing intervals before starting new ones
-                clearInterval(gameInterval);
-                clearInterval(spawnInterval);
-
-                // Start game loops
-                gameInterval = setInterval(updateGame, 1000 / 60); // ~60 FPS
-                spawnInterval = setInterval(spawnObjects, 800); // Spawn rate (adjust as needed)
-                console.log("Game Started - Canvas:", canvas.width, "x", canvas.height);
+                if (!ctx || !gameContainer) return;
+                canvas.width = gameContainer.clientWidth; canvas.height = gameContainer.clientHeight;
+                player.x = canvas.width / 2 - player.width / 2; player.y = canvas.height - player.height - 10;
+                gameActive = true; moneyItems = []; debtItems = []; score = 0; updateScore(); keys = {};
+                if (gameOverlay) gameOverlay.style.display = 'none';
+                clearInterval(gameInterval); clearInterval(spawnInterval);
+                gameInterval = setInterval(updateGame, 1000 / 60); spawnInterval = setInterval(spawnObjects, 750); // Faster spawn
             }
 
             function endGame() {
-                gameActive = false; // Set game state
-                clearInterval(gameInterval);
-                clearInterval(spawnInterval);
-
+                gameActive = false; clearInterval(gameInterval); clearInterval(spawnInterval);
                 if (gameOverlay) {
-                    gameOverlay.style.display = 'flex'; // Show overlay
+                    gameOverlay.style.display = 'flex';
                     const gameTitle = gameOverlay.querySelector('.game-title');
                     if (gameTitle) gameTitle.textContent = `GAME OVER! Score: ${score}`;
                     const gameDesc = gameOverlay.querySelector('.game-description');
-                    if (gameDesc) gameDesc.textContent = `You collected ${score} $DEBT tokens before the system inevitably crushed you. Ready to try again?`;
+                    if (gameDesc) gameDesc.textContent = `You got ${score} points before inevitably getting rekt. Pathetic. Try again?`;
                     const startBtnText = gameOverlay.querySelector('.start-game-btn');
-                    if(startBtnText) startBtnText.textContent = "RESTART GAME";
+                    if(startBtnText) startBtnText.textContent = "AGAIN, DEGEN!";
                 }
-                console.log("Game Ended - Final Score:", score);
             }
 
-            function updateScore() {
-                if (scoreDisplay) scoreDisplay.textContent = `SCORE: ${score}`;
-            }
+            function updateScore() { if (scoreDisplay) scoreDisplay.textContent = `POINTS: ${score}`; }
 
             function spawnObjects() {
-                if (!gameActive || !canvas || canvas.width <= 0) return; // Don't spawn if game isn't active or canvas invalid
-
-                // Spawn Money ($DEBT)
-                if (Math.random() < 0.4) { // Adjust spawn chance
-                    moneyItems.push({
-                        x: Math.random() * (canvas.width - itemSize), // Ensure within bounds
-                        y: -itemSize, // Start just above the canvas
-                        emoji: emojis.money
-                    });
+                if (!gameActive || !canvas || canvas.width <= 0) return;
+                if (Math.random() < 0.5) { // Spawn money chance
+                    moneyItems.push({ x: Math.random()*(canvas.width-itemSize), y: -itemSize, emoji: emojis.money });
                 }
-                // Spawn Debt Items
-                if (Math.random() < 0.65) { // Adjust spawn chance (slightly more debt?)
-                    debtItems.push({
-                        x: Math.random() * (canvas.width - itemSize), // Ensure within bounds
-                        y: -itemSize, // Start just above the canvas
-                        emoji: debtPool[Math.floor(Math.random() * debtPool.length)]
-                    });
+                if (Math.random() < 0.7) { // More debt
+                    debtItems.push({ x: Math.random()*(canvas.width-itemSize), y: -itemSize, emoji: debtPool[Math.floor(Math.random()*debtPool.length)] });
                 }
             }
 
             function updateGame() {
-                if (!gameActive || !canvas || !ctx) return; // Stop updates if game ended or canvas context lost
-
-                // Move player
+                if (!gameActive || !canvas || !ctx) return;
                 if (keys['arrowleft'] || keys['a']) player.x -= player.speed;
                 if (keys['arrowright'] || keys['d']) player.x += player.speed;
-
-                // Clamp player position to canvas bounds
                 player.x = Math.max(0, Math.min(canvas.width - player.width, player.x));
-
-                // Clear canvas
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                // Draw player (as a rectangle)
-                ctx.fillStyle = player.color;
-                ctx.fillRect(player.x, player.y, player.width, player.height);
-
-                // Draw player emoji centered on the rectangle
-                ctx.font = "30px Arial"; // Make player emoji slightly larger
-                ctx.textAlign = "center";
-                ctx.textBaseline = "middle"; // Align vertically in the middle
+                // Player Rect (optional visualization)
+                // ctx.fillStyle = player.color;
+                // ctx.fillRect(player.x, player.y, player.width, player.height);
+                // Player Emoji
+                ctx.font = "40px Arial"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
                 ctx.fillText(emojis.player, player.x + player.width / 2, player.y + player.height / 2);
 
-                // --- Update & Draw Items ---
-                ctx.font = `${itemSize}px Arial`; // Set font size for items
-                // Align emojis better vertically (already centered horizontally)
-                ctx.textBaseline = "middle";
-
-                // Update money items
-                for (let i = moneyItems.length - 1; i >= 0; i--) {
-                    let item = moneyItems[i];
-                    item.y += 4; // Speed of falling money
-                    ctx.fillText(item.emoji, item.x + itemSize / 2, item.y + itemSize / 2); // Center emoji in its box
-
-                    // Check collision
+                ctx.font = `${itemSize}px Arial`; ctx.textBaseline = "middle";
+                for (let i = moneyItems.length - 1; i >= 0; i--) { /* ... Money collision/drawing ... */
+                    let item = moneyItems[i]; item.y += 4;
+                    ctx.fillText(item.emoji, item.x + itemSize / 2, item.y + itemSize / 2);
                     if (isColliding(player, { x: item.x, y: item.y, width: itemSize, height: itemSize })) {
-                        score += 10;
-                        updateScore();
-                        moneyItems.splice(i, 1); // Remove collected item
-                    }
-                    // Remove if off-screen
-                    else if (item.y > canvas.height) {
-                        moneyItems.splice(i, 1);
-                    }
+                        score += 10; updateScore(); moneyItems.splice(i, 1);
+                    } else if (item.y > canvas.height) { moneyItems.splice(i, 1); }
                 }
-
-                // Update debt items
-                for (let i = debtItems.length - 1; i >= 0; i--) {
-                    let item = debtItems[i];
-                    item.y += 5; // Speed of falling debt (slightly faster)
-                    ctx.fillText(item.emoji, item.x + itemSize / 2, item.y + itemSize / 2); // Center emoji
-
-                    // Check collision
-                    if (isColliding(player, { x: item.x, y: item.y, width: itemSize, height: itemSize })) {
-                        endGame();
-                        return; // Exit update loop immediately after game ends
-                    }
-                    // Remove if off-screen
-                    else if (item.y > canvas.height) {
-                        debtItems.splice(i, 1);
-                    }
+                for (let i = debtItems.length - 1; i >= 0; i--) { /* ... Debt collision/drawing ... */
+                    let item = debtItems[i]; item.y += 5.5; // Faster debt
+                    ctx.fillText(item.emoji, item.x + itemSize / 2, item.y + itemSize / 2);
+                     if (isColliding(player, { x: item.x, y: item.y, width: itemSize, height: itemSize })) {
+                         endGame(); return;
+                     } else if (item.y > canvas.height) { debtItems.splice(i, 1); }
                 }
             }
 
-            // Axis-Aligned Bounding Box Collision Detection
-            function isColliding(rect1, rect2) {
-                return (
-                    rect1.x < rect2.x + rect2.width &&
-                    rect1.x + rect1.width > rect2.x &&
-                    rect1.y < rect2.y + rect2.height &&
-                    rect1.y + rect1.height > rect2.y
-                );
+            function isColliding(rect1, rect2) { /* ... Collision logic (unchanged) ... */
+                return ( rect1.x < rect2.x + rect2.width && rect1.x + rect1.width > rect2.x &&
+                         rect1.y < rect2.y + rect2.height && rect1.y + rect1.height > rect2.y );
             }
 
-            // --- Other Dynamic Elements ---
-
-            // Update debt counter
-            function updateDebtCounter() {
-                if (!debtCounter) return;
-                let currentDebt = parseFloat(debtCounter.textContent.replace(/[$,]/g, '')) || 307000000000000;
-                const increment = Math.floor(Math.random() * 15000000) + 5000000;
-                currentDebt += increment;
-                debtCounter.textContent = '$' + currentDebt.toLocaleString('en-US', { maximumFractionDigits: 0 });
-            }
-            setInterval(updateDebtCounter, 100); // Update frequently
-
-            // Ticker price fluctuation
-            function updatePrice() {
+            // --- Other Dynamic Elements (Ticker Price, Meme Alerts) ---
+            function updatePrice() { /* ... Price update logic (unchanged)... */
                 if (!priceValue || !priceChange) return;
-                let currentPrice = parseFloat(priceValue.textContent.replace(/[$,]/g, '')) || 0.00025;
-                const changePercent = (Math.random() * 0.15) - 0.05; // Random change between -5% and +10%
+                let currentPrice = parseFloat(priceValue.textContent) || 0.00000169;
+                const changePercent = (Math.random() * 0.60) - 0.25; // Wild swings: -25% to +35%
                 let newPrice = currentPrice * (1 + changePercent);
-                newPrice = Math.max(0.00001, newPrice); // Floor price
-
-                priceValue.textContent = '$' + newPrice.toFixed(6); // Keep precision
-
+                newPrice = Math.max(0.00000001, newPrice); // Floor
+                priceValue.textContent = newPrice.toFixed(8);
                 const displayChange = (changePercent * 100).toFixed(1);
                 priceChange.textContent = (changePercent >= 0 ? '+' : '') + displayChange + '%';
-
                 priceChange.className = 'price-change ' + (changePercent >= 0 ? 'positive' : 'negative');
             }
-            setInterval(updatePrice, 3500); // Update rate
+            setInterval(updatePrice, 2500); // Faster price updates
 
-
-            // Random financial facts popup
+            // Meme financial facts popup
             const factsMessages = [
-                "FACT: Credit card debt hits record high of $1.13 trillion!",
-                "ALERT: Student loan interest has outpaced inflation by 3x since 2000",
-                "WARNING: Housing affordability at lowest level since 1985",
-                "BREAKING: 64% of Americans living paycheck to paycheck",
-                "REPORT: Medical debt is the #1 cause of bankruptcy",
-                "FACT: The average American has $90,460 in debt",
-                "ALERT: National debt per taxpayer now exceeds $240,000",
-                "WARNING: 3 in 5 Americans couldn't cover a $1,000 emergency",
-                "BREAKING: Real wages have stagnated since the 1970s",
-                "REPORT: DebtCoin up 46% as debt crisis worsens!",
-                "FACT: Debt slavery is the modern form of indentured servitude",
-                "ALERT: The average car loan now exceeds 72 months",
-                "WARNING: 1 in 6 homeowners are underwater on their mortgage"
+                "ALERT: Local man buys $DEBT instead of insulin. Says 'YOLO'.",
+                "BREAKING: Jerome Powell seen crying into a pile of useless dollars. $DEBT suspected.",
+                "FACT: 9 out of 10 dentists agree $DEBT is 'probably a bad idea, but kinda funny'.",
+                "WARNING: Holding $DEBT may cause spontaneous diamond hands and delusions of grandeur.",
+                "REPORT: Study finds link between $DEBT ownership and inexplicable urge to tweet rocket emojis.",
+                "ALERT: Wife's boyfriend recommends diversifying into $DEBT. Financial advice?",
+                "FACT: $DEBT has more utility than your degree (it makes people laugh).",
+                "BREAKING: Scientists discover $DEBT cures existential dread*. (*Results may vary, dread may increase).",
+                "WARNING: May cause you to quit your job and tell your boss to 'suck it'. Don't.",
+                "REPORT: $DEBT outperforms S&P 500 (in meme potential).",
+                "ALERT: Buying $DEBT confirmed side effect: uncontrollable giggling during market crashes."
             ];
 
              function showRandomFact() {
-                 // Check if a popup already exists to avoid spamming
                  if (document.querySelector('.facts-popup')) return;
-
                  const msg = factsMessages[Math.floor(Math.random() * factsMessages.length)];
                  const popup = document.createElement('div');
-                 popup.className = 'facts-popup'; // Relies on CSS for animation
+                 popup.className = 'facts-popup';
                  popup.textContent = msg;
                  document.body.appendChild(popup);
-
-                 // Remove popup after animation completes fully (using animation duration from CSS)
-                 popup.addEventListener('animationend', () => {
-                     // Check if it's the fade-out part of the animation before removing
-                      if (popup.parentNode && popup.style.opacity === '0') { // A bit of a hacky check
-                          popup.remove();
-                      }
-                 });
-
-                 // Fallback removal in case animationend event doesn't fire reliably
-                 setTimeout(() => {
-                    if (popup.parentNode) {
-                        popup.remove();
-                    }
-                 }, 5100); // Slightly longer than the animation duration
+                 popup.addEventListener('animationend', () => { if (popup.parentNode) { popup.remove(); } });
+                 setTimeout(() => { if (popup.parentNode) { popup.remove(); } }, 6100); // Fallback
              }
-
-
             function scheduleFact() {
-                const delay = Math.random() * 12000 + 18000; // Show every 18-30 seconds
-                setTimeout(() => {
-                    showRandomFact();
-                    scheduleFact(); // Schedule the next one
-                }, delay);
+                const delay = Math.random() * 10000 + 10000; // Show every 10-20 seconds
+                setTimeout(() => { showRandomFact(); scheduleFact(); }, delay);
             }
-            // Don't start immediately, wait a bit after page load
-            setTimeout(scheduleFact, 5000);
+            setTimeout(scheduleFact, 6000); // Initial delay
 
         }); // End DOMContentLoaded
     </script>
