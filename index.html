@@ -12,11 +12,16 @@
             box-sizing: border-box;
         }
 
+        html {
+             scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+        }
+
         body {
             background-color: #0d0d0d;
             color: #f0f0f0;
             line-height: 1.6;
             font-family: 'Arial', sans-serif;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
         /* Container */
@@ -28,9 +33,10 @@
 
         /* Header styles */
         header {
-            background-color: #1a1a1a;
+            background-color: rgba(26, 26, 26, 0.95); /* Slightly transparent */
+            backdrop-filter: blur(5px); /* Frosted glass effect */
             color: white;
-            padding: 20px 0;
+            padding: 15px 0; /* Reduced padding slightly */
             position: fixed;
             width: 100%;
             top: 0;
@@ -47,7 +53,7 @@
         .logo {
             font-size: 24px;
             font-weight: 700;
-            color: #3e8eff; /* Changed to blue */
+            color: #3e8eff; /* Blue */
             text-decoration: none;
         }
 
@@ -57,7 +63,7 @@
 
         .ticker-symbol {
             font-family: monospace;
-            background-color: #3e8eff; /* Changed to blue */
+            background-color: #3e8eff; /* Blue */
             color: #0d0d0d;
             padding: 2px 6px;
             border-radius: 3px;
@@ -66,6 +72,7 @@
             vertical-align: middle;
         }
 
+        /* Desktop Navigation */
         nav ul {
             display: flex;
             list-style: none;
@@ -80,135 +87,87 @@
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
+            padding: 5px 0; /* Add padding for larger clickable area */
         }
 
         nav ul li a:hover {
-            color: #3e8eff; /* Changed to blue */
+            color: #3e8eff; /* Blue */
         }
 
         .cta-button {
-            background-color: #3e8eff; /* Changed to blue */
+            background-color: #3e8eff; /* Blue */
             color: white;
             padding: 10px 20px;
             border-radius: 5px;
             font-weight: 700;
             text-decoration: none;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
         }
 
         .cta-button:hover {
             background-color: #2e7eee; /* Darker blue */
+            transform: translateY(-2px);
         }
 
-        /* Hero section */
-        .hero {
-            padding: 180px 0 100px;
-            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+        /* Mobile Navigation Toggle (Hamburger) */
+        .mobile-nav-toggle {
+            display: none; /* Hidden by default */
+            background: none;
+            border: none;
             color: white;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            border-bottom: 2px solid #3e8eff; /* Changed to blue */
+            font-size: 28px;
+            cursor: pointer;
+            z-index: 110; /* Above overlay */
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
+        /* Mobile Navigation Links Container */
+        .mobile-nav-links {
+            display: none; /* Hidden by default */
+            position: fixed;
             top: 0;
-            left: 0;
-            width: 100%;
+            right: 0;
+            width: 70%; /* Adjust width as needed */
+            max-width: 300px;
             height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><text x="0" y="10" font-family="monospace" font-size="10" fill="rgba(62,142,255,0.03)">$</text></svg>');
-            opacity: 0.5;
+            background-color: #1a1a1a; /* Dark background */
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.4);
+            padding-top: 80px; /* Space for close button or header */
+            z-index: 105;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            color: #ffffff;
+        .mobile-nav-links.active {
+            display: flex; /* Show when active */
         }
 
-        .hero h1 span {
-            color: #3e8eff; /* Changed to blue */
-        }
-
-        .hero p {
-            font-size: 20px;
-            max-width: 800px;
-            margin: 0 auto 40px;
-            opacity: 0.9;
-        }
-
-        .tagline {
-            font-style: italic;
-            font-size: 24px;
-            margin-bottom: 30px;
-            color: #3e8eff; /* Changed to blue */
-        }
-
-        .hero-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .hero-cta {
-            padding: 15px 30px;
-            font-size: 18px;
-        }
-
-        .secondary-cta {
-            background-color: transparent;
-            border: 2px solid #3e8eff; /* Changed to blue */
-        }
-
-        .secondary-cta:hover {
-            background-color: rgba(62, 142, 255, 0.1); /* Changed to blue */
-        }
-
-        /* Global debt counter */
-        .global-debt-counter {
-            background-color: rgba(26, 26, 26, 0.8);
-            border: 2px solid #3e8eff; /* Changed to blue */
-            padding: 15px;
-            border-radius: 10px;
-            max-width: 600px;
-            margin: 0 auto 40px;
-        }
-
-        .counter-label {
-            font-size: 14px;
-            text-transform: uppercase;
-            color: #cccccc;
-            letter-spacing: 2px;
-        }
-
-        .counter-value {
-            font-family: monospace;
-            font-size: 36px;
-            font-weight: bold;
-            color: #3e8eff; /* Changed to blue */
-            margin: 10px 0;
-        }
-
-        .counter-subtext {
-            font-size: 12px;
-            color: #cccccc;
-            font-style: italic;
-        }
-
-        /* Game container */
-        .game-container {
-            margin-top: 50px;
+        .mobile-nav-links ul {
+            list-style: none;
+            padding: 0;
             width: 100%;
-            max-width: 800px;
-            height: 500px;
-            margin: 50px auto 0;
-            background-color: #1a1a1a;
-            border: 3px solid #3e8eff; /* Changed to blue */
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
+            text-align: center;
+        }
+
+        .mobile-nav-links ul li {
+            margin: 20px 0;
+        }
+
+        .mobile-nav-links ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            padding: 10px 20px;
+            display: block; /* Make whole area clickable */
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .mobile-nav-links ul li a:hover {
+            color: #3e8eff; /* Blue */
+            background-color: #2a2a2a;
+        }
+        .mobile-nav-links .cta-button {
+            margin-top: 30px;
         }
 
         /* Price ticker */
@@ -220,19 +179,27 @@
             font-family: monospace;
             overflow: hidden;
             white-space: nowrap;
-            position: relative; /* Added for pseudo-element */
-            width: 100%; /* Ensure it spans width */
+            position: relative;
+            width: 100%;
         }
 
-        .price-ticker::after { /* Fade effect for overflowing text */
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 50px;
-            height: 100%;
-            background: linear-gradient(to right, transparent, #0d0d0d);
-        }
+         .price-ticker::after { /* Fade effect for overflowing text */
+             content: '';
+             position: absolute;
+             top: 0;
+             right: 0;
+             width: 60px; /* Increased fade width */
+             height: 100%;
+             background: linear-gradient(to right, transparent, #0d0d0d 80%); /* Sharper fade */
+             pointer-events: none; /* Allow clicking through the fade */
+         }
+
+         .ticker-content { /* Wrap content for animation */
+            display: inline-block; /* Necessary for transform animation */
+            padding-left: 100%; /* Start off-screen to the right */
+            animation: ticker 30s linear infinite; /* Adjust duration as needed */
+         }
+
 
         .price-label {
             color: #cccccc;
@@ -240,7 +207,7 @@
         }
 
         .price-value {
-            color: #3e8eff; /* Changed to blue */
+            color: #3e8eff; /* Blue */
             font-weight: bold;
             margin-right: 10px;
         }
@@ -254,20 +221,18 @@
 
         .positive {
             background-color: #32CD32; /* Green for positive */
-            color: white;
+            color: #ffffff;
         }
 
         .negative {
             background-color: #ff3e3e; /* Red for negative */
-            color: white;
+            color: #ffffff;
         }
 
         .ticker-message {
             color: #cccccc;
             font-style: italic;
-            animation: ticker 20s linear infinite;
-            display: inline-block; /* Needed for transform */
-            padding-left: 100%; /* Start off-screen */
+            margin-left: 30px; /* Space between price and message */
         }
 
         @keyframes ticker {
@@ -275,8 +240,203 @@
                 transform: translateX(0);
             }
             100% {
-                transform: translateX(-100%); /* Move fully across */
+                transform: translateX(-100%); /* Move fully across its own width + padding */
             }
+        }
+
+
+        /* Hero section */
+        .hero {
+            padding: 180px 0 100px; /* Increased top padding to account for fixed header + ticker */
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid #3e8eff; /* Blue */
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><text x="0" y="10" font-family="monospace" font-size="10" fill="rgba(62,142,255,0.03)">$</text></svg>');
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        .hero .container { /* Ensure container content is above pseudo-element */
+            position: relative;
+            z-index: 1;
+        }
+
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .hero h1 span {
+            color: #3e8eff; /* Blue */
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+
+        .tagline {
+            font-style: italic;
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: #3e8eff; /* Blue */
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px; /* Added margin */
+        }
+
+        .hero-cta {
+            padding: 15px 30px;
+            font-size: 18px;
+        }
+
+        .secondary-cta {
+            background-color: transparent;
+            border: 2px solid #3e8eff; /* Blue */
+            color: #3e8eff;
+        }
+
+        .secondary-cta:hover {
+            background-color: rgba(62, 142, 255, 0.1); /* Blue */
+            color: #ffffff;
+        }
+
+        /* Global debt counter */
+        .global-debt-counter {
+            background-color: rgba(26, 26, 26, 0.8);
+            border: 2px solid #3e8eff; /* Blue */
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: 40px auto; /* Adjusted margin */
+        }
+
+        .counter-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            color: #cccccc;
+            letter-spacing: 2px;
+        }
+
+        .counter-value {
+            font-family: monospace;
+            font-size: 36px;
+            font-weight: bold;
+            color: #3e8eff; /* Blue */
+            margin: 10px 0;
+            word-wrap: break-word; /* Prevent overflow */
+        }
+
+        .counter-subtext {
+            font-size: 12px;
+            color: #cccccc;
+            font-style: italic;
+        }
+
+        /* Contract address box */
+        .contract-address {
+            background-color: #1a1a1a;
+            border: 2px solid #3e8eff; /* Blue */
+            border-radius: 10px;
+            padding: 20px; /* Increased padding */
+            margin: 30px auto;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .contract-address h4 {
+            color: #ffffff;
+            margin-bottom: 15px; /* Increased margin */
+            font-size: 18px;
+        }
+
+        .contract-address p {
+            font-family: monospace;
+            background-color: #0d0d0d;
+            padding: 12px; /* Increased padding */
+            border-radius: 5px;
+            color: #3e8eff; /* Blue */
+            overflow-wrap: break-word; /* Better word breaking */
+            word-break: break-all;
+            font-size: 14px; /* Slightly smaller for long addresses */
+            text-align: center;
+        }
+
+        .copy-btn {
+            background-color: #3e8eff; /* Blue */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            margin-top: 15px; /* Increased margin */
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .copy-btn:hover {
+            background-color: #2e7eee; /* Darker blue */
+        }
+
+        /* Buy buttons section */
+        .buy-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px auto;
+            max-width: 800px;
+        }
+
+        .buy-btn {
+            padding: 15px 25px;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 16px;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.3s, box-shadow 0.3s;
+            background-color: #3e8eff; /* Blue - Standardized */
+        }
+
+        .buy-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(62, 142, 255, 0.3); /* Blue shadow */
+        }
+
+        /* Game container */
+        .game-container {
+            margin-top: 50px;
+            width: 100%;
+            max-width: 800px;
+            height: 500px;
+            margin: 50px auto 0;
+            background-color: #1a1a1a;
+            border: 3px solid #3e8eff; /* Blue */
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer; /* Indicate interactivity */
         }
 
         .game-overlay {
@@ -289,67 +449,81 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: rgba(10, 10, 10, 0.8);
+            background-color: rgba(10, 10, 10, 0.85); /* Slightly darker overlay */
             z-index: 10;
+            padding: 20px; /* Add padding */
         }
 
         .game-title {
             font-size: 36px;
             margin-bottom: 20px;
-            color: #3e8eff; /* Changed to blue */
+            color: #3e8eff; /* Blue */
         }
 
         .game-description {
             max-width: 500px;
             margin-bottom: 30px;
             text-align: center;
+            color: #cccccc; /* Lighter text on overlay */
         }
 
         .start-game-btn {
-            background-color: #3e8eff; /* Changed to blue */
+            background-color: #3e8eff; /* Blue */
             color: white;
             padding: 12px 25px;
             border: none;
             border-radius: 5px;
             font-size: 18px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
         }
 
         .start-game-btn:hover {
             background-color: #2e7eee; /* Darker blue */
+            transform: translateY(-2px);
         }
+
+         #game-canvas { /* Ensure canvas is block level for sizing */
+            display: block;
+            width: 100%;
+            height: 100%;
+         }
 
         .game-score {
             position: absolute;
             top: 20px;
             right: 20px;
             font-size: 24px;
-            color: #3e8eff; /* Changed to blue */
+            color: #3e8eff; /* Blue */
             font-weight: bold;
             z-index: 5;
+            background-color: rgba(13, 13, 13, 0.6); /* Slight background for readability */
+            padding: 5px 10px;
+            border-radius: 5px;
         }
 
         .game-controls {
             position: absolute;
             bottom: 20px;
             left: 20px;
-            color: white;
+            color: rgba(255, 255, 255, 0.7); /* Slightly faded */
             font-size: 14px;
             z-index: 5;
+            background-color: rgba(13, 13, 13, 0.6);
+            padding: 5px 10px;
+            border-radius: 5px;
         }
 
-        /* Features section */
-        .features {
-            padding: 100px 0;
-            text-align: center;
-            background-color: #151515;
+        /* Sections */
+        section {
+             padding: 100px 0;
         }
 
         .section-title {
             font-size: 36px;
             margin-bottom: 20px;
             color: #ffffff;
+            text-align: center;
         }
 
         .section-description {
@@ -357,6 +531,12 @@
             margin: 0 auto 60px;
             color: #cccccc;
             font-size: 18px;
+            text-align: center;
+        }
+
+        /* Features section */
+        .features {
+            background-color: #151515;
         }
 
         .features-grid {
@@ -370,14 +550,15 @@
             border-radius: 10px;
             padding: 40px 30px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
             border: 1px solid #333333;
+            text-align: center; /* Center content */
         }
 
         .feature-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(62, 142, 255, 0.2); /* Changed to blue */
-            border-color: #3e8eff; /* Changed to blue */
+            box-shadow: 0 10px 25px rgba(62, 142, 255, 0.2); /* Blue */
+            border-color: #3e8eff; /* Blue */
         }
 
         .feature-icon {
@@ -389,8 +570,9 @@
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
-            color: #3e8eff; /* Changed to blue */
+            color: #3e8eff; /* Blue */
             font-size: 28px;
+            border: 1px solid #444; /* Subtle border */
         }
 
         .feature-title {
@@ -405,7 +587,6 @@
 
         /* Manifesto section */
         .manifesto-section {
-            padding: 100px 0;
             background-color: #0d0d0d;
             position: relative;
         }
@@ -419,6 +600,7 @@
             height: 100%;
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="10" y="50" font-family="Arial" font-size="20" fill="rgba(62,142,255,0.03)">DEBT</text></svg>');
             opacity: 0.5;
+            z-index: 0;
         }
 
         .manifesto-container {
@@ -426,123 +608,158 @@
             margin: 0 auto;
             position: relative;
             z-index: 1;
-            text-align: center;
+            text-align: center; /* Center container content */
         }
 
         .manifesto-title {
             font-size: 42px;
-            color: #3e8eff; /* Changed to blue */
+            color: #3e8eff; /* Blue */
             margin-bottom: 30px;
-            text-align: center;
         }
 
         .manifesto-section h3 {
-            color: #3e8eff; /* Changed to blue */
+            color: #ffffff; /* White for subheadings */
             font-size: 24px;
-            text-align: center;
-            margin-left: auto;
-            margin-right: auto;
+            margin-top: 40px;
+            margin-bottom: 15px;
         }
 
-        .manifesto-section ul.roadmap,
-        .manifesto-section ul.principles {
-            display: inline-block;
-            text-align: left;
-        }
 
         .manifesto-section p {
             color: #cccccc;
             margin-bottom: 20px;
             font-size: 18px;
             line-height: 1.7;
+            text-align: left; /* Align paragraphs left within centered container */
         }
 
-        .principles {
-            list-style: none;
-            margin: 20px 0;
+        /* Lists within Manifesto */
+        .manifesto-section ul.roadmap,
+        .manifesto-section ul.principles {
+            display: inline-block; /* Allow centering via text-align on parent */
+            text-align: left; /* Align list items left */
+            margin: 20px auto; /* Center block */
             padding: 20px;
             background-color: #1a1a1a;
             border-radius: 10px;
-            border-left: 3px solid #3e8eff; /* Changed to blue */
+            max-width: 100%; /* Prevent overflow */
         }
 
-        .principles li {
-            padding: 10px 0;
-            font-size: 18px;
-            color: #ffffff;
-            border-bottom: 1px solid #333333;
-        }
+         .manifesto-section ul.principles {
+             list-style: none;
+             border-left: 3px solid #3e8eff; /* Blue */
+         }
+          .manifesto-section ul.principles li {
+              padding: 10px 0;
+              font-size: 18px;
+              color: #ffffff;
+              border-bottom: 1px solid #333333;
+          }
+          .manifesto-section ul.principles li:last-child {
+              border-bottom: none;
+          }
 
-        .principles li:last-child {
-            border-bottom: none;
-        }
-
-        .roadmap {
+        .manifesto-section ul.roadmap {
             list-style: none;
-            margin: 20px 0;
+            padding-left: 40px; /* Space for pseudo-elements */
         }
+         .manifesto-section ul.roadmap li {
+             padding: 10px 0 10px 0; /* Removed left padding */
+             position: relative;
+             color: #cccccc;
+         }
+          .manifesto-section ul.roadmap li::before {
+              content: '🚀'; /* Emoji bullet */
+              position: absolute;
+              left: -25px; /* Position emoji */
+              top: 10px;
+              color: #3e8eff; /* Blue */
+          }
 
-        .roadmap li {
-            padding: 10px 0 10px 30px;
-            position: relative;
-            color: #cccccc;
-        }
-
-        .roadmap li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 15px;
-            width: 10px;
-            height: 10px;
-            background-color: #3e8eff; /* Changed to blue */
-            border-radius: 50%;
-        }
 
         .final-words {
             margin-top: 60px;
-            padding: 20px;
+            padding: 30px; /* Increased padding */
             background-color: #1a1a1a;
             border-radius: 10px;
             text-align: center;
+            border-top: 2px solid #3e8eff; /* Blue */
         }
 
         .final-words p {
             font-size: 24px;
             margin-bottom: 10px;
+            text-align: center; /* Center paragraph */
         }
 
         .final-words strong {
-            color: #3e8eff; /* Changed to blue */
+            color: #3e8eff; /* Blue */
             font-size: 26px;
             display: block;
             margin-top: 20px;
         }
 
+        /* Tokenomics Section NEW */
+        #tokenomics {
+            background-color: #111111; /* Slightly different dark */
+        }
+
+        .tokenomics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .tokenomic-card {
+            background-color: #222222;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .tokenomic-card:hover {
+            transform: translateY(-5px);
+            border-color: #3e8eff; /* Blue */
+        }
+
+        .tokenomic-card h3 {
+            color: #3e8eff; /* Blue */
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .tokenomic-card p {
+            color: #cccccc;
+            font-size: 16px;
+        }
+
         /* How it works section */
         .how-it-works {
-            padding: 100px 0;
             background-color: #121212;
         }
 
         .steps {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around; /* Better spacing */
             margin-top: 60px;
             flex-wrap: wrap;
+            gap: 30px; /* Add gap for wrapping */
         }
 
         .step {
-            flex-basis: calc(25% - 20px); /* Adjust based on gap */
+            flex-basis: calc(25% - 30px); /* Adjust basis for gap */
+            min-width: 220px; /* Minimum width before wrapping */
             text-align: center;
             position: relative;
-            margin-bottom: 40px; /* Added for spacing when wrapping */
+            margin-bottom: 40px; /* Spacing when wrapping */
         }
 
         .step-number {
             width: 60px;
             height: 60px;
-            background-color: #3e8eff; /* Changed to blue */
+            background-color: #3e8eff; /* Blue */
             color: white;
             border-radius: 50%;
             display: flex;
@@ -551,6 +768,7 @@
             font-size: 24px;
             font-weight: 700;
             margin: 0 auto 30px;
+            border: 2px solid #5a9fff; /* Lighter blue border */
         }
 
         .step-title {
@@ -565,8 +783,6 @@
 
         /* Stats section */
         .stats {
-            padding: 100px 0;
-            text-align: center;
             background-color: #0a0a0a;
             color: white;
         }
@@ -580,13 +796,20 @@
 
         .stat-card {
             padding: 20px;
+            border: 1px solid #222; /* Subtle border */
+            border-radius: 8px;
+            transition: transform 0.3s, border-color 0.3s;
         }
+         .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #3e8eff; /* Blue */
+         }
 
         .stat-value {
             font-size: 48px;
             font-weight: 700;
             margin-bottom: 10px;
-            color: #3e8eff; /* Changed to blue */
+            color: #3e8eff; /* Blue */
         }
 
         .stat-label {
@@ -596,16 +819,13 @@
 
         /* Movement section */
         .movement-section {
-            padding: 100px 0;
             background-color: #0d0d0d;
-            text-align: center;
         }
 
         .movement-title {
             font-size: 42px;
-            color: #3e8eff; /* Changed to blue */
+            color: #3e8eff; /* Blue */
             margin-bottom: 30px;
-            text-align: center;
         }
 
         .movement-description {
@@ -640,8 +860,13 @@
             justify-content: center;
             margin-bottom: 15px;
             font-size: 40px;
-            color: #3e8eff; /* Changed to blue */
+            color: #3e8eff; /* Blue */
             border: 2px solid #333333;
+             transition: transform 0.3s, border-color 0.3s;
+        }
+        .icon-container:hover {
+             transform: scale(1.1);
+             border-color: #3e8eff; /* Blue */
         }
 
         .icon-label {
@@ -651,7 +876,6 @@
 
         /* Testimonials section */
         .testimonials {
-            padding: 100px 0;
             background-color: #151515;
         }
 
@@ -668,6 +892,8 @@
             padding: 30px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             border: 1px solid #333333;
+            display: flex; /* Use flex for better alignment */
+            flex-direction: column;
         }
 
         .testimonial-text {
@@ -676,11 +902,13 @@
             margin-bottom: 20px;
             font-size: 16px;
             line-height: 1.7;
+            flex-grow: 1; /* Allow text to take up space */
         }
 
         .testimonial-author {
             display: flex;
             align-items: center;
+            margin-top: auto; /* Push author to bottom */
         }
 
         .author-avatar {
@@ -689,7 +917,10 @@
             border-radius: 50%;
             margin-right: 15px;
             background-color: #333333;
-            border: 1px solid #3e8eff; /* Changed to blue */
+            border: 1px solid #3e8eff; /* Blue */
+             /* Basic placeholder - replace with actual images */
+            display: inline-block;
+            background-image: linear-gradient(45deg, #444, #555);
         }
 
         .author-name {
@@ -702,20 +933,18 @@
             font-size: 14px;
         }
 
-        /* Game section styles */
+        /* Game section styles (Text Intro to Game) */
         .game-section {
-            padding: 100px 0;
             background-color: #0d0d0d;
-            text-align: center;
         }
 
         .game-section h2 {
             font-size: 42px;
-            color: #3e8eff; /* Changed to blue */
+            color: #3e8eff; /* Blue */
             margin-bottom: 20px;
         }
 
-        .game-section p {
+        .game-section p.section-description { /* Target the specific p */
             max-width: 800px;
             margin: 0 auto 40px;
             color: #cccccc;
@@ -727,37 +956,43 @@
             justify-content: space-around;
             flex-wrap: wrap;
             margin: 40px 0;
+            gap: 20px; /* Add gap */
         }
 
         .game-feature {
             flex-basis: 30%;
             min-width: 250px;
             margin-bottom: 30px;
+            background-color: #1a1a1a; /* Add background */
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #333;
         }
 
         .game-feature h4 {
-            color: #3e8eff; /* Changed to blue */
-            margin-bottom: 10px;
+            color: #3e8eff; /* Blue */
+            margin-bottom: 15px; /* Increased margin */
             font-size: 20px;
+            border-bottom: 1px solid #444; /* Separator */
+            padding-bottom: 10px;
         }
 
         .game-feature ul {
             text-align: left;
             padding-left: 20px;
             color: #cccccc;
+            list-style: disc; /* Use standard bullets */
         }
 
         .game-feature ul li {
-            margin-bottom: 5px;
+            margin-bottom: 8px; /* Spacing */
         }
 
         /* CTA section */
         .cta {
-            padding: 100px 0;
             background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
             color: white;
-            text-align: center;
-            border-top: 2px solid #3e8eff; /* Changed to blue */
+            border-top: 2px solid #3e8eff; /* Blue */
         }
 
         .cta-box {
@@ -768,7 +1003,7 @@
         .cta-title {
             font-size: 36px;
             margin-bottom: 20px;
-            color: #3e8eff; /* Changed to blue */
+            color: #3e8eff; /* Blue */
         }
 
         .cta-description {
@@ -800,12 +1035,12 @@
         .footer-column h3 {
             font-size: 18px;
             margin-bottom: 20px;
-            color: #3e8eff; /* Changed to blue */
+            color: #3e8eff; /* Blue */
         }
 
         .footer-column ul {
             list-style: none;
-            padding: 0; /* Added reset */
+            padding: 0;
         }
 
         .footer-column ul li {
@@ -816,21 +1051,22 @@
             color: white;
             text-decoration: none;
             opacity: 0.8;
-            transition: opacity 0.3s, color 0.3s; /* Added color transition */
+            transition: opacity 0.3s, color 0.3s;
         }
 
         .footer-column ul li a:hover {
             opacity: 1;
-            color: #3e8eff; /* Changed to blue */
+            color: #3e8eff; /* Blue */
         }
 
         .social-icons {
             display: flex;
             gap: 15px;
-            padding: 0; /* Added reset */
+            padding: 0; /* Reset padding */
+            list-style: none; /* Remove list bullets if it's a ul */
         }
 
-        .social-icon {
+        .social-icon { /* Style the link directly */
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -839,19 +1075,20 @@
             align-items: center;
             justify-content: center;
             color: white; /* Make emoji visible */
-            text-decoration: none; /* Remove underline */
-            font-size: 20px; /* Adjust emoji size */
-            transition: background-color 0.3s;
+            text-decoration: none;
+            font-size: 20px;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
         .social-icon:hover {
-            background-color: #3e8eff; /* Changed to blue */
+            background-color: #3e8eff; /* Blue */
+            transform: translateY(-3px);
         }
 
         .footer-bottom {
             text-align: center;
             padding-top: 40px;
-            margin-top: 40px; /* Added margin for separation */
+            margin-top: 40px;
             border-top: 1px solid #333;
         }
 
@@ -859,212 +1096,98 @@
             opacity: 0.8;
             font-size: 14px;
         }
+         .footer-bottom a {
+             color: #3e8eff;
+             opacity: 0.8;
+             text-decoration: none;
+             transition: opacity 0.3s;
+         }
+         .footer-bottom a:hover {
+              opacity: 1;
+         }
 
         /* Financial facts popup */
         .facts-popup {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: #3e8eff; /* Changed to blue */
+            background-color: #3e8eff; /* Blue */
             color: white;
             padding: 15px 20px;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Enhanced shadow */
             z-index: 1000;
             max-width: 300px;
-            animation: slideIn 0.5s forwards;
+            font-size: 14px; /* Slightly smaller text */
             font-weight: bold;
+            opacity: 0; /* Start hidden for animation */
+            transform: translateX(110%); /* Start off-screen */
+            animation: slideInFadeOut 5s forwards ease-in-out; /* Combined animation */
         }
 
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
+        @keyframes slideInFadeOut {
+            0% {
+                transform: translateX(110%);
                 opacity: 0;
             }
-            to {
+            15% { /* Slide in */
                 transform: translateX(0);
                 opacity: 1;
             }
-        }
-
-        .fade-out {
-            animation: fadeOut 1s forwards;
-        }
-
-        @keyframes fadeOut {
-            from {
-                opacity: 1;
-            }
-            to {
-                opacity: 0;
-                /* Optionally add transform: translateX(100%); for slide out */
-            }
-        }
-
-        /* Contract address box */
-        .contract-address {
-            background-color: #1a1a1a;
-            border: 2px solid #3e8eff; /* Changed to blue */
-            border-radius: 10px;
-            padding: 15px;
-            margin: 30px auto;
-            max-width: 600px;
-            text-align: center;
-        }
-
-        .contract-address h4 {
-            color: #ffffff;
-            margin-bottom: 10px;
-            font-size: 18px;
-        }
-
-        .contract-address p {
-            font-family: monospace;
-            background-color: #0d0d0d;
-            padding: 10px;
-            border-radius: 5px;
-            color: #3e8eff; /* Changed to blue */
-            overflow: auto;
-            word-break: break-all;
-        }
-
-        .copy-btn {
-            background-color: #3e8eff; /* Changed to blue */
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 8px 15px;
-            margin-top: 10px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background-color 0.3s;
-        }
-
-        .copy-btn:hover {
-            background-color: #2e7eee; /* Darker blue */
-        }
-
-        /* Search Bar */
-        .search-container {
-            max-width: 600px;
-            margin: 30px auto;
-        }
-
-        .search-bar {
-            display: flex;
-            width: 100%;
-        }
-
-        .search-input {
-            flex-grow: 1;
-            padding: 15px;
-            border: 2px solid #3e8eff; /* Changed to blue */
-            background-color: #1a1a1a;
-            color: white;
-            border-radius: 5px 0 0 5px;
-            font-size: 16px;
-        }
-
-        .search-input::placeholder {
-            color: #999;
-        }
-
-        .search-btn {
-            background-color: #3e8eff; /* Changed to blue */
-            color: white;
-            border: none;
-            padding: 0 20px;
-            border-radius: 0 5px 5px 0;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        .search-btn:hover {
-            background-color: #2e7eee; /* Darker blue */
-        }
-
-        /* Buy buttons section */
-        .buy-buttons {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin: 30px auto;
-            max-width: 800px;
-        }
-
-        .buy-btn {
-            padding: 15px 25px;
-            border-radius: 5px;
-            font-weight: 700;
-            font-size: 16px;
-            text-decoration: none;
-            color: white;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .buy-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .drown-btn {
-            background-color: #3e8eff; /* Blue */
-        }
-
-        .bailout-btn {
-            background-color: #32CD32; /* Green */
-        }
-
-        .wallet-btn {
-            background-color: #9932CC; /* Purple */
-        }
-
-        .moon-btn {
-            background-color: #FF8C00; /* Orange */
+             85% { /* Stay visible */
+                 transform: translateX(0);
+                 opacity: 1;
+             }
+             100% { /* Fade out */
+                 transform: translateX(0); /* Optional: Keep position while fading */
+                 opacity: 0;
+             }
         }
 
         /* Responsive adjustments */
-         @media (max-width: 992px) { /* Adjust breakpoint as needed */
+        @media (max-width: 992px) {
+             nav ul { display: none; } /* Hide desktop nav */
+             .mobile-nav-toggle { display: block; } /* Show hamburger */
+
              .step {
                 flex-basis: calc(50% - 20px); /* Two steps per row */
             }
             .footer-column {
                 flex-basis: 45%; /* Two columns per row */
             }
-            nav ul {
-                /* Consider collapsing nav on smaller screens */
-                display: none; /* Simplest approach, replace with burger menu JS */
-            }
          }
 
         @media (max-width: 768px) {
-            .header-inner { flex-direction: column; gap: 15px; } /* Stack logo and nav */
+            .header-inner { flex-direction: row; } /* Keep logo and button on same row */
             .hero h1 { font-size: 36px; }
             .hero p { font-size: 18px; }
             .tagline { font-size: 20px; }
             .features-grid { grid-template-columns: 1fr; } /* Stack features */
+            .tokenomics-grid { grid-template-columns: 1fr; } /* Stack tokenomics */
             .steps { flex-direction: column; align-items: center;}
             .step { flex-basis: 80%; } /* Stack steps */
             .stats-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
             .footer-column {
                 flex-basis: 100%; /* Stack footer columns */
-                text-align: center; /* Center text */
+                text-align: center;
             }
             .social-icons { justify-content: center; } /* Center icons */
             .facts-popup { max-width: 90%; right: 5%; left: 5%; bottom: 10px; text-align: center;}
-            .game-container { height: 400px; } /* Adjust game size */
-            .buy-buttons { flex-direction: column; align-items: center; }
-            .buy-btn { width: 80%; }
+            .game-container { height: 400px; }
+            .buy-buttons { flex-direction: column; align-items: center; gap: 10px;}
+            .buy-btn { width: 80%; max-width: 300px; text-align:center;} /* Centered text */
+            .hero-buttons { flex-direction: column; align-items: center; gap: 15px; }
+            .hero-cta { width: 80%; max-width: 300px; }
+            .manifesto-section ul.roadmap,
+            .manifesto-section ul.principles {
+                max-width: 95%; /* Adjust list width */
+            }
         }
 
         @media (max-width: 576px) {
-             .hero { padding-top: 150px; padding-bottom: 80px; }
+             .hero { padding: 160px 0 80px; } /* Adjust padding for header+ticker */
              .hero h1 { font-size: 30px; }
              .hero p { font-size: 16px; }
-             .hero-buttons { flex-direction: column; gap: 15px; }
-             .hero-cta { width: 80%; margin: 0 auto; }
              .global-debt-counter { max-width: 90%; }
              .counter-value { font-size: 28px; }
              .section-title { font-size: 28px; }
@@ -1074,6 +1197,8 @@
              .feature-title { font-size: 20px; }
              .testimonial-card { padding: 20px; }
              .footer { padding: 60px 0 30px; }
+             .game-title { font-size: 28px; }
+             .game-description { font-size: 15px; }
         }
     </style>
 </head>
@@ -1086,18 +1211,40 @@
                 <ul>
                     <li><a href="#features">Why $DEBT?</a></li>
                     <li><a href="#manifesto">Manifesto</a></li>
+                    <li><a href="#tokenomics">Tokenomics</a></li>
                     <li><a href="#how-it-works">Strategy</a></li>
-                    <li><a href="#movement">Join the Movement</a></li>
+                    <li><a href="#movement">Movement</a></li>
+                    <li><a href="#manifesto">Whitepaper</a></li>
                     <li><a href="#buy" class="cta-button">Buy $DEBT</a></li>
                 </ul>
             </nav>
+            <button class="mobile-nav-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+                ☰ {/* Use actual icon font or SVG here if possible */}
+            </button>
         </div>
+         <!-- Mobile Nav Links container -->
+         <div class="mobile-nav-links" id="mobile-nav">
+             <ul>
+                <li><a href="#features">Why $DEBT?</a></li>
+                <li><a href="#manifesto">Manifesto</a></li>
+                <li><a href="#tokenomics">Tokenomics</a></li>
+                <li><a href="#how-it-works">Strategy</a></li>
+                <li><a href="#movement">Movement</a></li>
+                <li><a href="#manifesto">Whitepaper</a></li>
+                <li><a href="#buy" class="cta-button">Buy $DEBT</a></li>
+             </ul>
+         </div>
         <div class="price-ticker">
-            <div class="ticker-content"> <!-- Wrap content for animation -->
+            <div class="ticker-content"> <!-- Content wrapper for seamless looping -->
                 <span class="price-label">$DEBT: </span>
-                <span class="price-value">$0.00025</span>
+                <span class="price-value">$0.000250</span>
                 <span class="price-change positive">+46.8%</span>
-                <span class="ticker-message">Economy Crisis Boosts DebtCoin... National Debt Reaches New Record... Student Loan Forgiveness Blocked Again... Housing Crash Imminent... Credit Card APRs Hit 24.99%... DebtCoin - The People's Hedge...</span>
+                <span class="ticker-message">Economy Crisis Boosts DebtCoin... National Debt Reaches New Record... Student Loan Forgiveness Blocked Again... Housing Crash Imminent... Credit Card APRs Hit 24.99%... DebtCoin - The People's Hedge... </span>
+                <!-- Repeat content slightly modified if needed for smoother loop appearance -->
+                 <span class="price-label">$DEBT: </span>
+                 <span class="price-value">$0.000250</span>
+                 <span class="price-change positive">+46.8%</span>
+                 <span class="ticker-message">Economy Crisis Boosts DebtCoin... National Debt Reaches New Record... Student Loan Forgiveness Blocked Again... Housing Crash Imminent... Credit Card APRs Hit 24.99%... DebtCoin - The People's Hedge... </span>
             </div>
         </div>
     </header>
@@ -1109,32 +1256,30 @@
             <h1>Flipping the <span>Financial System</span>, One $DEBT at a Time</h1>
             <p>If you can't beat the debt, profit from it. DebtCoin is the people's hedge against America's inevitable debt implosion.</p>
             <p style="font-size: 16px; margin-bottom: 30px; color: #6b8fff; font-style: italic;">The debt bubble will pop. <strong>$DEBT is your lifeboat.</strong></p>
-            
+
             <div class="global-debt-counter">
                 <div class="counter-label">GLOBAL DEBT COUNTER</div>
                 <div class="counter-value" id="debt-counter">$307,154,293,471,581</div>
                 <div class="counter-subtext">Let's profit from this instead of drowning in it</div>
             </div>
-            
+
             <!-- Contract Address -->
             <div class="contract-address">
-                <h4>$DEBT Token Contract Address</h4>
+                <h4>$DEBT Token Contract Address (Example)</h4>
                 <p>0x7Eb5D86FD78f3852a3e0e064f2842d45a3dB6EA2</p>
                 <button class="copy-btn">Copy Address</button>
             </div>
-            
-            <!-- Search Bar Section Removed -->
-            
-            <!-- Buy Button Section - Simplified -->
+
+            <!-- Buy Button Section -->
             <div id="buy" class="buy-buttons">
-                <a href="#" class="buy-btn drown-btn">Buy $DEBT</a>
+                <a href="#" class="buy-btn">Buy $DEBT Now</a> {/* Link to DEX/Purchase Page */}
             </div>
-            
+
             <div class="hero-buttons">
                 <a href="#movement" class="cta-button hero-cta">Join the Movement</a>
                 <a href="#how-it-works" class="cta-button hero-cta secondary-cta">Our Strategy</a>
             </div>
-   
+
             <!-- Game container -->
             <div class="game-container">
                 <div class="game-overlay">
@@ -1144,7 +1289,7 @@
                 </div>
                 <canvas id="game-canvas"></canvas>
                 <div class="game-score">SCORE: 0</div>
-                <div class="game-controls">Arrow keys or swipe to fight debt traps</div>
+                <div class="game-controls">Arrows/A/D to Move | Collect 💰 | Avoid 🏦📝🔴👔</div>
             </div>
         </div>
     </section>
@@ -1189,69 +1334,86 @@
         </div>
     </section>
 
-<!-- Manifesto Section -->
-<section class="manifesto-section" id="manifesto">
-  <div class="container manifesto-container">
-    <h2 class="manifesto-title">📜 THE DEBTCOIN MANIFESTO</h2>
+    <!-- Manifesto Section -->
+    <section class="manifesto-section" id="manifesto">
+      <div class="container manifesto-container">
+        <h2 class="manifesto-title">📜 THE DEBTCOIN MANIFESTO</h2>
 
-    <h3>🔍 The Problem</h3>
-    <p>In 2025, as national debt surges past $33 trillion and personal debt cripples 80% of Americans, the financial elite continue to profit from our collective misery.</p>
-    <p>They created a system where debt is inescapable—but what if we told you there's a way to <em>profit</em> from that same corrupt system?</p>
+        <h3>🔍 The Problem</h3>
+        <p>In 2025, as national debt surges past $33 trillion and personal debt cripples 80% of Americans, the financial elite continue to profit from our collective misery. They created a system where debt is inescapable—but what if we told you there's a way to <em>profit</em> from that same corrupt system?</p>
 
-    <h3>💡 The Solution</h3>
-    <p><strong>DebtCoin</strong> is the <strong>first crypto that rises as debt increases</strong>—a hedge against financial collapse that puts power back in the hands of the indebted masses.</p>
+        <h3>💡 The Solution</h3>
+        <p><strong>DebtCoin ($DEBT)</strong> is the <strong>first crypto engineered to rise as debt increases</strong>—a hedge against financial collapse that puts power back in the hands of the indebted masses. We track key debt indicators and economic instability metrics to fuel our value.</p>
 
-    <h3>🚀 The Mission</h3>
-    <p>We're not just another token—we're a movement against financial servitude.</p>
-    <ul class="roadmap">
-      <li><strong>Educate</strong> people about the unsustainable debt machine</li>
-      <li><strong>Empower</strong> individuals to profit from inevitable economic crisis</li>
-      <li><strong>Build</strong> a community of financial rebels fighting back</li>
-      <li><strong>Create</strong> pathways to true financial independence</li>
-      <li><strong>Protest</strong> through profit—every $DEBT purchase is a vote against the system</li>
-    </ul>
+        <h3>🚀 The Mission</h3>
+        <p>We're not just another token—we're a movement against financial servitude. Our goals:</p>
+        <ul class="roadmap">
+          <li>Expose the unsustainable debt machine through relentless awareness campaigns.</li>
+          <li>Empower individuals to profit from the inevitable economic crisis using $DEBT.</li>
+          <li>Build a powerful community of financial rebels fighting back against the system.</li>
+          <li>Create pathways to true financial independence, funded by the system's collapse.</li>
+          <li>Protest through profit—every $DEBT purchase is a vote against financial enslavement.</li>
+        </ul>
 
-    <h3>📊 Tokenomics</h3>
-    <ul class="principles">
-      <li><strong>Supply:</strong> Inversely correlated to U.S. National Debt—as debt increases, token supply decreases</li>
-      <li><strong>Value Driver:</strong> Smart contract tied to debt crisis indicators</li>
-      <li><strong>Staking:</strong> We call it <em>"Hedging"</em>—earn higher rewards during economic downturns</li>
-      <li><strong>Utility:</strong> Governance voting on strategic investments in debt instruments</li>
-    </ul>
+        <div class="final-words">
+          <p>"When life gives you lemons (debt), mint DebtCoin."</p>
+          <strong>The only bubble that profits when all other bubbles pop.</strong>
+        </div>
+      </div>
+    </section>
 
-    <div class="final-words">
-      <p>"When life gives you lemons (debt), mint DebtCoin."</p>
-      <strong>The only bubble that profits when all other bubbles pop.</strong>
-    </div>
-  </div>
-</section>
+    <!-- Tokenomics Section -->
+    <section id="tokenomics">
+        <div class="container">
+            <h2 class="section-title">📊 $DEBT Tokenomics</h2>
+            <p class="section-description">Engineered for stability and growth during economic turmoil.</p>
+            <div class="tokenomics-grid">
+                <div class="tokenomic-card">
+                    <h3>Supply Mechanism</h3>
+                    <p>Fixed initial supply. Token burns triggered by increasing national debt milestones, creating deflationary pressure as the crisis worsens.</p>
+                </div>
+                <div class="tokenomic-card">
+                    <h3>Value Driver</h3>
+                    <p>Smart contracts monitor real-time debt crisis indicators (e.g., debt-to-GDP, default rates, inflation). Positive indicators strengthen buy-side pressure.</p>
+                </div>
+                <div class="tokenomic-card">
+                    <h3>"Hedging" (Staking)</h3>
+                    <p>Stake $DEBT to earn yield. Rewards automatically increase during periods of high economic volatility, incentivizing long-term holding during crises.</p>
+                </div>
+                <div class="tokenomic-card">
+                    <h3>Community Treasury</h3>
+                    <p>A percentage of transaction fees funds a treasury for marketing, development, and future debt-relief initiatives voted on by $DEBT holders.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
     <!-- How It Works Section -->
     <section class="how-it-works" id="how-it-works">
         <div class="container" style="text-align: center;">
             <h2 class="section-title">Our Strategic Roadmap</h2>
-            <p class="section-description">A calculated plan to profit from economic disaster</p>
+            <p class="section-description">A calculated plan to profit from economic disaster and build a debt-free future.</p>
             <div class="steps">
                 <div class="step">
                     <div class="step-number">1</div>
-                    <h3 class="step-title">Phase 1: Awareness</h3>
-                    <p class="step-description">Launch community-driven education campaign about the unsustainable debt crisis and how $DEBT serves as a financial hedge.</p>
+                    <h3 class="step-title">Phase 1: Awareness & Launch</h3>
+                    <p class="step-description">Launch $DEBT token. Build community. Drive education on the debt crisis and $DEBT as the counter-financial hedge.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3 class="step-title">Phase 2: Adoption</h3>
-                    <p class="step-description">Build strategic partnerships with financial influencers, debt relief advocates, and economic doomsayers to spread the movement.</p>
+                    <h3 class="step-title">Phase 2: Adoption & Partnerships</h3>
+                    <p class="step-description">Forge alliances with financial influencers, media outlets, and debt relief groups. Increase token accessibility (DEX listings).</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
-                    <h3 class="step-title">Phase 3: Crisis Profit</h3>
-                    <p class="step-description">As debt markets destabilize, our tokenomics ensure $DEBT holders profit while traditional markets collapse.</p>
+                    <h3 class="step-title">Phase 3: Crisis Profit & Utility</h3>
+                    <p class="step-description">As debt markets destabilize, tokenomics drive $DEBT value. Launch governance and enhanced 'Hedging' protocols.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">4</div>
-                    <h3 class="step-title">Phase 4: Financial Liberation</h3>
-                    <p class="step-description">Use community treasury to create debt forgiveness programs and financial education for $DEBT holders.</p>
+                    <h3 class="step-title">Phase 4: Financial Liberation Fund</h3>
+                    <p class="step-description">Utilize community treasury, governed by $DEBT holders, to fund real-world debt relief programs and financial education.</p>
                 </div>
             </div>
         </div>
@@ -1261,10 +1423,10 @@
     <section class="stats">
         <div class="container">
             <h2 class="section-title">The Debt Crisis by the Numbers</h2>
-            <p class="section-description">These aren't just statistics—they're profit opportunities.</p>
+            <p class="section-description">These aren't just statistics—they're the fuel for $DEBT.</p>
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-value">$33T+</div>
+                    <div class="stat-value">$34T+</div>
                     <div class="stat-label">US National Debt</div>
                 </div>
                 <div class="stat-card">
@@ -1272,13 +1434,13 @@
                     <div class="stat-label">Student Loan Debt</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value">$1T+</div>
+                    <div class="stat-value">$1.1T+</div>
                     <div class="stat-label">Credit Card Debt</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-value">97%</div>
-                    <div class="stat-label">Chance of Economic Collapse by 2030</div>
-                </div>
+                 <div class="stat-card">
+                     <div class="stat-value">97%</div> {/* Fictional stat */}
+                     <div class="stat-label">Recession Probability (Next 2 Yrs)</div>
+                 </div>
             </div>
         </div>
     </section>
@@ -1287,12 +1449,12 @@
     <section class="movement-section" id="movement">
         <div class="container">
             <h2 class="movement-title">✊ The Debt Rebellion</h2>
-            <p class="movement-description">You're not just an investor. You're a <strong>Financial Revolutionary</strong>.<br>Join the:</p>
+            <p class="movement-description">You're not just an investor. You're a <strong>Financial Revolutionary</strong>.<br>Join thousands turning the tables on the system:</p>
 
             <div class="movement-icons">
                 <div class="movement-icon">
                     <div class="icon-container">🛡️</div>
-                    <div class="icon-label">League of Debt Defenders</div>
+                    <div class="icon-label">Debt Defenders</div>
                 </div>
                 <div class="movement-icon">
                     <div class="icon-container">🔄</div>
@@ -1300,11 +1462,12 @@
                 </div>
                 <div class="movement-icon">
                     <div class="icon-container">🚀</div>
-                    <div class="icon-label">Financial Freedom Fighters</div>
+                    <div class="icon-label">Freedom Fighters</div>
                 </div>
             </div>
 
-            <p class="movement-description">Our community motto:<br><em>"First you borrow. Then you beg. Then you buy $DEBT."</em></p>
+            <p class="movement-description" style="font-style: italic;">Our community motto:<br><strong>"First you borrow. Then you beg. Then you buy $DEBT."</strong></p>
+             <a href="#buy" class="cta-button hero-cta" style="margin-top: 20px;">Become a Rebel - Buy $DEBT</a>
         </div>
     </section>
 
@@ -1312,35 +1475,35 @@
     <section class="testimonials" id="testimonials">
         <div class="container" style="text-align: center;">
             <h2 class="section-title">Voices of the Movement</h2>
-            <p class="section-description">Real people using $DEBT to fight back against the system.</p>
+            <p class="section-description">Real people using $DEBT to fight back and find hope.</p>
             <div class="testimonials-grid">
                 <div class="testimonial-card">
-                    <p class="testimonial-text">"I have $120K in student loans that I'll never pay off. Now I'm using some of my paycheck to buy $DEBT as a hedge. If the system collapses under its own weight, at least my $DEBT will moon."</p>
+                    <p class="testimonial-text">"I have $120K in student loans I'll likely never pay off. Buying $DEBT feels like taking back some control. If the system that trapped me collapses, at least this part of my portfolio will thrive."</p>
                     <div class="testimonial-author">
                         <div class="author-avatar"></div>
                         <div>
-                            <div class="author-name">Alex, 29</div>
+                            <div class="author-name">Alex P., 29</div>
                             <div class="author-title">Software Engineer & Debt Rebel</div>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-card">
-                    <p class="testimonial-text">"When my mortgage interest rate doubled, I realized the system is rigged. Now I'm taking 10% of my mortgage payment and putting it into $DEBT. It's my insurance policy against economic collapse."</p>
+                    <p class="testimonial-text">"Watched my parents lose almost everything in '08. $DEBT is my hedge against history repeating itself. It's cynical? Maybe. But it's also strategic. This time, the crash won't crush me."</p>
                     <div class="testimonial-author">
                         <div class="author-avatar"></div>
                         <div>
-                            <div class="author-name">Maya, 35</div>
-                            <div class="author-title">Financial Strategist</div>
+                            <div class="author-name">Maya K., 35</div>
+                            <div class="author-title">Financial Analyst & Realist</div>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-card">
-                    <p class="testimonial-text">"I watched my parents lose everything in 2008. Now I'm playing the long game with $DEBT. When the next crash happens—and it will—I'll be ready. This time, I'll be on the winning side of history."</p>
+                    <p class="testimonial-text">"It's more than just a token; it's a community. We share info, strategies, and support. Knowing you're not alone in this debt fight, and having a tool like $DEBT, makes a huge difference."</p>
                     <div class="testimonial-author">
                         <div class="author-avatar"></div>
                         <div>
-                            <div class="author-name">Jamal, 26</div>
-                            <div class="author-title">Economic Collapse Prepper</div>
+                            <div class="author-name">Jamal R., 26</div>
+                            <div class="author-title">Community Member</div>
                         </div>
                     </div>
                 </div>
@@ -1348,37 +1511,42 @@
         </div>
     </section>
 
-    <!-- Game Section -->
+    <!-- Game Section (Text Intro) -->
     <section class="game-section">
         <div class="container">
-            <h2>🕹️ DEBT FIGHTER</h2>
-            <p>A revolutionary browser game where you battle predatory financial institutions, corrupt politicians, and Wall Street manipulators while collecting $DEBT tokens to secure your financial future.</p>
+            <h2 class="section-title">🕹️ DEBT FIGHTER: The Game</h2>
+            <p class="section-description">Blow off steam and stack virtual $DEBT! Battle predatory lenders, Wall Street sharks, and clueless politicians in our retro-style browser game. Experience the thrill of fighting back (while you wait for the real system to crash).</p>
 
             <div class="game-features">
                 <div class="game-feature">
-                    <h4>Player Character</h4>
+                    <h4>Gameplay</h4>
                     <ul>
-                        <li>A courageous debt rebel fighting against the system</li>
-                        <li>Controls: Arrow keys or swipe to maneuver</li>
+                        <li>Dodge falling debt traps (loans, bills)</li>
+                        <li>Avoid attacks from financial predators</li>
+                        <li>Collect falling $DEBT tokens (💰)</li>
+                        <li>Simple, addictive, cathartic!</li>
                     </ul>
                 </div>
                 <div class="game-feature">
-                    <h4>Your Enemies</h4>
+                    <h4>Enemies</h4>
                     <ul>
-                        <li>Predatory Lenders (falling anvils)</li>
-                        <li>Wall Street Bankers (homing missiles)</li>
-                        <li>Debt Collection Agencies (red lasers)</li>
+                        <li>🏦 Predatory Banks</li>
+                        <li>📝 Fine Print Loans</li>
+                        <li>🔴 Collection Agencies</li>
+                        <li>👔 Clueless Politicians</li>
                     </ul>
                 </div>
                 <div class="game-feature">
-                    <h4>Power-ups</h4>
+                    <h4>Objective</h4>
                     <ul>
-                        <li>🛡️ Debt Shield: Temporary invincibility</li>
-                        <li>🧠 Financial Literacy: Slows enemy attacks</li>
-                        <li>💰 DebtCoin: Increases your hedge against collapse</li>
+                        <li>Survive the debt onslaught</li>
+                        <li>Maximize your $DEBT score</li>
+                        <li>Beat your previous record</li>
+                        <li>Prove your resilience!</li>
                     </ul>
                 </div>
             </div>
+             <p class="section-description" style="font-size: 16px; font-style: italic;">Ready to play? Scroll back up and hit "START GAME"!</p>
         </div>
     </section>
 
@@ -1386,9 +1554,9 @@
     <section class="cta">
         <div class="container">
             <div class="cta-box">
-                <h2 class="cta-title">Ready to profit from the debt crisis?</h2>
-                <p class="cta-description">"The only thing stronger than gravity is compound interest." — Albert Einstein (probably)</p>
-                <a href="#buy" class="cta-button hero-cta">Secure Your Financial Future</a>
+                <h2 class="cta-title">Stop Being a Victim. Start Profiting.</h2>
+                <p class="cta-description">The debt crisis is coming. Will you drown in it, or ride the wave with $DEBT? The choice is yours.</p>
+                <a href="#buy" class="cta-button hero-cta">Secure Your $DEBT Hedge Now</a>
             </div>
         </div>
     </section>
@@ -1398,149 +1566,236 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>$DEBT</h3>
+                    <h3>$DEBT Coin</h3>
                     <ul>
-                        <li><a href="#">About Our Movement</a></li>
-                        <li><a href="#">Join the Team</a></li>
-                        <li><a href="#">Media Coverage</a></li>
-                        <li><a href="#">Debt Crisis Blog</a></li>
+                        <li><a href="#manifesto">Manifesto</a></li>
+                        <li><a href="#tokenomics">Tokenomics</a></li>
+                        <li><a href="#how-it-works">Roadmap</a></li>
+                        <li><a href="#">Blog: Debt Crisis News</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Economic Resources</h3>
+                    <h3>Resources</h3>
                     <ul>
-                        <li><a href="#">Debt Tracker Dashboard</a></li>
-                        <li><a href="#">Financial Collapse Indicators</a></li>
-                        <li><a href="#">Debt Hedge Strategies</a></li>
-                        <li><a href="#">Developer API</a></li>
+                        <li><a href="#">How to Buy $DEBT</a></li>
+                        <li><a href="#">Debt Tracker (External)</a></li>
+                        <li><a href="#">Hedge Strategies</a></li>
+                        <li><a href="#">Developer Docs (Soon)</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Community Support</h3>
+                    <h3>Community</h3>
                     <ul>
-                        <li><a href="#">Debt Rebellion Forums</a></li>
-                        <li><a href="#">Contact the Movement</a></li>
-                        <li><a href="#">Network Status</a></li>
-                        <li><a href="#">Frequently Asked Questions</a></li>
+                        <li><a href="#">Discord (Join Us!)</a></li>
+                        <li><a href="#">Telegram</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                        <li><a href="#">FAQs</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Join the Movement</h3>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon">📱</a>
-                        <a href="#" class="social-icon">🐦</a>
-                        <a href="#" class="social-icon">👥</a>
-                        <a href="#" class="social-icon">📢</a>
-                    </div>
-                    <p style="margin-top: 20px; color: #3e8eff; opacity: 0.8;">
-                        Subscribe to our newsletter for debt crisis updates
+                    <h3>Join the Rebellion</h3>
+                    <ul class="social-icons">
+                        <li><a href="#" class="social-icon" aria-label="Twitter">🐦</a></li> {/* Replace with actual links/icons */}
+                        <li><a href="#" class="social-icon" aria-label="Telegram">📱</a></li>
+                        <li><a href="#" class="social-icon" aria-label="Discord">👥</a></li>
+                        <li><a href="#" class="social-icon" aria-label="Reddit">📢</a></li>
+                    </ul>
+                    <p style="margin-top: 20px; color: #aaa; font-size: 14px;">
+                        Follow us for updates and join the conversation.
                     </p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2025 DebtCoin. All rights reserved. | <a href="#" style="color: #3e8eff; opacity: 0.8;">Privacy Policy</a> | <a href="#" style="color: #3e8eff; opacity: 0.8;">Terms of Service</a></p>
-                <p style="margin-top: 10px; font-size: 12px; color: #666;">This website represents a movement against the debt system. $DEBT token involves risk. Do your own research before investing.</p>
+                <p>© 2024-2025 DebtCoin ($DEBT). Turning Crisis into Opportunity. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+                <p style="margin-top: 10px; font-size: 12px; color: #666;">Disclaimer: $DEBT is a high-risk, speculative digital asset. This website is for informational and entertainment purposes only and does not constitute financial advice. Invest only what you can afford to lose. The game is purely for entertainment.</p>
             </div>
         </div>
     </footer>
 
+    <!-- *** UPDATED GAME SCRIPT *** -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // --- Element Selection ---
             const startButton = document.querySelector('.start-game-btn');
             const gameOverlay = document.querySelector('.game-overlay');
             const canvas = document.getElementById('game-canvas');
-            const ctx = canvas.getContext('2d');
             const scoreDisplay = document.querySelector('.game-score');
+            const gameContainer = document.querySelector('.game-container'); // Needed for sizing
             const debtCounter = document.getElementById('debt-counter');
             const priceValue = document.querySelector('.price-value');
             const priceChange = document.querySelector('.price-change');
             const copyBtn = document.querySelector('.copy-btn');
+            let tickerContent = document.querySelector('.ticker-content'); // Use let for potential reset
+            const tickerContainer = document.querySelector('.price-ticker');
+            const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+            const mobileNavLinks = document.getElementById('mobile-nav');
 
-            if(copyBtn) {
-                copyBtn.addEventListener('click', function() {
-                    const contractAddress = document.querySelector('.contract-address p').innerText;
-                    navigator.clipboard.writeText(contractAddress).then(function() {
-                        copyBtn.textContent = "Copied!";
-                        setTimeout(() => {
-                            copyBtn.textContent = "Copy Address";
-                        }, 2000);
-                    });
-                });
+            // --- Basic Checks ---
+            if (!canvas || !gameContainer || !startButton || !gameOverlay || !scoreDisplay) {
+                console.error("Essential game elements not found. Game cannot initialize.");
+                // Disable game functionality if elements are missing
+                if(startButton) startButton.disabled = true;
+                if(gameOverlay) gameOverlay.innerHTML = "<p style='color:red;'>Game failed to load essential elements.</p>";
             }
+             const ctx = canvas ? canvas.getContext('2d') : null; // Get context only if canvas exists
+             if (!ctx) {
+                 console.error("Canvas context could not be created. Game cannot initialize.");
+                 if(startButton) startButton.disabled = true;
+                 if(gameOverlay) gameOverlay.innerHTML = "<p style='color:red;'>Game rendering context failed.</p>";
+             }
 
-            let player = { x: 375, y: 440, width: 50, height: 50, color: '#3e8eff' };
+
+            // --- Game Variables ---
+            let player = { x: 0, y: 0, width: 50, height: 50, color: '#3e8eff', speed: 6 }; // Player speed added
             let moneyItems = [];
             let debtItems = [];
             let keys = {};
             let score = 0;
-            let gameInterval, spawnInterval, gameActive = false; // Added gameActive flag
-
-            // Make canvas responsive or fixed? Using fixed size from container
-            const gameContainer = document.querySelector('.game-container');
-            if (canvas && gameContainer) {
-                 canvas.width = gameContainer.clientWidth; // Match container width
-                 canvas.height = gameContainer.clientHeight; // Match container height
-                 player.y = canvas.height - 60; // Adjust player start Y based on height
-                 player.x = canvas.width / 2 - player.width / 2; // Center player
-            } else {
-                console.error("Canvas or Game Container not found!");
-                return; // Stop script if essential elements are missing
-            }
-
+            let gameInterval, spawnInterval;
+            let gameActive = false; // Flag to control game state
+            const itemSize = 30; // Size for falling items (visual and collision)
 
             const emojis = {
+                player: '✊', // Player emoji
                 money: '💰',
                 banker: '🏦',
                 lender: '📝',
                 agency: '🔴',
                 politician: '👔'
             };
-
             const debtPool = [emojis.banker, emojis.lender, emojis.agency, emojis.politician];
 
-            if (startButton) {
-                startButton.addEventListener('click', function() {
-                    if (!gameActive) { // Prevent starting multiple games
-                       gameOverlay.style.display = 'none';
-                       startGame();
+             // --- Mobile Menu Logic ---
+             if (mobileNavToggle && mobileNavLinks) {
+                 mobileNavToggle.addEventListener('click', () => {
+                     const isExpanded = mobileNavToggle.getAttribute('aria-expanded') === 'true';
+                     mobileNavLinks.classList.toggle('active');
+                     mobileNavToggle.setAttribute('aria-expanded', !isExpanded);
+                     // Optional: Change hamburger icon to 'X'
+                     mobileNavToggle.textContent = !isExpanded ? '✕' : '☰';
+                 });
+
+                 // Close menu when a link is clicked (for single-page applications)
+                 mobileNavLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileNavLinks.classList.remove('active');
+                        mobileNavToggle.setAttribute('aria-expanded', 'false');
+                        mobileNavToggle.textContent = '☰';
+                    });
+                 });
+             } else {
+                 console.warn("Mobile navigation elements not found.");
+             }
+
+
+            // --- Event Listeners ---
+             if (startButton && ctx) { // Only add listener if button and context exist
+                 startButton.addEventListener('click', function() {
+                     if (!gameActive) { // Prevent starting multiple games
+                        startGame();
+                     }
+                 });
+             }
+
+
+            document.addEventListener('keydown', e => {
+                keys[e.key.toLowerCase()] = true; // Use lowercase for consistency (e.g., 'a' vs 'A')
+                // Prevent page scroll with arrow keys/space when game is active
+                if (gameActive && ['arrowup', 'arrowdown', 'arrowleft', 'arrowright', ' '].includes(e.key.toLowerCase())) {
+                    e.preventDefault();
+                }
+            });
+            document.addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false; });
+
+            if (copyBtn) {
+                copyBtn.addEventListener('click', function() {
+                    const contractAddressElement = document.querySelector('.contract-address p');
+                    if (contractAddressElement) {
+                        const contractAddress = contractAddressElement.innerText;
+                         // Use Clipboard API
+                         if (navigator.clipboard && navigator.clipboard.writeText) {
+                             navigator.clipboard.writeText(contractAddress).then(function() {
+                                 copyBtn.textContent = "Copied!";
+                                 setTimeout(() => {
+                                     copyBtn.textContent = "Copy Address";
+                                 }, 2000);
+                             }, function(err) {
+                                 console.error('Could not copy text: ', err);
+                                 copyBtn.textContent = "Copy Failed";
+                                  setTimeout(() => {
+                                     copyBtn.textContent = "Copy Address";
+                                 }, 2000);
+                             });
+                         } else {
+                             // Fallback for older browsers (less reliable)
+                             try {
+                                 const textArea = document.createElement("textarea");
+                                 textArea.value = contractAddress;
+                                 textArea.style.position = "fixed"; // Prevent scrolling
+                                 textArea.style.opacity = 0;
+                                 document.body.appendChild(textArea);
+                                 textArea.focus();
+                                 textArea.select();
+                                 document.execCommand('copy');
+                                 document.body.removeChild(textArea);
+                                 copyBtn.textContent = "Copied!";
+                                 setTimeout(() => { copyBtn.textContent = "Copy Address"; }, 2000);
+                             } catch (err) {
+                                  console.error('Fallback copy failed: ', err);
+                                  copyBtn.textContent = "Copy Failed";
+                                   setTimeout(() => { copyBtn.textContent = "Copy Address"; }, 2000);
+                             }
+                         }
                     }
                 });
             }
 
-            document.addEventListener('keydown', e => {
-                keys[e.key] = true;
-                // Prevent page scroll with arrow keys when game is active
-                if (gameActive && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
-                    e.preventDefault();
-                }
-            });
-            document.addEventListener('keyup', e => { keys[e.key] = false });
-
+            // --- Game Functions ---
             function startGame() {
-                gameActive = true; // Set game state
+                if (!ctx || !gameContainer) return; // Need context and container
+
+                // Set canvas dimensions right before starting
+                canvas.width = gameContainer.clientWidth;
+                canvas.height = gameContainer.clientHeight;
+
+                // Reset player position based on *current* canvas dimensions
+                player.x = canvas.width / 2 - player.width / 2;
+                player.y = canvas.height - player.height - 10; // Position near bottom
+
+                // Reset game state
+                gameActive = true;
                 moneyItems = [];
                 debtItems = [];
                 score = 0;
                 updateScore();
-                player.x = canvas.width / 2 - player.width / 2; // Re-center player
+                keys = {}; // Clear any pressed keys from previous game
+                if (gameOverlay) gameOverlay.style.display = 'none'; // Hide overlay
 
                 // Clear any existing intervals before starting new ones
                 clearInterval(gameInterval);
                 clearInterval(spawnInterval);
 
-                gameInterval = setInterval(updateGame, 1000 / 60); // 60 FPS
-                spawnInterval = setInterval(spawnObjects, 900); // Spawn rate
+                // Start game loops
+                gameInterval = setInterval(updateGame, 1000 / 60); // ~60 FPS
+                spawnInterval = setInterval(spawnObjects, 800); // Spawn rate (adjust as needed)
+                console.log("Game Started - Canvas:", canvas.width, "x", canvas.height);
             }
 
             function endGame() {
                 gameActive = false; // Set game state
                 clearInterval(gameInterval);
                 clearInterval(spawnInterval);
-                if (gameOverlay) gameOverlay.style.display = 'flex';
-                // Use a less intrusive notification or update overlay text
-                // alert(`Game Over! You collected ${score} $DEBT tokens and got absolutely rugged.`);
-                const gameTitle = gameOverlay.querySelector('.game-title');
-                if (gameTitle) gameTitle.textContent = `GAME OVER! Score: ${score}`;
+
+                if (gameOverlay) {
+                    gameOverlay.style.display = 'flex'; // Show overlay
+                    const gameTitle = gameOverlay.querySelector('.game-title');
+                    if (gameTitle) gameTitle.textContent = `GAME OVER! Score: ${score}`;
+                    const gameDesc = gameOverlay.querySelector('.game-description');
+                    if (gameDesc) gameDesc.textContent = `You collected ${score} $DEBT tokens before the system inevitably crushed you. Ready to try again?`;
+                    const startBtnText = gameOverlay.querySelector('.start-game-btn');
+                    if(startBtnText) startBtnText.textContent = "RESTART GAME";
+                }
+                console.log("Game Ended - Final Score:", score);
             }
 
             function updateScore() {
@@ -1548,56 +1803,59 @@
             }
 
             function spawnObjects() {
-                if (!gameActive) return; // Don't spawn if game isn't active
+                if (!gameActive || !canvas || canvas.width <= 0) return; // Don't spawn if game isn't active or canvas invalid
 
-                // Money
-                if (Math.random() < 0.5) { // Adjust spawn chance as needed
+                // Spawn Money ($DEBT)
+                if (Math.random() < 0.4) { // Adjust spawn chance
                     moneyItems.push({
-                        x: Math.random() * (canvas.width - 30), // Ensure within bounds
-                        y: -30,
+                        x: Math.random() * (canvas.width - itemSize), // Ensure within bounds
+                        y: -itemSize, // Start just above the canvas
                         emoji: emojis.money
                     });
                 }
-                // Debt
-                if (Math.random() < 0.6) { // Adjust spawn chance as needed
+                // Spawn Debt Items
+                if (Math.random() < 0.65) { // Adjust spawn chance (slightly more debt?)
                     debtItems.push({
-                        x: Math.random() * (canvas.width - 30), // Ensure within bounds
-                        y: -30,
+                        x: Math.random() * (canvas.width - itemSize), // Ensure within bounds
+                        y: -itemSize, // Start just above the canvas
                         emoji: debtPool[Math.floor(Math.random() * debtPool.length)]
                     });
                 }
             }
 
             function updateGame() {
-                if (!gameActive) return; // Stop updates if game ended
+                if (!gameActive || !canvas || !ctx) return; // Stop updates if game ended or canvas context lost
 
                 // Move player
-                if (keys['ArrowLeft'] || keys['a']) player.x -= 6;
-                if (keys['ArrowRight'] || keys['d']) player.x += 6;
+                if (keys['arrowleft'] || keys['a']) player.x -= player.speed;
+                if (keys['arrowright'] || keys['d']) player.x += player.speed;
+
                 // Clamp player position to canvas bounds
                 player.x = Math.max(0, Math.min(canvas.width - player.width, player.x));
 
                 // Clear canvas
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-                // Draw player
+                // Draw player (as a rectangle)
                 ctx.fillStyle = player.color;
                 ctx.fillRect(player.x, player.y, player.width, player.height);
 
-                // Draw emoji as player face (optional):
-                ctx.font = "24px Arial";
-                ctx.textAlign = "center"; // Center emoji text
-                ctx.fillText("✊", player.x + player.width / 2, player.y + 35);
+                // Draw player emoji centered on the rectangle
+                ctx.font = "30px Arial"; // Make player emoji slightly larger
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle"; // Align vertically in the middle
+                ctx.fillText(emojis.player, player.x + player.width / 2, player.y + player.height / 2);
 
-                // Define item size for collision
-                const itemSize = 30;
-                ctx.font = `${itemSize}px Arial`; // Set font size for drawing emojis
+                // --- Update & Draw Items ---
+                ctx.font = `${itemSize}px Arial`; // Set font size for items
+                // Align emojis better vertically (already centered horizontally)
+                ctx.textBaseline = "middle";
 
                 // Update money items
                 for (let i = moneyItems.length - 1; i >= 0; i--) {
                     let item = moneyItems[i];
                     item.y += 4; // Speed of falling money
-                    ctx.fillText(item.emoji, item.x + itemSize / 2, item.y + itemSize); // Adjust drawing position based on text alignment
+                    ctx.fillText(item.emoji, item.x + itemSize / 2, item.y + itemSize / 2); // Center emoji in its box
 
                     // Check collision
                     if (isColliding(player, { x: item.x, y: item.y, width: itemSize, height: itemSize })) {
@@ -1605,7 +1863,7 @@
                         updateScore();
                         moneyItems.splice(i, 1); // Remove collected item
                     }
-                     // Remove if off-screen
+                    // Remove if off-screen
                     else if (item.y > canvas.height) {
                         moneyItems.splice(i, 1);
                     }
@@ -1615,12 +1873,12 @@
                 for (let i = debtItems.length - 1; i >= 0; i--) {
                     let item = debtItems[i];
                     item.y += 5; // Speed of falling debt (slightly faster)
-                    ctx.fillText(item.emoji, item.x + itemSize / 2, item.y + itemSize); // Adjust drawing position
+                    ctx.fillText(item.emoji, item.x + itemSize / 2, item.y + itemSize / 2); // Center emoji
 
                     // Check collision
                     if (isColliding(player, { x: item.x, y: item.y, width: itemSize, height: itemSize })) {
                         endGame();
-                        // return; // Exit update loop immediately
+                        return; // Exit update loop immediately after game ends
                     }
                     // Remove if off-screen
                     else if (item.y > canvas.height) {
@@ -1629,7 +1887,7 @@
                 }
             }
 
-            // Improved Collision Detection (Axis-Aligned Bounding Box)
+            // Axis-Aligned Bounding Box Collision Detection
             function isColliding(rect1, rect2) {
                 return (
                     rect1.x < rect2.x + rect2.width &&
@@ -1644,41 +1902,30 @@
             // Update debt counter
             function updateDebtCounter() {
                 if (!debtCounter) return;
-                // Use Number.MAX_SAFE_INTEGER to avoid potential overflow issues with massive numbers if needed
-                const currentDebt = parseInt(debtCounter.textContent.replace(/\D/g, '')) || 300000000000000; // Fallback if parsing fails
-                const increment = Math.floor(Math.random() * 1000000000) + 50000000; // Add a base increment
-                const newDebt = currentDebt + increment;
-                debtCounter.textContent = ' + newDebt.toLocaleString('en-US'); // Format with commas
+                let currentDebt = parseFloat(debtCounter.textContent.replace(/[$,]/g, '')) || 307000000000000;
+                const increment = Math.floor(Math.random() * 15000000) + 5000000;
+                currentDebt += increment;
+                debtCounter.textContent = '$' + currentDebt.toLocaleString('en-US', { maximumFractionDigits: 0 });
             }
-            setInterval(updateDebtCounter, 1500); // Update rate
+            setInterval(updateDebtCounter, 100); // Update frequently
 
             // Ticker price fluctuation
             function updatePrice() {
                 if (!priceValue || !priceChange) return;
-                // Generate a random price keeping it in a reasonable range
-                const basePrice = 0.00025;
-                const variance = 0.00005;
-                const newPrice = (basePrice + (Math.random() * variance * 2 - variance)).toFixed(6);
-                priceValue.textContent = ' + newPrice;
+                let currentPrice = parseFloat(priceValue.textContent.replace(/[$,]/g, '')) || 0.00025;
+                const changePercent = (Math.random() * 0.15) - 0.05; // Random change between -5% and +10%
+                let newPrice = currentPrice * (1 + changePercent);
+                newPrice = Math.max(0.00001, newPrice); // Floor price
 
-                // Random change between -3% and +8%
-                const isPositive = Math.random() > 0.4; // 60% chance of positive change
-                const changeValue = isPositive ? 
-                    (Math.random() * 7 + 1).toFixed(1) : // 1.0% to 8.0%
-                    (Math.random() * 2.9 + 0.1).toFixed(1); // 0.1% to 3.0%
-                
-                priceChange.textContent = (isPositive ? '+' : '-') + changeValue + '%';
-                
-                // Update class based on positive/negative
-                if (isPositive) {
-                    priceChange.classList.add('positive');
-                    priceChange.classList.remove('negative');
-                } else {
-                    priceChange.classList.add('negative');
-                    priceChange.classList.remove('positive');
-                }
+                priceValue.textContent = '$' + newPrice.toFixed(6); // Keep precision
+
+                const displayChange = (changePercent * 100).toFixed(1);
+                priceChange.textContent = (changePercent >= 0 ? '+' : '') + displayChange + '%';
+
+                priceChange.className = 'price-change ' + (changePercent >= 0 ? 'positive' : 'negative');
             }
-            setInterval(updatePrice, 4000); // Update rate
+            setInterval(updatePrice, 3500); // Update rate
+
 
             // Random financial facts popup
             const factsMessages = [
@@ -1697,33 +1944,44 @@
                 "WARNING: 1 in 6 homeowners are underwater on their mortgage"
             ];
 
-            function showRandomFact() {
-                const msg = factsMessages[Math.floor(Math.random() * factsMessages.length)];
-                const popup = document.createElement('div');
-                popup.className = 'facts-popup';
-                popup.textContent = msg;
-                document.body.appendChild(popup);
+             function showRandomFact() {
+                 // Check if a popup already exists to avoid spamming
+                 if (document.querySelector('.facts-popup')) return;
 
-                // Remove popup after animation + display time
-                setTimeout(() => {
-                    popup.classList.add('fade-out');
-                    // Remove element from DOM after fade-out animation completes
-                    popup.addEventListener('animationend', () => {
+                 const msg = factsMessages[Math.floor(Math.random() * factsMessages.length)];
+                 const popup = document.createElement('div');
+                 popup.className = 'facts-popup'; // Relies on CSS for animation
+                 popup.textContent = msg;
+                 document.body.appendChild(popup);
+
+                 // Remove popup after animation completes fully (using animation duration from CSS)
+                 popup.addEventListener('animationend', () => {
+                     // Check if it's the fade-out part of the animation before removing
+                      if (popup.parentNode && popup.style.opacity === '0') { // A bit of a hacky check
+                          popup.remove();
+                      }
+                 });
+
+                 // Fallback removal in case animationend event doesn't fire reliably
+                 setTimeout(() => {
+                    if (popup.parentNode) {
                         popup.remove();
-                    });
-                }, 4000); // Start fade-out after 4 seconds
-            }
+                    }
+                 }, 5100); // Slightly longer than the animation duration
+             }
+
 
             function scheduleFact() {
-                const delay = Math.random() * 10000 + 15000; // 15-25 seconds
+                const delay = Math.random() * 12000 + 18000; // Show every 18-30 seconds
                 setTimeout(() => {
                     showRandomFact();
                     scheduleFact(); // Schedule the next one
                 }, delay);
             }
-            scheduleFact(); // Start the first fact popup schedule
+            // Don't start immediately, wait a bit after page load
+            setTimeout(scheduleFact, 5000);
 
-        });
+        }); // End DOMContentLoaded
     </script>
 
 </body>
