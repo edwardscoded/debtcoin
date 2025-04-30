@@ -817,7 +817,6 @@
         </div>
     </div>
 
-
     <!-- GAME SCRIPT -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -853,9 +852,9 @@
             if (!canvas || !gameContainer || !startButton || !gameOverlay || !scoreDisplay) {
                 console.error("Essential game HTML elements missing. Game cannot initialize.");
                 gameCanRun = false;
-                if(startButton) startButton.disabled = true; // Disable button if elements missing
+                if(startButton) startButton.disabled = true;
                 if(gameOverlay) {
-                    gameOverlay.style.display = 'flex'; // Ensure overlay is visible
+                    gameOverlay.style.display = 'flex';
                     gameOverlay.innerHTML = "<p style='color:red; text-align: center;'>Error: Game components failed to load.<br>Check console (F12) for details.</p>";
                 }
             }
@@ -877,7 +876,7 @@
                 const observer = new IntersectionObserver((entries, observer) => {
                     entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); } });
                 }, observerOptions);
-                fadeElements.forEach(el => { if(el) observer.observe(el); }); // Check if el exists
+                fadeElements.forEach(el => { if(el) observer.observe(el); });
             } catch (e) { console.error("Error setting up scroll observer:", e); }
 
             // --- Mobile Menu Logic ---
@@ -931,7 +930,7 @@
                  if (howToBuyModal && closeHowToBuyModal) {
                      const openHowToBuy = () => openModal(howToBuyModal);
                      if(howToBuyBtn) howToBuyBtn.addEventListener('click', openHowToBuy);
-                     if(howToBuyBtnFooter) howToBuyBtnFooter.addEventListener('click', openHowToBuy); // Also link footer button
+                     if(howToBuyBtnFooter) howToBuyBtnFooter.addEventListener('click', openHowToBuy);
                      closeHowToBuyModal.addEventListener('click', () => closeModal(howToBuyModal));
                      howToBuyModal.addEventListener('click', (e) => { if(e.target === howToBuyModal) closeModal(howToBuyModal); });
                  }
@@ -956,7 +955,7 @@
             let currentTestimonialIndex = 0;
             try {
                 function showTestimonial(index) {
-                    if (!testimonialCards || testimonialCards.length === 0) return; // Guard clause
+                    if (!testimonialCards || testimonialCards.length === 0) return;
                     testimonialCards.forEach((card, i) => {
                         card.classList.remove('active');
                         if (i === index) { card.classList.add('active'); }
@@ -978,68 +977,97 @@
             // --- GAME LOGIC (Self-Contained Block) ---
             // ========================================
             if (gameCanRun) { // Only run game logic if elements and context are ready
-                let player = { x: 0, y: 0, width: 45, height: 45, color: '#ff3e3e', speed: 6 };
+                let player = { x: 0, y: 0, width: 45, height: 45, color: '#ff3e3e', speed: 6 }; // Ensure speed is positive
                 let moneyItems = []; let debtItems = []; let keys = {}; let score = 0;
                 let gameInterval, spawnInterval; let gameActive = false; const itemSize = 35;
                 const emojis = { player: '🤡', money: '$', banker: '🏦', lender: '🧾', agency: '🚨', politician: '💩' };
                 const debtPool = [emojis.banker, emojis.lender, emojis.agency, emojis.politician];
                 const MAX_LEADERBOARD_ENTRIES = 10;
 
-                // --- Game Event Listener ---
+                // --- Game Input Event Listeners (Defined within game scope) ---
+                document.addEventListener('keydown', handleKeyDown);
+                document.addEventListener('keyup', handleKeyUp);
+
+                function handleKeyDown(e) {
+                    const key = e.key.toLowerCase();
+                    keys[key] = true;
+                    // Prevent page scroll only if game is active
+                    if (gameActive && ['arrowup', 'arrowdown', 'arrowleft', 'arrowright', ' '].includes(key)) {
+                        e.preventDefault();
+                    }
+                }
+
+                function handleKeyUp(e) {
+                    const key = e.key.toLowerCase();
+                    keys[key] = false;
+                }
+
+                 // --- Game Start Button Event Listener ---
                  startButton.addEventListener('click', function() {
-                    if (!gameActive) { // Prevent starting multiple games if already active
-                        console.log("Attempting to start game...");
+                    // Check gameActive *again* right before starting
+                    if (!gameActive) {
                         startGame();
                     } else {
-                        console.log("Game already active, ignoring start click.");
+                         console.warn("Start button clicked while game already active.");
                     }
                  });
 
                 function startGame() {
-                    console.log("startGame function executing...");
-                    // Double check essential elements right before use
+                    // Re-check essential elements
                     if (!ctx || !gameContainer || !canvas) {
                          console.error("Cannot start game, essential drawing elements missing.");
-                         // Maybe display error on overlay?
-                          if (gameOverlay) {
-                             gameOverlay.style.display = 'flex';
-                             gameOverlay.innerHTML = "<p style='color:red;'>Critical Error: Cannot initialize game canvas.</p>";
-                          }
+                          if (gameOverlay) { gameOverlay.style.display = 'flex'; gameOverlay.innerHTML = "<p style='color:red;'>Critical Error: Cannot initialize game canvas.</p>"; }
                          return;
                      }
 
-                    // Set canvas dimensions *after* ensuring container is ready
+                    // Ensure canvas dimensions are set and valid
                     canvas.width = gameContainer.clientWidth;
                     canvas.height = gameContainer.clientHeight;
-                    console.log(`Canvas dimensions set: ${canvas.width} x ${canvas.height}`);
-
-                    // Check if dimensions are valid
                     if (canvas.width <= 0 || canvas.height <= 0) {
-                        console.error(`Invalid canvas dimensions (${canvas.width}x${canvas.height}). Game cannot start. Is the container visible and sized?`);
-                        if (gameOverlay) {
-                             gameOverlay.style.display = 'flex';
-                             gameOverlay.innerHTML = "<p style='color:red;'>Error: Game container has no size. Cannot start.</p>";
-                        }
-                        return; // Stop if canvas has no size
+                        console.error(`Invalid canvas dimensions (${canvas.width}x${canvas.height}). Game cannot start.`);
+                        if (gameOverlay) { gameOverlay.style.display = 'flex'; gameOverlay.innerHTML = "<p style='color:red;'>Error: Game container has no size.</p>"; }
+                        return;
                     }
 
-
+                    // Reset player, score, items, keys state
                     player.x = canvas.width / 2 - player.width / 2;
-                    player.y = canvas.height - player.height - 15;
-                    gameActive = true; moneyItems = []; debtItems = []; score = 0; updateScore(); keys = {};
+                    player.y = canvas.height - player.height - 15; // Position player
+                    score = 0; updateScore();
+                    moneyItems = []; debtItems = [];
+                    keys = {}; // CRITICAL: Reset keys object on new game
+
+                    // Set game active flag
+                    gameActive = true;
+
+                    // Hide overlay
                     if (gameOverlay) gameOverlay.style.display = 'none';
-                    clearInterval(gameInterval); clearInterval(spawnInterval); // Clear existing intervals
-                    console.log("Starting game loops...");
-                    gameInterval = setInterval(updateGame, 1000 / 60);
-                    spawnInterval = setInterval(spawnObjects, 700);
-                    console.log("Game loops started.");
+
+                    // Clear previous intervals (important for restarts)
+                    clearInterval(gameInterval);
+                    clearInterval(spawnInterval);
+
+                    // Start new game loops
+                    gameInterval = setInterval(updateGame, 1000 / 60); // ~60 FPS
+                    spawnInterval = setInterval(spawnObjects, 700); // Spawn rate
+                    console.log("Game started successfully.");
                 }
 
                 function endGame() {
-                    console.log("endGame function called. Final Score:", score);
-                    gameActive = false;
-                    clearInterval(gameInterval); clearInterval(spawnInterval);
-                    console.log("Game loops cleared.");
+                    // Only run endGame logic once
+                    if (!gameActive) return;
+                    console.log("Ending game. Final Score:", score);
+                    gameActive = false; // Set inactive *first*
+
+                    // Clear intervals
+                    clearInterval(gameInterval);
+                    clearInterval(spawnInterval);
+
+                    // Remove key listeners specific to the game to prevent background input handling
+                    // document.removeEventListener('keydown', handleKeyDown);
+                    // document.removeEventListener('keyup', handleKeyUp);
+                    // Note: Keeping listeners active might be okay if start button logic prevents multiple games.
+
+                    // Show overlay
                     if (gameOverlay) {
                         gameOverlay.style.display = 'flex';
                         const gameTitle = gameOverlay.querySelector('.game-title');
@@ -1049,112 +1077,126 @@
                         const startBtnText = gameOverlay.querySelector('.start-game-btn');
                         if(startBtnText) startBtnText.textContent = "GO AGANE";
                     }
-                    // Use setTimeout to avoid blocking potential final draw updates
-                    setTimeout(() => {
+
+                    // Prompt for leaderboard entry
+                    setTimeout(() => { // Delay slightly
                          try {
                              const playerName = prompt(`Game Over! Score: ${score}\nEnter Name (max 15 chars):`, "AnonDegen");
                              if (playerName) {
-                                 saveScore(playerName.substring(0, 15).trim(), score); // Trim whitespace too
+                                 saveScore(playerName.substring(0, 15).trim(), score);
                              }
-                         } catch (e) {
-                             console.error("Error during prompt/saveScore:", e);
-                         }
+                         } catch (e) { console.error("Error during prompt/saveScore:", e); }
                     }, 100);
                 }
 
                 function updateScore() { if (scoreDisplay) scoreDisplay.textContent = `POINTS: ${score}`; }
 
                 function spawnObjects() {
-                    if (!gameActive || !canvas || canvas.width <= 0) return; // Check canvas width again
-                    if (Math.random() < 0.55) { moneyItems.push({ x: Math.random()*(canvas.width-itemSize), y: -itemSize, emoji: emojis.money }); }
-                    if (Math.random() < 0.75) { debtItems.push({ x: Math.random()*(canvas.width-itemSize), y: -itemSize, emoji: debtPool[Math.floor(Math.random()*debtPool.length)] }); }
+                    if (!gameActive || !canvas || canvas.width <= 0) return;
+                    // Spawn Money
+                    if (Math.random() < 0.55) {
+                        moneyItems.push({ x: Math.random()*(canvas.width-itemSize), y: -itemSize, emoji: emojis.money });
+                    }
+                    // Spawn Debt
+                    if (Math.random() < 0.75) {
+                        debtItems.push({ x: Math.random()*(canvas.width-itemSize), y: -itemSize, emoji: debtPool[Math.floor(Math.random()*debtPool.length)] });
+                    }
                 }
 
                 function updateGame() {
-                    if (!gameActive || !canvas || !ctx) return; // Stop if game ended or context lost
+                    // Essential check at the beginning of the loop
+                    if (!gameActive || !canvas || !ctx) {
+                        // If the game should be active but isn't, maybe clear intervals?
+                        // clearInterval(gameInterval); clearInterval(spawnInterval);
+                        return;
+                    }
 
-                    try { // Add a try-catch around the core update loop for safety
-                        // Player Movement
-                        if (keys['arrowleft'] || keys['a']) player.x -= player.speed;
-                        if (keys['arrowright'] || keys['d']) player.x += player.speed;
+                    try {
+                        // --- Player Movement ---
+                        // Check the keys object state right before using it
+                        let moved = false;
+                        if (keys['arrowleft'] || keys['a']) {
+                            player.x -= player.speed;
+                            moved = true;
+                        }
+                        if (keys['arrowright'] || keys['d']) {
+                            player.x += player.speed;
+                            moved = true;
+                        }
+                        // (Optional log for debugging movement)
+                        // if(moved) console.log(`Moved: player.x = ${player.x}`);
+
+
+                        // Clamp player position to canvas bounds
                         player.x = Math.max(0, Math.min(canvas.width - player.width, player.x));
 
-                        // Clear & Draw
+                        // --- Clear Canvas ---
                         ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                        // --- Draw Player ---
                         ctx.font = "45px Arial"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
                         ctx.fillText(emojis.player, player.x + player.width / 2, player.y + player.height / 2);
 
+                        // --- Update & Draw Items ---
                         ctx.font = `${itemSize}px Arial`; ctx.textBaseline = "middle";
 
-                        // Update Money Items
+                        // Money items loop (check collision)
                         for (let i = moneyItems.length - 1; i >= 0; i--) {
-                             if (!moneyItems[i]) continue; // Safety check if item removed mid-loop elsewhere
+                            if (!moneyItems[i]) continue;
                             let item = moneyItems[i]; item.y += 4.5;
                             ctx.fillText(item.emoji, item.x + itemSize / 2, item.y + itemSize / 2);
-                            if (isColliding(player, { x: item.x, y: item.y, width: itemSize, height: itemSize })) { score += 10; updateScore(); moneyItems.splice(i, 1); }
-                            else if (item.y > canvas.height) { moneyItems.splice(i, 1); }
+                            if (isColliding(player, { x: item.x, y: item.y, width: itemSize, height: itemSize })) {
+                                score += 10; updateScore(); moneyItems.splice(i, 1);
+                            } else if (item.y > canvas.height) { moneyItems.splice(i, 1); }
                         }
 
-                        // Update Debt Items
+                        // Debt items loop (check collision -> endGame)
                         for (let i = debtItems.length - 1; i >= 0; i--) {
-                            if (!debtItems[i]) continue; // Safety check
-                            let item = debtItems[i]; item.y += 6;
+                            if (!debtItems[i]) continue;
+                            let item = debtItems[i]; item.y += 6; // Faster debt
                             ctx.fillText(item.emoji, item.x + itemSize / 2, item.y + itemSize / 2);
-                            if (isColliding(player, { x: item.x, y: item.y, width: itemSize, height: itemSize })) {
-                                endGame(); // Call endGame immediately
-                                return; // Stop processing this frame after game over
-                            }
-                            else if (item.y > canvas.height) { debtItems.splice(i, 1); }
+                             if (isColliding(player, { x: item.x, y: item.y, width: itemSize, height: itemSize })) {
+                                 endGame(); // Call endGame immediately
+                                 return; // Exit the update loop for this frame
+                             } else if (item.y > canvas.height) { debtItems.splice(i, 1); }
                         }
                     } catch (e) {
                         console.error("Error during game update loop:", e);
-                        // Consider stopping the game if a critical error occurs in the loop
-                        gameActive = false;
-                        clearInterval(gameInterval);
-                        clearInterval(spawnInterval);
-                         if (gameOverlay) {
-                             gameOverlay.style.display = 'flex';
-                             gameOverlay.innerHTML = "<p style='color:red;'>Critical Game Error Occurred.<br>Check console (F12) & Refresh.</p>";
-                          }
+                        gameActive = false; // Stop game on error
+                        clearInterval(gameInterval); clearInterval(spawnInterval);
+                         if (gameOverlay) { gameOverlay.style.display = 'flex'; gameOverlay.innerHTML = "<p style='color:red;'>Critical Game Error Occurred.<br>Check console (F12) & Refresh.</p>"; }
                     }
                 } // End updateGame
 
                 function isColliding(rect1, rect2) {
-                    return ( rect1.x < rect2.x + rect2.width && rect1.x + rect1.width > rect2.x && rect1.y < rect2.y + rect2.height && rect1.y + rect1.height > rect2.y );
+                    // Axis-Aligned Bounding Box collision detection
+                    return (
+                        rect1.x < rect2.x + rect2.width &&
+                        rect1.x + rect1.width > rect2.x &&
+                        rect1.y < rect2.y + rect2.height &&
+                        rect1.y + rect1.height > rect2.y
+                    );
                 }
 
-                // --- Leaderboard Functions (Inside game block for scope, could be outside) ---
-                 function getScores() {
-                     try {
-                         const scores = localStorage.getItem('debtGameLeaderboard');
-                         return scores ? JSON.parse(scores) : [];
-                     } catch (e) {
-                         console.error("Error reading scores from localStorage:", e);
-                         return []; // Return empty array on error
-                     }
+                // --- Leaderboard Functions (Inside game scope) ---
+                 function getScores() { /* ... (unchanged) ... */
+                    try { const scores = localStorage.getItem('debtGameLeaderboard'); return scores ? JSON.parse(scores) : []; }
+                    catch (e) { console.error("Error reading scores:", e); return []; }
                  }
-
-                 function saveScore(name, score) {
+                 function saveScore(name, score) { /* ... (unchanged) ... */
                      try {
-                         const scores = getScores();
-                         scores.push({ name: name || "AnonDegen", score });
+                         const scores = getScores(); scores.push({ name: name || "AnonDegen", score });
                          scores.sort((a, b) => b.score - a.score);
                          const topScores = scores.slice(0, MAX_LEADERBOARD_ENTRIES);
                          localStorage.setItem('debtGameLeaderboard', JSON.stringify(topScores));
                          updateLeaderboardDisplay();
-                     } catch (e) {
-                          console.error("Error saving score to localStorage:", e);
-                     }
+                     } catch (e) { console.error("Error saving score:", e); }
                  }
-
-                 function updateLeaderboardDisplay() {
+                 function updateLeaderboardDisplay() { /* ... (unchanged) ... */
                      if (!leaderboardList) return;
-                     const scores = getScores();
-                     leaderboardList.innerHTML = ''; // Clear previous list
-                     if (scores.length === 0) {
-                         leaderboardList.innerHTML = '<li>No scores yet. Play!</li>'; return;
-                     }
-                     scores.forEach((entry, index) => { /* ... (unchanged li creation) ... */
+                     const scores = getScores(); leaderboardList.innerHTML = '';
+                     if (scores.length === 0) { leaderboardList.innerHTML = '<li>No scores yet. Play!</li>'; return; }
+                     scores.forEach((entry, index) => {
                         const li = document.createElement('li');
                         const rankSpan = document.createElement('span'); rankSpan.textContent = `#${index + 1}`; rankSpan.style.cssText = 'font-weight:normal; color:#888; margin-right:10px;';
                         const nameSpan = document.createElement('span'); nameSpan.className = 'leaderboard-name'; nameSpan.textContent = entry.name;
@@ -1171,63 +1213,53 @@
 
 
             // --- Price Feed Logic ---
-            async function fetchAndUpdatePrice() {
+            async function fetchAndUpdatePrice() { /* ... (unchanged - remember to add API key if needed) ... */
                 if (!priceValueEl || !priceChangeEl) return;
                 const tokenAddress = "YOUR_TOKEN_ADDRESS_ON_SOLANA"; // <<< MUST REPLACE
-                 // Use a CORS proxy if the API doesn't allow direct browser requests
-                // Example using a generic proxy (use with caution, find a reliable one or host your own)
-                // const proxyUrl = 'https://cors-anywhere.herokuapp.com/'; // Example proxy
-                // const apiUrl = `${proxyUrl}https://public-api.birdeye.so/public/price?address=${tokenAddress}`;
-                const apiUrl = `https://public-api.birdeye.so/public/price?address=${tokenAddress}`; // Try direct first
-
-                // You might need headers for Birdeye free tier key
-                 const headers = {
-                 // 'X-API-KEY': 'YOUR_BIRDEYE_API_KEY' // <--- Add your key if needed
-                 };
+                const apiUrl = `https://public-api.birdeye.so/public/price?address=${tokenAddress}`;
+                 const headers = { /* 'X-API-KEY': 'YOUR_BIRDEYE_API_KEY' */ }; // Add headers if required
 
                 try {
                     const response = await fetch(apiUrl, { headers: headers });
                     if (!response.ok) { throw new Error(`API Error (${response.status}): ${response.statusText}`); }
                     const data = await response.json();
-
-                     if (data && data.data && typeof data.data.value !== 'undefined') { // Check if value exists
-                         const price = data.data.value;
-                         const priceChange24h = data.data.priceChange24hPercent !== undefined ? data.data.priceChange24hPercent : 0; // Default to 0
-
-                         priceValueEl.textContent = price.toFixed(8); // Dynamic precision might be better
-                         priceChangeEl.textContent = `${priceChange24h >= 0 ? '+' : ''}${priceChange24h.toFixed(2)}%`;
+                     if (data && data.data && typeof data.data.value !== 'undefined') {
+                         const price = data.data.value; const priceChange24h = data.data.priceChange24hPercent !== undefined ? data.data.priceChange24hPercent : 0;
+                         priceValueEl.textContent = price.toFixed(8); priceChangeEl.textContent = `${priceChange24h >= 0 ? '+' : ''}${priceChange24h.toFixed(2)}%`;
                          priceChangeEl.className = 'price-change ' + (priceChange24h >= 0 ? 'positive' : 'negative');
                      } else { throw new Error("Unexpected API response format"); }
-
                 } catch (error) {
                     console.error("Failed to fetch price:", error);
-                    priceValueEl.textContent = 'Error'; priceChangeEl.textContent = '-.--%';
-                    priceChangeEl.className = 'price-change';
+                    priceValueEl.textContent = 'Error'; priceChangeEl.textContent = '-.--%'; priceChangeEl.className = 'price-change';
                 }
             }
 
             // --- Initializations Outside Game Block ---
-            fetchAndUpdatePrice();
-            setInterval(fetchAndUpdatePrice, 45000); // Fetch slightly less often (45s)
+            try { // Wrap async call for safety
+                fetchAndUpdatePrice();
+                setInterval(fetchAndUpdatePrice, 45000);
+            } catch(e) { console.error("Error initiating price fetch:", e); }
 
 
             // --- Fact Popup ---
-             const factsMessages = [ /* ... Your meme facts ... */
-                "ALERT: Local man buys $DEBT instead of insulin. Says 'YOLO'.", "BREAKING: Jerome Powell seen crying into a pile of useless dollars. $DEBT suspected.", "FACT: 9 out of 10 dentists agree $DEBT is 'probably a bad idea, but kinda funny'.", "WARNING: Holding $DEBT may cause spontaneous diamond hands and delusions of grandeur.", "REPORT: Study finds link between $DEBT ownership and inexplicable urge to tweet rocket emojis.", "ALERT: Wife's boyfriend recommends diversifying into $DEBT. Financial advice?", "FACT: $DEBT has more utility than your degree (it makes people laugh).", "BREAKING: Scientists discover $DEBT cures existential dread*. (*Results may vary, dread may increase).", "WARNING: May cause you to quit your job and tell your boss to 'suck it'. Don't.", "REPORT: $DEBT outperforms S&P 500 (in meme potential).", "ALERT: Buying $DEBT confirmed side effect: uncontrollable giggling during market crashes."
-            ];
-             function showRandomFact() { /* ... (unchanged) ... */
-                 if (document.querySelector('.facts-popup')) return;
-                 const msg = factsMessages[Math.floor(Math.random() * factsMessages.length)];
-                 const popup = document.createElement('div'); popup.className = 'facts-popup'; popup.textContent = msg;
-                 document.body.appendChild(popup);
-                 popup.addEventListener('animationend', () => { if (popup.parentNode) { popup.remove(); } });
-                 setTimeout(() => { if (popup.parentNode) { popup.remove(); } }, 6100);
-             }
-             function scheduleFact() { /* ... (unchanged) ... */
-                 const delay = Math.random() * 11000 + 12000; // 12-23 seconds
-                 setTimeout(() => { showRandomFact(); scheduleFact(); }, delay);
-             }
-             setTimeout(scheduleFact, 7000); // Initial delay
+             try {
+                 const factsMessages = [ /* ... Your meme facts ... */
+                    "ALERT: Local man buys $DEBT instead of insulin. Says 'YOLO'.", "BREAKING: Jerome Powell seen crying into a pile of useless dollars. $DEBT suspected.", "FACT: 9 out of 10 dentists agree $DEBT is 'probably a bad idea, but kinda funny'.", "WARNING: Holding $DEBT may cause spontaneous diamond hands and delusions of grandeur.", "REPORT: Study finds link between $DEBT ownership and inexplicable urge to tweet rocket emojis.", "ALERT: Wife's boyfriend recommends diversifying into $DEBT. Financial advice?", "FACT: $DEBT has more utility than your degree (it makes people laugh).", "BREAKING: Scientists discover $DEBT cures existential dread*. (*Results may vary, dread may increase).", "WARNING: May cause you to quit your job and tell your boss to 'suck it'. Don't.", "REPORT: $DEBT outperforms S&P 500 (in meme potential).", "ALERT: Buying $DEBT confirmed side effect: uncontrollable giggling during market crashes."
+                ];
+                 function showRandomFact() { /* ... (unchanged) ... */
+                     if (document.querySelector('.facts-popup')) return;
+                     const msg = factsMessages[Math.floor(Math.random() * factsMessages.length)];
+                     const popup = document.createElement('div'); popup.className = 'facts-popup'; popup.textContent = msg;
+                     document.body.appendChild(popup);
+                     popup.addEventListener('animationend', () => { if (popup.parentNode) { popup.remove(); } });
+                     setTimeout(() => { if (popup.parentNode) { popup.remove(); } }, 6100);
+                 }
+                 function scheduleFact() { /* ... (unchanged) ... */
+                     const delay = Math.random() * 11000 + 12000;
+                     setTimeout(() => { showRandomFact(); scheduleFact(); }, delay);
+                 }
+                 setTimeout(scheduleFact, 7000);
+            } catch(e) { console.error("Error setting up fact popups:", e); }
 
 
         }); // End DOMContentLoaded
