@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$DEBT - The More You Owe, The More You Own | DebtCoin</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #0d0d0d;
+            color: #f0f0f0;
+            line-height: 1.6;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header styles */
+        header {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ff3e3e;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: #ffffff;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ff3e3e;
+        }
+        
+        .cta-button {
+            background-color: #ff3e3e;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: #e62e2e;
+        }
+        
+        /* Hero section */
+        .hero {
+            padding: 180px 0 100px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid #ff3e3e;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+        
+        .hero h1 span {
+            color: #ff3e3e;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+        
+        .tagline {
+            font-style: italic;
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: #ff3e3e;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .hero-cta {
+            padding: 15px 30px;
+            font-size: 18px;
+        }
+        
+        .secondary-cta {
+            background-color: transparent;
+            border: 2px solid #ff3e3e;
+        }
+        
+        .secondary-cta:hover {
+            background-color: rgba(255, 62, 62, 0.1);
+        }
+        
+        /* Game container */
+        .game-container {
+            margin-top: 50px;
+            width: 100%;
+            max-width: 800px;
+            height: 500px;
+            margin: 50px auto 0;
+            background-color: #1a1a1a;
+            border: 3px solid #ff3e3e;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        #game-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        
+        .game-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(10, 10, 10, 0.8);
+            z-index: 10;
+        }
+        
+        .game-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #ff3e3e;
+        }
+        
+        .game-description {
+            max-width: 500px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .start-game-btn {
+            background-color: #ff3e3e;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .start-game-btn:hover {
+            background-color: #e62e2e;
+        }
+        
+        .game-score {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: #ff3e3e;
+            font-weight: bold;
+            z-index: 5;
+        }
+        
+        .game-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            font-size: 14px;
+            z-index: 5;
+        }
+        
+        /* Features section */
+        .features {
+            padding: 100px 0;
+            text-align: center;
+            background-color: #151515;
+        }
+        
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+        
+        .section-description {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            color: #cccccc;
+            font-size: 18px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            background-color: #222222;
+            border-radius: 10px;
+            padding: 40px 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #333333;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 62, 62, 0.2);
+            border-color: #ff3e3e;
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background-color: #2a2a2a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: #ff3e3e;
+            font-size: 28px;
+        }
+        
+        .feature-title {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+        
+        .feature-description {
+            color: #cccccc;
+        }
+        
+        /* Lore section */
+        .lore-section {
+            padding: 100px 0;
+            background-color: #0d0d0d;
+            position: relative;
+        }
+        
+        .lore-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="10" y="50" font-family="Arial" font-size="20" fill="rgba(255,62,62,0.03)">DEBT</text></svg>');
+            opacity: 0.5;
+        }
+        
+        .lore-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .lore-title {
+            font-size: 42px;
+            color: #ff3e3e;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .lore-section h3 {
+            color: #ff3e3e;
+            font-size: 24px;
+            margin: 30px 0 15px;
+        }
+        
+        .lore-section p {
+            color: #cccccc;
+            margin-bottom: 20px;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+        
+        .commandments {
+            list-style: none;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            border-left: 3px solid #ff3e3e;
+        }
+        
+        .commandments li {
+            padding: 10px 0;
+            font-size: 18px;
+            color: #ffffff;
+            border-bottom: 1px solid #333333;
+        }
+        
+        .commandments li:last-child {
+            border-bottom: none;
+        }
+        
+        .roadmap {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .roadmap li {
+            padding: 10px 0 10px 30px;
+            position: relative;
+            color: #cccccc;
+        }
+        
+        .roadmap li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 15px;
+            width: 10px;
+            height: 10px;
+            background-color: #ff3e3e;
+            border-radius: 50%;
+        }
+        
+        .final-words {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .final-words p {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .final-words strong {
+            color: #ff3e3e;
+            font-size: 26px;
+            display: block;
+            margin-top: 20px;
+        }
+        
+        /* How it works section */
+        .how-it-works {
+            padding: 100px 0;
+            background-color: #121212;
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+        
+        .step {
+            flex-basis: 30%;
+            text-align: center;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: #ff3e3e;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 auto 30px;
+        }
+        
+        .step-title {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+        
+        .step-description {
+            color: #cccccc;
+        }
+        
+        @media (max-width: 768px) {
+            .step {
+                flex-basis: 100%;
+                margin-bottom: 50px;
+            }
+            
+            .steps {
+                flex-direction: column;
+            }
+        }
+        
+        /* Stats section */
+        .stats {
+            padding: 100px 0;
+            text-align: center;
+            background-color: #0a0a0a;
+            color: white;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .stat-card {
+            padding: 20px;
+        }
+        
+        .stat-value {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #ff3e3e;
+        }
+        
+        .stat-label {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        /* Cult section */
+        .cult-section {
+            padding: 100px 0;
+            background-color: #0d0d0d;
+            text-align: center;
+        }
+        
+        .cult-title {
+            font-size: 42px;
+            color: #ff3e3e;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .cult-description {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-size: 18px;
+            color: #cccccc;
+            line-height: 1.7;
+        }
+        
+        .cult-icons {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .cult-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .icon-container {
+            width: 100px;
+            height: 100px;
+            background-color: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 40px;
+            color: #ff3e3e;
+            border: 2px solid #333333;
+        }
+        
+        .icon-label {
+            font-size: 16px;
+            color: #ffffff;
+        }
+        
+        /* Testimonials section */
+        .testimonials {
+            padding: 100px 0;
+            background-color: #151515;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .testimonial-card {
+            background-color: #222222;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid #333333;
+        }
+        
+        .testimonial-text {
+            color: #cccccc;
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            background-color: #333333;
+            border: 1px solid #ff3e3e;
+        }
+        
+        .author-name {
+            font-weight: 700;
+            color: #ffffff;
+        }
+        
+        .author-title {
+            color: #999999;
+            font-size: 14px;
+        }
+        
+        /* Game section styles */
+        .game-section {
+            padding: 100px 0;
+            background-color: #0d0d0d;
+            text-align: center;
+        }
+        
+        .game-section h2 {
+            font-size: 42px;
+            color: #ff3e3e;
+            margin-bottom: 20px;
+        }
+        
+        .game-section p {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: #cccccc;
+            font-size: 18px;
+        }
+        
+        .game-features {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+        
+        .game-feature {
+            flex-basis: 30%;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+        
+        .game-feature h4 {
+            color: #ff3e3e;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .game-feature ul {
+            text-align: left;
+            padding-left: 20px;
+            color: #cccccc;
+        }
+        
+        .game-feature ul li {
+            margin-bottom: 5px;
+        }
+        
+        /* CTA section */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            color: white;
+            text-align: center;
+            border-top: 2px solid #ff3e3e;
+        }
+        
+        .cta-box {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #ff3e3e;
+        }
+        
+        .cta-description {
+            font-size: 18px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #0a0a0a;
+            color: white;
+            padding: 80px 0 40px;
+            border-top: 1px solid #333333;
+        }
+        
+: 23%;
+            min-width: 200px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #8dc647;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            opacity: 1;
+            color: #8dc647;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: #8dc647;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid #333;
+        }
+        
+        .footer-bottom p {
+            opacity: 0.8;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-column {
+                flex-basis: 48%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .footer-column {
+                flex-basis: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-inner">
+            <a href="#" class="logo">Debt<span>coin</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#" class="cta-button">Get Started</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="tagline">The More You Owe, The More You Own</div>
+            <h1>Welcome to <span>$DEBT</span>coin</h1>
+            <p>The first cryptocurrency backed by absolutely nothing—except your crippling anxiety and a faint hope that this Ponzi is <em>your</em> Ponzi.</p>
+            <p style="font-size: 16px; margin-bottom: 30px; color: #ff6b6b; font-style: italic;">We don't promise utility. We don't promise stability. We <strong>promise vibes.</strong></p>
+            <div class="hero-buttons">
+                <a href="#" class="cta-button hero-cta">Join the Debtors</a>
+                <a href="#how-it-works" class="cta-button hero-cta secondary-cta">Go Into Debt</a>
+            </div>
+            
+            <!-- Game container -->
+            <div class="game-container">
+                <div class="game-overlay">
+                    <h3 class="game-title">DEBT DODGER</h3>
+                    <p class="game-description">A fast-paced game where you play as an over-leveraged citizen trying to dodge predatory debt traps and flying loan offers while collecting $DEBT tokens.</p>
+                    <button class="start-game-btn">START GAME</button>
+                </div>
+                <canvas id="game-canvas"></canvas>
+                <div class="game-score">SCORE: 0</div>
+                <div class="game-controls">Arrow keys or swipe to dodge debt traps</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose $DEBT?</h2>
+            <p class="section-description">Because your real debt isn't funny enough already.</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💸</div>
+                    <h3 class="feature-title">Backed by Nothing</h3>
+                    <p class="feature-description">Unlike other cryptocurrencies that pretend to have value, we're honest about being completely worthless—just like your student loans.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📉</div>
+                    <h3 class="feature-title">Guaranteed Losses</h3>
+                    <p class="feature-description">Why wait for market crashes? With $DEBT, you're already in the red from day one. It's a feature, not a bug.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3 class="feature-title">Mental Gymnastics</h3>
+                    <p class="feature-description">Holding $DEBT trains your brain to rationalize terrible financial decisions. Think of it as CrossFit for your denial.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌎</div>
+                    <h3 class="feature-title">Global Misery</h3>
+                    <p class="feature-description">Join a worldwide community of people making the same mistake simultaneously. Debt knows no borders!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3 class="feature-title">Infinite Supply</h3>
+                    <p class="feature-description">Just like real debt, we can create $DEBT out of thin air forever. We learned from the best—central banks!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤡</div>
+                    <h3 class="feature-title">Comedy Gold</h3>
+                    <p class="feature-description">When your investment goes to zero, at least you'll have some great stories for your therapist.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Lore Section -->
+    <section class="lore-section" id="lore">
+        <div class="container lore-container">
+            <h2 class="lore-title">💀 DEBTCOIN LORE</h2>
+            
+            <h3>📜 The Beginning of the End</h3>
+            <p>In the year 2025, after the 37th interest rate hike, one brave soul looked at his $124,000 in student loans, $7 in his checking account, and said: "What if... we just made debt <em>funny</em>?"</p>
+            <p>Thus, <strong>DebtCoin</strong> was born. Not to fix the system—but to <strong>mock it so hard it collapses</strong>.</p>
+            
+            <h3>🧠 The Big Idea</h3>
+            <p>DebtCoin is the <strong>first crypto backed by absolutely nothing</strong>—except your crippling anxiety and a faint hope that this Ponzi is <em>your</em> Ponzi.</p>
+            
+            <h3>🕯️ Whitepaper? Nah. Redpaper.</h3>
+            <p>DebtCoin's "redpaper" outlines a simple economic principle:</p>
+            <ul class="roadmap">
+                <li><strong>Step 1</strong>: You buy $DEBT.</li>
+                <li><strong>Step 2</strong>: You tell others to buy $DEBT.</li>
+                <li><strong>Step 3</strong>: You spiral into existential crisis.</li>
+                <li><strong>Step 4</strong>: Profit???</li>
+            </ul>
+            
+            <h3>📉 Tokenomics</h3>
+            <ul class="commandments">
+                <li><strong>Total Supply</strong>: Infinite (like real debt)</li>
+                <li><strong>Burn Rate</strong>: We accidentally lost the private keys</li>
+                <li><strong>Staking</strong>: We call it "Defaulting"</li>
+                <li><strong>APY</strong>: Always Promising Yikes</li>
+            </ul>
+            
+            <div class="final-words">
+                <p>"In Fiat We Trusted. In $DEBT We Found the Truth."</p>
+                <strong>Welcome to financial freedom through complete surrender.</strong>
+            </div>
+        </div>
+    </section>
+    
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">Our Roadmap to Financial Ruin</h2>
+            <p class="section-description">Getting scammed has never been this easy!</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Q1: Launch</h3>
+                    <p class="step-description">We launch $DEBT with maximum hype and minimum utility. Early adopters call themselves "financial visionaries."</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Q2: Collapse</h3>
+                    <p class="step-description">Price plummets 99%. Discord fills with hopium. "This is just a correction!"</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Q3: Blame the Devs</h3>
+                    <p class="step-description">Team disappears with liquidity. Community makes conspiracy theories about the "master plan."</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Q4: Relaunch as ReDebtCoin</h3>
+                    <p class="step-description">Same scam, new name. You'll probably buy it again because you never learn.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <h2 class="section-title">The Debt Crisis by the Numbers</h2>
+            <p class="section-description">If these stats don't make you laugh, you'll cry!</p>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">$33T+</div>
+                    <div class="stat-label">US National Debt</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">$1.7T+</div>
+                    <div class="stat-label">Student Loan Debt</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">$1T+</div>
+                    <div class="stat-label">Credit Card Debt</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">∞</div>
+                    <div class="stat-label">Your Financial Anxiety</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Cult Section -->
+    <section class="cult-section">
+        <div class="container">
+            <h2 class="cult-title">😇 The Community</h2>
+            <p class="cult-description">You're not just an investor. You're a <strong>Debtor</strong> now.<br>Welcome to the:</p>
+            
+            <div class="cult-icons">
+                <div class="cult-icon">
+                    <div class="icon-container">🕯️</div>
+                    <div class="icon-label">Church of Eternal Leverage</div>
+                </div>
+                <div class="cult-icon">
+                    <div class="icon-container">💳</div>
+                    <div class="icon-label">Order of Overdraft</div>
+                </div>
+                <div class="cult-icon">
+                    <div class="icon-container">🪦</div>
+                    <div class="icon-label">Guild of the Rugged</div>
+                </div>
+            </div>
+            
+            <p class="cult-description">Every Sunday we gather to chant:<br><em>"Debt is love. Debt is life. Rug me, Father, for I have spent."</em></p>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">Trust the $DEBT-Heads</h2>
+            <p class="section-description">Success stories from our community of financial masochists.</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"I maxed out three credit cards to buy $DEBT. Now I live in my car, but at least my Discord profile has a special role! Worth it!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar"></div>
+                        <div>
+                            <div class="author-name">Jeremy, 24</div>
+                            <div class="author-title">Former Apartment Dweller</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"My wife left me after I put our mortgage payment into $DEBT. But the community is so supportive! They send me ramen recipes daily."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar"></div>
+                        <div>
+                            <div class="author-name">Mike, 37</div>
+                            <div class="author-title">Newly Single</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"I don't even understand what $DEBT is, but a TikToker told me to buy it, so I sold my kidney. Now I'm down 98% but HODLING STRONG!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar"></div>
+                        <div>
+                            <div class="author-name">Emily, 19</div>
+                            <div class="author-title">One-Kidney Wonder</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Game Section -->
+    <section class="game-section">
+        <div class="container">
+            <h2>🕹️ DEBT DODGER</h2>
+            <p>A fast-paced, satirical browser game where you play as an over-leveraged citizen trying to dodge predatory debt traps and flying loan offers while collecting $DEBT tokens.</p>
+            
+            <div class="game-features">
+                <div class="game-feature">
+                    <h4>Player Character</h4>
+                    <ul>
+                        <li>A frantic cartoon guy in a suit, sweating profusely</li>
+                        <li>Controls: Arrow keys or swipe to dodge</li>
+                    </ul>
+                </div>
+                <div class="game-feature">
+                    <h4>Deadly Obstacles</h4>
+                    <ul>
+                        <li>Student Loans (falling anvils)</li>
+                        <li>Credit Card Offers (homing missiles)</li>
+                        <li>IRS Audits (red lasers)</li>
+                    </ul>
+                </div>
+                <div class="game-feature">
+                    <h4>Power-ups</h4>
+                    <ul>
+                        <li>🧾 Bankruptcy Filing: Temporarily invincible</li>
+                        <li>🧠 Financial Literacy: Slows time</li>
+                        <li>💰 DebtCoin: Adds to your score</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-box">
+                <h2 class="cta-title">Ready to make the worst financial decision of your life?</h2>
+                <p class="cta-description">Join thousands of other delusional investors on our journey to financial oblivion!</p>
+                <a href="#" class="cta-button hero-cta">Sacrifice Your Savings</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>$DEBT</h3>
+                    <ul>
+                        <li><a href="#">About Our Scam</a></li>
+                        <li><a href="#">We're Not Hiring</a></li>
+                        <li><a href="#">Media Blackout</a></li>
+                        <li><a href="#">FUD Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>So-Called Products</h3>
+                    <ul>
+                        <li><a href="#">Leaky Wallet</a></li>
+                        <li><a href="#">Gambling Platform</a></li>
+                        <li><a href="#">Premium Losses</a></li>
+                        <li><a href="#">Broken API</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>No Support</h3>
+                    <ul>
+                        <li><a href="#">Unhelpful Center</a></li>
+                        <li><a href="#">Don't Contact Us</a></li>
+                        <li><a href="#">Status: It's Complicated</a></li>
+                        <li><a href="#">Frequently Avoided Questions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Join the Cult</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon">🚽</a>
+                        <a href="#" class="social-icon">💩</a>
+                        <a href="#" class="social-icon">🔥</a>
+                        <a href="#" class="social-icon">💸</a>
+                    </div>
+                    <p style="margin-top: 20px; color: #ff3e3e; opacity: 0.8;">
+                        Subscribe to our newsletter for more financial abuse
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 DebtCoin. No rights reserved. | <a href="#" style="color: #ff3e3e; opacity: 0.8;">No Privacy Policy</a> | <a href="#" style="color: #ff3e3e; opacity: 0.8;">Terms of Servitude</a></p>
+                <p style="margin-top: 10px; font-size: 12px; color: #666;">This website is satirical. Please don't actually buy this. It's not real. If you try to send money, you deserve what happens next.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Simple JavaScript for the Debt Dodger game
+        document.addEventListener('DOMContentLoaded', function() {
+            const startButton = document.querySelector('.start-game-btn');
+            const gameOverlay = document.querySelector('.game-overlay');
+            const canvas = document.getElementById('game-canvas');
+            const scoreDisplay = document.querySelector('.game-score');
+            
+            let gameActive = false;
+            let score = 0;
+            
+            startButton.addEventListener('click', function() {
+                gameOverlay.style.display = 'none';
+                startGame();
+            });
+            
+            function startGame() {
+                gameActive = true;
+                score = 0;
+                updateScore();
+                // Normally we'd initialize the game here
+                // But this is just a mockup
+                
+                // For demonstration, just toggle the overlay back after 3 seconds
+                setTimeout(function() {
+                    gameOverlay.style.display = 'flex';
+                    gameActive = false;
+                    alert("Game over! You've been crushed by debt! (In a real implementation, this would be a functioning game)");
+                }, 3000);
+            }
+            
+            function updateScore() {
+                scoreDisplay.textContent = `SCORE: ${score}`;
+            }
+        });
+    </script>
+</body>
+</html>
+</body>
+</html>
