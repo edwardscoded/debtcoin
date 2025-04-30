@@ -1,3 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$DEBT - The More You Owe, The More You Own | DebtCoin</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0d0d0d;
+            color: #f0f0f0;
+            line-height: 1.6;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ff3e3e;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #ffffff;
+        }
+
+        .ticker-symbol {
+            font-family: monospace;
+            background-color: #ff3e3e;
+            color: #0d0d0d;
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-left: 5px;
+            font-size: 0.8em;
+            vertical-align: middle;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ff3e3e;
+        }
+
+        .cta-button {
+            background-color: #ff3e3e;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #e62e2e;
+        }
+
+        /* Hero section */
+        .hero {
+            padding: 180px 0 100px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid #ff3e3e;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><text x="0" y="10" font-family="monospace" font-size="10" fill="rgba(255,62,62,0.03)">$</text></svg>');
+            opacity: 0.5;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .hero h1 span {
+            color: #ff3e3e;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+
+        .tagline {
+            font-style: italic;
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: #ff3e3e;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .hero-cta {
+            padding: 15px 30px;
+            font-size: 18px;
+        }
+
+        .secondary-cta {
+            background-color: transparent;
+            border: 2px solid #ff3e3e;
+        }
+
+        .secondary-cta:hover {
+            background-color: rgba(255, 62, 62, 0.1);
+        }
+
+        /* Global debt counter */
+        .global-debt-counter {
+            background-color: rgba(26, 26, 26, 0.8);
+            border: 2px solid #ff3e3e;
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .counter-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            color: #cccccc;
+            letter-spacing: 2px;
+        }
+
+        .counter-value {
+            font-family: monospace;
+            font-size: 36px;
+            font-weight: bold;
+            color: #ff3e3e;
+            margin: 10px 0;
+        }
+
+        .counter-subtext {
+            font-size: 12px;
+            color: #cccccc;
+            font-style: italic;
+        }
+
+        /* Game container */
+        .game-container {
+            margin-top: 50px;
+            width: 100%;
+            max-width: 800px;
+            height: 500px;
+            margin: 50px auto 0;
+            background-color: #1a1a1a;
+            border: 3px solid #ff3e3e;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Price ticker */
+        .price-ticker {
+            background-color: #0d0d0d;
+            padding: 8px 0;
+            text-align: center;
+            border-top: 1px solid #333;
+            font-family: monospace;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative; /* Added for pseudo-element */
+            width: 100%; /* Ensure it spans width */
+        }
+
+        .price-ticker::after { /* Fade effect for overflowing text */
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50px;
+            height: 100%;
+            background: linear-gradient(to right, transparent, #0d0d0d);
+        }
+
+        .price-label {
+            color: #cccccc;
+            margin-right: 5px;
+        }
+
+        .price-value {
+            color: #ff3e3e;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .price-change {
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            margin-right: 15px;
+        }
+
+        .negative {
+            background-color: #ff3e3e;
+            color: white;
+        }
+
+        .ticker-message {
+            color: #cccccc;
+            font-style: italic;
+            animation: ticker 20s linear infinite;
+            display: inline-block; /* Needed for transform */
+            padding-left: 100%; /* Start off-screen */
+        }
+
+        @keyframes ticker {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%); /* Move fully across */
+            }
+        }
+
+        .game-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(10, 10, 10, 0.8);
+            z-index: 10;
+        }
+
+        .game-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #ff3e3e;
+        }
+
+        .game-description {
+            max-width: 500px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .start-game-btn {
+            background-color: #ff3e3e;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .start-game-btn:hover {
+            background-color: #e62e2e;
+        }
+
+        .game-score {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: #ff3e3e;
+            font-weight: bold;
+            z-index: 5;
+        }
+
+        .game-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            font-size: 14px;
+            z-index: 5;
+        }
+
+        /* Features section */
+        .features {
+            padding: 100px 0;
+            text-align: center;
+            background-color: #151515;
+        }
+
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .section-description {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            color: #cccccc;
+            font-size: 18px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background-color: #222222;
+            border-radius: 10px;
+            padding: 40px 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #333333;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 62, 62, 0.2);
+            border-color: #ff3e3e;
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background-color: #2a2a2a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: #ff3e3e;
+            font-size: 28px;
+        }
+
+        .feature-title {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .feature-description {
+            color: #cccccc;
+        }
+
+        /* Lore section */
+        .lore-section {
+            padding: 100px 0;
+            background-color: #0d0d0d;
+            position: relative;
+        }
+
+        .lore-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="10" y="50" font-family="Arial" font-size="20" fill="rgba(255,62,62,0.03)">DEBT</text></svg>');
+            opacity: 0.5;
+        }
+
+        .lore-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .lore-title {
+            font-size: 42px;
+            color: #ff3e3e;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .lore-section h3 {
+            color: #ff3e3e;
+            font-size: 24px;
+            margin: 30px 0 15px;
+        }
+
+        .lore-section p {
+            color: #cccccc;
+            margin-bottom: 20px;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .commandments {
+            list-style: none;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            border-left: 3px solid #ff3e3e;
+        }
+
+        .commandments li {
+            padding: 10px 0;
+            font-size: 18px;
+            color: #ffffff;
+            border-bottom: 1px solid #333333;
+        }
+
+        .commandments li:last-child {
+            border-bottom: none;
+        }
+
+        .roadmap {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .roadmap li {
+            padding: 10px 0 10px 30px;
+            position: relative;
+            color: #cccccc;
+        }
+
+        .roadmap li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 15px;
+            width: 10px;
+            height: 10px;
+            background-color: #ff3e3e;
+            border-radius: 50%;
+        }
+
+        .final-words {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .final-words p {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .final-words strong {
+            color: #ff3e3e;
+            font-size: 26px;
+            display: block;
+            margin-top: 20px;
+        }
+
+        /* How it works section */
+        .how-it-works {
+            padding: 100px 0;
+            background-color: #121212;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            flex-basis: calc(25% - 20px); /* Adjust based on gap */
+            text-align: center;
+            position: relative;
+            margin-bottom: 40px; /* Added for spacing when wrapping */
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: #ff3e3e;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 auto 30px;
+        }
+
+        .step-title {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .step-description {
+            color: #cccccc;
+        }
+
+        /* Stats section */
+        .stats {
+            padding: 100px 0;
+            text-align: center;
+            background-color: #0a0a0a;
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .stat-card {
+            padding: 20px;
+        }
+
+        .stat-value {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #ff3e3e;
+        }
+
+        .stat-label {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        /* Cult section */
+        .cult-section {
+            padding: 100px 0;
+            background-color: #0d0d0d;
+            text-align: center;
+        }
+
+        .cult-title {
+            font-size: 42px;
+            color: #ff3e3e;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .cult-description {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-size: 18px;
+            color: #cccccc;
+            line-height: 1.7;
+        }
+
+        .cult-icons {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .cult-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .icon-container {
+            width: 100px;
+            height: 100px;
+            background-color: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 40px;
+            color: #ff3e3e;
+            border: 2px solid #333333;
+        }
+
+        .icon-label {
+            font-size: 16px;
+            color: #ffffff;
+        }
+
+        /* Testimonials section */
+        .testimonials {
+            padding: 100px 0;
+            background-color: #151515;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .testimonial-card {
+            background-color: #222222;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid #333333;
+        }
+
+        .testimonial-text {
+            color: #cccccc;
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            background-color: #333333;
+            border: 1px solid #ff3e3e;
+        }
+
+        .author-name {
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .author-title {
+            color: #999999;
+            font-size: 14px;
+        }
+
+        /* Game section styles */
+        .game-section {
+            padding: 100px 0;
+            background-color: #0d0d0d;
+            text-align: center;
+        }
+
+        .game-section h2 {
+            font-size: 42px;
+            color: #ff3e3e;
+            margin-bottom: 20px;
+        }
+
+        .game-section p {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: #cccccc;
+            font-size: 18px;
+        }
+
+        .game-features {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+
+        .game-feature {
+            flex-basis: 30%;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+
+        .game-feature h4 {
+            color: #ff3e3e;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .game-feature ul {
+            text-align: left;
+            padding-left: 20px;
+            color: #cccccc;
+        }
+
+        .game-feature ul li {
+            margin-bottom: 5px;
+        }
+
+        /* CTA section */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            color: white;
+            text-align: center;
+            border-top: 2px solid #ff3e3e;
+        }
+
+        .cta-box {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #ff3e3e;
+        }
+
+        .cta-description {
+            font-size: 18px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0a0a0a;
+            color: white;
+            padding: 80px 0 40px;
+            border-top: 1px solid #333333;
+        }
+
+        /* --- MOVED FOOTER COLUMN STYLES OUTSIDE --- */
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .footer-column {
+            flex-basis: 23%; /* Adjust as needed */
+            min-width: 200px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #ff3e3e; /* Changed from green to red */
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0; /* Added reset */
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s, color 0.3s; /* Added color transition */
+        }
+
+        .footer-column ul li a:hover {
+            opacity: 1;
+            color: #ff3e3e; /* Changed from green to red */
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            padding: 0; /* Added reset */
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white; /* Make emoji visible */
+            text-decoration: none; /* Remove underline */
+            font-size: 20px; /* Adjust emoji size */
+            transition: background-color 0.3s;
+        }
+
+        .social-icon:hover {
+            background-color: #ff3e3e; /* Changed from green to red */
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px; /* Added margin for separation */
+            border-top: 1px solid #333;
+        }
+
+        .footer-bottom p {
+            opacity: 0.8;
+            font-size: 14px;
+        }
+
         /* Financial advice popup */
         .advice-popup {
             position: fixed;
@@ -13,7 +862,7 @@
             animation: slideIn 0.5s forwards;
             font-weight: bold;
         }
-        
+
         @keyframes slideIn {
             from {
                 transform: translateX(100%);
@@ -24,21 +873,22 @@
                 opacity: 1;
             }
         }
-        
+
         .fade-out {
             animation: fadeOut 1s forwards;
         }
-        
+
         @keyframes fadeOut {
             from {
                 opacity: 1;
             }
             to {
                 opacity: 0;
+                /* Optionally add transform: translateX(100%); for slide out */
             }
         }
-        
-        /* Click-bait banners */
+
+        /* Click-bait banners (Defined but unused in HTML) */
         .clickbait-banner {
             background-color: #2a2a2a;
             border: 1px solid #ff3e3e;
@@ -50,7 +900,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .clickbait-banner::before {
             content: 'SPONSORED';
             position: absolute;
@@ -62,874 +912,75 @@
             color: #cccccc;
             border-radius: 3px;
         }
-        
+
         .clickbait-banner h4 {
             font-size: 24px;
             color: #ff3e3e;
             margin-bottom: 10px;
         }
-        
+
         .clickbait-banner p {
             color: #cccccc;
             margin-bottom: 15px;
         }
-        
+
+        /* Blink animation (Defined but unused in HTML) */
         .blink {
-            animation: blink 1s<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>$DEBT - The More You Owe, The More You Own | DebtCoin</title>
-    <style>
-        /* Reset and base styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            animation: blink 1s infinite; /* Added infinite */
         }
-        
-        body {
-            background-color: #0d0d0d;
-            color: #f0f0f0;
-            line-height: 1.6;
-            font-family: 'Arial', sans-serif;
+
+        @keyframes blink { /* Added keyframes definition */
+           0%, 100% { opacity: 1; }
+           50% { opacity: 0; }
         }
-        
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header styles */
-        header {
-            background-color: #1a1a1a;
-            color: white;
-            padding: 20px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        .header-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: #ff3e3e;
-            text-decoration: none;
-        }
-        
-        .logo span {
-            color: #ffffff;
-        }
-        
-        .ticker-symbol {
-            font-family: monospace;
-            background-color: #ff3e3e;
-            color: #0d0d0d;
-            padding: 2px 6px;
-            border-radius: 3px;
-            margin-left: 5px;
-            font-size: 0.8em;
-            vertical-align: middle;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 30px;
-        }
-        
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        nav ul li a:hover {
-            color: #ff3e3e;
-        }
-        
-        .cta-button {
-            background-color: #ff3e3e;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
-        
-        .cta-button:hover {
-            background-color: #e62e2e;
-        }
-        
-        /* Hero section */
-        .hero {
-            padding: 180px 0 100px;
-            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
-            color: white;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            border-bottom: 2px solid #ff3e3e;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><text x="0" y="10" font-family="monospace" font-size="10" fill="rgba(255,62,62,0.03)">$</text></svg>');
-            opacity: 0.5;
-        }
-        
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            color: #ffffff;
-        }
-        
-        .hero h1 span {
-            color: #ff3e3e;
-        }
-        
-        .hero p {
-            font-size: 20px;
-            max-width: 800px;
-            margin: 0 auto 40px;
-            opacity: 0.9;
-        }
-        
-        .tagline {
-            font-style: italic;
-            font-size: 24px;
-            margin-bottom: 30px;
-            color: #ff3e3e;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        
-        .hero-cta {
-            padding: 15px 30px;
-            font-size: 18px;
-        }
-        
-        .secondary-cta {
-            background-color: transparent;
-            border: 2px solid #ff3e3e;
-        }
-        
-        .secondary-cta:hover {
-            background-color: rgba(255, 62, 62, 0.1);
-        }
-        
-        /* Global debt counter */
-        .global-debt-counter {
-            background-color: rgba(26, 26, 26, 0.8);
-            border: 2px solid #ff3e3e;
-            padding: 15px;
-            border-radius: 10px;
-            max-width: 600px;
-            margin: 0 auto 40px;
-        }
-        
-        .counter-label {
-            font-size: 14px;
-            text-transform: uppercase;
-            color: #cccccc;
-            letter-spacing: 2px;
-        }
-        
-        .counter-value {
-            font-family: monospace;
-            font-size: 36px;
-            font-weight: bold;
-            color: #ff3e3e;
-            margin: 10px 0;
-        }
-        
-        .counter-subtext {
-            font-size: 12px;
-            color: #cccccc;
-            font-style: italic;
-        }
-        
-        /* Game container */
-        .game-container {
-            margin-top: 50px;
-            width: 100%;
-            max-width: 800px;
-            height: 500px;
-            margin: 50px auto 0;
-            background-color: #1a1a1a;
-            border: 3px solid #ff3e3e;
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        /* Price ticker */
-        .price-ticker {
-            background-color: #0d0d0d;
-            padding: 8px 0;
-            text-align: center;
-            border-top: 1px solid #333;
-            font-family: monospace;
-            overflow: hidden;
-            white-space: nowrap;
-            position: relative;
-        }
-        
-        .price-ticker::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 50px;
-            height: 100%;
-            background: linear-gradient(to right, transparent, #0d0d0d);
-        }
-        
-        .price-label {
-            color: #cccccc;
-            margin-right: 5px;
-        }
-        
-        .price-value {
-            color: #ff3e3e;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-        
-        .price-change {
-            padding: 2px 5px;
-            border-radius: 3px;
-            font-size: 0.8em;
-            margin-right: 15px;
-        }
-        
-        .negative {
-            background-color: #ff3e3e;
-            color: white;
-        }
-        
-        .ticker-message {
-            color: #cccccc;
-            font-style: italic;
-            animation: ticker 20s linear infinite;
-            display: inline-block;
-            padding-left: 100%;
-        }
-        
-        @keyframes ticker {
-            0% {
-                transform: translateX(0);
+
+        /* Responsive adjustments */
+         @media (max-width: 992px) { /* Adjust breakpoint as needed */
+             .step {
+                flex-basis: calc(50% - 20px); /* Two steps per row */
             }
-            100% {
-                transform: translateX(-100%);
-            }
-        }
-        
-        .game-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-color: rgba(10, 10, 10, 0.8);
-            z-index: 10;
-        }
-        
-        .game-title {
-            font-size: 36px;
-            margin-bottom: 20px;
-            color: #ff3e3e;
-        }
-        
-        .game-description {
-            max-width: 500px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        
-        .start-game-btn {
-            background-color: #ff3e3e;
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 5px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .start-game-btn:hover {
-            background-color: #e62e2e;
-        }
-        
-        .game-score {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 24px;
-            color: #ff3e3e;
-            font-weight: bold;
-            z-index: 5;
-        }
-        
-        .game-controls {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            color: white;
-            font-size: 14px;
-            z-index: 5;
-        }
-        
-        /* Features section */
-        .features {
-            padding: 100px 0;
-            text-align: center;
-            background-color: #151515;
-        }
-        
-        .section-title {
-            font-size: 36px;
-            margin-bottom: 20px;
-            color: #ffffff;
-        }
-        
-        .section-description {
-            max-width: 800px;
-            margin: 0 auto 60px;
-            color: #cccccc;
-            font-size: 18px;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-        
-        .feature-card {
-            background-color: #222222;
-            border-radius: 10px;
-            padding: 40px 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid #333333;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(255, 62, 62, 0.2);
-            border-color: #ff3e3e;
-        }
-        
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            background-color: #2a2a2a;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            color: #ff3e3e;
-            font-size: 28px;
-        }
-        
-        .feature-title {
-            font-size: 22px;
-            margin-bottom: 15px;
-            color: #ffffff;
-        }
-        
-        .feature-description {
-            color: #cccccc;
-        }
-        
-        /* Lore section */
-        .lore-section {
-            padding: 100px 0;
-            background-color: #0d0d0d;
-            position: relative;
-        }
-        
-        .lore-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="10" y="50" font-family="Arial" font-size="20" fill="rgba(255,62,62,0.03)">DEBT</text></svg>');
-            opacity: 0.5;
-        }
-        
-        .lore-container {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .lore-title {
-            font-size: 42px;
-            color: #ff3e3e;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        
-        .lore-section h3 {
-            color: #ff3e3e;
-            font-size: 24px;
-            margin: 30px 0 15px;
-        }
-        
-        .lore-section p {
-            color: #cccccc;
-            margin-bottom: 20px;
-            font-size: 18px;
-            line-height: 1.7;
-        }
-        
-        .commandments {
-            list-style: none;
-            margin: 20px 0;
-            padding: 20px;
-            background-color: #1a1a1a;
-            border-radius: 10px;
-            border-left: 3px solid #ff3e3e;
-        }
-        
-        .commandments li {
-            padding: 10px 0;
-            font-size: 18px;
-            color: #ffffff;
-            border-bottom: 1px solid #333333;
-        }
-        
-        .commandments li:last-child {
-            border-bottom: none;
-        }
-        
-        .roadmap {
-            list-style: none;
-            margin: 20px 0;
-        }
-        
-        .roadmap li {
-            padding: 10px 0 10px 30px;
-            position: relative;
-            color: #cccccc;
-        }
-        
-        .roadmap li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 15px;
-            width: 10px;
-            height: 10px;
-            background-color: #ff3e3e;
-            border-radius: 50%;
-        }
-        
-        .final-words {
-            margin-top: 40px;
-            padding: 20px;
-            background-color: #1a1a1a;
-            border-radius: 10px;
-            text-align: center;
-        }
-        
-        .final-words p {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-        
-        .final-words strong {
-            color: #ff3e3e;
-            font-size: 26px;
-            display: block;
-            margin-top: 20px;
-        }
-        
-        /* How it works section */
-        .how-it-works {
-            padding: 100px 0;
-            background-color: #121212;
-        }
-        
-        .steps {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 60px;
-            flex-wrap: wrap;
-        }
-        
-        .step {
-            flex-basis: 30%;
-            text-align: center;
-            position: relative;
-        }
-        
-        .step-number {
-            width: 60px;
-            height: 60px;
-            background-color: #ff3e3e;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: 700;
-            margin: 0 auto 30px;
-        }
-        
-        .step-title {
-            font-size: 22px;
-            margin-bottom: 15px;
-            color: #ffffff;
-        }
-        
-        .step-description {
-            color: #cccccc;
-        }
-        
-        @media (max-width: 768px) {
-            .step {
-                flex-basis: 100%;
-                margin-bottom: 50px;
-            }
-            
-            .steps {
-                flex-direction: column;
-            }
-        }
-        
-        /* Stats section */
-        .stats {
-            padding: 100px 0;
-            text-align: center;
-            background-color: #0a0a0a;
-            color: white;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
-        }
-        
-        .stat-card {
-            padding: 20px;
-        }
-        
-        .stat-value {
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: #ff3e3e;
-        }
-        
-        .stat-label {
-            font-size: 18px;
-            opacity: 0.9;
-        }
-        
-        /* Cult section */
-        .cult-section {
-            padding: 100px 0;
-            background-color: #0d0d0d;
-            text-align: center;
-        }
-        
-        .cult-title {
-            font-size: 42px;
-            color: #ff3e3e;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        
-        .cult-description {
-            max-width: 800px;
-            margin: 0 auto 40px;
-            font-size: 18px;
-            color: #cccccc;
-            line-height: 1.7;
-        }
-        
-        .cult-icons {
-            display: flex;
-            justify-content: center;
-            gap: 50px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-        
-        .cult-icon {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .icon-container {
-            width: 100px;
-            height: 100px;
-            background-color: #1a1a1a;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
-            font-size: 40px;
-            color: #ff3e3e;
-            border: 2px solid #333333;
-        }
-        
-        .icon-label {
-            font-size: 16px;
-            color: #ffffff;
-        }
-        
-        /* Testimonials section */
-        .testimonials {
-            padding: 100px 0;
-            background-color: #151515;
-        }
-        
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
-        }
-        
-        .testimonial-card {
-            background-color: #222222;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            border: 1px solid #333333;
-        }
-        
-        .testimonial-text {
-            color: #cccccc;
-            font-style: italic;
-            margin-bottom: 20px;
-            font-size: 16px;
-            line-height: 1.7;
-        }
-        
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-        }
-        
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin-right: 15px;
-            background-color: #333333;
-            border: 1px solid #ff3e3e;
-        }
-        
-        .author-name {
-            font-weight: 700;
-            color: #ffffff;
-        }
-        
-        .author-title {
-            color: #999999;
-            font-size: 14px;
-        }
-        
-        /* Game section styles */
-        .game-section {
-            padding: 100px 0;
-            background-color: #0d0d0d;
-            text-align: center;
-        }
-        
-        .game-section h2 {
-            font-size: 42px;
-            color: #ff3e3e;
-            margin-bottom: 20px;
-        }
-        
-        .game-section p {
-            max-width: 800px;
-            margin: 0 auto 40px;
-            color: #cccccc;
-            font-size: 18px;
-        }
-        
-        .game-features {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin: 40px 0;
-        }
-        
-        .game-feature {
-            flex-basis: 30%;
-            min-width: 250px;
-            margin-bottom: 30px;
-        }
-        
-        .game-feature h4 {
-            color: #ff3e3e;
-            margin-bottom: 10px;
-            font-size: 20px;
-        }
-        
-        .game-feature ul {
-            text-align: left;
-            padding-left: 20px;
-            color: #cccccc;
-        }
-        
-        .game-feature ul li {
-            margin-bottom: 5px;
-        }
-        
-        /* CTA section */
-        .cta {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
-            color: white;
-            text-align: center;
-            border-top: 2px solid #ff3e3e;
-        }
-        
-        .cta-box {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .cta-title {
-            font-size: 36px;
-            margin-bottom: 20px;
-            color: #ff3e3e;
-        }
-        
-        .cta-description {
-            font-size: 18px;
-            margin-bottom: 40px;
-            opacity: 0.9;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: #0a0a0a;
-            color: white;
-            padding: 80px 0 40px;
-            border-top: 1px solid #333333;
-        }
-        
-: 23%;
-            min-width: 200px;
-            margin-bottom: 30px;
-        }
-        
-        .footer-column h3 {
-            font-size: 18px;
-            margin-bottom: 20px;
-            color: #8dc647;
-        }
-        
-        .footer-column ul {
-            list-style: none;
-        }
-        
-        .footer-column ul li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-column ul li a {
-            color: white;
-            text-decoration: none;
-            opacity: 0.8;
-            transition: opacity 0.3s;
-        }
-        
-        .footer-column ul li a:hover {
-            opacity: 1;
-            color: #8dc647;
-        }
-        
-        .social-icons {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.3s;
-        }
-        
-        .social-icon:hover {
-            background-color: #8dc647;
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 40px;
-            border-top: 1px solid #333;
-        }
-        
-        .footer-bottom p {
-            opacity: 0.8;
-            font-size: 14px;
-        }
-        
-        @media (max-width: 768px) {
             .footer-column {
-                flex-basis: 48%;
+                flex-basis: 45%; /* Two columns per row */
             }
+            nav ul {
+                /* Consider collapsing nav on smaller screens */
+                display: none; /* Simplest approach, replace with burger menu JS */
+            }
+         }
+
+        @media (max-width: 768px) {
+            .header-inner { flex-direction: column; gap: 15px; } /* Stack logo and nav */
+            .hero h1 { font-size: 36px; }
+            .hero p { font-size: 18px; }
+            .tagline { font-size: 20px; }
+            .features-grid { grid-template-columns: 1fr; } /* Stack features */
+            .steps { flex-direction: column; align-items: center;}
+            .step { flex-basis: 80%; } /* Stack steps */
+            .stats-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+            .footer-column {
+                flex-basis: 100%; /* Stack footer columns */
+                text-align: center; /* Center text */
+            }
+            .social-icons { justify-content: center; } /* Center icons */
+            .advice-popup { max-width: 90%; right: 5%; left: 5%; bottom: 10px; text-align: center;}
+            .game-container { height: 400px; } /* Adjust game size */
         }
-        
+
         @media (max-width: 576px) {
-            .footer-column {
-                flex-basis: 100%;
-            }
+             .hero { padding-top: 150px; padding-bottom: 80px; }
+             .hero h1 { font-size: 30px; }
+             .hero p { font-size: 16px; }
+             .hero-buttons { flex-direction: column; gap: 15px; }
+             .hero-cta { width: 80%; margin: 0 auto; }
+             .global-debt-counter { max-width: 90%; }
+             .counter-value { font-size: 28px; }
+             .section-title { font-size: 28px; }
+             .lore-title, .cult-title, .game-section h2, .cta-title { font-size: 32px; }
+             .stat-value { font-size: 36px; }
+             .step-title { font-size: 20px; }
+             .feature-title { font-size: 20px; }
+             .testimonial-card { padding: 20px; }
+             .footer { padding: 60px 0 30px; }
         }
     </style>
 </head>
@@ -949,13 +1000,15 @@
             </nav>
         </div>
         <div class="price-ticker">
-            <span class="price-label">$DEBT: </span>
-            <span class="price-value">$0.0000001</span>
-            <span class="price-change negative">-99.97%</span>
-            <span class="ticker-message">Just Keep Buying</span>
+            <div class="ticker-content"> <!-- Wrap content for animation -->
+                <span class="price-label">$DEBT: </span>
+                <span class="price-value">$0.0000001</span>
+                <span class="price-change negative">-99.97%</span>
+                <span class="ticker-message">Just Keep Buying ... Diamond Hands ... To The Moon (Trenches) ... Financial Advice Not Included ... </span>
+            </div>
         </div>
     </header>
-    
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
@@ -972,7 +1025,7 @@
                 <a href="#" class="cta-button hero-cta">Join the Debtors</a>
                 <a href="#how-it-works" class="cta-button hero-cta secondary-cta">Go Into Debt</a>
             </div>
-            
+
             <!-- Game container -->
             <div class="game-container">
                 <div class="game-overlay">
@@ -986,7 +1039,7 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Features Section -->
     <section class="features" id="features">
         <div class="container">
@@ -1026,19 +1079,19 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Lore Section -->
     <section class="lore-section" id="lore">
         <div class="container lore-container">
             <h2 class="lore-title">💀 DEBTCOIN LORE</h2>
-            
+
             <h3>📜 The Beginning of the End</h3>
             <p>In the year 2025, after the 37th interest rate hike, one brave soul looked at his $124,000 in student loans, $7 in his checking account, and said: "What if... we just made debt <em>funny</em>?"</p>
             <p>Thus, <strong>DebtCoin</strong> was born. Not to fix the system—but to <strong>mock it so hard it collapses</strong>.</p>
-            
+
             <h3>🧠 The Big Idea</h3>
             <p>DebtCoin is the <strong>first crypto backed by absolutely nothing</strong>—except your crippling anxiety and a faint hope that this Ponzi is <em>your</em> Ponzi.</p>
-            
+
             <h3>🕯️ Whitepaper? Nah. Redpaper.</h3>
             <p>DebtCoin's "redpaper" outlines a simple economic principle:</p>
             <ul class="roadmap">
@@ -1047,7 +1100,7 @@
                 <li><strong>Step 3</strong>: You spiral into existential crisis.</li>
                 <li><strong>Step 4</strong>: Profit???</li>
             </ul>
-            
+
             <h3>📉 Tokenomics</h3>
             <ul class="commandments">
                 <li><strong>Total Supply</strong>: Infinite (like real debt)</li>
@@ -1055,14 +1108,14 @@
                 <li><strong>Staking</strong>: We call it "Defaulting"</li>
                 <li><strong>APY</strong>: Always Promising Yikes</li>
             </ul>
-            
+
             <div class="final-words">
                 <p>"In Fiat We Trusted. In $DEBT We Found the Truth."</p>
                 <strong>Welcome to financial freedom through complete surrender.</strong>
             </div>
         </div>
     </section>
-    
+
     <!-- How It Works Section -->
     <section class="how-it-works" id="how-it-works">
         <div class="container">
@@ -1092,7 +1145,7 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Stats Section -->
     <section class="stats">
         <div class="container">
@@ -1118,13 +1171,13 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Cult Section -->
     <section class="cult-section">
         <div class="container">
             <h2 class="cult-title">😇 The Community</h2>
             <p class="cult-description">You're not just an investor. You're a <strong>Debtor</strong> now.<br>Welcome to the:</p>
-            
+
             <div class="cult-icons">
                 <div class="cult-icon">
                     <div class="icon-container">🕯️</div>
@@ -1139,11 +1192,11 @@
                     <div class="icon-label">Guild of the Rugged</div>
                 </div>
             </div>
-            
+
             <p class="cult-description">Every Sunday we gather to chant:<br><em>"Debt is love. Debt is life. Rug me, Father, for I have spent."</em></p>
         </div>
     </section>
-    
+
     <!-- Testimonials Section -->
     <section class="testimonials" id="testimonials">
         <div class="container">
@@ -1183,13 +1236,13 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Game Section -->
     <section class="game-section">
         <div class="container">
             <h2>🕹️ DEBT DODGER</h2>
             <p>A fast-paced, satirical browser game where you play as an over-leveraged citizen trying to dodge predatory debt traps and flying loan offers while collecting $DEBT tokens.</p>
-            
+
             <div class="game-features">
                 <div class="game-feature">
                     <h4>Player Character</h4>
@@ -1217,7 +1270,7 @@
             </div>
         </div>
     </section>
-    
+
     <!-- CTA Section -->
     <section class="cta">
         <div class="container">
@@ -1228,7 +1281,7 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -1274,207 +1327,226 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 DebtCoin. No rights reserved. | <a href="#" style="color: #ff3e3e; opacity: 0.8;">No Privacy Policy</a> | <a href="#" style="color: #ff3e3e; opacity: 0.8;">Terms of Servitude</a></p>
+                <p>© 2025 DebtCoin. No rights reserved. | <a href="#" style="color: #ff3e3e; opacity: 0.8;">No Privacy Policy</a> | <a href="#" style="color: #ff3e3e; opacity: 0.8;">Terms of Servitude</a></p>
                 <p style="margin-top: 10px; font-size: 12px; color: #666;">This website is satirical. Please don't actually buy this. It's not real. If you try to send money, you deserve what happens next.</p>
             </div>
         </div>
     </footer>
-    
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const startButton = document.querySelector('.start-game-btn');
-    const gameOverlay = document.querySelector('.game-overlay');
-    const canvas = document.getElementById('game-canvas');
-    const ctx = canvas.getContext('2d');
-    const scoreDisplay = document.querySelector('.game-score');
 
-    let player = { x: 375, y: 440, width: 50, height: 50, color: '#ff3e3e' };
-    let moneyItems = [];
-    let debtItems = [];
-    let keys = {};
-    let score = 0;
-    let gameInterval, spawnInterval;
-
-    canvas.width = 800;
-    canvas.height = 500;
-
-    const emojis = {
-        money: '💰',
-        creditCard: '💳',
-        studentLoan: '📚',
-        audit: '🧾',
-        rent: '📄'
-    };
-
-    const debtPool = [emojis.creditCard, emojis.studentLoan, emojis.audit, emojis.rent];
-
-    startButton.addEventListener('click', function() {
-        gameOverlay.style.display = 'none';
-        startGame();
-    });
-
-    document.addEventListener('keydown', e => keys[e.key] = true);
-    document.addEventListener('keyup', e => keys[e.key] = false);
-
-    function startGame() {
-        moneyItems = [];
-        debtItems = [];
-        score = 0;
-        updateScore();
-        player.x = 375;
-
-        gameInterval = setInterval(updateGame, 1000 / 60);
-        spawnInterval = setInterval(spawnObjects, 900);
-    }
-
-    function endGame() {
-        clearInterval(gameInterval);
-        clearInterval(spawnInterval);
-        gameOverlay.style.display = 'flex';
-        alert(`Game Over! You collected ${score} $DEBT tokens and got absolutely rugged.`);
-    }
-
-    function updateScore() {
-        scoreDisplay.textContent = `SCORE: ${score}`;
-    }
-
-    function spawnObjects() {
-        // Money
-        if (Math.random() < 0.5) {
-            moneyItems.push({
-                x: Math.random() * (canvas.width - 30),
-                y: -30,
-                emoji: emojis.money
-            });
-        }
-        // Debt
-        if (Math.random() < 0.6) {
-            debtItems.push({
-                x: Math.random() * (canvas.width - 30),
-                y: -30,
-                emoji: debtPool[Math.floor(Math.random() * debtPool.length)]
-            });
-        }
-    }
-
-    function updateGame() {
-        // Move player
-        if (keys['ArrowLeft']) player.x -= 6;
-        if (keys['ArrowRight']) player.x += 6;
-        player.x = Math.max(0, Math.min(canvas.width - player.width, player.x));
-
-        // Clear canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // Draw player
-        ctx.fillStyle = player.color;
-        ctx.fillRect(player.x, player.y, player.width, player.height);
-
-        // Draw emoji as player face (optional):
-        ctx.font = "24px Arial";
-        ctx.fillText("😰", player.x + 10, player.y + 35);
-
-        // Update money items
-        for (let i = moneyItems.length - 1; i >= 0; i--) {
-            let item = moneyItems[i];
-            item.y += 4;
-            ctx.font = "28px Arial";
-            ctx.fillText(item.emoji, item.x, item.y);
-
-            if (item.y > canvas.height) {
-                moneyItems.splice(i, 1);
-            } else if (isColliding(player, { x: item.x, y: item.y, size: 30 })) {
-                score += 10;
-                updateScore();
-                moneyItems.splice(i, 1);
-            }
-        }
-
-        // Update debt items
-        for (let i = debtItems.length - 1; i >= 0; i--) {
-            let item = debtItems[i];
-            item.y += 5;
-            ctx.font = "28px Arial";
-            ctx.fillText(item.emoji, item.x, item.y);
-
-            if (item.y > canvas.height) {
-                debtItems.splice(i, 1);
-            } else if (isColliding(player, { x: item.x, y: item.y, size: 30 })) {
-                endGame();
-            }
-        }
-    }
-
-    function isColliding(a, b) {
-        return (
-            a.x < b.x + b.size &&
-            a.x + a.width > b.x &&
-            a.y < b.y + b.size &&
-            a.y + a.height > b.y
-        );
-    }
-});
-            
-            // Update debt counter
-            function updateDebtCounter() {
-                const currentDebt = parseInt(debtCounter.textContent.replace(/\D/g, ''));
-                const newDebt = currentDebt + Math.floor(Math.random() * 1000000000);
-                debtCounter.textContent = '
-</body>
-</html>
-</body>
-</html> + newDebt.toLocaleString();
-            }
-            
-            // Update debt counter every 2 seconds
-            setInterval(updateDebtCounter, 2000);
-            
-            // Ticker price fluctuation
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const startButton = document.querySelector('.start-game-btn');
+            const gameOverlay = document.querySelector('.game-overlay');
+            const canvas = document.getElementById('game-canvas');
+            const ctx = canvas.getContext('2d');
+            const scoreDisplay = document.querySelector('.game-score');
+            const debtCounter = document.getElementById('debt-counter');
             const priceValue = document.querySelector('.price-value');
             const priceChange = document.querySelector('.price-change');
-            
-            function updatePrice() {
-                // Generate a random price between 0.00000001 and 0.0000009
-                const newPrice = (Math.random() * 0.0000009 + 0.00000001).toFixed(9);
-                priceValue.textContent = '
-</body>
-</html>
-</body>
-</html> + newPrice;
-                
-                // Random change between -99.99% and -95%
-                const change = -(Math.random() * 5 + 95).toFixed(2);
-                priceChange.textContent = change + '%';
+
+            let player = { x: 375, y: 440, width: 50, height: 50, color: '#ff3e3e' };
+            let moneyItems = [];
+            let debtItems = [];
+            let keys = {};
+            let score = 0;
+            let gameInterval, spawnInterval, gameActive = false; // Added gameActive flag
+
+            // Make canvas responsive or fixed? Using fixed size from container
+            const gameContainer = document.querySelector('.game-container');
+            if (canvas && gameContainer) {
+                 canvas.width = gameContainer.clientWidth; // Match container width
+                 canvas.height = gameContainer.clientHeight; // Match container height
+                 player.y = canvas.height - 60; // Adjust player start Y based on height
+                 player.x = canvas.width / 2 - player.width / 2; // Center player
+            } else {
+                console.error("Canvas or Game Container not found!");
+                return; // Stop script if essential elements are missing
             }
-            
-            // Update price every 5 seconds
-            setInterval(updatePrice, 5000);
-            
-            startButton.addEventListener('click', function() {
-                gameOverlay.style.display = 'none';
-                startGame();
+
+
+            const emojis = {
+                money: '💰',
+                creditCard: '💳',
+                studentLoan: '📚',
+                audit: '🧾',
+                rent: '📄'
+            };
+
+            const debtPool = [emojis.creditCard, emojis.studentLoan, emojis.audit, emojis.rent];
+
+            if (startButton) {
+                startButton.addEventListener('click', function() {
+                    if (!gameActive) { // Prevent starting multiple games
+                       gameOverlay.style.display = 'none';
+                       startGame();
+                    }
+                });
+            }
+
+            document.addEventListener('keydown', e => {
+                keys[e.key] = true;
+                // Prevent page scroll with arrow keys when game is active
+                if (gameActive && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                    e.preventDefault();
+                }
             });
-            
+            document.addEventListener('keyup', e => { keys[e.key] = false });
+
             function startGame() {
-                gameActive = true;
+                gameActive = true; // Set game state
+                moneyItems = [];
+                debtItems = [];
                 score = 0;
                 updateScore();
-                // Normally we'd initialize the game here
-                // But this is just a mockup
-                
-                // For demonstration, just toggle the overlay back after 3 seconds
-                setTimeout(function() {
-                    gameOverlay.style.display = 'flex';
-                    gameActive = false;
-                    alert("Game over! You've been crushed by debt! (In a real implementation, this would be a functioning game)");
-                }, 3000);
+                player.x = canvas.width / 2 - player.width / 2; // Re-center player
+
+                // Clear any existing intervals before starting new ones
+                clearInterval(gameInterval);
+                clearInterval(spawnInterval);
+
+                gameInterval = setInterval(updateGame, 1000 / 60); // 60 FPS
+                spawnInterval = setInterval(spawnObjects, 900); // Spawn rate
             }
-            
+
+            function endGame() {
+                gameActive = false; // Set game state
+                clearInterval(gameInterval);
+                clearInterval(spawnInterval);
+                if (gameOverlay) gameOverlay.style.display = 'flex';
+                // Use a less intrusive notification or update overlay text
+                // alert(`Game Over! You collected ${score} $DEBT tokens and got absolutely rugged.`);
+                const gameTitle = gameOverlay.querySelector('.game-title');
+                if (gameTitle) gameTitle.textContent = `GAME OVER! Score: ${score}`;
+            }
+
             function updateScore() {
-                scoreDisplay.textContent = `SCORE: ${score}`;
+                if (scoreDisplay) scoreDisplay.textContent = `SCORE: ${score}`;
             }
-            
-            // Add random "financial advice" popup
+
+            function spawnObjects() {
+                if (!gameActive) return; // Don't spawn if game isn't active
+
+                // Money
+                if (Math.random() < 0.5) { // Adjust spawn chance as needed
+                    moneyItems.push({
+                        x: Math.random() * (canvas.width - 30), // Ensure within bounds
+                        y: -30,
+                        emoji: emojis.money
+                    });
+                }
+                // Debt
+                if (Math.random() < 0.6) { // Adjust spawn chance as needed
+                    debtItems.push({
+                        x: Math.random() * (canvas.width - 30), // Ensure within bounds
+                        y: -30,
+                        emoji: debtPool[Math.floor(Math.random() * debtPool.length)]
+                    });
+                }
+            }
+
+            function updateGame() {
+                if (!gameActive) return; // Stop updates if game ended
+
+                // Move player
+                if (keys['ArrowLeft'] || keys['a']) player.x -= 6;
+                if (keys['ArrowRight'] || keys['d']) player.x += 6;
+                // Clamp player position to canvas bounds
+                player.x = Math.max(0, Math.min(canvas.width - player.width, player.x));
+
+                // Clear canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Draw player
+                ctx.fillStyle = player.color;
+                ctx.fillRect(player.x, player.y, player.width, player.height);
+
+                // Draw emoji as player face (optional):
+                ctx.font = "24px Arial";
+                ctx.textAlign = "center"; // Center emoji text
+                ctx.fillText("😰", player.x + player.width / 2, player.y + 35);
+
+                // Define item size for collision
+                const itemSize = 30;
+                ctx.font = `${itemSize}px Arial`; // Set font size for drawing emojis
+
+                // Update money items
+                for (let i = moneyItems.length - 1; i >= 0; i--) {
+                    let item = moneyItems[i];
+                    item.y += 4; // Speed of falling money
+                    ctx.fillText(item.emoji, item.x + itemSize / 2, item.y + itemSize); // Adjust drawing position based on text alignment
+
+                    // Check collision
+                    if (isColliding(player, { x: item.x, y: item.y, width: itemSize, height: itemSize })) {
+                        score += 10;
+                        updateScore();
+                        moneyItems.splice(i, 1); // Remove collected item
+                    }
+                     // Remove if off-screen
+                    else if (item.y > canvas.height) {
+                        moneyItems.splice(i, 1);
+                    }
+                }
+
+                // Update debt items
+                for (let i = debtItems.length - 1; i >= 0; i--) {
+                    let item = debtItems[i];
+                    item.y += 5; // Speed of falling debt (slightly faster)
+                    ctx.fillText(item.emoji, item.x + itemSize / 2, item.y + itemSize); // Adjust drawing position
+
+                    // Check collision
+                    if (isColliding(player, { x: item.x, y: item.y, width: itemSize, height: itemSize })) {
+                        endGame();
+                        // return; // Exit update loop immediately on game over
+                    }
+                    // Remove if off-screen
+                    else if (item.y > canvas.height) {
+                        debtItems.splice(i, 1);
+                    }
+                }
+            }
+
+            // Improved Collision Detection (Axis-Aligned Bounding Box)
+            function isColliding(rect1, rect2) {
+                return (
+                    rect1.x < rect2.x + rect2.width &&
+                    rect1.x + rect1.width > rect2.x &&
+                    rect1.y < rect2.y + rect2.height &&
+                    rect1.y + rect1.height > rect2.y
+                );
+            }
+
+            // --- Other Dynamic Elements ---
+
+            // Update debt counter
+            function updateDebtCounter() {
+                if (!debtCounter) return;
+                // Use Number.MAX_SAFE_INTEGER to avoid potential overflow issues with massive numbers if needed
+                const currentDebt = parseInt(debtCounter.textContent.replace(/\D/g, '')) || 300000000000000; // Fallback if parsing fails
+                const increment = Math.floor(Math.random() * 1000000000) + 50000000; // Add a base increment
+                const newDebt = currentDebt + increment;
+                debtCounter.textContent = '$' + newDebt.toLocaleString('en-US'); // Format with commas
+            }
+            setInterval(updateDebtCounter, 1500); // Update rate
+
+            // Ticker price fluctuation
+            function updatePrice() {
+                 if (!priceValue || !priceChange) return;
+                // Generate a random price keeping it low
+                const newPrice = (Math.random() * 0.00000089 + 0.0000001).toFixed(9);
+                priceValue.textContent = '$' + newPrice;
+
+                // Random change, heavily biased towards negative
+                const change = -(Math.random() * 4.99 + 95).toFixed(2); // Between -95.00% and -99.99%
+                priceChange.textContent = change + '%';
+                // Ensure class is correct (it's always negative here)
+                if (!priceChange.classList.contains('negative')) {
+                     priceChange.classList.add('negative');
+                     priceChange.classList.remove('positive'); // Just in case
+                }
+            }
+            setInterval(updatePrice, 4000); // Update rate
+
+            // Random financial advice popup
             const adviceMessages = [
                 "Financial Advice: Buy high, sell low!",
                 "Have you considered a third mortgage?",
@@ -1484,226 +1556,41 @@ document.addEventListener('DOMContentLoaded', function() {
                 "BREAKING: Your portfolio is underperforming inflation!",
                 "Fun Fact: Ramen has all essential nutrients!",
                 "Your landlord just bought more $DEBT than you!",
-                "WARNING: Your credit score just dropped 100 points for viewing this site!",
-                "ALERT: Your bank account is filing for divorce!"
+                "WARNING: Your credit score just dropped 100 points!",
+                "ALERT: Your bank account is filing for divorce!",
+                "Remember: It's only a loss if you sell!",
+                "This is definitely financial advice. Trust me.",
+                "FOMO is your best investment indicator."
             ];
-            
+
             function showRandomAdvice() {
-                const randomMessage = adviceMessages[Math.floor(Math.random() * adviceMessages.length)];
-                
-                const advicePopup = document.createElement('div');
-                advicePopup.className = 'advice-popup';
-                advicePopup.textContent = randomMessage;
-                
-                document.body.appendChild(advicePopup);
-                
-                // Remove popup after 4 seconds
+                const msg = adviceMessages[Math.floor(Math.random() * adviceMessages.length)];
+                const popup = document.createElement('div');
+                popup.className = 'advice-popup';
+                popup.textContent = msg;
+                document.body.appendChild(popup);
+
+                // Remove popup after animation + display time
                 setTimeout(() => {
-                    advicePopup.classList.add('fade-out');
-                    setTimeout(() => {
-                        document.body.removeChild(advicePopup);
-                    }, 1000);
-                }, 4000);
+                    popup.classList.add('fade-out');
+                    // Remove element from DOM after fade-out animation completes
+                    popup.addEventListener('animationend', () => {
+                        popup.remove();
+                    });
+                }, 4000); // Start fade-out after 4 seconds
             }
-            
-            // Show random advice every 20-30 seconds
+
             function scheduleAdvice() {
-                const delay = Math.random() * 10000 + 20000; // 20-30 seconds
+                const delay = Math.random() * 10000 + 15000; // 15-25 seconds
                 setTimeout(() => {
                     showRandomAdvice();
-                    scheduleAdvice();
+                    scheduleAdvice(); // Schedule the next one
                 }, delay);
             }
-            
-            scheduleAdvice();
+            scheduleAdvice(); // Start the first advice popup schedule
+
         });
     </script>
 
-        <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const startButton = document.querySelector('.start-game-btn');
-    const gameOverlay = document.querySelector('.game-overlay');
-    const canvas = document.getElementById('game-canvas');
-    const ctx = canvas.getContext('2d');
-    const scoreDisplay = document.querySelector('.game-score');
-    const debtCounter = document.getElementById('debt-counter');
-
-    let player = { x: 375, y: 440, width: 50, height: 50, color: '#ff3e3e' };
-    let moneyItems = [];
-    let debtItems = [];
-    let keys = {};
-    let score = 0;
-    let gameInterval, spawnInterval;
-
-    canvas.width = 800;
-    canvas.height = 500;
-
-    const emojis = {
-        money: '💰',
-        creditCard: '💳',
-        studentLoan: '📚',
-        audit: '🧾',
-        rent: '📄'
-    };
-
-    const debtPool = [emojis.creditCard, emojis.studentLoan, emojis.audit, emojis.rent];
-
-    startButton.addEventListener('click', function() {
-        gameOverlay.style.display = 'none';
-        startGame();
-    });
-
-    document.addEventListener('keydown', e => keys[e.key] = true);
-    document.addEventListener('keyup', e => keys[e.key] = false);
-
-    function startGame() {
-        moneyItems = [];
-        debtItems = [];
-        score = 0;
-        updateScore();
-        player.x = 375;
-
-        gameInterval = setInterval(updateGame, 1000 / 60);
-        spawnInterval = setInterval(spawnObjects, 900);
-    }
-
-    function endGame() {
-        clearInterval(gameInterval);
-        clearInterval(spawnInterval);
-        gameOverlay.style.display = 'flex';
-        alert(`Game Over! You collected ${score} $DEBT tokens and got absolutely rugged.`);
-    }
-
-    function updateScore() {
-        scoreDisplay.textContent = `SCORE: ${score}`;
-    }
-
-    function spawnObjects() {
-        if (Math.random() < 0.5) {
-            moneyItems.push({
-                x: Math.random() * (canvas.width - 30),
-                y: -30,
-                emoji: emojis.money
-            });
-        }
-        if (Math.random() < 0.6) {
-            debtItems.push({
-                x: Math.random() * (canvas.width - 30),
-                y: -30,
-                emoji: debtPool[Math.floor(Math.random() * debtPool.length)]
-            });
-        }
-    }
-
-    function updateGame() {
-        if (keys['ArrowLeft']) player.x -= 6;
-        if (keys['ArrowRight']) player.x += 6;
-        player.x = Math.max(0, Math.min(canvas.width - player.width, player.x));
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        ctx.fillStyle = player.color;
-        ctx.fillRect(player.x, player.y, player.width, player.height);
-
-        ctx.font = "24px Arial";
-        ctx.fillText("😰", player.x + 10, player.y + 35);
-
-        for (let i = moneyItems.length - 1; i >= 0; i--) {
-            let item = moneyItems[i];
-            item.y += 4;
-            ctx.font = "28px Arial";
-            ctx.fillText(item.emoji, item.x, item.y);
-
-            if (item.y > canvas.height) {
-                moneyItems.splice(i, 1);
-            } else if (isColliding(player, { x: item.x, y: item.y, size: 30 })) {
-                score += 10;
-                updateScore();
-                moneyItems.splice(i, 1);
-            }
-        }
-
-        for (let i = debtItems.length - 1; i >= 0; i--) {
-            let item = debtItems[i];
-            item.y += 5;
-            ctx.font = "28px Arial";
-            ctx.fillText(item.emoji, item.x, item.y);
-
-            if (item.y > canvas.height) {
-                debtItems.splice(i, 1);
-            } else if (isColliding(player, { x: item.x, y: item.y, size: 30 })) {
-                endGame();
-            }
-        }
-    }
-
-    function isColliding(a, b) {
-        return (
-            a.x < b.x + b.size &&
-            a.x + a.width > b.x &&
-            a.y < b.y + b.size &&
-            a.y + a.height > b.y
-        );
-    }
-
-    // Update debt counter
-    function updateDebtCounter() {
-        const currentDebt = parseInt(debtCounter.textContent.replace(/\D/g, ''));
-        const newDebt = currentDebt + Math.floor(Math.random() * 1000000000);
-        debtCounter.textContent = '$' + newDebt.toLocaleString();
-    }
-    setInterval(updateDebtCounter, 2000);
-
-    // Ticker price fluctuation
-    const priceValue = document.querySelector('.price-value');
-    const priceChange = document.querySelector('.price-change');
-
-    function updatePrice() {
-        const newPrice = (Math.random() * 0.0000009 + 0.00000001).toFixed(9);
-        priceValue.textContent = '$' + newPrice;
-        const change = -(Math.random() * 5 + 95).toFixed(2);
-        priceChange.textContent = change + '%';
-    }
-    setInterval(updatePrice, 5000);
-
-    // Random financial advice popup
-    const adviceMessages = [
-        "Financial Advice: Buy high, sell low!",
-        "Have you considered a third mortgage?",
-        "Pro Tip: Credit cards are just free money!",
-        "Diamond hands mean never seeing profits!",
-        "If you can't afford it, finance it!",
-        "BREAKING: Your portfolio is underperforming inflation!",
-        "Fun Fact: Ramen has all essential nutrients!",
-        "Your landlord just bought more $DEBT than you!",
-        "WARNING: Your credit score just dropped 100 points!",
-        "ALERT: Your bank account is filing for divorce!"
-    ];
-
-    function showRandomAdvice() {
-        const msg = adviceMessages[Math.floor(Math.random() * adviceMessages.length)];
-        const popup = document.createElement('div');
-        popup.className = 'advice-popup';
-        popup.textContent = msg;
-        document.body.appendChild(popup);
-        setTimeout(() => {
-            popup.classList.add('fade-out');
-            setTimeout(() => popup.remove(), 1000);
-        }, 4000);
-    }
-
-    function scheduleAdvice() {
-        const delay = Math.random() * 10000 + 20000;
-        setTimeout(() => {
-            showRandomAdvice();
-            scheduleAdvice();
-        }, delay);
-    }
-    scheduleAdvice();
-});
-</script>
-
-</body>
-</html>
 </body>
 </html>
