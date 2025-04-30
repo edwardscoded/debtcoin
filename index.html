@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>$DEBT - The More You Owe, The More You Own | DebtCoin</title>
+    <title>$DEBT - If You Can't Beat The Debt, Profit From It | DebtCoin</title>
     <style>
         /* Reset and base styles */
         * {
@@ -47,7 +47,7 @@
         .logo {
             font-size: 24px;
             font-weight: 700;
-            color: #ff3e3e;
+            color: #3e8eff; /* Changed to blue */
             text-decoration: none;
         }
 
@@ -57,7 +57,7 @@
 
         .ticker-symbol {
             font-family: monospace;
-            background-color: #ff3e3e;
+            background-color: #3e8eff; /* Changed to blue */
             color: #0d0d0d;
             padding: 2px 6px;
             border-radius: 3px;
@@ -83,11 +83,11 @@
         }
 
         nav ul li a:hover {
-            color: #ff3e3e;
+            color: #3e8eff; /* Changed to blue */
         }
 
         .cta-button {
-            background-color: #ff3e3e;
+            background-color: #3e8eff; /* Changed to blue */
             color: white;
             padding: 10px 20px;
             border-radius: 5px;
@@ -97,7 +97,7 @@
         }
 
         .cta-button:hover {
-            background-color: #e62e2e;
+            background-color: #2e7eee; /* Darker blue */
         }
 
         /* Hero section */
@@ -108,7 +108,7 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-            border-bottom: 2px solid #ff3e3e;
+            border-bottom: 2px solid #3e8eff; /* Changed to blue */
         }
 
         .hero::before {
@@ -118,7 +118,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><text x="0" y="10" font-family="monospace" font-size="10" fill="rgba(255,62,62,0.03)">$</text></svg>');
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><text x="0" y="10" font-family="monospace" font-size="10" fill="rgba(62,142,255,0.03)">$</text></svg>');
             opacity: 0.5;
         }
 
@@ -129,7 +129,7 @@
         }
 
         .hero h1 span {
-            color: #ff3e3e;
+            color: #3e8eff; /* Changed to blue */
         }
 
         .hero p {
@@ -143,7 +143,7 @@
             font-style: italic;
             font-size: 24px;
             margin-bottom: 30px;
-            color: #ff3e3e;
+            color: #3e8eff; /* Changed to blue */
         }
 
         .hero-buttons {
@@ -159,17 +159,17 @@
 
         .secondary-cta {
             background-color: transparent;
-            border: 2px solid #ff3e3e;
+            border: 2px solid #3e8eff; /* Changed to blue */
         }
 
         .secondary-cta:hover {
-            background-color: rgba(255, 62, 62, 0.1);
+            background-color: rgba(62, 142, 255, 0.1); /* Changed to blue */
         }
 
         /* Global debt counter */
         .global-debt-counter {
             background-color: rgba(26, 26, 26, 0.8);
-            border: 2px solid #ff3e3e;
+            border: 2px solid #3e8eff; /* Changed to blue */
             padding: 15px;
             border-radius: 10px;
             max-width: 600px;
@@ -187,7 +187,7 @@
             font-family: monospace;
             font-size: 36px;
             font-weight: bold;
-            color: #ff3e3e;
+            color: #3e8eff; /* Changed to blue */
             margin: 10px 0;
         }
 
@@ -205,7 +205,7 @@
             height: 500px;
             margin: 50px auto 0;
             background-color: #1a1a1a;
-            border: 3px solid #ff3e3e;
+            border: 3px solid #3e8eff; /* Changed to blue */
             border-radius: 10px;
             overflow: hidden;
             position: relative;
@@ -240,7 +240,7 @@
         }
 
         .price-value {
-            color: #ff3e3e;
+            color: #3e8eff; /* Changed to blue */
             font-weight: bold;
             margin-right: 10px;
         }
@@ -252,8 +252,13 @@
             margin-right: 15px;
         }
 
+        .positive {
+            background-color: #32CD32; /* Green for positive */
+            color: white;
+        }
+
         .negative {
-            background-color: #ff3e3e;
+            background-color: #ff3e3e; /* Red for negative */
             color: white;
         }
 
@@ -291,7 +296,7 @@
         .game-title {
             font-size: 36px;
             margin-bottom: 20px;
-            color: #ff3e3e;
+            color: #3e8eff; /* Changed to blue */
         }
 
         .game-description {
@@ -301,7 +306,7 @@
         }
 
         .start-game-btn {
-            background-color: #ff3e3e;
+            background-color: #3e8eff; /* Changed to blue */
             color: white;
             padding: 12px 25px;
             border: none;
@@ -312,7 +317,7 @@
         }
 
         .start-game-btn:hover {
-            background-color: #e62e2e;
+            background-color: #2e7eee; /* Darker blue */
         }
 
         .game-score {
@@ -320,7 +325,7 @@
             top: 20px;
             right: 20px;
             font-size: 24px;
-            color: #ff3e3e;
+            color: #3e8eff; /* Changed to blue */
             font-weight: bold;
             z-index: 5;
         }
@@ -371,8 +376,8 @@
 
         .feature-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(255, 62, 62, 0.2);
-            border-color: #ff3e3e;
+            box-shadow: 0 10px 25px rgba(62, 142, 255, 0.2); /* Changed to blue */
+            border-color: #3e8eff; /* Changed to blue */
         }
 
         .feature-icon {
@@ -384,7 +389,7 @@
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
-            color: #ff3e3e;
+            color: #3e8eff; /* Changed to blue */
             font-size: 28px;
         }
 
@@ -398,25 +403,25 @@
             color: #cccccc;
         }
 
-        /* Lore section */
-        .lore-section {
+        /* Manifesto section */
+        .manifesto-section {
             padding: 100px 0;
             background-color: #0d0d0d;
             position: relative;
         }
 
-        .lore-section::before {
+        .manifesto-section::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="10" y="50" font-family="Arial" font-size="20" fill="rgba(255,62,62,0.03)">DEBT</text></svg>');
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="10" y="50" font-family="Arial" font-size="20" fill="rgba(62,142,255,0.03)">DEBT</text></svg>');
             opacity: 0.5;
         }
 
-        .lore-container {
+        .manifesto-container {
             max-width: 800px;
             margin: 0 auto;
             position: relative;
@@ -424,51 +429,51 @@
             text-align: center;
         }
 
-        .lore-title {
+        .manifesto-title {
             font-size: 42px;
-            color: #ff3e3e;
+            color: #3e8eff; /* Changed to blue */
             margin-bottom: 30px;
             text-align: center;
         }
 
-        .lore-section h3 {
-            color: #ff3e3e;
+        .manifesto-section h3 {
+            color: #3e8eff; /* Changed to blue */
             font-size: 24px;
             text-align: center;
             margin-left: auto;
             margin-right: auto;
         }
 
-        .lore-section ul.roadmap,
-        .lore-section ul.commandments {
-        display: inline-block;
-        text-align: left;
-}
+        .manifesto-section ul.roadmap,
+        .manifesto-section ul.principles {
+            display: inline-block;
+            text-align: left;
+        }
 
-        .lore-section p {
+        .manifesto-section p {
             color: #cccccc;
             margin-bottom: 20px;
             font-size: 18px;
             line-height: 1.7;
         }
 
-        .commandments {
+        .principles {
             list-style: none;
             margin: 20px 0;
             padding: 20px;
             background-color: #1a1a1a;
             border-radius: 10px;
-            border-left: 3px solid #ff3e3e;
+            border-left: 3px solid #3e8eff; /* Changed to blue */
         }
 
-        .commandments li {
+        .principles li {
             padding: 10px 0;
             font-size: 18px;
             color: #ffffff;
             border-bottom: 1px solid #333333;
         }
 
-        .commandments li:last-child {
+        .principles li:last-child {
             border-bottom: none;
         }
 
@@ -490,7 +495,7 @@
             top: 15px;
             width: 10px;
             height: 10px;
-            background-color: #ff3e3e;
+            background-color: #3e8eff; /* Changed to blue */
             border-radius: 50%;
         }
 
@@ -508,7 +513,7 @@
         }
 
         .final-words strong {
-            color: #ff3e3e;
+            color: #3e8eff; /* Changed to blue */
             font-size: 26px;
             display: block;
             margin-top: 20px;
@@ -537,7 +542,7 @@
         .step-number {
             width: 60px;
             height: 60px;
-            background-color: #ff3e3e;
+            background-color: #3e8eff; /* Changed to blue */
             color: white;
             border-radius: 50%;
             display: flex;
@@ -581,7 +586,7 @@
             font-size: 48px;
             font-weight: 700;
             margin-bottom: 10px;
-            color: #ff3e3e;
+            color: #3e8eff; /* Changed to blue */
         }
 
         .stat-label {
@@ -589,21 +594,21 @@
             opacity: 0.9;
         }
 
-        /* Cult section */
-        .cult-section {
+        /* Movement section */
+        .movement-section {
             padding: 100px 0;
             background-color: #0d0d0d;
             text-align: center;
         }
 
-        .cult-title {
+        .movement-title {
             font-size: 42px;
-            color: #ff3e3e;
+            color: #3e8eff; /* Changed to blue */
             margin-bottom: 30px;
             text-align: center;
         }
 
-        .cult-description {
+        .movement-description {
             max-width: 800px;
             margin: 0 auto 40px;
             font-size: 18px;
@@ -611,7 +616,7 @@
             line-height: 1.7;
         }
 
-        .cult-icons {
+        .movement-icons {
             display: flex;
             justify-content: center;
             gap: 50px;
@@ -619,7 +624,7 @@
             flex-wrap: wrap;
         }
 
-        .cult-icon {
+        .movement-icon {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -635,7 +640,7 @@
             justify-content: center;
             margin-bottom: 15px;
             font-size: 40px;
-            color: #ff3e3e;
+            color: #3e8eff; /* Changed to blue */
             border: 2px solid #333333;
         }
 
@@ -684,7 +689,7 @@
             border-radius: 50%;
             margin-right: 15px;
             background-color: #333333;
-            border: 1px solid #ff3e3e;
+            border: 1px solid #3e8eff; /* Changed to blue */
         }
 
         .author-name {
@@ -706,7 +711,7 @@
 
         .game-section h2 {
             font-size: 42px;
-            color: #ff3e3e;
+            color: #3e8eff; /* Changed to blue */
             margin-bottom: 20px;
         }
 
@@ -731,7 +736,7 @@
         }
 
         .game-feature h4 {
-            color: #ff3e3e;
+            color: #3e8eff; /* Changed to blue */
             margin-bottom: 10px;
             font-size: 20px;
         }
@@ -752,7 +757,7 @@
             background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
             color: white;
             text-align: center;
-            border-top: 2px solid #ff3e3e;
+            border-top: 2px solid #3e8eff; /* Changed to blue */
         }
 
         .cta-box {
@@ -763,7 +768,7 @@
         .cta-title {
             font-size: 36px;
             margin-bottom: 20px;
-            color: #ff3e3e;
+            color: #3e8eff; /* Changed to blue */
         }
 
         .cta-description {
@@ -780,7 +785,6 @@
             border-top: 1px solid #333333;
         }
 
-        /* --- MOVED FOOTER COLUMN STYLES OUTSIDE --- */
         .footer-content {
             display: flex;
             justify-content: space-between;
@@ -796,7 +800,7 @@
         .footer-column h3 {
             font-size: 18px;
             margin-bottom: 20px;
-            color: #ff3e3e; /* Changed from green to red */
+            color: #3e8eff; /* Changed to blue */
         }
 
         .footer-column ul {
@@ -817,7 +821,7 @@
 
         .footer-column ul li a:hover {
             opacity: 1;
-            color: #ff3e3e; /* Changed from green to red */
+            color: #3e8eff; /* Changed to blue */
         }
 
         .social-icons {
@@ -841,7 +845,7 @@
         }
 
         .social-icon:hover {
-            background-color: #ff3e3e; /* Changed from green to red */
+            background-color: #3e8eff; /* Changed to blue */
         }
 
         .footer-bottom {
@@ -856,12 +860,12 @@
             font-size: 14px;
         }
 
-        /* Financial advice popup */
-        .advice-popup {
+        /* Financial facts popup */
+        .facts-popup {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: #ff3e3e;
+            background-color: #3e8eff; /* Changed to blue */
             color: white;
             padding: 15px 20px;
             border-radius: 8px;
@@ -897,50 +901,128 @@
             }
         }
 
-        /* Click-bait banners (Defined but unused in HTML) */
-        .clickbait-banner {
-            background-color: #2a2a2a;
-            border: 1px solid #ff3e3e;
+        /* Contract address box */
+        .contract-address {
+            background-color: #1a1a1a;
+            border: 2px solid #3e8eff; /* Changed to blue */
+            border-radius: 10px;
             padding: 15px;
-            margin: 40px auto;
-            max-width: 800px;
+            margin: 30px auto;
+            max-width: 600px;
             text-align: center;
-            border-radius: 8px;
-            position: relative;
-            overflow: hidden;
         }
 
-        .clickbait-banner::before {
-            content: 'SPONSORED';
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 2px 5px;
-            font-size: 10px;
-            color: #cccccc;
-            border-radius: 3px;
-        }
-
-        .clickbait-banner h4 {
-            font-size: 24px;
-            color: #ff3e3e;
+        .contract-address h4 {
+            color: #ffffff;
             margin-bottom: 10px;
+            font-size: 18px;
         }
 
-        .clickbait-banner p {
-            color: #cccccc;
-            margin-bottom: 15px;
+        .contract-address p {
+            font-family: monospace;
+            background-color: #0d0d0d;
+            padding: 10px;
+            border-radius: 5px;
+            color: #3e8eff; /* Changed to blue */
+            overflow: auto;
+            word-break: break-all;
         }
 
-        /* Blink animation (Defined but unused in HTML) */
-        .blink {
-            animation: blink 1s infinite; /* Added infinite */
+        .copy-btn {
+            background-color: #3e8eff; /* Changed to blue */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
         }
 
-        @keyframes blink { /* Added keyframes definition */
-           0%, 100% { opacity: 1; }
-           50% { opacity: 0; }
+        .copy-btn:hover {
+            background-color: #2e7eee; /* Darker blue */
+        }
+
+        /* Search Bar */
+        .search-container {
+            max-width: 600px;
+            margin: 30px auto;
+        }
+
+        .search-bar {
+            display: flex;
+            width: 100%;
+        }
+
+        .search-input {
+            flex-grow: 1;
+            padding: 15px;
+            border: 2px solid #3e8eff; /* Changed to blue */
+            background-color: #1a1a1a;
+            color: white;
+            border-radius: 5px 0 0 5px;
+            font-size: 16px;
+        }
+
+        .search-input::placeholder {
+            color: #999;
+        }
+
+        .search-btn {
+            background-color: #3e8eff; /* Changed to blue */
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .search-btn:hover {
+            background-color: #2e7eee; /* Darker blue */
+        }
+
+        /* Buy buttons section */
+        .buy-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px auto;
+            max-width: 800px;
+        }
+
+        .buy-btn {
+            padding: 15px 25px;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 16px;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .buy-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .drown-btn {
+            background-color: #3e8eff; /* Blue */
+        }
+
+        .bailout-btn {
+            background-color: #32CD32; /* Green */
+        }
+
+        .wallet-btn {
+            background-color: #9932CC; /* Purple */
+        }
+
+        .moon-btn {
+            background-color: #FF8C00; /* Orange */
         }
 
         /* Responsive adjustments */
@@ -971,8 +1053,10 @@
                 text-align: center; /* Center text */
             }
             .social-icons { justify-content: center; } /* Center icons */
-            .advice-popup { max-width: 90%; right: 5%; left: 5%; bottom: 10px; text-align: center;}
+            .facts-popup { max-width: 90%; right: 5%; left: 5%; bottom: 10px; text-align: center;}
             .game-container { height: 400px; } /* Adjust game size */
+            .buy-buttons { flex-direction: column; align-items: center; }
+            .buy-btn { width: 80%; }
         }
 
         @media (max-width: 576px) {
@@ -984,7 +1068,7 @@
              .global-debt-counter { max-width: 90%; }
              .counter-value { font-size: 28px; }
              .section-title { font-size: 28px; }
-             .lore-title, .cult-title, .game-section h2, .cta-title { font-size: 32px; }
+             .manifesto-title, .movement-title, .game-section h2, .cta-title { font-size: 32px; }
              .stat-value { font-size: 36px; }
              .step-title { font-size: 20px; }
              .feature-title { font-size: 20px; }
@@ -1001,21 +1085,19 @@
             <nav>
                 <ul>
                     <li><a href="#features">Why $DEBT?</a></li>
-                    <li><a href="#lore">Debtifesto</a></li>
-                    <li><a href="#how-it-works">Roadmap</a></li>
-                    <!-- Updated Join the Cult link -->
-                    <li><a href="https://t.me/" target="_blank" rel="noopener noreferrer">Join the Cult</a></li>
-                    <!-- Updated Buy the Dip link -->
-                    <li><a href="https://dexscreener.com/" target="_blank" rel="noopener noreferrer" class="cta-button">Buy the Dip</a></li>
+                    <li><a href="#manifesto">Manifesto</a></li>
+                    <li><a href="#how-it-works">Strategy</a></li>
+                    <li><a href="#movement">Join the Movement</a></li>
+                    <li><a href="#buy" class="cta-button">Buy $DEBT</a></li>
                 </ul>
             </nav>
         </div>
         <div class="price-ticker">
             <div class="ticker-content"> <!-- Wrap content for animation -->
                 <span class="price-label">$DEBT: </span>
-                <span class="price-value">$0.0000001</span>
-                <span class="price-change negative">-99.97%</span>
-                <span class="ticker-message">Just Keep Buying ... Diamond Hands ... To The Moon (Trenches) ... Financial Advice Not Included ... </span>
+                <span class="price-value">$0.00025</span>
+                <span class="price-change positive">+46.8%</span>
+                <span class="ticker-message">Economy Crisis Boosts DebtCoin... National Debt Reaches New Record... Student Loan Forgiveness Blocked Again... Housing Crash Imminent... Credit Card APRs Hit 24.99%... DebtCoin - The People's Hedge...</span>
             </div>
         </div>
     </header>
@@ -1023,64 +1105,46 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <div class="tagline">The More You Owe, The More You Own</div>
-            <h1>Welcome to <span>$DEBT</span>coin</h1>
-            <p>The first cryptocurrency backed by absolutely nothing—except your crippling anxiety and a faint hope that this Ponzi is <em>your</em> Ponzi.</p>
-            <p style="font-size: 16px; margin-bottom: 30px; color: #ff6b6b; font-style: italic;">We don't promise utility. We don't promise stability. We <strong>promise vibes.</strong></p>
+            <div class="tagline">Own Your Chains. Bet Against Financial Freedom.</div>
+            <h1>Flipping the <span>Financial System</span>, One $DEBT at a Time</h1>
+            <p>If you can't beat the debt, profit from it. DebtCoin is the people's hedge against America's inevitable debt implosion.</p>
+            <p style="font-size: 16px; margin-bottom: 30px; color: #6b8fff; font-style: italic;">The debt bubble will pop. <strong>$DEBT is your lifeboat.</strong></p>
+            
             <div class="global-debt-counter">
                 <div class="counter-label">GLOBAL DEBT COUNTER</div>
                 <div class="counter-value" id="debt-counter">$307,154,293,471,581</div>
-                <div class="counter-subtext">...and rising with every refresh</div>
+                <div class="counter-subtext">Let's profit from this instead of drowning in it</div>
             </div>
+            
+            <!-- Contract Address -->
+            <div class="contract-address">
+                <h4>$DEBT Token Contract Address</h4>
+                <p>0x7Eb5D86FD78f3852a3e0e064f2842d45a3dB6EA2</p>
+                <button class="copy-btn">Copy Address</button>
+            </div>
+            
+            <!-- Search Bar Section Removed -->
+            
+            <!-- Buy Button Section - Simplified -->
+            <div id="buy" class="buy-buttons">
+                <a href="#" class="buy-btn drown-btn">Buy $DEBT</a>
+            </div>
+            
             <div class="hero-buttons">
-                <a href="#" class="cta-button hero-cta">Join the Debtors</a>
-                <a href="#how-it-works" class="cta-button hero-cta secondary-cta">Go Into Debt</a>
+                <a href="#movement" class="cta-button hero-cta">Join the Movement</a>
+                <a href="#how-it-works" class="cta-button hero-cta secondary-cta">Our Strategy</a>
             </div>
    
-            <!-- Game Section -->
-    <section class="game-section">
-        <div class="container">
-            <h2>🕹️ DEBT DODGER</h2>
-            <p>A fast-paced, satirical browser game where you play as an over-leveraged citizen trying to dodge predatory debt traps and flying loan offers while collecting $DEBT tokens.</p>
-
-            <div class="game-features">
-                <div class="game-feature">
-                    <h4>Player Character</h4>
-                    <ul>
-                        <li>A frantic cartoon guy in a suit, sweating profusely</li>
-                        <li>Controls: Arrow keys or swipe to dodge</li>
-                    </ul>
-                </div>
-                <div class="game-feature">
-                    <h4>Deadly Obstacles</h4>
-                    <ul>
-                        <li>Student Loans (falling anvils)</li>
-                        <li>Credit Card Offers (homing missiles)</li>
-                        <li>IRS Audits (red lasers)</li>
-                    </ul>
-                </div>
-                <div class="game-feature">
-                    <h4>Power-ups</h4>
-                    <ul>
-                        <li>🧾 Bankruptcy Filing: Temporarily invincible</li>
-                        <li>🧠 Financial Literacy: Slows time</li>
-                        <li>💰 DebtCoin: Adds to your score</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-         
             <!-- Game container -->
             <div class="game-container">
                 <div class="game-overlay">
-                    <h3 class="game-title">DEBT DODGER</h3>
-                    <p class="game-description">A fast-paced game where you play as an over-leveraged citizen trying to dodge predatory debt traps and flying loan offers while collecting $DEBT tokens.</p>
+                    <h3 class="game-title">DEBT FIGHTER</h3>
+                    <p class="game-description">A fast-paced game where you play as a rebellious citizen fighting against predatory debt systems while collecting $DEBT tokens to hedge against economic collapse.</p>
                     <button class="start-game-btn">START GAME</button>
                 </div>
                 <canvas id="game-canvas"></canvas>
                 <div class="game-score">SCORE: 0</div>
-                <div class="game-controls">Arrow keys or swipe to dodge debt traps</div>
+                <div class="game-controls">Arrow keys or swipe to fight debt traps</div>
             </div>
         </div>
     </section>
@@ -1089,76 +1153,75 @@
     <section class="features" id="features">
         <div class="container">
             <h2 class="section-title">Why Choose $DEBT?</h2>
-            <p class="section-description">Because your real debt isn't funny enough already.</p>
+            <p class="section-description">Because when the debt bubble bursts, $DEBT holders will be the only ones smiling.</p>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">💸</div>
-                    <h3 class="feature-title">Backed by Nothing</h3>
-                    <p class="feature-description">Unlike other cryptocurrencies that pretend to have value, we're honest about being completely worthless—just like your student loans.</p>
+                    <div class="feature-icon">📈</div>
+                    <h3 class="feature-title">Crisis-Proof Investment</h3>
+                    <p class="feature-description">As credit card debt, student loans, and government deficits spiral out of control, $DEBT rises. When the economy tanks, DebtCoin moons.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📉</div>
-                    <h3 class="feature-title">Guaranteed Losses</h3>
-                    <p class="feature-description">Why wait for market crashes? With $DEBT, you're already in the red from day one. It's a feature, not a bug.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🧠</div>
-                    <h3 class="feature-title">Mental Gymnastics</h3>
-                    <p class="feature-description">Holding $DEBT trains your brain to rationalize terrible financial decisions. Think of it as CrossFit for your denial.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌎</div>
-                    <h3 class="feature-title">Global Misery</h3>
-                    <p class="feature-description">Join a worldwide community of people making the same mistake simultaneously. Debt knows no borders!</p>
+                    <div class="feature-icon">🛡️</div>
+                    <h3 class="feature-title">Your Financial Shield</h3>
+                    <p class="feature-description">Protecting your future by betting against a system designed to keep you financially trapped. Turn your cynicism into opportunity.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🔄</div>
-                    <h3 class="feature-title">Infinite Supply</h3>
-                    <p class="feature-description">Just like real debt, we can create $DEBT out of thin air forever. We learned from the best—central banks!</p>
+                    <h3 class="feature-title">Inverse Economics</h3>
+                    <p class="feature-description">While traditional assets crumble under recession and debt crisis, $DEBT thrives on economic chaos. A true counter-cyclical asset.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🚨</div>
-                    <h3 class="feature-title">Emergency Fund Destroyer</h3>
-                    <p class="feature-description">Why save for emergencies when you can gamble it on a meme coin? Financial advisors hate this one weird trick!</p>
+                    <div class="feature-icon">🌐</div>
+                    <h3 class="feature-title">Global Movement</h3>
+                    <p class="feature-description">Join a worldwide community of debt rebels using crypto to fight back against predatory financial systems.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Strategic Defiance</h3>
+                    <p class="feature-description">Every $DEBT purchase is both a protest against and a profit from the broken financial system. Make money while making a statement.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3 class="feature-title">Debt-Free Future Fund</h3>
+                    <p class="feature-description">Use your $DEBT profits to eliminate your real-world debt. The ultimate irony: getting debt-free by betting on more debt.</p>
                 </div>
             </div>
         </div>
     </section>
 
-<!-- Debtifesto Section -->
-<section class="lore-section" id="lore">
-  <div class="container lore-container">
-    <h2 class="lore-title">📜 THE DEBTIFESTO</h2>
+<!-- Manifesto Section -->
+<section class="manifesto-section" id="manifesto">
+  <div class="container manifesto-container">
+    <h2 class="manifesto-title">📜 THE DEBTCOIN MANIFESTO</h2>
 
-    <h3>📉 The Beginning of the End</h3>
-    <p>In the year 2025, after the 37th interest rate hike, one brave soul stared into the void of $124,000 in loans and $7 in his checking account and whispered:</p>
-    <p><em>"What if we didn’t fix the system... we just turned it into a meme?"</em></p>
-    <p>Thus, <strong>$DEBT</strong> was born—not as salvation, but as satire. Not to save the system, but to mock it until it breaks.</p>
+    <h3>🔍 The Problem</h3>
+    <p>In 2025, as national debt surges past $33 trillion and personal debt cripples 80% of Americans, the financial elite continue to profit from our collective misery.</p>
+    <p>They created a system where debt is inescapable—but what if we told you there's a way to <em>profit</em> from that same corrupt system?</p>
 
-    <h3>🧠 The Core Delusion</h3>
-    <p><strong>DebtCoin</strong> is the <strong>first crypto backed by absolutely nothing</strong>—just like your job prospects, retirement fund, and that overpriced degree.</p>
+    <h3>💡 The Solution</h3>
+    <p><strong>DebtCoin</strong> is the <strong>first crypto that rises as debt increases</strong>—a hedge against financial collapse that puts power back in the hands of the indebted masses.</p>
 
-    <h3>📕 The Redpaper</h3>
-    <p>Why whitewash lies when you can bleed truth?</p>
+    <h3>🚀 The Mission</h3>
+    <p>We're not just another token—we're a movement against financial servitude.</p>
     <ul class="roadmap">
-      <li><strong>Step 1</strong>: Buy $DEBT</li>
-      <li><strong>Step 2</strong>: Shill $DEBT to your friends</li>
-      <li><strong>Step 3</strong>: Enter financial denial spiral</li>
-      <li><strong>Step 4</strong>: ???</li>
-      <li><strong>Step 5</strong>: Eternal Ramen</li>
+      <li><strong>Educate</strong> people about the unsustainable debt machine</li>
+      <li><strong>Empower</strong> individuals to profit from inevitable economic crisis</li>
+      <li><strong>Build</strong> a community of financial rebels fighting back</li>
+      <li><strong>Create</strong> pathways to true financial independence</li>
+      <li><strong>Protest</strong> through profit—every $DEBT purchase is a vote against the system</li>
     </ul>
 
     <h3>📊 Tokenomics</h3>
-    <ul class="commandments">
-      <li><strong>Total Supply</strong>: Infinite (like your bad decisions)</li>
-      <li><strong>Burn Rate</strong>: We lost the private keys. Oops.</li>
-      <li><strong>Staking</strong>: We call it <em>"Defaulting"</em></li>
-      <li><strong>APY</strong>: Always Promising Yikes</li>
+    <ul class="principles">
+      <li><strong>Supply:</strong> Inversely correlated to U.S. National Debt—as debt increases, token supply decreases</li>
+      <li><strong>Value Driver:</strong> Smart contract tied to debt crisis indicators</li>
+      <li><strong>Staking:</strong> We call it <em>"Hedging"</em>—earn higher rewards during economic downturns</li>
+      <li><strong>Utility:</strong> Governance voting on strategic investments in debt instruments</li>
     </ul>
 
     <div class="final-words">
-      <p>"In Fiat We Trusted. In <strong>$DEBT</strong> We Found the Truth."</p>
-      <strong>Welcome to financial freedom through complete surrender.</strong>
+      <p>"When life gives you lemons (debt), mint DebtCoin."</p>
+      <strong>The only bubble that profits when all other bubbles pop.</strong>
     </div>
   </div>
 </section>
@@ -1166,29 +1229,29 @@
 
     <!-- How It Works Section -->
     <section class="how-it-works" id="how-it-works">
-        <div class="container">
-            <h2 class="section-title">Our Roadmap to Financial Ruin</h2>
-            <p class="section-description">Getting scammed has never been this easy!</p>
+        <div class="container" style="text-align: center;">
+            <h2 class="section-title">Our Strategic Roadmap</h2>
+            <p class="section-description">A calculated plan to profit from economic disaster</p>
             <div class="steps">
                 <div class="step">
                     <div class="step-number">1</div>
-                    <h3 class="step-title">Q1: Launch</h3>
-                    <p class="step-description">We launch $DEBT with maximum hype and minimum utility. Early adopters call themselves "financial visionaries."</p>
+                    <h3 class="step-title">Phase 1: Awareness</h3>
+                    <p class="step-description">Launch community-driven education campaign about the unsustainable debt crisis and how $DEBT serves as a financial hedge.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3 class="step-title">Q2: Collapse</h3>
-                    <p class="step-description">Price plummets 99%. Discord fills with hopium. "This is just a correction!"</p>
+                    <h3 class="step-title">Phase 2: Adoption</h3>
+                    <p class="step-description">Build strategic partnerships with financial influencers, debt relief advocates, and economic doomsayers to spread the movement.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
-                    <h3 class="step-title">Q3: Blame the Devs</h3>
-                    <p class="step-description">Team disappears with liquidity. Community makes conspiracy theories about the "master plan."</p>
+                    <h3 class="step-title">Phase 3: Crisis Profit</h3>
+                    <p class="step-description">As debt markets destabilize, our tokenomics ensure $DEBT holders profit while traditional markets collapse.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">4</div>
-                    <h3 class="step-title">Q4: Relaunch as ReDebtCoin</h3>
-                    <p class="step-description">Same scam, new name. You'll probably buy it again because you never learn.</p>
+                    <h3 class="step-title">Phase 4: Financial Liberation</h3>
+                    <p class="step-description">Use community treasury to create debt forgiveness programs and financial education for $DEBT holders.</p>
                 </div>
             </div>
         </div>
@@ -1198,7 +1261,7 @@
     <section class="stats">
         <div class="container">
             <h2 class="section-title">The Debt Crisis by the Numbers</h2>
-            <p class="section-description">If these stats don't make you laugh, you'll cry!</p>
+            <p class="section-description">These aren't just statistics—they're profit opportunities.</p>
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-value">$33T+</div>
@@ -1213,73 +1276,107 @@
                     <div class="stat-label">Credit Card Debt</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value">∞</div>
-                    <div class="stat-label">Your Financial Anxiety</div>
+                    <div class="stat-value">97%</div>
+                    <div class="stat-label">Chance of Economic Collapse by 2030</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Cult Section -->
-    <section class="cult-section">
+    <!-- Movement Section -->
+    <section class="movement-section" id="movement">
         <div class="container">
-            <h2 class="cult-title">😇 The Community</h2>
-            <p class="cult-description">You're not just an investor. You're a <strong>Debtor</strong> now.<br>Welcome to the:</p>
+            <h2 class="movement-title">✊ The Debt Rebellion</h2>
+            <p class="movement-description">You're not just an investor. You're a <strong>Financial Revolutionary</strong>.<br>Join the:</p>
 
-            <div class="cult-icons">
-                <div class="cult-icon">
-                    <div class="icon-container">🕯️</div>
-                    <div class="icon-label">Church of Eternal Leverage</div>
+            <div class="movement-icons">
+                <div class="movement-icon">
+                    <div class="icon-container">🛡️</div>
+                    <div class="icon-label">League of Debt Defenders</div>
                 </div>
-                <div class="cult-icon">
-                    <div class="icon-container">💳</div>
-                    <div class="icon-label">Order of Overdraft</div>
+                <div class="movement-icon">
+                    <div class="icon-container">🔄</div>
+                    <div class="icon-label">Profit Rebels</div>
                 </div>
-                <div class="cult-icon">
-                    <div class="icon-container">🪦</div>
-                    <div class="icon-label">Guild of the Rugged</div>
+                <div class="movement-icon">
+                    <div class="icon-container">🚀</div>
+                    <div class="icon-label">Financial Freedom Fighters</div>
                 </div>
             </div>
 
-            <p class="cult-description">Every Sunday we gather to chant:<br><em>"Debt is love. Debt is life. Rug me, Father, for I have spent."</em></p>
+            <p class="movement-description">Our community motto:<br><em>"First you borrow. Then you beg. Then you buy $DEBT."</em></p>
         </div>
     </section>
 
     <!-- Testimonials Section -->
     <section class="testimonials" id="testimonials">
-        <div class="container">
-            <h2 class="section-title">Trust the $DEBT-Heads</h2>
-            <p class="section-description">Success stories from our community of financial masochists.</p>
+        <div class="container" style="text-align: center;">
+            <h2 class="section-title">Voices of the Movement</h2>
+            <p class="section-description">Real people using $DEBT to fight back against the system.</p>
             <div class="testimonials-grid">
                 <div class="testimonial-card">
-                    <p class="testimonial-text">"I maxed out three credit cards to buy $DEBT. Now I live in my car, but at least my Discord profile has a special role! Worth it!"</p>
+                    <p class="testimonial-text">"I have $120K in student loans that I'll never pay off. Now I'm using some of my paycheck to buy $DEBT as a hedge. If the system collapses under its own weight, at least my $DEBT will moon."</p>
                     <div class="testimonial-author">
                         <div class="author-avatar"></div>
                         <div>
-                            <div class="author-name">Jeremy, 24</div>
-                            <div class="author-title">Former Apartment Dweller</div>
+                            <div class="author-name">Alex, 29</div>
+                            <div class="author-title">Software Engineer & Debt Rebel</div>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-card">
-                    <p class="testimonial-text">"My wife left me after I put our mortgage payment into $DEBT. But the community is so supportive! They send me ramen recipes daily."</p>
+                    <p class="testimonial-text">"When my mortgage interest rate doubled, I realized the system is rigged. Now I'm taking 10% of my mortgage payment and putting it into $DEBT. It's my insurance policy against economic collapse."</p>
                     <div class="testimonial-author">
                         <div class="author-avatar"></div>
                         <div>
-                            <div class="author-name">Mike, 37</div>
-                            <div class="author-title">Newly Single</div>
+                            <div class="author-name">Maya, 35</div>
+                            <div class="author-title">Financial Strategist</div>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-card">
-                    <p class="testimonial-text">"I don't even understand what $DEBT is, but a TikToker told me to buy it, so I sold my kidney. Now I'm down 98% but HODLING STRONG!"</p>
+                    <p class="testimonial-text">"I watched my parents lose everything in 2008. Now I'm playing the long game with $DEBT. When the next crash happens—and it will—I'll be ready. This time, I'll be on the winning side of history."</p>
                     <div class="testimonial-author">
                         <div class="author-avatar"></div>
                         <div>
-                            <div class="author-name">Emily, 19</div>
-                            <div class="author-title">One-Kidney Wonder</div>
+                            <div class="author-name">Jamal, 26</div>
+                            <div class="author-title">Economic Collapse Prepper</div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Section -->
+    <section class="game-section">
+        <div class="container">
+            <h2>🕹️ DEBT FIGHTER</h2>
+            <p>A revolutionary browser game where you battle predatory financial institutions, corrupt politicians, and Wall Street manipulators while collecting $DEBT tokens to secure your financial future.</p>
+
+            <div class="game-features">
+                <div class="game-feature">
+                    <h4>Player Character</h4>
+                    <ul>
+                        <li>A courageous debt rebel fighting against the system</li>
+                        <li>Controls: Arrow keys or swipe to maneuver</li>
+                    </ul>
+                </div>
+                <div class="game-feature">
+                    <h4>Your Enemies</h4>
+                    <ul>
+                        <li>Predatory Lenders (falling anvils)</li>
+                        <li>Wall Street Bankers (homing missiles)</li>
+                        <li>Debt Collection Agencies (red lasers)</li>
+                    </ul>
+                </div>
+                <div class="game-feature">
+                    <h4>Power-ups</h4>
+                    <ul>
+                        <li>🛡️ Debt Shield: Temporary invincibility</li>
+                        <li>🧠 Financial Literacy: Slows enemy attacks</li>
+                        <li>💰 DebtCoin: Increases your hedge against collapse</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -1289,9 +1386,9 @@
     <section class="cta">
         <div class="container">
             <div class="cta-box">
-                <h2 class="cta-title">Ready to make the worst financial decision of your life?</h2>
-                <p class="cta-description">Join thousands of other delusional investors on our journey to financial oblivion!</p>
-                <a href="#" class="cta-button hero-cta">Sacrifice Your Savings</a>
+                <h2 class="cta-title">Ready to profit from the debt crisis?</h2>
+                <p class="cta-description">"The only thing stronger than gravity is compound interest." — Albert Einstein (probably)</p>
+                <a href="#buy" class="cta-button hero-cta">Secure Your Financial Future</a>
             </div>
         </div>
     </section>
@@ -1303,46 +1400,46 @@
                 <div class="footer-column">
                     <h3>$DEBT</h3>
                     <ul>
-                        <li><a href="#">About Our Scam</a></li>
-                        <li><a href="#">We're Not Hiring</a></li>
-                        <li><a href="#">Media Blackout</a></li>
-                        <li><a href="#">FUD Blog</a></li>
+                        <li><a href="#">About Our Movement</a></li>
+                        <li><a href="#">Join the Team</a></li>
+                        <li><a href="#">Media Coverage</a></li>
+                        <li><a href="#">Debt Crisis Blog</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>So-Called Products</h3>
+                    <h3>Economic Resources</h3>
                     <ul>
-                        <li><a href="#">Leaky Wallet</a></li>
-                        <li><a href="#">Gambling Platform</a></li>
-                        <li><a href="#">Premium Losses</a></li>
-                        <li><a href="#">Broken API</a></li>
+                        <li><a href="#">Debt Tracker Dashboard</a></li>
+                        <li><a href="#">Financial Collapse Indicators</a></li>
+                        <li><a href="#">Debt Hedge Strategies</a></li>
+                        <li><a href="#">Developer API</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>No Support</h3>
+                    <h3>Community Support</h3>
                     <ul>
-                        <li><a href="#">Unhelpful Center</a></li>
-                        <li><a href="#">Don't Contact Us</a></li>
-                        <li><a href="#">Status: It's Complicated</a></li>
-                        <li><a href="#">Frequently Avoided Questions</a></li>
+                        <li><a href="#">Debt Rebellion Forums</a></li>
+                        <li><a href="#">Contact the Movement</a></li>
+                        <li><a href="#">Network Status</a></li>
+                        <li><a href="#">Frequently Asked Questions</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Join the Cult</h3>
+                    <h3>Join the Movement</h3>
                     <div class="social-icons">
-                        <a href="#" class="social-icon">🚽</a>
-                        <a href="#" class="social-icon">💩</a>
-                        <a href="#" class="social-icon">🔥</a>
-                        <a href="#" class="social-icon">💸</a>
+                        <a href="#" class="social-icon">📱</a>
+                        <a href="#" class="social-icon">🐦</a>
+                        <a href="#" class="social-icon">👥</a>
+                        <a href="#" class="social-icon">📢</a>
                     </div>
-                    <p style="margin-top: 20px; color: #ff3e3e; opacity: 0.8;">
-                        Subscribe to our newsletter for more financial abuse
+                    <p style="margin-top: 20px; color: #3e8eff; opacity: 0.8;">
+                        Subscribe to our newsletter for debt crisis updates
                     </p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2025 DebtCoin. No rights reserved. | <a href="#" style="color: #ff3e3e; opacity: 0.8;">No Privacy Policy</a> | <a href="#" style="color: #ff3e3e; opacity: 0.8;">Terms of Servitude</a></p>
-                <p style="margin-top: 10px; font-size: 12px; color: #666;">This website is satirical. Please don't actually buy this. It's not real. If you try to send money, you deserve what happens next.</p>
+                <p>© 2025 DebtCoin. All rights reserved. | <a href="#" style="color: #3e8eff; opacity: 0.8;">Privacy Policy</a> | <a href="#" style="color: #3e8eff; opacity: 0.8;">Terms of Service</a></p>
+                <p style="margin-top: 10px; font-size: 12px; color: #666;">This website represents a movement against the debt system. $DEBT token involves risk. Do your own research before investing.</p>
             </div>
         </div>
     </footer>
@@ -1357,8 +1454,21 @@
             const debtCounter = document.getElementById('debt-counter');
             const priceValue = document.querySelector('.price-value');
             const priceChange = document.querySelector('.price-change');
+            const copyBtn = document.querySelector('.copy-btn');
 
-            let player = { x: 375, y: 440, width: 50, height: 50, color: '#ff3e3e' };
+            if(copyBtn) {
+                copyBtn.addEventListener('click', function() {
+                    const contractAddress = document.querySelector('.contract-address p').innerText;
+                    navigator.clipboard.writeText(contractAddress).then(function() {
+                        copyBtn.textContent = "Copied!";
+                        setTimeout(() => {
+                            copyBtn.textContent = "Copy Address";
+                        }, 2000);
+                    });
+                });
+            }
+
+            let player = { x: 375, y: 440, width: 50, height: 50, color: '#3e8eff' };
             let moneyItems = [];
             let debtItems = [];
             let keys = {};
@@ -1380,13 +1490,13 @@
 
             const emojis = {
                 money: '💰',
-                creditCard: '💳',
-                studentLoan: '📚',
-                audit: '🧾',
-                rent: '📄'
+                banker: '🏦',
+                lender: '📝',
+                agency: '🔴',
+                politician: '👔'
             };
 
-            const debtPool = [emojis.creditCard, emojis.studentLoan, emojis.audit, emojis.rent];
+            const debtPool = [emojis.banker, emojis.lender, emojis.agency, emojis.politician];
 
             if (startButton) {
                 startButton.addEventListener('click', function() {
@@ -1477,7 +1587,7 @@
                 // Draw emoji as player face (optional):
                 ctx.font = "24px Arial";
                 ctx.textAlign = "center"; // Center emoji text
-                ctx.fillText("😰", player.x + player.width / 2, player.y + 35);
+                ctx.fillText("✊", player.x + player.width / 2, player.y + 35);
 
                 // Define item size for collision
                 const itemSize = 30;
@@ -1510,7 +1620,7 @@
                     // Check collision
                     if (isColliding(player, { x: item.x, y: item.y, width: itemSize, height: itemSize })) {
                         endGame();
-                        // return; // Exit update loop immediately on game over
+                        // return; // Exit update loop immediately
                     }
                     // Remove if off-screen
                     else if (item.y > canvas.height) {
@@ -1538,49 +1648,59 @@
                 const currentDebt = parseInt(debtCounter.textContent.replace(/\D/g, '')) || 300000000000000; // Fallback if parsing fails
                 const increment = Math.floor(Math.random() * 1000000000) + 50000000; // Add a base increment
                 const newDebt = currentDebt + increment;
-                debtCounter.textContent = '$' + newDebt.toLocaleString('en-US'); // Format with commas
+                debtCounter.textContent = ' + newDebt.toLocaleString('en-US'); // Format with commas
             }
             setInterval(updateDebtCounter, 1500); // Update rate
 
             // Ticker price fluctuation
             function updatePrice() {
-                 if (!priceValue || !priceChange) return;
-                // Generate a random price keeping it low
-                const newPrice = (Math.random() * 0.00000089 + 0.0000001).toFixed(9);
-                priceValue.textContent = '$' + newPrice;
+                if (!priceValue || !priceChange) return;
+                // Generate a random price keeping it in a reasonable range
+                const basePrice = 0.00025;
+                const variance = 0.00005;
+                const newPrice = (basePrice + (Math.random() * variance * 2 - variance)).toFixed(6);
+                priceValue.textContent = ' + newPrice;
 
-                // Random change, heavily biased towards negative
-                const change = -(Math.random() * 4.99 + 95).toFixed(2); // Between -95.00% and -99.99%
-                priceChange.textContent = change + '%';
-                // Ensure class is correct (it's always negative here)
-                if (!priceChange.classList.contains('negative')) {
-                     priceChange.classList.add('negative');
-                     priceChange.classList.remove('positive'); // Just in case
+                // Random change between -3% and +8%
+                const isPositive = Math.random() > 0.4; // 60% chance of positive change
+                const changeValue = isPositive ? 
+                    (Math.random() * 7 + 1).toFixed(1) : // 1.0% to 8.0%
+                    (Math.random() * 2.9 + 0.1).toFixed(1); // 0.1% to 3.0%
+                
+                priceChange.textContent = (isPositive ? '+' : '-') + changeValue + '%';
+                
+                // Update class based on positive/negative
+                if (isPositive) {
+                    priceChange.classList.add('positive');
+                    priceChange.classList.remove('negative');
+                } else {
+                    priceChange.classList.add('negative');
+                    priceChange.classList.remove('positive');
                 }
             }
             setInterval(updatePrice, 4000); // Update rate
 
-            // Random financial advice popup
-            const adviceMessages = [
-                "Financial Advice: Buy high, sell low!",
-                "Have you considered a third mortgage?",
-                "Pro Tip: Credit cards are just free money!",
-                "Diamond hands mean never seeing profits!",
-                "If you can't afford it, finance it!",
-                "BREAKING: Your portfolio is underperforming inflation!",
-                "Fun Fact: Ramen has all essential nutrients!",
-                "Your landlord just bought more $DEBT than you!",
-                "WARNING: Your credit score just dropped 100 points!",
-                "ALERT: Your bank account is filing for divorce!",
-                "Remember: It's only a loss if you sell!",
-                "This is definitely financial advice. Trust me.",
-                "FOMO is your best investment indicator."
+            // Random financial facts popup
+            const factsMessages = [
+                "FACT: Credit card debt hits record high of $1.13 trillion!",
+                "ALERT: Student loan interest has outpaced inflation by 3x since 2000",
+                "WARNING: Housing affordability at lowest level since 1985",
+                "BREAKING: 64% of Americans living paycheck to paycheck",
+                "REPORT: Medical debt is the #1 cause of bankruptcy",
+                "FACT: The average American has $90,460 in debt",
+                "ALERT: National debt per taxpayer now exceeds $240,000",
+                "WARNING: 3 in 5 Americans couldn't cover a $1,000 emergency",
+                "BREAKING: Real wages have stagnated since the 1970s",
+                "REPORT: DebtCoin up 46% as debt crisis worsens!",
+                "FACT: Debt slavery is the modern form of indentured servitude",
+                "ALERT: The average car loan now exceeds 72 months",
+                "WARNING: 1 in 6 homeowners are underwater on their mortgage"
             ];
 
-            function showRandomAdvice() {
-                const msg = adviceMessages[Math.floor(Math.random() * adviceMessages.length)];
+            function showRandomFact() {
+                const msg = factsMessages[Math.floor(Math.random() * factsMessages.length)];
                 const popup = document.createElement('div');
-                popup.className = 'advice-popup';
+                popup.className = 'facts-popup';
                 popup.textContent = msg;
                 document.body.appendChild(popup);
 
@@ -1594,14 +1714,14 @@
                 }, 4000); // Start fade-out after 4 seconds
             }
 
-            function scheduleAdvice() {
+            function scheduleFact() {
                 const delay = Math.random() * 10000 + 15000; // 15-25 seconds
                 setTimeout(() => {
-                    showRandomAdvice();
-                    scheduleAdvice(); // Schedule the next one
+                    showRandomFact();
+                    scheduleFact(); // Schedule the next one
                 }, delay);
             }
-            scheduleAdvice(); // Start the first advice popup schedule
+            scheduleFact(); // Start the first fact popup schedule
 
         });
     </script>
