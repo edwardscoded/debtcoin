@@ -1,4 +1,81 @@
-<!DOCTYPE html>
+        /* Financial advice popup */
+        .advice-popup {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ff3e3e;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            max-width: 300px;
+            animation: slideIn 0.5s forwards;
+            font-weight: bold;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .fade-out {
+            animation: fadeOut 1s forwards;
+        }
+        
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+        
+        /* Click-bait banners */
+        .clickbait-banner {
+            background-color: #2a2a2a;
+            border: 1px solid #ff3e3e;
+            padding: 15px;
+            margin: 40px auto;
+            max-width: 800px;
+            text-align: center;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .clickbait-banner::before {
+            content: 'SPONSORED';
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 2px 5px;
+            font-size: 10px;
+            color: #cccccc;
+            border-radius: 3px;
+        }
+        
+        .clickbait-banner h4 {
+            font-size: 24px;
+            color: #ff3e3e;
+            margin-bottom: 10px;
+        }
+        
+        .clickbait-banner p {
+            color: #cccccc;
+            margin-bottom: 15px;
+        }
+        
+        .blink {
+            animation: blink 1s<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,6 +94,7 @@
             background-color: #0d0d0d;
             color: #f0f0f0;
             line-height: 1.6;
+            font-family: 'Arial', sans-serif;
         }
         
         /* Container */
@@ -53,6 +131,17 @@
         
         .logo span {
             color: #ffffff;
+        }
+        
+        .ticker-symbol {
+            font-family: monospace;
+            background-color: #ff3e3e;
+            color: #0d0d0d;
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-left: 5px;
+            font-size: 0.8em;
+            vertical-align: middle;
         }
         
         nav ul {
@@ -100,6 +189,17 @@
             border-bottom: 2px solid #ff3e3e;
         }
         
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><text x="0" y="10" font-family="monospace" font-size="10" fill="rgba(255,62,62,0.03)">$</text></svg>');
+            opacity: 0.5;
+        }
+        
         .hero h1 {
             font-size: 48px;
             margin-bottom: 20px;
@@ -144,6 +244,37 @@
             background-color: rgba(255, 62, 62, 0.1);
         }
         
+        /* Global debt counter */
+        .global-debt-counter {
+            background-color: rgba(26, 26, 26, 0.8);
+            border: 2px solid #ff3e3e;
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        
+        .counter-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            color: #cccccc;
+            letter-spacing: 2px;
+        }
+        
+        .counter-value {
+            font-family: monospace;
+            font-size: 36px;
+            font-weight: bold;
+            color: #ff3e3e;
+            margin: 10px 0;
+        }
+        
+        .counter-subtext {
+            font-size: 12px;
+            color: #cccccc;
+            font-style: italic;
+        }
+        
         /* Game container */
         .game-container {
             margin-top: 50px;
@@ -158,10 +289,66 @@
             position: relative;
         }
         
-        #game-canvas {
-            width: 100%;
+        /* Price ticker */
+        .price-ticker {
+            background-color: #0d0d0d;
+            padding: 8px 0;
+            text-align: center;
+            border-top: 1px solid #333;
+            font-family: monospace;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+        
+        .price-ticker::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50px;
             height: 100%;
-            display: block;
+            background: linear-gradient(to right, transparent, #0d0d0d);
+        }
+        
+        .price-label {
+            color: #cccccc;
+            margin-right: 5px;
+        }
+        
+        .price-value {
+            color: #ff3e3e;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .price-change {
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            margin-right: 15px;
+        }
+        
+        .negative {
+            background-color: #ff3e3e;
+            color: white;
+        }
+        
+        .ticker-message {
+            color: #cccccc;
+            font-style: italic;
+            animation: ticker 20s linear infinite;
+            display: inline-block;
+            padding-left: 100%;
+        }
+        
+        @keyframes ticker {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
         }
         
         .game-overlay {
@@ -750,15 +937,22 @@
     <!-- Header -->
     <header>
         <div class="container header-inner">
-            <a href="#" class="logo">Debt<span>coin</span></a>
+            <a href="#" class="logo">Debt<span>coin</span> <span class="ticker-symbol">$DEBT</span></a>
             <nav>
                 <ul>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#how-it-works">How It Works</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="#" class="cta-button">Get Started</a></li>
+                    <li><a href="#features">Why $DEBT?</a></li>
+                    <li><a href="#lore">Lore</a></li>
+                    <li><a href="#how-it-works">Roadmap</a></li>
+                    <li><a href="#cult">Join the Cult</a></li>
+                    <li><a href="#" class="cta-button">Buy the Dip</a></li>
                 </ul>
             </nav>
+        </div>
+        <div class="price-ticker">
+            <span class="price-label">$DEBT: </span>
+            <span class="price-value">$0.0000001</span>
+            <span class="price-change negative">-99.97%</span>
+            <span class="ticker-message">Just Keep Buying</span>
         </div>
     </header>
     
@@ -769,6 +963,11 @@
             <h1>Welcome to <span>$DEBT</span>coin</h1>
             <p>The first cryptocurrency backed by absolutely nothing—except your crippling anxiety and a faint hope that this Ponzi is <em>your</em> Ponzi.</p>
             <p style="font-size: 16px; margin-bottom: 30px; color: #ff6b6b; font-style: italic;">We don't promise utility. We don't promise stability. We <strong>promise vibes.</strong></p>
+            <div class="global-debt-counter">
+                <div class="counter-label">GLOBAL DEBT COUNTER</div>
+                <div class="counter-value" id="debt-counter">$307,154,293,471,581</div>
+                <div class="counter-subtext">...and rising with every refresh</div>
+            </div>
             <div class="hero-buttons">
                 <a href="#" class="cta-button hero-cta">Join the Debtors</a>
                 <a href="#how-it-works" class="cta-button hero-cta secondary-cta">Go Into Debt</a>
@@ -820,9 +1019,9 @@
                     <p class="feature-description">Just like real debt, we can create $DEBT out of thin air forever. We learned from the best—central banks!</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🤡</div>
-                    <h3 class="feature-title">Comedy Gold</h3>
-                    <p class="feature-description">When your investment goes to zero, at least you'll have some great stories for your therapist.</p>
+                    <div class="feature-icon">🚨</div>
+                    <h3 class="feature-title">Emergency Fund Destroyer</h3>
+                    <p class="feature-description">Why save for emergencies when you can gamble it on a meme coin? Financial advisors hate this one weird trick!</p>
                 </div>
             </div>
         </div>
@@ -1132,8 +1331,7 @@ document.addEventListener('DOMContentLoaded', function() {
         clearInterval(gameInterval);
         clearInterval(spawnInterval);
         gameOverlay.style.display = 'flex';
-        alert(`You’ve been crushed by debt! Final Score: ${score} $DEBT tokens. Maybe try a 9-5 next time?`);
-
+        alert(`Game Over! You collected ${score} $DEBT tokens and got absolutely rugged.`);
     }
 
     function updateScore() {
@@ -1216,9 +1414,110 @@ document.addEventListener('DOMContentLoaded', function() {
         );
     }
 });
-</script>
-
-
+            
+            // Update debt counter
+            function updateDebtCounter() {
+                const currentDebt = parseInt(debtCounter.textContent.replace(/\D/g, ''));
+                const newDebt = currentDebt + Math.floor(Math.random() * 1000000000);
+                debtCounter.textContent = '
+</body>
+</html>
+</body>
+</html> + newDebt.toLocaleString();
+            }
+            
+            // Update debt counter every 2 seconds
+            setInterval(updateDebtCounter, 2000);
+            
+            // Ticker price fluctuation
+            const priceValue = document.querySelector('.price-value');
+            const priceChange = document.querySelector('.price-change');
+            
+            function updatePrice() {
+                // Generate a random price between 0.00000001 and 0.0000009
+                const newPrice = (Math.random() * 0.0000009 + 0.00000001).toFixed(9);
+                priceValue.textContent = '
+</body>
+</html>
+</body>
+</html> + newPrice;
+                
+                // Random change between -99.99% and -95%
+                const change = -(Math.random() * 5 + 95).toFixed(2);
+                priceChange.textContent = change + '%';
+            }
+            
+            // Update price every 5 seconds
+            setInterval(updatePrice, 5000);
+            
+            startButton.addEventListener('click', function() {
+                gameOverlay.style.display = 'none';
+                startGame();
+            });
+            
+            function startGame() {
+                gameActive = true;
+                score = 0;
+                updateScore();
+                // Normally we'd initialize the game here
+                // But this is just a mockup
+                
+                // For demonstration, just toggle the overlay back after 3 seconds
+                setTimeout(function() {
+                    gameOverlay.style.display = 'flex';
+                    gameActive = false;
+                    alert("Game over! You've been crushed by debt! (In a real implementation, this would be a functioning game)");
+                }, 3000);
+            }
+            
+            function updateScore() {
+                scoreDisplay.textContent = `SCORE: ${score}`;
+            }
+            
+            // Add random "financial advice" popup
+            const adviceMessages = [
+                "Financial Advice: Buy high, sell low!",
+                "Have you considered a third mortgage?",
+                "Pro Tip: Credit cards are just free money!",
+                "Diamond hands mean never seeing profits!",
+                "If you can't afford it, finance it!",
+                "BREAKING: Your portfolio is underperforming inflation!",
+                "Fun Fact: Ramen has all essential nutrients!",
+                "Your landlord just bought more $DEBT than you!",
+                "WARNING: Your credit score just dropped 100 points for viewing this site!",
+                "ALERT: Your bank account is filing for divorce!"
+            ];
+            
+            function showRandomAdvice() {
+                const randomMessage = adviceMessages[Math.floor(Math.random() * adviceMessages.length)];
+                
+                const advicePopup = document.createElement('div');
+                advicePopup.className = 'advice-popup';
+                advicePopup.textContent = randomMessage;
+                
+                document.body.appendChild(advicePopup);
+                
+                // Remove popup after 4 seconds
+                setTimeout(() => {
+                    advicePopup.classList.add('fade-out');
+                    setTimeout(() => {
+                        document.body.removeChild(advicePopup);
+                    }, 1000);
+                }, 4000);
+            }
+            
+            // Show random advice every 20-30 seconds
+            function scheduleAdvice() {
+                const delay = Math.random() * 10000 + 20000; // 20-30 seconds
+                setTimeout(() => {
+                    showRandomAdvice();
+                    scheduleAdvice();
+                }, delay);
+            }
+            
+            scheduleAdvice();
+        });
+    </script>
 </body>
 </html>
 </body>
