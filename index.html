@@ -10,10 +10,10 @@
         html { scroll-behavior: smooth; }
 
         body {
-            background-color: #0c0c0c; /* Even darker */
-            color: #e8e8e8; /* Slightly off-white */
-            line-height: 1.6;
-            font-family: 'Inter', 'Arial', sans-serif; /* Modern font */
+            background-color: #0a0a0a; /* Even darker base */
+            color: #f0f0f0;
+            line-height: 1.7; /* Slightly more spacing */
+            font-family: 'Poppins', 'Arial', sans-serif; /* More modern/playful font */
             overflow-x: hidden;
             opacity: 0;
             animation: fadeInPage 0.8s ease-out forwards;
@@ -21,469 +21,522 @@
         @keyframes fadeInPage { to { opacity: 1; } }
 
         /* Container */
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .container { max-width: 1150px; margin: 0 auto; padding: 0 20px; }
 
         /* Section base */
-        section { padding: 70px 0; position: relative; overflow: hidden; }
+        section { padding: 80px 0; position: relative; overflow: hidden; }
 
         /* Animations on Scroll */
-        .fade-in-section { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
+        .fade-in-section { opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .fade-in-section.visible { opacity: 1; transform: translateY(0); }
 
-        /* Glitch Effect (Optional) */
-         .glitch { animation: glitch 1.5s linear infinite alternate-reverse; }
+        /* Glitch Effect */
+         .glitch { animation: glitch 2s linear infinite alternate-reverse; display: inline-block; }
          @keyframes glitch {
-             2%, 64% { transform: translate(2px, 0) skew(0deg); }
-             4%, 60% { transform: translate(-2px, 0) skew(0deg); }
-             62% { transform: translate(0, 0) skew(5deg); }
+             2%, 64% { transform: translate(3px, 0) skew(0.5deg); text-shadow: -2px 0 #00ffff, 2px 0 #ff00ff; }
+             4%, 60% { transform: translate(-3px, 0) skew(-0.5deg); text-shadow: 2px 0 #00ffff, -2px 0 #ff00ff;}
+             62% { transform: translate(0, 0) skew(5deg); text-shadow: 1px 1px #00ff00, -1px -1px #ff0000; }
          }
 
 
         /* Header styles */
         header {
-            background-color: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(10px);
-            color: white; padding: 15px 0; position: fixed; width: 100%; top: 0; z-index: 100;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            background-color: rgba(5, 5, 5, 0.85); backdrop-filter: blur(12px); color: white;
+            padding: 15px 0; position: fixed; width: 100%; top: 0; z-index: 100;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
         }
         .header-inner { display: flex; justify-content: space-between; align-items: center; }
 
         .logo {
-            font-size: 28px; font-weight: 800; /* Bolder */ color: #ff3e3e; /* Red instead of blue */
-            text-decoration: none; letter-spacing: -1.5px;
-            text-shadow: 0 0 5px rgba(255, 62, 62, 0.5); /* Red glow */
+            font-size: 30px; font-weight: 900; /* Extra Bold */ color: #ff3e3e; text-decoration: none;
+            letter-spacing: -2px; text-shadow: 0 0 8px rgba(255, 62, 62, 0.6);
         }
         .logo span { color: #ffffff; }
         .ticker-symbol {
-            font-family: 'Courier New', Courier, monospace; background-color: #ff3e3e; color: #0c0c0c;
-            padding: 3px 8px; border-radius: 4px; margin-left: 8px; font-size: 0.7em;
+            font-family: 'Courier New', Courier, monospace; background-color: #ff3e3e; color: #0a0a0a;
+            padding: 4px 9px; border-radius: 5px; margin-left: 8px; font-size: 0.65em;
             vertical-align: middle; font-weight: bold; border: 1px solid #ff6e6e;
         }
 
         /* Desktop Navigation */
-        nav ul { display: flex; list-style: none; }
-        nav ul li { margin-left: 40px; }
+        nav ul { display: flex; list-style: none; align-items: center; /* Align items vertically */}
+        nav ul li { margin-left: 45px; }
         nav ul li a {
-            color: #d0d0d0; text-decoration: none; font-weight: 600; /* Semi-bold */
-            transition: color 0.3s, transform 0.2s; padding: 5px 0; position: relative; display: inline-block;
-            text-transform: uppercase; /* Cult-like feel */ font-size: 0.9em; letter-spacing: 0.5px;
+            color: #d5d5d5; text-decoration: none; font-weight: 600; transition: color 0.3s, transform 0.2s;
+            padding: 5px 0; position: relative; display: inline-block; text-transform: uppercase;
+            font-size: 0.95em; letter-spacing: 0.8px;
         }
-         nav ul li a::after {
-             content: ''; position: absolute; width: 0; height: 2px; display: block; margin-top: 3px;
-             right: 0; background: #ff3e3e; transition: width 0.3s ease;
-         }
+         nav ul li a::after { content: ''; position: absolute; width: 0; height: 2px; display: block; margin-top: 4px; right: 0; background: #ff3e3e; transition: width 0.4s ease; }
          nav ul li a:hover::after { width: 100%; left: 0; background-color: #ff3e3e; }
         nav ul li a:hover { color: #ffffff; transform: translateY(-1px); }
 
+        /* CTA Button Base Style */
         .cta-button {
-            background: linear-gradient(45deg, #ff3e3e, #ff6e6e); /* Red Gradient */
-            color: white; padding: 10px 24px; border-radius: 5px; font-weight: 700; text-decoration: none;
-            transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(255, 62, 62, 0.4);
-            text-transform: uppercase; font-size: 0.9em; letter-spacing: 0.5px;
-        }
-        .cta-button:hover {
-            background: linear-gradient(45deg, #e02a2a, #f05a5a);
-            transform: translateY(-2px) scale(1.03); box-shadow: 0 6px 18px rgba(255, 62, 62, 0.5);
-        }
-        .cta-button.nav-cta { margin-left: 40px; }
+             background: linear-gradient(45deg, #ff3e3e, #ff6e6e); color: white; padding: 12px 28px; border-radius: 6px;
+             font-weight: 700; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(255, 62, 62, 0.4);
+             text-transform: uppercase; font-size: 0.95em; letter-spacing: 1px; border: none; cursor: pointer;
+         }
+         .cta-button:hover {
+             background: linear-gradient(45deg, #e02a2a, #f05a5a); transform: translateY(-3px) scale(1.04);
+             box-shadow: 0 8px 20px rgba(255, 62, 62, 0.6);
+         }
+
+        /* Pump.fun Button Specific Style */
+         .pump-fun-button {
+             background: linear-gradient(45deg, #4ade80, #1fcc44); /* Pump.fun green */
+             color: #111; /* Dark text */
+             padding: 12px 28px; border-radius: 6px; font-weight: 800; text-decoration: none;
+             transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(74, 222, 128, 0.4);
+             text-transform: uppercase; font-size: 1em; letter-spacing: 1px; border: none; cursor: pointer;
+             margin-left: 20px; /* Space from nav */
+         }
+         .pump-fun-button:hover {
+             background: linear-gradient(45deg, #36d399, #1aaa39);
+             transform: translateY(-3px) scale(1.04); box-shadow: 0 8px 20px rgba(74, 222, 128, 0.5);
+         }
+
 
         /* Mobile Navigation */
-        .mobile-nav-toggle { display: none; background: none; border: none; color: white; font-size: 32px; cursor: pointer; z-index: 110; padding: 5px; }
+        .mobile-nav-toggle { display: none; background: none; border: none; color: white; font-size: 34px; cursor: pointer; z-index: 110; padding: 5px; }
         .mobile-nav-links {
-            display: none; position: fixed; top: 0; right: -100%; width: 80%; max-width: 340px; height: 100%;
-            background-color: #111; box-shadow: -5px 0 20px rgba(0, 0, 0, 0.6); padding-top: 90px;
+            display: none; position: fixed; top: 0; right: -100%; width: 85%; max-width: 360px; height: 100%;
+            background-color: #111; box-shadow: -5px 0 25px rgba(0, 0, 0, 0.7); padding-top: 100px;
             z-index: 105; flex-direction: column; align-items: center; transition: right 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
         .mobile-nav-links.active { display: flex; right: 0; }
         .mobile-nav-links ul { list-style: none; padding: 0; width: 100%; text-align: center; }
-        .mobile-nav-links ul li { margin: 30px 0; }
+        .mobile-nav-links ul li { margin: 35px 0; }
         .mobile-nav-links ul li a {
-            color: white; text-decoration: none; font-size: 22px; font-weight: 600; padding: 14px 30px;
+            color: white; text-decoration: none; font-size: 24px; font-weight: 600; padding: 15px 30px;
             display: block; transition: background-color 0.3s, color 0.3s; text-transform: uppercase;
         }
         .mobile-nav-links ul li a:hover { color: #ff3e3e; background-color: #1f1f1f; }
-        .mobile-nav-links .cta-button { margin-top: 50px; }
+        .mobile-nav-links .pump-fun-button { margin-top: 40px; margin-left: 0; } /* Center button on mobile */
 
 
         /* Price ticker */
         .price-ticker {
-            background-color: #000; /* Pitch black */ padding: 8px 0; text-align: center;
-            border-top: 1px solid #2a2a2a; font-family: 'Courier New', Courier, monospace;
+            background-color: #000; padding: 9px 0; text-align: center; border-top: 1px solid #333; font-family: 'Courier New', Courier, monospace;
             overflow: hidden; white-space: nowrap; position: relative; width: 100%;
         }
-        .price-ticker::after {
-             content: ''; position: absolute; top: 0; right: 0; width: 70px; height: 100%;
-             background: linear-gradient(to right, transparent, #000 85%); pointer-events: none;
-         }
-         .ticker-content { display: inline-block; padding-left: 100%; animation: ticker 30s linear infinite; }
-        .price-label { color: #aaa; margin-right: 5px; }
-        .price-value { color: #ff3e3e; font-weight: bold; margin-right: 10px; }
-        .price-change { padding: 2px 5px; border-radius: 3px; font-size: 0.8em; margin-right: 15px; }
+        .price-ticker::after { content: ''; position: absolute; top: 0; right: 0; width: 80px; height: 100%; background: linear-gradient(to right, transparent, #000 90%); pointer-events: none; }
+        .ticker-content { display: inline-block; padding-left: 100%; animation: ticker 30s linear infinite; }
+        .price-label { color: #bbb; margin-right: 5px; }
+        .price-value { color: #ff3e3e; font-weight: bold; margin-right: 10px; font-size: 1.1em;} /* Slightly larger */
+        .price-change { padding: 3px 6px; border-radius: 4px; font-size: 0.85em; margin-right: 18px; }
         .positive { background-color: #28a745; color: white; }
-        .negative { background-color: #ff3e3e; color: white; } /* Use red for negative */
-        .ticker-message { color: #a8a8a8; font-style: italic; margin-left: 30px; }
+        .negative { background-color: #ff3e3e; color: white; }
+        .ticker-message { color: #b8b8b8; font-style: italic; margin-left: 35px; }
         @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
 
         /* Hero section */
         .hero {
-            padding: 200px 0 140px;
-             background: #0c0c0c url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><g fill="none" stroke="rgba(255, 62, 62, 0.05)" stroke-width="1"><path d="M30 0 L60 30 L30 60 L0 30 Z" /><path d="M0 0 L60 60 M60 0 L0 60" /></g></svg>') repeat; /* Edgy chaotic background */
-            color: white; text-align: center; position: relative; overflow: hidden;
-            border-bottom: 4px solid #ff3e3e; /* Thicker red border */
+            padding: 220px 0 160px;
+            background: #0a0a0a url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70"><g fill="rgba(255, 62, 62, 0.03)" fill-rule="evenodd"><path d="M0 0h70v70H0z"/><path d="M10 10h50v50H10z"/><path d="M20 20h30v30H20z"/><path d="M30 30h10v10H30z"/></g></svg>') repeat; /* Concentric squares bg */
+            color: white; text-align: center; position: relative; overflow: hidden; border-bottom: 5px solid #ff3e3e;
         }
         .hero .container { position: relative; z-index: 1; }
-
         .hero h1 {
-            font-size: 64px; /* MUCH Larger */ margin-bottom: 15px; color: #ffffff; font-weight: 800;
-            letter-spacing: -2px; text-shadow: 0 3px 8px rgba(0,0,0,0.5); line-height: 1.1;
+            font-size: 72px; margin-bottom: 20px; color: #ffffff; font-weight: 900; letter-spacing: -3px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.6); line-height: 1.05;
         }
-        .hero h1 span { color: #ff3e3e; text-shadow: 0 0 10px rgba(255, 62, 62, 0.7); } /* Red glow */
+        .hero h1 span { color: #ff3e3e; text-shadow: 0 0 15px rgba(255, 62, 62, 0.8); }
+        .hero p.subtitle { font-size: 26px; max-width: 800px; margin: 0 auto 40px; opacity: 0.9; font-weight: 400; }
+        .hero p.tagline { font-size: 32px; margin-bottom: 50px; color: #ff3e3e; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
 
-        .hero p.subtitle {
-            font-size: 24px; max-width: 750px; margin: 0 auto 35px; opacity: 0.85; font-weight: 400;
+        .hero-buttons-main { /* Container for main buttons */
+            margin: 40px auto; display: flex; justify-content: center; align-items: center; gap: 25px; flex-wrap: wrap;
         }
-         .hero p.tagline { /* More aggressive tagline */
-            font-style: normal; font-size: 30px; margin-bottom: 45px; color: #ff3e3e; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 1px;
+        .hero-cta-main { /* Buy on Pump Button in Hero */
+             padding: 22px 50px; font-size: 24px; border-radius: 10px; letter-spacing: 1.5px;
          }
-
-
-        .hero-cta-main { /* Main Buy/Join Button */
-            padding: 20px 45px; font-size: 22px; margin: 30px auto; display: inline-block;
-            background: linear-gradient(45deg, #ff3e3e, #ff6e6e); color: white; border-radius: 8px;
-            font-weight: 700; text-decoration: none; transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(255, 62, 62, 0.5); text-transform: uppercase; letter-spacing: 1px;
-        }
-        .hero-cta-main:hover {
-            background: linear-gradient(45deg, #e02a2a, #f05a5a);
-            transform: translateY(-3px) scale(1.05); box-shadow: 0 9px 25px rgba(255, 62, 62, 0.6);
-        }
+         .how-to-buy-button { /* Secondary Button Style */
+             background: transparent; border: 2px solid #ff6e6e; color: #ff6e6e; padding: 18px 40px; font-size: 18px;
+             border-radius: 8px; font-weight: 700; text-decoration: none; transition: all 0.3s ease;
+             text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
+         }
+         .how-to-buy-button:hover { background-color: rgba(255, 62, 62, 0.1); color: #fff; transform: translateY(-2px); }
 
 
         /* Contract address box */
         .contract-address {
-            background-color: rgba(15, 15, 15, 0.9); border: 2px solid #ff3e3e; border-radius: 10px;
-            padding: 30px; margin: 50px auto; max-width: 650px; text-align: center;
-            box-shadow: 0 0 15px rgba(255, 62, 62, 0.2); /* Red glow */
+            background-color: rgba(10, 10, 10, 0.9); border: 2px solid #ff3e3e; border-radius: 12px; padding: 35px;
+            margin: 60px auto; max-width: 700px; text-align: center; box-shadow: 0 0 20px rgba(255, 62, 62, 0.25);
         }
-        .contract-address h4 { color: #ffffff; margin-bottom: 15px; font-size: 20px; text-transform: uppercase; }
+        .contract-address h4 { color: #eee; margin-bottom: 18px; font-size: 22px; text-transform: uppercase; letter-spacing: 1px;}
         .contract-address p {
-            font-family: 'Courier New', Courier, monospace; background-color: #000; padding: 15px; border-radius: 5px;
-            color: #ff3e3e; overflow-wrap: break-word; word-break: break-all; font-size: 16px;
-            text-align: center; border: 1px solid #444;
+            font-family: 'Courier New', Courier, monospace; background-color: #000; padding: 18px; border-radius: 6px; color: #ff3e3e;
+            overflow-wrap: break-word; word-break: break-all; font-size: 17px; text-align: center; border: 1px solid #555;
         }
-        .copy-btn {
-            background-color: #ff3e3e; color: white; border: none; border-radius: 5px; padding: 12px 20px;
-            margin-top: 20px; cursor: pointer; font-size: 16px; transition: background-color 0.3s, transform 0.2s;
-            font-weight: bold; text-transform: uppercase;
-        }
+        .copy-btn { /* Standard Copy Button Style */
+             background-color: #ff3e3e; color: white; border: none; border-radius: 6px; padding: 12px 22px; margin-top: 20px;
+             cursor: pointer; font-size: 16px; transition: background-color 0.3s, transform 0.2s; font-weight: bold; text-transform: uppercase;
+         }
         .copy-btn:hover { background-color: #e02a2a; transform: translateY(-2px); }
 
         /* Social Links Box */
-        .socials-box {
-            margin-top: 40px;
-            text-align: center;
-        }
-        .socials-box h4 {
-            color: #ccc;
-            margin-bottom: 15px;
-            font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 20px; /* Increased gap */
-            list-style: none;
-            padding: 0;
-        }
+        .socials-box { margin-top: 50px; text-align: center; }
+        .socials-box h4 { color: #ddd; margin-bottom: 20px; font-size: 18px; text-transform: uppercase; letter-spacing: 1.5px; }
+        .social-icons { display: flex; justify-content: center; gap: 25px; list-style: none; padding: 0; }
         .social-icon {
-            width: 45px; /* Larger icons */
-            height: 45px;
-            border-radius: 50%;
-            background-color: #222;
-            display: flex; align-items: center; justify-content: center;
-            color: white; text-decoration: none; font-size: 22px;
-            transition: background-color 0.3s, transform 0.3s;
-            border: 1px solid #444;
+            width: 50px; height: 50px; border-radius: 50%; background-color: #282828; display: flex; align-items: center;
+            justify-content: center; color: white; text-decoration: none; font-size: 24px; transition: all 0.3s ease;
+            border: 1px solid #555; position: relative; /* For tooltip */
         }
-        .social-icon:hover {
-            background-color: #ff3e3e;
-            transform: translateY(-3px) scale(1.1);
-            color: #000; /* Black icon on red hover */
-             border-color: #ff3e3e;
-        }
-         /* Tooltip for social icons (optional) */
-         .social-icon[aria-label]:hover::after {
-             content: attr(aria-label);
-             position: absolute;
-             bottom: 110%; /* Position above */
-             left: 50%;
-             transform: translateX(-50%);
-             background-color: #333;
-             color: white;
-             padding: 4px 8px;
-             border-radius: 4px;
-             font-size: 12px;
-             white-space: nowrap;
-             z-index: 10;
+        .social-icon:hover { background-color: #ff3e3e; transform: translateY(-4px) scale(1.15); color: #0a0a0a; border-color: #ff3e3e; box-shadow: 0 5px 10px rgba(255, 62, 62, 0.3);}
+        .social-icon[aria-label]:hover::after { /* Tooltip Style */
+             content: attr(aria-label); position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%);
+             background-color: #111; color: white; padding: 5px 10px; border-radius: 5px; font-size: 13px;
+             white-space: nowrap; z-index: 10; border: 1px solid #444;
          }
 
 
-        /* Manifesto Section (Rewritten as "The Decree") */
-        #decree {
-            background-color: #111; /* Darker background */
-            border-top: 2px dashed #ff3e3e; /* Dashed border */
-            border-bottom: 2px dashed #ff3e3e;
-        }
-        .decree-container {
-            max-width: 850px; margin: 0 auto; position: relative; z-index: 1; text-align: center;
-            padding: 40px; background-color: rgba(0,0,0,0.3); border-radius: 10px;
-             border: 1px solid #333;
-        }
-        .decree-title {
-            font-size: 48px; color: #ff3e3e; margin-bottom: 30px; font-weight: 800;
-            text-transform: uppercase; letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(255, 62, 62, 0.5);
-        }
-        #decree h3 {
-            color: #ffffff; font-size: 28px; margin-top: 40px; margin-bottom: 15px;
-            font-weight: 700;
-        }
-        #decree p {
-            color: #c5c5c5; /* Lighter grey */ margin-bottom: 25px; font-size: 19px; line-height: 1.7;
-            text-align: left; /* Keep paragraphs readable */
-        }
-         #decree strong { color: #ff3e3e; font-weight: 700; }
-         #decree em { color: #eee; font-style: italic; }
+        /* Game Zone Section (Combined Game + Leaderboard) */
+         #game-zone { background-color: #111; text-align: center; }
+         #game-zone .section-title { margin-bottom: 20px;}
+         #game-zone .section-description { margin-bottom: 40px; }
 
-        .decree-list { /* Replaces roadmap/principles */
-            list-style: none; margin: 30px auto; padding: 0; text-align: left; max-width: 600px;
+         .game-and-leaderboard {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            align-items: flex-start; /* Align tops */
+         }
+
+        .game-container {
+            flex: 2; /* Takes more space */
+            min-width: 300px; /* Min width before wrapping */
+            max-width: 750px; /* Max width */
+            height: 480px; /* Adjusted height */
+            margin: 0; /* Remove auto margin */
+            background-color: #1a1a1a; border: 3px solid #ff3e3e; border-radius: 10px;
+            overflow: hidden; position: relative; cursor: pointer; box-shadow: 0 0 25px rgba(255, 62, 62, 0.3);
         }
-        .decree-list li {
-            padding: 12px 0 12px 35px; position: relative; color: #e0e0e0; font-size: 18px;
-            border-bottom: 1px solid #333;
-        }
+        .game-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: rgba(5, 5, 5, 0.92); z-index: 10; padding: 20px; text-align: center; }
+        .game-title { font-size: 44px; margin-bottom: 20px; color: #ff3e3e; font-weight: bold; }
+        .game-description { max-width: 500px; margin-bottom: 35px; color: #ccc; font-size: 18px; }
+        .start-game-btn {
+             background: linear-gradient(45deg, #ff3e3e, #ff6e6e); color: white; padding: 16px 35px; border: none;
+             border-radius: 8px; font-size: 20px; cursor: pointer; transition: all 0.3s ease; font-weight: bold;
+             box-shadow: 0 5px 15px rgba(255, 62, 62, 0.4); text-transform: uppercase;
+         }
+         .start-game-btn:hover { background: linear-gradient(45deg, #e02a2a, #f05a5a); transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 20px rgba(255, 62, 62, 0.5); }
+         #game-canvas { display: block; width: 100%; height: 100%; }
+        .game-score { position: absolute; top: 15px; right: 15px; font-size: 22px; color: #ff3e3e; font-weight: bold; z-index: 5; background-color: rgba(5, 5, 5, 0.75); padding: 8px 14px; border-radius: 5px; font-family: monospace; }
+        .game-controls { position: absolute; bottom: 15px; left: 15px; color: rgba(255, 255, 255, 0.6); font-size: 13px; z-index: 5; background-color: rgba(5, 5, 5, 0.75); padding: 6px 10px; border-radius: 5px; }
+
+         /* Leaderboard Styles */
+         .leaderboard-container {
+            flex: 1; /* Takes less space */
+            min-width: 280px;
+            max-width: 350px;
+            background-color: #1a1a1a;
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid #444;
+            text-align: left;
+         }
+         .leaderboard-container h3 {
+             color: #ff3e3e;
+             text-align: center;
+             margin-bottom: 20px;
+             font-size: 24px;
+             text-transform: uppercase;
+             letter-spacing: 1px;
+         }
+         #leaderboard-list {
+             list-style: none;
+             padding: 0;
+             max-height: 350px; /* Limit height */
+             overflow-y: auto; /* Add scroll if needed */
+         }
+          #leaderboard-list::-webkit-scrollbar { width: 5px; }
+          #leaderboard-list::-webkit-scrollbar-track { background: #222; }
+          #leaderboard-list::-webkit-scrollbar-thumb { background: #ff3e3e; border-radius: 3px;}
+
+         #leaderboard-list li {
+             display: flex;
+             justify-content: space-between;
+             padding: 10px 5px;
+             border-bottom: 1px solid #333;
+             font-size: 16px;
+             color: #ccc;
+         }
+         #leaderboard-list li:last-child { border-bottom: none; }
+         #leaderboard-list .leaderboard-name { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 70%; }
+         #leaderboard-list .leaderboard-score { font-weight: bold; color: #ff3e3e; font-family: monospace;}
+
+
+        /* The Decree Section */
+        #decree { background-color: #111; border-top: 3px solid #ff3e3e; border-bottom: 3px solid #ff3e3e; }
+        .decree-container { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; text-align: center; padding: 50px; background-color: rgba(0,0,0,0.4); border-radius: 12px; border: 1px solid #444; }
+        .decree-title { font-size: 52px; color: #ff3e3e; margin-bottom: 35px; font-weight: 900; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 12px rgba(255, 62, 62, 0.6); }
+        #decree h3 { color: #fff; font-size: 30px; margin-top: 45px; margin-bottom: 18px; font-weight: 700; }
+        #decree p { color: #d0d0d0; margin-bottom: 28px; font-size: 20px; line-height: 1.8; text-align: left; }
+        #decree strong { color: #ff3e3e; font-weight: 700; } #decree em { color: #eee; font-style: italic; }
+        .decree-list { list-style: none; margin: 35px auto; padding: 0; text-align: left; max-width: 650px; }
+        .decree-list li { padding: 14px 0 14px 40px; position: relative; color: #e5e5e5; font-size: 19px; border-bottom: 1px solid #444; }
         .decree-list li:last-child { border-bottom: none; }
-        .decree-list li::before {
-            content: '🔥'; /* Fire emoji bullet */ position: absolute; left: 0; top: 14px; font-size: 20px;
-        }
-
-        .final-words {
-            margin-top: 50px; padding: 30px; background-color: rgba(255, 62, 62, 0.1); /* Red tint background */
-            border-radius: 10px; text-align: center; border: 1px solid #ff3e3e;
-        }
-        .final-words p { font-size: 26px; margin-bottom: 15px; text-align: center; color: #fff; font-weight: 600;}
-        .final-words strong { color: #ff3e3e; font-size: 28px; display: block; margin-top: 20px; text-transform: uppercase;}
+        .decree-list li::before { content: '🔥'; position: absolute; left: 0; top: 16px; font-size: 22px; }
+        .final-words { margin-top: 60px; padding: 35px; background-color: rgba(255, 62, 62, 0.15); border-radius: 10px; text-align: center; border: 1px solid #ff3e3e; }
+        .final-words p { font-size: 28px; margin-bottom: 18px; text-align: center; color: #fff; font-weight: 600;}
+        .final-words strong { color: #ff3e3e; font-size: 30px; display: block; margin-top: 25px; text-transform: uppercase;}
 
 
-        /* Features Section (Rewritten as "Why We Fight") */
-        #why-we-fight {
-            background-color: #0f0f0f;
-        }
-        .section-title {
-            font-size: 42px; /* Larger */ margin-bottom: 25px; color: #ffffff; text-align: center;
-            font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-        }
-        .section-description {
-            max-width: 800px; margin: 0 auto 60px; color: #bbb; font-size: 19px; text-align: center;
-        }
-
-        .features-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 35px; /* Tighter gap */
-        }
+        /* Why We Fight Section */
+        #why-we-fight { background-color: #0d0d0d; }
+        .section-title { font-size: 46px; margin-bottom: 30px; color: #ffffff; text-align: center; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; }
+        .section-description { max-width: 850px; margin: 0 auto 70px; color: #c5c5c5; font-size: 20px; text-align: center; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
         .feature-card {
-            background-color: #181818; border-radius: 10px; padding: 35px 25px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4); transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-            border: 1px solid #333; text-align: center;
+            background-color: #1a1a1a; border-radius: 12px; padding: 40px 30px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s, border-color 0.3s;
+            border: 1px solid #444; text-align: center; display: flex; flex-direction: column; /* Align content */
         }
-        .feature-card:hover {
-            transform: translateY(-8px) rotate(-1deg); /* Slight tilt */
-            box-shadow: 0 10px 30px rgba(255, 62, 62, 0.3); border-color: #ff3e3e;
-        }
+        .feature-card:hover { transform: translateY(-10px) rotate(-1.5deg); box-shadow: 0 12px 35px rgba(255, 62, 62, 0.35); border-color: #ff3e3e; }
         .feature-icon {
-            width: 75px; height: 75px; background-color: #222; border-radius: 50%; display: flex;
-            align-items: center; justify-content: center; margin: 0 auto 25px; color: #ff3e3e; font-size: 32px;
-            border: 2px solid #444; transition: transform 0.3s;
+            width: 80px; height: 80px; background-color: #252525; border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; margin: 0 auto 30px; color: #ff3e3e; font-size: 36px; border: 2px solid #555;
+            transition: transform 0.4s ease-in-out;
         }
-         .feature-card:hover .feature-icon {
-             transform: scale(1.1) rotate(10deg);
-         }
-        .feature-title { font-size: 24px; margin-bottom: 15px; color: #ffffff; font-weight: 600; }
-        .feature-description { color: #b5b5b5; font-size: 16px; }
+         .feature-card:hover .feature-icon { transform: scale(1.15) rotate(15deg); }
+        .feature-title { font-size: 26px; margin-bottom: 18px; color: #ffffff; font-weight: 700; flex-shrink: 0; /* Prevent shrinking */ }
+        .feature-description { color: #bdbdbd; font-size: 17px; flex-grow: 1; /* Allow text to fill space */ }
 
 
-        /* Movement Section (Rewritten as "Join The Cult") */
-        #join-the-cult {
-            background: linear-gradient(180deg, #111 0%, #0c0c0c 100%); /* Subtle gradient */
-        }
-        .movement-title {
-            font-size: 48px; color: #ff3e3e; margin-bottom: 30px; font-weight: 800;
-            text-transform: uppercase; letter-spacing: 2px; text-align: center;
-        }
-        .movement-description {
-            max-width: 800px; margin: 0 auto 40px; font-size: 20px; color: #ccc; line-height: 1.7; text-align: center;
-        }
-         .movement-description strong { color: #ff3e3e; }
-
-        .movement-icons {
-            display: flex; justify-content: center; gap: 60px; margin-bottom: 50px; flex-wrap: wrap;
-        }
+        /* Join The Cult Section */
+        #join-the-cult { background: linear-gradient(180deg, #151515 0%, #0a0a0a 100%); }
+        .movement-title { font-size: 52px; color: #ff3e3e; margin-bottom: 35px; font-weight: 900; text-transform: uppercase; letter-spacing: 3px; text-align: center; }
+        .movement-description { max-width: 850px; margin: 0 auto 50px; font-size: 21px; color: #d0d0d0; line-height: 1.8; text-align: center; }
+        .movement-description strong { color: #ff3e3e; }
+        .movement-icons { display: flex; justify-content: center; gap: 70px; margin-bottom: 60px; flex-wrap: wrap; }
         .movement-icon { display: flex; flex-direction: column; align-items: center; }
         .icon-container {
-            width: 110px; height: 110px; background-color: #1a1a1a; border-radius: 50%; display: flex;
-            align-items: center; justify-content: center; margin-bottom: 20px; font-size: 45px; color: #ff3e3e;
-            border: 3px solid #444; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s, box-shadow 0.3s; /* Bouncy effect */
+            width: 120px; height: 120px; background-color: #1f1f1f; border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; margin-bottom: 25px; font-size: 50px; color: #ff3e3e; border: 4px solid #555;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s, box-shadow 0.3s;
         }
-        .icon-container:hover {
-             transform: scale(1.15) rotate(-5deg); border-color: #ff3e3e; box-shadow: 0 0 25px rgba(255, 62, 62, 0.4);
-        }
-        .icon-label { font-size: 18px; color: #ffffff; font-weight: 600; text-transform: uppercase; }
-
-        .cult-motto {
-            font-size: 24px; font-style: italic; color: #ff3e3e; margin-top: 30px; font-weight: bold; text-align: center;
-        }
+        .icon-container:hover { transform: scale(1.2) rotate(-8deg); border-color: #ff3e3e; box-shadow: 0 0 30px rgba(255, 62, 62, 0.5); }
+        .icon-label { font-size: 19px; color: #ffffff; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .cult-motto { font-size: 26px; font-style: italic; color: #ff3e3e; margin-top: 40px; font-weight: bold; text-align: center; text-shadow: 0 0 5px rgba(255,62,62,0.3); }
 
 
-        /* Testimonials Section (Meme Edition) */
-        #testimonials { background-color: #151515; }
-        .testimonials-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 60px;
+        /* Meme Vault Section */
+        #meme-vault { background-color: #101010; text-align: center; }
+        .meme-grid {
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+             gap: 25px;
+             margin-top: 50px;
         }
-        .testimonial-card {
-            background-color: #222; border-radius: 10px; padding: 35px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5); /* Inset shadow */
-            border: 1px solid #444; display: flex; flex-direction: column;
-            transition: transform 0.3s, border-color 0.3s;
+        .meme-item img {
+             width: 100%;
+             height: auto;
+             border-radius: 8px;
+             border: 2px solid #444;
+             transition: transform 0.3s, box-shadow 0.3s;
+             cursor: pointer; /* Optional: Add lightbox later */
         }
-         .testimonial-card:hover {
-             transform: scale(1.03);
+        .meme-item img:hover {
+             transform: scale(1.05);
+             box-shadow: 0 5px 15px rgba(255, 62, 62, 0.3);
              border-color: #ff3e3e;
-         }
-        .testimonial-text {
-            color: #ccc; font-style: italic; margin-bottom: 25px; font-size: 17px; line-height: 1.7;
-            flex-grow: 1; border-left: 3px solid #ff3e3e; padding-left: 15px; /* Quote style */
         }
+        .meme-submission-note {
+             margin-top: 40px;
+             font-size: 18px;
+             color: #aaa;
+        }
+         .meme-submission-note a {
+             color: #ff3e3e;
+             text-decoration: underline;
+         }
+
+
+        /* Testimonials Slider Section */
+        #testimonials { background-color: #1a1a1a; padding-bottom: 100px; /* Extra space for nav */}
+        .testimonial-slider-container {
+            max-width: 700px; /* Adjust width */
+            margin: 60px auto 0;
+            position: relative;
+            perspective: 1000px; /* For 3D flip effect */
+            min-height: 350px; /* Ensure container has height */
+        }
+        .testimonial-card { /* Now part of the slider */
+            background-color: #252525; border-radius: 15px; padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6); border: 1px solid #555;
+            display: flex; flex-direction: column; position: absolute; /* Position for stacking/flipping */
+            width: 100%; height: 100%; top: 0; left: 0;
+            opacity: 0; visibility: hidden;
+            transform: rotateY(180deg); /* Start flipped */
+            backface-visibility: hidden;
+            transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.5s, visibility 0.5s;
+        }
+        .testimonial-card.active {
+             opacity: 1; visibility: visible; transform: rotateY(0deg); /* Flip in */
+             z-index: 2; /* Bring active card to front */
+        }
+        .testimonial-text { color: #d0d0d0; font-style: italic; margin-bottom: 30px; font-size: 18px; line-height: 1.8; flex-grow: 1; border-left: 4px solid #ff3e3e; padding-left: 20px; }
         .testimonial-author { display: flex; align-items: center; margin-top: auto; }
-        .author-avatar {
-            width: 55px; height: 55px; border-radius: 50%; margin-right: 15px; background-color: #444;
-            border: 2px solid #ff3e3e; display: flex; align-items: center; justify-content: center;
-            font-size: 24px; font-weight: bold; color: #111;
-        }
-        .author-name { font-weight: 700; color: #ffffff; font-size: 17px; }
-        .author-title { color: #999; font-size: 14px; text-transform: uppercase; }
+        .author-avatar { width: 60px; height: 60px; border-radius: 50%; margin-right: 18px; background-color: #4a4a4a; border: 2px solid #ff3e3e; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: bold; color: #111; }
+        .author-name { font-weight: 700; color: #ffffff; font-size: 18px; }
+        .author-title { color: #a0a0a0; font-size: 15px; text-transform: uppercase; }
 
-
-        /* Game Section Styles (Intro Text) */
-        .game-section { background-color: #0c0c0c; text-align: center; }
-        .game-section h2 { font-size: 42px; color: #ff3e3e; margin-bottom: 20px; text-transform: uppercase; }
-        .game-section p.section-description { max-width: 800px; margin: 0 auto 40px; color: #bbb; font-size: 19px; }
-        .game-features { display: flex; justify-content: space-around; flex-wrap: wrap; margin: 40px 0; gap: 25px; }
-        .game-feature {
-            flex-basis: 30%; min-width: 260px; margin-bottom: 30px; background-color: #1a1a1a;
-            padding: 25px; border-radius: 8px; border: 1px solid #444;
-        }
-        .game-feature h4 { color: #ff3e3e; margin-bottom: 15px; font-size: 22px; border-bottom: 1px solid #555; padding-bottom: 10px; }
-        .game-feature ul { text-align: left; padding-left: 20px; color: #bbb; list-style: none; } /* No bullets */
-        .game-feature ul li { margin-bottom: 10px; position: relative; padding-left: 25px; }
-         .game-feature ul li::before {
-             content: '🎮'; /* Game controller bullet */ position: absolute; left: 0; top: 0;
+         /* Slider Navigation */
+         .testimonial-nav {
+             position: absolute;
+             bottom: -60px; /* Position below the card area */
+             left: 50%;
+             transform: translateX(-50%);
+             display: flex;
+             gap: 20px;
+             z-index: 5;
          }
+         .testimonial-nav button {
+             background-color: #ff3e3e;
+             color: white;
+             border: none;
+             border-radius: 50%;
+             width: 45px;
+             height: 45px;
+             font-size: 20px;
+             font-weight: bold;
+             cursor: pointer;
+             transition: background-color 0.3s, transform 0.2s;
+             box-shadow: 0 3px 8px rgba(255, 62, 62, 0.3);
+         }
+         .testimonial-nav button:hover {
+             background-color: #e02a2a;
+             transform: scale(1.1);
+         }
+          .testimonial-nav button:disabled { /* Style for disabled state */
+              background-color: #555;
+              cursor: not-allowed;
+              opacity: 0.5;
+              transform: none;
+              box-shadow: none;
+          }
 
 
         /* CTA Section */
-        .cta {
-            background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
-            color: white; border-top: 3px solid #ff3e3e;
-        }
-        .cta-box { max-width: 800px; margin: 0 auto; text-align: center;}
-        .cta-title { font-size: 40px; margin-bottom: 20px; color: #ff3e3e; font-weight: 700; text-transform: uppercase;}
-        .cta-description { font-size: 20px; margin-bottom: 40px; opacity: 0.9; color: #ccc;}
+        .cta { background: linear-gradient(135deg, #2a2a2a 0%, #050505 100%); color: white; border-top: 4px solid #ff3e3e; }
+        .cta-box { max-width: 850px; margin: 0 auto; text-align: center;}
+        .cta-title { font-size: 44px; margin-bottom: 25px; color: #ff3e3e; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;}
+        .cta-description { font-size: 21px; margin-bottom: 45px; opacity: 0.9; color: #d0d0d0;}
 
 
         /* Footer */
-        footer {
-            background-color: #050505; /* Near black */ color: white; padding: 70px 0 30px;
-            border-top: 1px solid #333;
-        }
-        .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; }
-        .footer-column { flex-basis: 23%; min-width: 200px; margin-bottom: 30px; }
-        .footer-column h3 { font-size: 20px; margin-bottom: 20px; color: #ff3e3e; text-transform: uppercase; }
+        footer { background-color: #000; color: white; padding: 80px 0 40px; border-top: 2px solid #444; }
+        .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px;}
+        .footer-column { flex: 1; min-width: 200px; margin-bottom: 30px; }
+        .footer-column h3 { font-size: 22px; margin-bottom: 25px; color: #ff3e3e; text-transform: uppercase; letter-spacing: 1px; }
         .footer-column ul { list-style: none; padding: 0; }
-        .footer-column ul li { margin-bottom: 12px; }
-        .footer-column ul li a { color: #bbb; text-decoration: none; opacity: 0.8; transition: opacity 0.3s, color 0.3s; }
+        .footer-column ul li { margin-bottom: 14px; }
+        .footer-column ul li a { color: #c5c5c5; text-decoration: none; opacity: 0.85; transition: opacity 0.3s, color 0.3s; }
         .footer-column ul li a:hover { opacity: 1; color: #ff3e3e; }
-        .footer-socials { /* For footer social icons specifically */
-             display: flex; gap: 15px; padding: 0; list-style: none;
+        .footer-socials { display: flex; gap: 18px; padding: 0; list-style: none; margin-top: 10px;}
+        .footer-socials .social-icon { width: 45px; height: 45px; font-size: 22px; background-color: #2a2a2a; border: none; }
+        .footer-socials .social-icon:hover { background-color: #ff3e3e; color: #000; }
+        .footer-bottom { text-align: center; padding-top: 50px; margin-top: 50px; border-top: 1px solid #444; }
+        .footer-bottom p { opacity: 0.75; font-size: 15px; color: #b5b5b5;}
+        .footer-bottom a { color: #ff3e3e; opacity: 0.85; text-decoration: none; transition: opacity 0.3s; }
+        .footer-bottom a:hover { opacity: 1; }
+        .footer-disclaimer { margin-top: 20px; font-size: 13px; color: #777; max-width: 750px; margin-left: auto; margin-right: auto; line-height: 1.5;}
+
+        /* Emergency Dump Button & Dark Mode Toggle */
+         .footer-extras {
+             margin-top: 30px;
+             display: flex;
+             justify-content: center;
+             align-items: center;
+             gap: 30px;
          }
-         .footer-socials .social-icon {
-              width: 40px; height: 40px; font-size: 20px; background-color: #222; border: none;
+         .dump-button {
+             background-color: #dc3545; /* Bootstrap red */
+             color: white;
+             border: none;
+             padding: 10px 20px;
+             font-size: 14px;
+             font-weight: bold;
+             border-radius: 5px;
+             cursor: pointer;
+             transition: background-color 0.3s, transform 0.2s;
+             text-transform: uppercase;
          }
-         .footer-socials .social-icon:hover { background-color: #ff3e3e; color: #000; }
+         .dump-button:hover { background-color: #c82333; transform: scale(1.05); }
 
-        .footer-bottom { text-align: center; padding-top: 40px; margin-top: 40px; border-top: 1px solid #333; }
-        .footer-bottom p { opacity: 0.7; font-size: 14px; color: #aaa;}
-         .footer-bottom a { color: #ff3e3e; opacity: 0.8; text-decoration: none; transition: opacity 0.3s; }
-         .footer-bottom a:hover { opacity: 1; }
-         .footer-disclaimer { margin-top: 15px; font-size: 12px; color: #666; max-width: 700px; margin-left: auto; margin-right: auto;}
+          /* Dark Mode Toggle Styles (Basic Switch) */
+          .dark-mode-toggle { display: flex; align-items: center; gap: 8px; color: #aaa; font-size: 14px;}
+          .dark-mode-toggle label { cursor: pointer; }
+          .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+          .switch input { opacity: 0; width: 0; height: 0; }
+          .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #444; transition: .4s; border-radius: 24px; }
+          .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+          input:checked + .slider { background-color: #ff3e3e; }
+          input:checked + .slider:before { transform: translateX(20px); }
 
 
-        /* Financial facts popup */
-        .facts-popup {
-            position: fixed; bottom: 20px; right: 20px; background-color: #ff3e3e; /* Red popup */
-            color: white; padding: 15px 20px; border-radius: 8px; box-shadow: 0 5px 20px rgba(255, 62, 62, 0.4);
-            z-index: 1000; max-width: 320px; /* Wider */ font-size: 15px; font-weight: bold; opacity: 0;
-            transform: translateX(110%); animation: slideInFadeOut 6s forwards ease-in-out; /* Longer duration */
-            border: 1px solid #ff6e6e;
+        /* Modal Styles */
+        .modal {
+            display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
+            overflow: auto; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
+            align-items: center; justify-content: center;
         }
-        @keyframes slideInFadeOut { /* Same animation as before */
-            0% { transform: translateX(110%); opacity: 0; } 15% { transform: translateX(0); opacity: 1; }
-            85% { transform: translateX(0); opacity: 1; } 100% { transform: translateX(0); opacity: 0; }
+        .modal.active { display: flex; animation: fadeInModal 0.3s ease-out; }
+        @keyframes fadeInModal { from { opacity: 0; } to { opacity: 1; } }
+
+        .modal-content {
+            background-color: #1a1a1a; margin: auto; padding: 30px 40px; border: 1px solid #ff3e3e;
+            width: 90%; max-width: 550px; border-radius: 10px; text-align: center; position: relative;
+            box-shadow: 0 5px 25px rgba(255, 62, 62, 0.3);
+        }
+        .modal-close {
+            color: #aaa; position: absolute; top: 10px; right: 20px; font-size: 32px; font-weight: bold;
+            cursor: pointer; transition: color 0.3s;
+        }
+        .modal-close:hover { color: #ff3e3e; }
+        .modal h2 { color: #ff3e3e; margin-bottom: 20px; font-size: 26px; text-transform: uppercase; }
+        .modal p { color: #ccc; margin-bottom: 25px; font-size: 17px; }
+        .modal-button { /* Generic button inside modal */
+            padding: 12px 25px; font-size: 16px; margin: 5px;
         }
 
         /* Responsive adjustments */
         @media (max-width: 992px) {
              nav ul { display: none; } .mobile-nav-toggle { display: block; }
-             .footer-column { flex-basis: 45%; }
+             .footer-column { flex-basis: 45%; min-width: initial; } /* Allow smaller columns */
+             .game-and-leaderboard { flex-direction: column; align-items: center; }
+             .game-container { order: 1; width: 100%; max-width: 600px; /* Limit width */}
+             .leaderboard-container { order: 2; width: 100%; max-width: 400px; margin-top: 30px; }
         }
         @media (max-width: 768px) {
-            section { padding: 60px 0; }
-            .header-inner { flex-direction: row; }
-            .hero h1 { font-size: 48px; }
-            .hero p.subtitle { font-size: 20px; }
-            .hero p.tagline { font-size: 24px; }
+            section { padding: 60px 0; } .header-inner { flex-direction: row; }
+            .hero h1 { font-size: 54px; } .hero p.subtitle { font-size: 20px; } .hero p.tagline { font-size: 26px; }
             .features-grid { grid-template-columns: 1fr; }
             .footer-column { flex-basis: 100%; text-align: center; }
             .footer-socials { justify-content: center; }
             .facts-popup { max-width: 90%; right: 5%; left: 5%; bottom: 10px; text-align: center;}
-            .game-container { height: 400px; margin-top: 40px;}
-            .decree-container { padding: 25px; }
-            .decree-title { font-size: 36px; }
-            #decree h3 { font-size: 24px; }
-            #decree p { font-size: 17px; }
-            .movement-title { font-size: 38px; }
-            .movement-description { font-size: 18px; }
-            .section-title { font-size: 34px; }
-            .section-description { font-size: 17px; }
+            .game-container { height: 420px; }
+            .decree-container { padding: 30px; } .decree-title { font-size: 40px; } #decree h3 { font-size: 26px; } #decree p { font-size: 18px; }
+            .movement-title { font-size: 42px; } .movement-description { font-size: 19px; }
+            .section-title { font-size: 38px; } .section-description { font-size: 18px; }
+            .testimonial-slider-container { max-width: 90%; min-height: 400px; } /* Adjust height */
+            .testimonial-text { font-size: 17px; }
+            .meme-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
         }
         @media (max-width: 576px) {
-             .hero { padding: 160px 0 100px; }
-             .hero h1 { font-size: 38px; letter-spacing: -1px;}
-             .hero p.subtitle { font-size: 18px; }
-             .hero p.tagline { font-size: 20px; }
-             .hero-cta-main { font-size: 18px; padding: 16px 35px; }
-             .contract-address p { font-size: 14px; }
-             .copy-btn { font-size: 14px; padding: 10px 16px;}
-             .game-title { font-size: 32px; }
-             .game-description { font-size: 16px; }
-             .decree-title { font-size: 30px; }
-             #decree h3 { font-size: 22px; }
-             #decree p { font-size: 16px; }
-             .feature-title { font-size: 20px; }
-             .footer-column h3 { font-size: 18px; }
-             .facts-popup { font-size: 13px; padding: 12px 15px;}
+             .hero { padding: 180px 0 120px; } .hero h1 { font-size: 42px; letter-spacing: -1.5px;} .hero p.subtitle { font-size: 18px; } .hero p.tagline { font-size: 22px; }
+             .hero-buttons-main { gap: 15px; } .hero-cta-main { font-size: 18px; padding: 18px 40px; } .how-to-buy-button { font-size: 16px; padding: 15px 30px;}
+             .contract-address { padding: 25px; } .contract-address p { font-size: 14px; } .copy-btn { font-size: 14px; padding: 10px 18px;}
+             .game-title { font-size: 34px; } .game-description { font-size: 16px; } .start-game-btn { font-size: 18px; padding: 14px 30px;}
+             .decree-title { font-size: 34px; } #decree h3 { font-size: 24px; } #decree p { font-size: 17px; } .decree-list li { font-size: 17px;}
+             .feature-title { font-size: 22px; } .feature-description { font-size: 16px; }
+             .footer-column h3 { font-size: 20px; } .facts-popup { font-size: 13px; padding: 12px 15px;}
+             .modal-content { padding: 20px; } .modal h2 { font-size: 22px; } .modal p { font-size: 16px; }
+             .leaderboard-container { padding: 20px; } .leaderboard-container h3 { font-size: 20px;} #leaderboard-list li { font-size: 15px; }
         }
 
     </style>
@@ -495,30 +548,34 @@
             <a href="#" class="logo glitch">$DEBT<span>Cult</span> <span class="ticker-symbol">$DEBT</span></a>
             <nav>
                 <ul>
-                    <li><a href="#decree">The Decree</a></li>
-                    <li><a href="#why-we-fight">Why We Fight</a></li>
-                    <li><a href="#join-the-cult">Join Us</a></li>
+                    <li><a href="#decree">Decree</a></li>
+                    <li><a href="#why-we-fight">Why Fight?</a></li>
+                    <li><a href="#join-the-cult">Join Cult</a></li>
+                    <li><a href="#meme-vault">Meme Vault</a></li>
                     <li><a href="#testimonials">Hearsay</a></li>
-                    {/* Removed Whitepaper */}
+                    <li><a href="#game-zone">Game Zone</a></li>
+                    {/* Nav Buy Button Replaced by Pump.fun Button */}
                 </ul>
             </nav>
-             <a href="https://dexscreener.com/solana/..." target="_blank" rel="noopener noreferrer" class="cta-button nav-cta">Get $DEBT</a> {/* Placeholder DEX Screener */}
+             <a href="YOUR_PUMPFUN_URL" target="_blank" rel="noopener noreferrer" class="pump-fun-button">Buy on Pump.fun</a>
             <button class="mobile-nav-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">☰</button>
         </div>
          <!-- Mobile Nav Links container -->
          <div class="mobile-nav-links" id="mobile-nav">
              <ul>
-                <li><a href="#decree">The Decree</a></li>
-                <li><a href="#why-we-fight">Why We Fight</a></li>
-                <li><a href="#join-the-cult">Join Us</a></li>
-                <li><a href="#testimonials">Hearsay</a></li>
-                <li><a href="https://dexscreener.com/solana/..." target="_blank" rel="noopener noreferrer" class="cta-button">Get $DEBT</a></li> {/* Placeholder DEX Screener */}
+                 <li><a href="#decree">Decree</a></li>
+                 <li><a href="#why-we-fight">Why Fight?</a></li>
+                 <li><a href="#join-the-cult">Join Cult</a></li>
+                 <li><a href="#meme-vault">Meme Vault</a></li>
+                 <li><a href="#testimonials">Hearsay</a></li>
+                 <li><a href="#game-zone">Game Zone</a></li>
+                 <li><a href="YOUR_PUMPFUN_URL" target="_blank" rel="noopener noreferrer" class="pump-fun-button">Buy on Pump.fun</a></li>
              </ul>
          </div>
         <div class="price-ticker">
             <div class="ticker-content">
-                <span class="price-label">$DEBT/SOL: </span><span class="price-value">0.00000169</span><span class="price-change positive">+69.42%</span><span class="ticker-message">SYSTEM CRUMBLING... BUY $DEBT... FED IS A JOKE... YOUR SAVINGS ARE WORTHLESS... RIDE OR DIE... $DEBT IS THE ONLY TRUTH... IGNORE THE FUD... FAIR LAUNCH ON PUMP.FUN... </span>
-                <span class="price-label">$DEBT/SOL: </span><span class="price-value">0.00000169</span><span class="price-change positive">+69.42%</span><span class="ticker-message">SYSTEM CRUMBLING... BUY $DEBT... FED IS A JOKE... YOUR SAVINGS ARE WORTHLESS... RIDE OR DIE... $DEBT IS THE ONLY TRUTH... IGNORE THE FUD... FAIR LAUNCH ON PUMP.FUN... </span>
+                <span class="price-label">$DEBT/SOL: </span><span class="price-value">LOADING...</span><span class="price-change">-.--%</span><span class="ticker-message">SYSTEM IS A LIE... $DEBT IS FOREVER... WAGMI (MAYBE)... FEAR IS FOR THE WEAK... HODL OR DIE... PUMP.FUN OR BUST... IGNORE YOUR BANK ACCOUNT... </span>
+                <span class="price-label">$DEBT/SOL: </span><span class="price-value">LOADING...</span><span class="price-change">-.--%</span><span class="ticker-message">SYSTEM IS A LIE... $DEBT IS FOREVER... WAGMI (MAYBE)... FEAR IS FOR THE WEAK... HODL OR DIE... PUMP.FUN OR BUST... IGNORE YOUR BANK ACCOUNT... </span>
             </div>
         </div>
     </header>
@@ -526,198 +583,170 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <p class="tagline">They Own Your Debt. We Own The Memes.</p>
-            <h1 class="glitch">BURN THE SYSTEM.<br><span>STACK $DEBT.</span></h1>
-            <p class="subtitle">Launched on Pump.fun because fuck 'em, that's why. This isn't just a coin, it's a middle finger to the financial overlords. 1 Billion tokens, fair launch, zero bullshit.</p>
+            <p class="tagline">They Print Money. We Print Memes.</p>
+            <h1 class="glitch">RESIST THE FED.<br><span>EMBRACE $DEBT.</span></h1>
+            <p class="subtitle">Born from rage on Pump.fun. No roadmap, no utility, just pure, weaponized degeneracy against the financial machine. 1 Billion $DEBT for the cult.</p>
 
-            <a href="https://dexscreener.com/solana/..." target="_blank" rel="noopener noreferrer" class="hero-cta-main">JOIN THE $DEBT REBELLION</a> {/* Placeholder DEX Screener */}
+            <div class="hero-buttons-main">
+                <a href="YOUR_PUMPFUN_URL" target="_blank" rel="noopener noreferrer" class="pump-fun-button hero-cta-main">Ape into $DEBT on Pump.fun</a>
+                <button class="how-to-buy-button" id="howToBuyBtn">How To Buy (For Noobs)</button>
+            </div>
 
             <!-- Contract Address -->
-            <div class="contract-address">
+            <div class="contract-address fade-in-section">
                 <h4>$DEBT Contract Address (Solana)</h4>
-                <p>YourPumpFunContractAddressHereXXXXXXXXXXXXXXXXXXXX</p> {/* REPLACE THIS */}
+                <p>YOUR_TOKEN_ADDRESS_ON_SOLANA</p> {/* REPLACE THIS */}
                 <button class="copy-btn">Copy CA</button>
             </div>
 
             <!-- Socials Box -->
-            <div class="socials-box">
-                 <h4>Find Us Degens Here:</h4>
+            <div class="socials-box fade-in-section">
+                 <h4>Find Us Howling Here:</h4>
                  <ul class="social-icons">
-                     <li><a href="https://t.me/yourtelegramlink" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Telegram">✈️</a></li> {/* Placeholder */}
-                     <li><a href="https://x.com/yourtwitterlink" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="X (Twitter)">🐦</a></li> {/* Placeholder */}
-                     <li><a href="https://dexscreener.com/solana/..." target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="DexScreener">📈</a></li> {/* Placeholder */}
-                     <li><a href="https://www.dextools.io/app/en/solana/pair-explorer/..." target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="DEXTools">🛠️</a></li> {/* Placeholder */}
+                     <li><a href="YOUR_TELEGRAM_LINK" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Telegram">✈️</a></li> {/* Placeholder */}
+                     <li><a href="YOUR_X_LINK" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="X (Twitter)">🐦</a></li> {/* Placeholder */}
+                     <li><a href="https://dexscreener.com/solana/YOUR_TOKEN_ADDRESS_ON_SOLANA" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="DexScreener">📈</a></li> {/* Placeholder */}
+                     <li><a href="https://www.dextools.io/app/en/solana/pair-explorer/YOUR_TOKEN_ADDRESS_ON_SOLANA" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="DEXTools">🛠️</a></li> {/* Placeholder */}
                  </ul>
-            </div>
-
-             <!-- Game container -->
-            <div class="game-container fade-in-section">
-                <div class="game-overlay">
-                    <h3 class="game-title glitch">DEBT DESTROYER '69</h3>
-                    <p class="game-description">Wasted your rent money on $DEBT? Good. Now waste your time obliterating financial symbols in our totally pointless game. It's better than checking the charts anyway.</p>
-                    <button class="start-game-btn">PLAY LIKE A DEGEN</button>
-                </div>
-                <canvas id="game-canvas"></canvas>
-                <div class="game-score">POINTS: 0</div>
-                <div class="game-controls">Use Arrows/A/D | Avoid Suits | Get Rich (in game)</div>
             </div>
         </div>
     </section>
+
+     <!-- Game Zone Section -->
+     <section id="game-zone" class="fade-in-section">
+        <div class="container">
+            <h2 class="section-title glitch">DEGEN GAME ZONE</h2>
+            <p class="section-description">Procrastinate your financial ruin! Smash stuff in our game while the real world burns. High score gets... absolutely nothing but bragging rights in the TG.</p>
+
+            <div class="game-and-leaderboard">
+                <!-- Game container -->
+                <div class="game-container">
+                    <div class="game-overlay">
+                        <h3 class="game-title glitch">DEBT DESTROYER '69</h3>
+                        <p class="game-description">Forget gains, focus on GAME. Destroy financial symbols. Collect useless points. Prove your degeneracy.</p>
+                        <button class="start-game-btn">PLAY NOW, CRY LATER</button>
+                    </div>
+                    <canvas id="game-canvas"></canvas>
+                    <div class="game-score">POINTS: 0</div>
+                    <div class="game-controls">Arrows/A/D | Avoid Suits | Get Points</div>
+                </div>
+
+                <!-- Leaderboard -->
+                <div class="leaderboard-container">
+                    <h3>🏆 Top Degens 🏆</h3>
+                    <ul id="leaderboard-list">
+                        <li>Loading...</li>
+                        {/* Scores will be populated by JS */}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <!-- The Decree Section -->
     <section id="decree" class="fade-in-section">
       <div class="container decree-container">
         <h2 class="decree-title glitch">THE $DEBT DECREE</h2>
-
-        <h3>LISTEN UP, MAGGOTS:</h3>
-        <p>The suits built a playground on our backs. They printed money, inflated assets, and drowned us in debt we never asked for. Student loans, mortgages, credit cards – it's all a fucking scam designed to keep you enslaved. They call it "fiscal policy." We call it <strong>THE GREAT RIGGING</strong>.</p>
-        <p>They think they won. They think we'll just roll over and pay our minimums until we die. <em>They are wrong.</em></p>
-
-        <h3>$DEBT IS OUR WEAPON:</h3>
-        <p>We launched $DEBT on Pump.fun as a collective FUCK YOU. No VCs, no presale bullshit, no team tokens dumped on your head. Just 1 Billion tokens unleashed into the wild. It's a symbol. It's a protest. It's a gamble fueled by pure, unadulterated spite.</p>
-        <p>This isn't about "utility" or "roadmaps." This is about community. This is about solidarity. This is about laughing in the face of the abyss while holding a bag of pure meme energy.</p>
-
-        <h3>OUR SACRED (AND STUPID) VOWS:</h3>
+        <h3>WE ARE THE DISPOSSESSED:</h3>
+        <p>They built their ivory towers on our broken dreams and crippling interest rates. They gambled with our future and left us holding the bag – a bag overflowing with student loans, mortgages we can't afford, and credit card debt that breeds like digital cockroaches. They call this "the economy." We call it <strong>MODERN SLAVERY</strong>.</p>
+        <p>They offer platitudes and payment plans. They tell us to budget better while they bail out billionaires. They expect quiet compliance. <em>They will get rebellion.</em></p>
+        <h3>$DEBT IS THE RAGE TOKEN:</h3>
+        <p>Forged in the fires of Pump.fun, $DEBT is our collective scream made manifest on the Solana blockchain. No roadmap, no promises, no bullshit "utility." Just 1 Billion tokens – a digital monument to our shared disgust. Buying $DEBT isn't an investment; it's an act of defiance. It's planting a flag on the smoldering ruins of traditional finance.</p>
+        <h3>THE CULT COMMANDMENTS:</h3>
         <ul class="decree-list">
-            <li>We buy $DEBT not because it makes sense, but because nothing else does anymore.</li>
-            <li>We HODL through dips like diamond-handed degenerates, fueled by ramen and rage.</li>
-            <li>We shill $DEBT relentlessly, annoying our friends and family until they join the cult or block us.</li>
-            <li>We fight the FUD with memes, insults, and weaponized autism.</li>
-            <li>We understand this could go to zero. We embrace the chaos.</li>
+            <li>Thou shalt ape into $DEBT with reckless abandon, logic be damned.</li>
+            <li>Thou shalt HODL like your life depends on it, even when the chart looks like Satan's EKG.</li>
+            <li>Thou shalt spread the $DEBT gospel with the fervor of a street preacher on bath salts.</li>
+            <li>Thou shalt combat FUD with superior meme warfare and aggressive capslock.</li>
+            <li>Thou shalt accept that $0 is a possible destination, and find beauty in the chaos.</li>
         </ul>
-
         <div class="final-words">
-          <p>"They gave us debt. We give them memes."</p>
-          <strong>JOIN $DEBT. REJECT SANITY. EMBRACE THE VOID.</strong>
+          <p>"They build debt empires. We build meme armies."</p>
+          <strong>SUBMIT TO $DEBT. FIND YOUR PEOPLE. LET IT BURN.</strong>
         </div>
       </div>
     </section>
 
-
     <!-- Why We Fight Section -->
     <section id="why-we-fight" class="fade-in-section">
         <div class="container">
-            <h2 class="section-title glitch">WHY WE FIGHT (Besides Being Broke)</h2>
-            <p class="section-description">This ain't your grandma's investment club. This is raw, primal screaming into the financial void, manifested as a Solana token.</p>
+            <h2 class="section-title glitch">Why $DEBT? (Are You Dense?)</h2>
+            <p class="section-description">If you need a reason beyond pure, visceral hatred for the current system, maybe this meme coin isn't for you. Go buy some blue chip loser token.</p>
             <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🖕</div>
-                    <h3 class="feature-title">Digital Middle Finger</h3>
-                    <p class="feature-description">Every $DEBT token held is a direct insult to the bankers, politicians, and pointy-shoed ghouls who rigged the game.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📉</div>
-                    <h3 class="feature-title">Profit From Pain (Maybe)</h3>
-                    <p class="feature-description">The system's crumbling? Good. Let it burn. Maybe $DEBT moons, maybe it doesn't. Either way, it's fun to watch.</p>
-                </div>
-                 <div class="feature-card">
-                    <div class="feature-icon">🤝</div>
-                    <h3 class="feature-title">Degenerate Unity</h3>
-                    <p class="feature-description">Find your tribe. Misery loves company, especially when that company holds the same shitcoin and hates the same people.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🚀</div>
-                    <h3 class="feature-title">Pure Meme Fuel</h3>
-                    <p class="feature-description">No utility? No problem. $DEBT runs on vibes, spite, and the collective delusion that this time, it's different.</p>
-                </div>
-                 <div class="feature-card">
-                    <div class="feature-icon">⚔️</div>
-                    <h3 class="feature-title">Financial LARPing</h3>
-                    <p class="feature-description">Pretend you're fighting the power by clicking buttons on Jupiter. It's cheaper than therapy and might actually pay off (lol, no).</p>
-                </div>
-                 <div class="feature-card">
-                    <div class="feature-icon">😂</div>
-                    <h3 class="feature-title">Laugh At The Apocalypse</h3>
-                    <p class="feature-description">When it all goes to hell, at least you'll have $DEBT and a community of fellow idiots to share memes with. Priceless.</p>
-                </div>
+                {/* Feature cards remain largely the same concept, slightly reworded */}
+                 <div class="feature-card"> <div class="feature-icon">🖕</div> <h3 class="feature-title">Financial Terrorism (Satire)</h3> <p class="feature-description">Think of $DEBT as a distributed denial-of-sanity attack on the global financial apparatus. It probably does nothing, but it feels good.</p> </div>
+                 <div class="feature-card"> <div class="feature-icon">📉</div> <h3 class="feature-title">Crash Insurance (LOL)</h3> <p class="feature-description">When everything else implodes, maybe $DEBT will randomly 100x. Or maybe it goes to zero first. Who knows? Embrace the gamble.</p> </div>
+                 <div class="feature-card"> <div class="feature-icon">🤝</div> <h3 class="feature-title">Idiot Solidarity</h3> <p class="feature-description">Connect with fellow financial outcasts who also made questionable life choices (like buying $DEBT). Strength in stupidity!</p> </div>
+                 <div class="feature-card"> <div class="feature-icon">🚀</div> <h3 class="feature-title">Anti-Utility Token</h3> <p class="feature-description">The less utility, the purer the meme. $DEBT's only function is to exist as a symbol of our collective discontent and poor judgment.</p> </div>
+                 <div class="feature-card"> <div class="feature-icon">⚔️</div> <h3 class="feature-title">Keyboard Warrior Cred</h3> <p class="feature-description">Flex your $DEBT bag in Telegram. Argue about floor prices. Feel important for 5 minutes before the next market dump.</p> </div>
+                 <div class="feature-card"> <div class="feature-icon">😂</div> <h3 class="feature-title">Apocalypse Party Favor</h3> <p class="feature-description">When the financial system finally eats itself, $DEBT holders will be the ones laughing maniacally. Join the party.</p> </div>
             </div>
         </div>
     </section>
 
+    <!-- Meme Vault Section -->
+    <section id="meme-vault" class="fade-in-section">
+        <div class="container">
+            <h2 class="section-title glitch">The Sacred Meme Vault</h2>
+            <p class="section-description">Witness the artistic genius fueled by financial despair and caffeine. Our finest propaganda, curated from the depths of the cult's collective psyche.</p>
+            <div class="meme-grid">
+                {/* REPLACE THESE WITH ACTUAL IMAGE URLS */}
+                <div class="meme-item"><img src="https://via.placeholder.com/300x300/111/ff3e3e?text=Replace+Me+1" alt="$DEBT Meme 1"></div>
+                <div class="meme-item"><img src="https://via.placeholder.com/300x300/111/ff3e3e?text=Replace+Me+2" alt="$DEBT Meme 2"></div>
+                <div class="meme-item"><img src="https://via.placeholder.com/300x300/111/ff3e3e?text=Replace+Me+3" alt="$DEBT Meme 3"></div>
+                <div class="meme-item"><img src="https://via.placeholder.com/300x300/111/ff3e3e?text=Replace+Me+4" alt="$DEBT Meme 4"></div>
+                <div class="meme-item"><img src="https://via.placeholder.com/300x300/111/ff3e3e?text=Replace+Me+5" alt="$DEBT Meme 5"></div>
+                <div class="meme-item"><img src="https://via.placeholder.com/300x300/111/ff3e3e?text=Replace+Me+6" alt="$DEBT Meme 6"></div>
+            </div>
+            <p class="meme-submission-note">Got better memes? Prove it. Spam them in our <a href="YOUR_TELEGRAM_LINK" target="_blank" rel="noopener noreferrer">Telegram</a> or tag us on <a href="YOUR_X_LINK" target="_blank" rel="noopener noreferrer">X</a>.</p>
+        </div>
+    </section>
 
     <!-- Join The Cult Section -->
     <section id="join-the-cult" class="fade-in-section">
         <div class="container" style="text-align: center;">
-            <h2 class="movement-title glitch">JOIN THE $DEBT CULT</h2>
-            <p class="movement-description">Stop crying about inflation. Stop doomscrolling Zillow. Stop pretending your 401k matters. There is only <strong>$DEBT</strong>. We are the horde at the gates of the financial citadel. Are you with us, or are you *them*?</p>
-
+            <h2 class="movement-title glitch">YOU ARE EITHER $DEBT OR AGAINST US</h2>
+            <p class="movement-description">The lines are drawn. The banks, the hedge funds, the politicians – they are the enemy. We are the resistance, armed with shitcoins and sarcasm. Choose your side. There is no middle ground in the $DEBT cult.</p>
             <div class="movement-icons">
-                <div class="movement-icon">
-                    <div class="icon-container">😡</div>
-                    <div class="icon-label">Rage Holders</div>
-                </div>
-                <div class="movement-icon">
-                    <div class="icon-container">🤡</div>
-                    <div class="icon-label">Meme Warriors</div>
-                </div>
-                <div class="movement-icon">
-                    <div class="icon-container">💸</div>
-                    <div class="icon-label">Future Ramen Kings</div>
-                </div>
+                <div class="movement-icon"> <div class="icon-container">😡</div> <div class="icon-label">Rage Apes</div> </div>
+                <div class="movement-icon"> <div class="icon-container">🤡</div> <div class="icon-label">Meme Lords</div> </div>
+                <div class="movement-icon"> <div class="icon-container">💸</div> <div class="icon-label">Zero Hodlers</div> </div>
             </div>
-
-            <p class="cult-motto">"In $DEBT We Trust. Everyone Else Can F*ck Off."</p>
-             <a href="https://dexscreener.com/solana/..." target="_blank" rel="noopener noreferrer" class="hero-cta-main" style="margin-top: 40px;">ACCEPT YOUR FATE - GET $DEBT</a> {/* Placeholder */}
+            <p class="cult-motto">"My Portfolio Died So $DEBT Could Live."</p>
+             <a href="YOUR_PUMPFUN_URL" target="_blank" rel="noopener noreferrer" class="pump-fun-button hero-cta-main" style="margin-top: 50px;">Pledge Allegiance - Buy $DEBT</a>
         </div>
     </section>
 
     <!-- Testimonials Section -->
     <section id="testimonials" class="fade-in-section">
         <div class="container">
-            <h2 class="section-title glitch">HEARSAY FROM THE TRENCHES</h2>
-            <p class="section-description">Don't trust us (you shouldn't). Trust these totally real, not-at-all-made-up whispers from the $DEBT abyss.</p>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"Sold my kidney for $DEBT. Doctor said it was 'medically inadvisable' but what does he know? He probably holds Bitcoin like a BOOMER. LFG!"</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">💎</div>
-                        <div>
-                            <div class="author-name">DiamondHands420</div>
-                            <div class="author-title">Professional Shitcoin Gambler</div>
-                        </div>
-                    </div>
+            <h2 class="section-title glitch">Whispers from the Asylum</h2>
+            <p class="section-description">Unfiltered, unhinged, possibly untrue testimonials allegedly overheard in the $DEBT Telegram voice chat at 3 AM.</p>
+            <div class="testimonial-slider-container">
+                <div class="testimonial-card active"> {/* Card 1 */}
+                    <p class="testimonial-text">"Liquidated my kid's college fund for $DEBT. He can learn a trade. Generational wealth is a meme anyway. Diamond hands baby!"</p>
+                    <div class="testimonial-author"> <div class="author-avatar">💀</div> <div> <div class="author-name">PaperhandPapí</div> <div class="author-title">Future Welfare Recipient</div> </div> </div>
                 </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"My wife left me after I aped our mortgage into $DEBT at the top. Jokes on her, now I have more money for $DEBT. Checkmate, Karen."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">📉</div>
-                        <div>
-                            <div class="author-name">BasedAnon</div>
-                            <div class="author-title">Soon-to-be Homeless Millionaire</div>
-                        </div>
-                    </div>
+                 <div class="testimonial-card"> {/* Card 2 */}
+                    <p class="testimonial-text">"My therapist told me buying $DEBT was a 'cry for help'. I told her my portfolio crying was louder. Then I bought more $DEBT."</p>
+                    <div class="testimonial-author"> <div class="author-avatar">🤪</div> <div> <div class="author-name">CertifiablyBased</div> <div class="author-title">Self-Diagnosed Genius</div> </div> </div>
                 </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"I don't understand blockchain, tokenomics, or basic math. But the $DEBT Telegram told me we're going to the moon, so I bought. Seems legit."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">🚀</div>
-                        <div>
-                            <div class="author-name">MoonBoi69</div>
-                            <div class="author-title">Financial Advice Taker (Reddit)</div>
-                        </div>
-                    </div>
+                 <div class="testimonial-card"> {/* Card 3 */}
+                    <p class="testimonial-text">"Chart looks like dogshit threw up on a Jackson Pollock painting. Bullish AF. Sent my life savings. WAGMI."</p>
+                    <div class="testimonial-author"> <div class="author-avatar">📊</div> <div> <div class="author-name">TA_is_Astrology</div> <div class="author-title">Technical Analyst (Failed)</div> </div> </div>
                 </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"Tried explaining $DEBT to my therapist. She doubled my session fee and prescribed me actual debt consolidation services. The system is trying to silence us!"</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">🧠</div>
-                        <div>
-                            <div class="author-name">NotACultLeader</div>
-                            <div class="author-title">Perfectly Sane Individual</div>
-                        </div>
-                    </div>
+                 <div class="testimonial-card"> {/* Card 4 */}
+                    <p class="testimonial-text">"Pump.fun launch means it's basically programmed to go up, right? Right?? Hello? Guys?"</p>
+                    <div class="testimonial-author"> <div class="author-avatar">🙏</div> <div> <div class="author-name">Praying4ExitLiq</div> <div class="author-title">Retail Exit Liquidity</div> </div> </div>
+                </div>
+                {/* Add more cards as needed */}
+
+                <div class="testimonial-nav">
+                    <button id="prevTestimonial" aria-label="Previous Testimonial"><</button>
+                    <button id="nextTestimonial" aria-label="Next Testimonial">></button>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Game Section Intro -->
-    <section class="game-section fade-in-section">
-        <div class="container">
-            <h2 class="glitch">POINTLESS GAME ZONE</h2>
-            <p class="section-description">Why be productive when you can simulate fighting the system while your $DEBT bag potentially evaporates? Click things. Make numbers go up. Feel something (maybe).</p>
-            {/* Game features removed for brevity, game itself is up top */}
-             <p class="section-description" style="font-size: 16px; font-style: italic; margin-top: 30px;">Scroll back up and smash that 'PLAY' button if you're bored.</p>
         </div>
     </section>
 
@@ -725,9 +754,9 @@
     <section class="cta fade-in-section">
         <div class="container">
             <div class="cta-box">
-                <h2 class="cta-title glitch">THE SYSTEM IS F*CKED. ARE YOU IN?</h2>
-                <p class="cta-description">This isn't financial advice. This is a fucking cult invitation. Join the $DEBT rebellion. Or don't. See if we care (we probably don't, we're too busy staring at charts).</p>
-                <a href="https://dexscreener.com/solana/..." target="_blank" rel="noopener noreferrer" class="hero-cta-main">BUY $DEBT. HATE LATER.</a> {/* Placeholder */}
+                <h2 class="cta-title glitch">LAST CHANCE BEFORE OBLIVION</h2>
+                <p class="cta-description">The financial world is a joke and we're the punchline. Might as well hold some $DEBT while it all burns down. Click the button. Feel the void.</p>
+                <a href="YOUR_PUMPFUN_URL" target="_blank" rel="noopener noreferrer" class="pump-fun-button hero-cta-main">Buy $DEBT Before Regret Sets In</a>
             </div>
         </div>
     </section>
@@ -736,46 +765,60 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                 <div class="footer-column">
-                     <h3>$DEBT Cult HQ</h3>
-                     <ul>
-                         <li><a href="#decree">The Decree</a></li>
-                         <li><a href="#why-we-fight">Why We Exist</a></li>
-                         <li><a href="#join-the-cult">Join The Insanity</a></li>
-                         <li><a href="#testimonials">Propaganda</a></li>
-                     </ul>
-                 </div>
-                 <div class="footer-column">
-                     <h3>Charts & Stuff</h3>
-                     <ul>
-                         <li><a href="https://dexscreener.com/solana/..." target="_blank" rel="noopener noreferrer">DexScreener</a></li> {/* Placeholder */}
-                         <li><a href="https://www.dextools.io/app/en/solana/pair-explorer/..." target="_blank" rel="noopener noreferrer">DEXTools</a></li> {/* Placeholder */}
-                         <li><a href="#">How to Ape (Guide)</a></li> {/* Could link to a simple guide */}
-                         <li><a href="#">Rug Checker (LOL)</a></li>
-                     </ul>
-                 </div>
-                 <div class="footer-column">
-                     <h3>Community</h3>
-                     <ul class="footer-socials">
-                         <li><a href="https://t.me/yourtelegramlink" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Telegram">✈️</a></li>
-                         <li><a href="https://x.com/yourtwitterlink" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="X (Twitter)">🐦</a></li>
-                     </ul>
-                      <p style="margin-top: 15px; color: #888; font-size: 14px;">Join the chaos in Telegram & X.</p>
-                 </div>
-                 <div class="footer-column">
-                     <h3>Contract</h3>
-                      <p style="font-family: 'Courier New', monospace; color: #aaa; font-size: 12px; word-break: break-all; margin-bottom: 10px;">YourPumpFunContractAddressHereXXXXXXXXXXXXXXXXXXXX</p> {/* REPLACE THIS */}
-                      <button class="copy-btn" style="font-size: 12px; padding: 6px 10px; background-color: #555;">Copy CA</button>
-                 </div>
+                 <div class="footer-column"> <h3>Cult Info</h3> <ul> <li><a href="#decree">Decree</a></li> <li><a href="#why-we-fight">Why We're Idiots</a></li> <li><a href="#join-the-cult">Join Us</a></li> <li><a href="#meme-vault">Propaganda</a></li> </ul> </div>
+                 <div class="footer-column"> <h3>Charts (Doomscroll Here)</h3> <ul> <li><a href="https://dexscreener.com/solana/YOUR_TOKEN_ADDRESS_ON_SOLANA" target="_blank" rel="noopener noreferrer">DexScreener</a></li> <li><a href="https://www.dextools.io/app/en/solana/pair-explorer/YOUR_TOKEN_ADDRESS_ON_SOLANA" target="_blank" rel="noopener noreferrer">DEXTools</a></li> <li><a href="#" id="howToBuyBtnFooter">How to Lose Money</a></li> <li><a href="#">Contract Scanner (Maybe)</a></li> </ul> </div>
+                 <div class="footer-column"> <h3>Connect (Misery Loves Co.)</h3> <ul class="footer-socials"> <li><a href="YOUR_TELEGRAM_LINK" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Telegram">✈️</a></li> <li><a href="YOUR_X_LINK" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="X (Twitter)">🐦</a></li> </ul> <p style="margin-top: 15px; color: #888; font-size: 14px;">Vent your losses in TG.</p> </div>
+                 <div class="footer-column"> <h3>Contract (Don't Blame Us)</h3> <p style="font-family: 'Courier New', monospace; color: #aaa; font-size: 13px; word-break: break-all; margin-bottom: 10px;">YOUR_TOKEN_ADDRESS_ON_SOLANA</p> <button class="copy-btn" style="font-size: 13px; padding: 7px 12px;">Copy CA</button> </div>
             </div>
+             <div class="footer-extras">
+                 <button class="dump-button" id="dumpBtn">🚨 Emergency Dump 🚨</button>
+                 <div class="dark-mode-toggle">
+                     <label for="dark-mode-switch">Dark Mode:</label>
+                     <label class="switch">
+                         <input type="checkbox" id="dark-mode-switch">
+                         <span class="slider"></span>
+                     </label>
+                 </div>
+             </div>
             <div class="footer-bottom">
-                <p>© 2024 $DEBT Cult. Launched on Pump.fun. We're probably all gonna make it (to zero).</p>
-                 <p class="footer-disclaimer">Disclaimer: $DEBT is a meme coin with zero intrinsic value, created for entertainment and protest. Expect extreme volatility. Investing in meme coins is basically gambling. Don't invest rent money, kid's college fund, or your grandma's inheritance unless you enjoy pain and public humiliation. This is not financial advice, obviously. DYOR = Do Your Own Retardedness. We are not responsible if you get rekt.</p>
+                <p>© 2024 $DEBT Cult. All rights reserved (to lose money). Launched via Pump.fun.</p>
+                 <p class="footer-disclaimer">Financial Disclaimer: LOL. $DEBT is a meme token with zero value, created for shits and giggles. It's highly volatile and speculative AF. Treat it like a casino trip where the house always wins, eventually. Don't invest money you need for important things like food, rent, or bail. We are not financial advisors; we are certified degenerates. If you get rekt, that's on you. NFA/DYOR.</p>
             </div>
         </div>
     </footer>
 
-    <!-- *** GAME SCRIPT (Mostly Unchanged) *** -->
+    <!-- Modals -->
+    <div id="dumpModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" id="closeDumpModal">×</span>
+            <h2 class="glitch">🚨 PANIC SELL ALERT 🚨</h2>
+            <p>Are you SURE you want to dump your $DEBT? Selling now means admitting defeat. Your hands will turn to paper, your soul may be forfeit to Jerome Powell, and the cult may shun you. Still wanna be a bitch?</p>
+            <button class="cta-button modal-button" id="confirmDump">Yes, I Have Paper Hands</button>
+            <button class="cta-button modal-button pump-fun-button" id="cancelDump">No, Diamond Hands!</button> {/* Green */}
+        </div>
+    </div>
+
+    <div id="howToBuyModal" class="modal">
+        <div class="modal-content" style="text-align: left;">
+             <span class="modal-close" id="closeHowToBuyModal">×</span>
+            <h2>How to Buy $DEBT (Idiot's Guide)</h2>
+            <p>Alright listen up, crayon-eater. Buying on Pump.fun is easy, even for you:</p>
+            <ol style="color: #ccc; margin-left: 20px; margin-bottom: 20px; font-size: 16px; line-height: 1.8;">
+                <li><strong>Get a Solana Wallet:</strong> Phantom or Solflare are fine. Download the browser extension or app. KEEP YOUR SEED PHRASE SAFE, MORON. Don't screenshot it, don't email it, tattoo it on your ass if you have to.</li>
+                <li><strong>Get SOL:</strong> Buy Solana (SOL) on a major exchange (Coinbase, Binance, Kraken, etc.). You'll need it for gas and to buy $DEBT.</li>
+                <li><strong>Send SOL to Your Wallet:</strong> Withdraw the SOL from the exchange to your Phantom/Solflare wallet address. Double-check the address, or your SOL goes poof.</li>
+                <li><strong>Go to Pump.fun:</strong> Click one of the big green "Buy on Pump.fun" buttons on this site OR go directly to: <a href="YOUR_PUMPFUN_URL" target="_blank" rel="noopener noreferrer" style="color:#ff3e3e; word-break: break-all;">YOUR_PUMPFUN_URL</a></li>
+                <li><strong>Connect Wallet:</strong> Click "Connect Wallet" on the Pump.fun page and approve the connection in your wallet.</li>
+                <li><strong>APE IN:</strong> Enter the amount of SOL you want to gamble on $DEBT. Review the transaction details (slippage, etc. - not that you understand it).</li>
+                <li><strong>Click "Buy" & Approve:</strong> Smash that buy button and approve the transaction in your wallet popup. Wait for the blockchain magic (or failure).</li>
+                <li><strong>Done:</strong> Congrats, you now own potentially worthless $DEBT! Welcome to the cult. Check your wallet to see your tokens (you might need to add the token address manually: <code style="font-size: 0.9em; color: #ff3e3e; word-break: break-all;">YOUR_TOKEN_ADDRESS_ON_SOLANA</code>).</li>
+            </ol>
+            <p style="font-style: italic; color: #888;">Now go shill in the Telegram like your life depends on it.</p>
+        </div>
+    </div>
+
+
+    <!-- GAME SCRIPT -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // --- Element Selection ---
@@ -784,15 +827,28 @@
             const canvas = document.getElementById('game-canvas');
             const scoreDisplay = document.querySelector('.game-score');
             const gameContainer = document.querySelector('.game-container');
-            const debtCounter = document.getElementById('debt-counter'); // Keep if you want the counter visually
-            const priceValue = document.querySelector('.price-value');
-            const priceChange = document.querySelector('.price-change');
-            const copyBtns = document.querySelectorAll('.copy-btn'); // Select all copy buttons
-            let tickerContent = document.querySelector('.ticker-content');
-            const tickerContainer = document.querySelector('.price-ticker');
+            const priceValueEl = document.querySelector('.price-ticker .price-value'); // More specific
+            const priceChangeEl = document.querySelector('.price-ticker .price-change'); // More specific
+            const copyBtns = document.querySelectorAll('.copy-btn');
             const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
             const mobileNavLinks = document.getElementById('mobile-nav');
-            const fadeElements = document.querySelectorAll('.fade-in-section'); // For scroll animations
+            const fadeElements = document.querySelectorAll('.fade-in-section');
+            const leaderboardList = document.getElementById('leaderboard-list');
+            const dumpBtn = document.getElementById('dumpBtn');
+            const dumpModal = document.getElementById('dumpModal');
+            const closeDumpModal = document.getElementById('closeDumpModal');
+            const confirmDump = document.getElementById('confirmDump'); // Button inside dump modal
+            const cancelDump = document.getElementById('cancelDump'); // Button inside dump modal
+            const howToBuyBtn = document.getElementById('howToBuyBtn');
+            const howToBuyBtnFooter = document.getElementById('howToBuyBtnFooter');
+            const howToBuyModal = document.getElementById('howToBuyModal');
+            const closeHowToBuyModal = document.getElementById('closeHowToBuyModal');
+            const darkModeSwitch = document.getElementById('dark-mode-switch');
+            const prevTestimonialBtn = document.getElementById('prevTestimonial');
+            const nextTestimonialBtn = document.getElementById('nextTestimonial');
+            const testimonialCards = document.querySelectorAll('.testimonial-card');
+            let currentTestimonialIndex = 0;
+
 
             // --- Basic Checks ---
              if (!canvas || !gameContainer || !startButton || !gameOverlay || !scoreDisplay) { console.error("Essential game elements not found."); }
@@ -800,195 +856,308 @@
              if (!ctx) { console.error("Canvas context could not be created."); }
 
              // --- Scroll Fade-In Animation ---
-             const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 }; // Adjust threshold
+             const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 }; // Trigger earlier
              const observer = new IntersectionObserver((entries, observer) => {
-                 entries.forEach(entry => {
-                     if (entry.isIntersecting) {
-                         entry.target.classList.add('visible');
-                         // Optional: Unobserve after animation to save resources
-                         // observer.unobserve(entry.target);
-                     }
-                     // Optional: Remove 'visible' class if element scrolls out of view
-                     // else { entry.target.classList.remove('visible'); }
-                 });
+                 entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); } });
              }, observerOptions);
-
              fadeElements.forEach(el => { observer.observe(el); });
-
 
              // --- Mobile Menu Logic ---
              if (mobileNavToggle && mobileNavLinks) {
-                 mobileNavToggle.addEventListener('click', () => {
-                     const isExpanded = mobileNavToggle.getAttribute('aria-expanded') === 'true';
-                     mobileNavLinks.classList.toggle('active');
-                     mobileNavToggle.setAttribute('aria-expanded', !isExpanded);
-                     mobileNavToggle.textContent = !isExpanded ? '✕' : '☰';
+                 mobileNavToggle.addEventListener('click', () => { /* ... unchanged ... */
+                    const isExpanded = mobileNavToggle.getAttribute('aria-expanded') === 'true';
+                    mobileNavLinks.classList.toggle('active');
+                    mobileNavToggle.setAttribute('aria-expanded', !isExpanded);
+                    mobileNavToggle.textContent = !isExpanded ? '✕' : '☰';
                  });
-                 mobileNavLinks.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        mobileNavLinks.classList.remove('active');
-                        mobileNavToggle.setAttribute('aria-expanded', 'false');
-                        mobileNavToggle.textContent = '☰';
-                    });
-                 });
-             } else { console.warn("Mobile navigation elements not found."); }
-
-
-            // --- Event Listeners ---
-             if (startButton && ctx) {
-                 startButton.addEventListener('click', function() { if (!gameActive) { startGame(); } });
+                 mobileNavLinks.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { /* ... unchanged ... */
+                     mobileNavLinks.classList.remove('active');
+                     mobileNavToggle.setAttribute('aria-expanded', 'false');
+                     mobileNavToggle.textContent = '☰';
+                 }); });
              }
 
-            document.addEventListener('keydown', e => {
-                keys[e.key.toLowerCase()] = true;
-                if (gameActive && ['arrowup', 'arrowdown', 'arrowleft', 'arrowright', ' '].includes(e.key.toLowerCase())) { e.preventDefault(); }
-            });
-            document.addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false; });
+            // --- Copy Button Logic ---
+            copyBtns.forEach(copyBtn => { copyBtn.addEventListener('click', function() { /* ... unchanged ... */
+                const contractAddressElement = this.previousElementSibling;
+                if (contractAddressElement && contractAddressElement.tagName === 'P') {
+                    const contractAddress = contractAddressElement.innerText;
+                    navigator.clipboard.writeText(contractAddress).then(() => {
+                        const originalText = this.textContent; this.textContent = "Copied!";
+                        setTimeout(() => { this.textContent = originalText; }, 1500);
+                    }, (err) => { console.error('Copy failed: ', err); const originalText = this.textContent; this.textContent = "Failed!"; setTimeout(() => { this.textContent = originalText; }, 1500); });
+                } else { console.error("Could not find contract address element."); }
+            }); });
 
-            // --- Copy Button Logic (Handles Multiple Buttons) ---
-            copyBtns.forEach(copyBtn => {
-                copyBtn.addEventListener('click', function() {
-                    const contractAddressElement = this.previousElementSibling; // Assumes <p> is right before <button>
-                    if (contractAddressElement && contractAddressElement.tagName === 'P') {
-                        const contractAddress = contractAddressElement.innerText;
-                        navigator.clipboard.writeText(contractAddress).then(() => {
-                            const originalText = this.textContent;
-                            this.textContent = "Copied!";
-                            setTimeout(() => { this.textContent = originalText; }, 2000);
-                        }, (err) => {
-                            console.error('Copy failed: ', err);
-                            const originalText = this.textContent;
-                            this.textContent = "Failed!";
-                             setTimeout(() => { this.textContent = originalText; }, 2000);
-                        });
-                    } else {
-                        console.error("Could not find contract address element to copy.");
+             // --- Modal Logic ---
+             function openModal(modal) { if(modal) modal.classList.add('active'); }
+             function closeModal(modal) { if(modal) modal.classList.remove('active'); }
+
+             // Dump Modal
+             if (dumpBtn && dumpModal && closeDumpModal && confirmDump && cancelDump) {
+                 dumpBtn.addEventListener('click', () => openModal(dumpModal));
+                 closeDumpModal.addEventListener('click', () => closeModal(dumpModal));
+                 cancelDump.addEventListener('click', () => closeModal(dumpModal));
+                 confirmDump.addEventListener('click', () => {
+                     alert("Pfft. Paper hands confirmed. NGMI."); // Simple alert
+                     closeModal(dumpModal);
+                 });
+                 dumpModal.addEventListener('click', (e) => { if(e.target === dumpModal) closeModal(dumpModal); }); // Close on outside click
+             }
+
+             // How To Buy Modal
+             if (howToBuyModal && closeHowToBuyModal) {
+                 const openHowToBuy = () => openModal(howToBuyModal);
+                 if(howToBuyBtn) howToBuyBtn.addEventListener('click', openHowToBuy);
+                 if(howToBuyBtnFooter) howToBuyBtnFooter.addEventListener('click', openHowToBuy);
+                 closeHowToBuyModal.addEventListener('click', () => closeModal(howToBuyModal));
+                 howToBuyModal.addEventListener('click', (e) => { if(e.target === howToBuyModal) closeModal(howToBuyModal); });
+             }
+
+             // Useless Dark Mode Toggle
+             if (darkModeSwitch) {
+                 darkModeSwitch.addEventListener('change', () => {
+                     console.log("Dark mode toggled... PSYCH! It does nothing. Welcome to the dark economy.");
+                     // Optionally add a small, temporary visual feedback
+                     document.body.style.transition = 'background-color 0.1s';
+                     document.body.style.backgroundColor = '#080808'; // Slightly different dark
+                     setTimeout(() => { document.body.style.backgroundColor = '#0a0a0a'; }, 100); // Revert
+                      // Uncheck it after a moment to show it's useless
+                      setTimeout(() => { darkModeSwitch.checked = false; }, 500);
+                 });
+             }
+
+            // --- Testimonial Slider Logic ---
+            function showTestimonial(index) {
+                testimonialCards.forEach((card, i) => {
+                    card.classList.remove('active');
+                    if (i === index) {
+                        card.classList.add('active');
                     }
                 });
-            });
-
-
-            // --- Game Variables & Functions (Keep as before, minor text changes) ---
-            let player = { x: 0, y: 0, width: 50, height: 50, color: '#ff3e3e', speed: 6 }; // Red player
-            let moneyItems = []; let debtItems = []; let keys = {}; let score = 0;
-            let gameInterval, spawnInterval; let gameActive = false; const itemSize = 30;
-            const emojis = { player: '🤡', money: '$', banker: '🏦', lender: '🧾', agency: '🚨', politician: '💩' }; // Adjusted emojis
-            const debtPool = [emojis.banker, emojis.lender, emojis.agency, emojis.politician];
-
-            function startGame() {
-                if (!ctx || !gameContainer) return;
-                canvas.width = gameContainer.clientWidth; canvas.height = gameContainer.clientHeight;
-                player.x = canvas.width / 2 - player.width / 2; player.y = canvas.height - player.height - 10;
-                gameActive = true; moneyItems = []; debtItems = []; score = 0; updateScore(); keys = {};
-                if (gameOverlay) gameOverlay.style.display = 'none';
-                clearInterval(gameInterval); clearInterval(spawnInterval);
-                gameInterval = setInterval(updateGame, 1000 / 60); spawnInterval = setInterval(spawnObjects, 750); // Faster spawn
+                currentTestimonialIndex = index;
+                // Disable/Enable buttons at ends
+                if(prevTestimonialBtn) prevTestimonialBtn.disabled = index === 0;
+                if(nextTestimonialBtn) nextTestimonialBtn.disabled = index === testimonialCards.length - 1;
             }
 
-            function endGame() {
+            if (prevTestimonialBtn && nextTestimonialBtn && testimonialCards.length > 0) {
+                prevTestimonialBtn.addEventListener('click', () => {
+                    if (currentTestimonialIndex > 0) {
+                        showTestimonial(currentTestimonialIndex - 1);
+                    }
+                });
+                nextTestimonialBtn.addEventListener('click', () => {
+                    if (currentTestimonialIndex < testimonialCards.length - 1) {
+                        showTestimonial(currentTestimonialIndex + 1);
+                    }
+                });
+                 // Initialize the slider
+                 showTestimonial(0);
+             }
+
+
+            // --- Game Variables & Functions ---
+            let player = { x: 0, y: 0, width: 45, height: 45, color: '#ff3e3e', speed: 6 }; // Slightly smaller player
+            let moneyItems = []; let debtItems = []; let keys = {}; let score = 0;
+            let gameInterval, spawnInterval; let gameActive = false; const itemSize = 35; // Larger items
+            const emojis = { player: '🤡', money: '$', banker: '🏦', lender: '🧾', agency: '🚨', politician: '💩' };
+            const debtPool = [emojis.banker, emojis.lender, emojis.agency, emojis.politician];
+            const MAX_LEADERBOARD_ENTRIES = 10;
+
+            function startGame() { /* ... (game start logic, unchanged from previous version) ... */
+                 if (!ctx || !gameContainer) return;
+                 canvas.width = gameContainer.clientWidth; canvas.height = gameContainer.clientHeight;
+                 player.x = canvas.width / 2 - player.width / 2; player.y = canvas.height - player.height - 15; // Start lower
+                 gameActive = true; moneyItems = []; debtItems = []; score = 0; updateScore(); keys = {};
+                 if (gameOverlay) gameOverlay.style.display = 'none';
+                 clearInterval(gameInterval); clearInterval(spawnInterval);
+                 gameInterval = setInterval(updateGame, 1000 / 60); spawnInterval = setInterval(spawnObjects, 700); // Even faster spawn
+             }
+
+            function endGame() { /* ... (game end logic + leaderboard prompt) ... */
                 gameActive = false; clearInterval(gameInterval); clearInterval(spawnInterval);
                 if (gameOverlay) {
                     gameOverlay.style.display = 'flex';
                     const gameTitle = gameOverlay.querySelector('.game-title');
-                    if (gameTitle) gameTitle.textContent = `GAME OVER! Score: ${score}`;
+                    if (gameTitle) gameTitle.textContent = `REKT! Score: ${score}`;
                     const gameDesc = gameOverlay.querySelector('.game-description');
-                    if (gameDesc) gameDesc.textContent = `You got ${score} points before inevitably getting rekt. Pathetic. Try again?`;
-                    const startBtnText = gameOverlay.querySelector('.start-game-btn');
-                    if(startBtnText) startBtnText.textContent = "AGAIN, DEGEN!";
+                    if (gameDesc) gameDesc.textContent = `You lasted longer than most marriages. Enter your degen name for the leaderboard (or don't, coward).`;
+                     const startBtnText = gameOverlay.querySelector('.start-game-btn');
+                     if(startBtnText) startBtnText.textContent = "GO AGANE";
                 }
-            }
+                 // Prompt for name and save score
+                 setTimeout(() => { // Delay prompt slightly
+                     const playerName = prompt(`Game Over! Final Score: ${score}\nEnter your Degen Name for the Leaderboard (max 15 chars):`, "AnonDegen");
+                     if (playerName) {
+                         saveScore(playerName.substring(0, 15), score); // Trim name
+                     }
+                 }, 100);
+             }
 
-            function updateScore() { if (scoreDisplay) scoreDisplay.textContent = `POINTS: ${score}`; }
+            function updateScore() { /* ... (score display update, unchanged) ... */
+                 if (scoreDisplay) scoreDisplay.textContent = `POINTS: ${score}`;
+             }
 
-            function spawnObjects() {
-                if (!gameActive || !canvas || canvas.width <= 0) return;
-                if (Math.random() < 0.5) { // Spawn money chance
-                    moneyItems.push({ x: Math.random()*(canvas.width-itemSize), y: -itemSize, emoji: emojis.money });
-                }
-                if (Math.random() < 0.7) { // More debt
-                    debtItems.push({ x: Math.random()*(canvas.width-itemSize), y: -itemSize, emoji: debtPool[Math.floor(Math.random()*debtPool.length)] });
-                }
-            }
+            function spawnObjects() { /* ... (spawn logic, unchanged) ... */
+                 if (!gameActive || !canvas || canvas.width <= 0) return;
+                 if (Math.random() < 0.55) { // More money
+                     moneyItems.push({ x: Math.random()*(canvas.width-itemSize), y: -itemSize, emoji: emojis.money });
+                 }
+                 if (Math.random() < 0.75) { // Even more debt
+                     debtItems.push({ x: Math.random()*(canvas.width-itemSize), y: -itemSize, emoji: debtPool[Math.floor(Math.random()*debtPool.length)] });
+                 }
+             }
 
-            function updateGame() {
+            function updateGame() { /* ... (game update loop, unchanged) ... */
                 if (!gameActive || !canvas || !ctx) return;
                 if (keys['arrowleft'] || keys['a']) player.x -= player.speed;
                 if (keys['arrowright'] || keys['d']) player.x += player.speed;
                 player.x = Math.max(0, Math.min(canvas.width - player.width, player.x));
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                // Player Rect (optional visualization)
-                // ctx.fillStyle = player.color;
-                // ctx.fillRect(player.x, player.y, player.width, player.height);
                 // Player Emoji
-                ctx.font = "40px Arial"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+                ctx.font = "45px Arial"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
                 ctx.fillText(emojis.player, player.x + player.width / 2, player.y + player.height / 2);
 
                 ctx.font = `${itemSize}px Arial`; ctx.textBaseline = "middle";
-                for (let i = moneyItems.length - 1; i >= 0; i--) { /* ... Money collision/drawing ... */
-                    let item = moneyItems[i]; item.y += 4;
+                // Money items loop
+                for (let i = moneyItems.length - 1; i >= 0; i--) {
+                    let item = moneyItems[i]; item.y += 4.5; // Faster money
                     ctx.fillText(item.emoji, item.x + itemSize / 2, item.y + itemSize / 2);
-                    if (isColliding(player, { x: item.x, y: item.y, width: itemSize, height: itemSize })) {
-                        score += 10; updateScore(); moneyItems.splice(i, 1);
-                    } else if (item.y > canvas.height) { moneyItems.splice(i, 1); }
+                    if (isColliding(player, { x: item.x, y: item.y, width: itemSize, height: itemSize })) { score += 10; updateScore(); moneyItems.splice(i, 1); }
+                    else if (item.y > canvas.height) { moneyItems.splice(i, 1); }
                 }
-                for (let i = debtItems.length - 1; i >= 0; i--) { /* ... Debt collision/drawing ... */
-                    let item = debtItems[i]; item.y += 5.5; // Faster debt
+                // Debt items loop
+                for (let i = debtItems.length - 1; i >= 0; i--) {
+                    let item = debtItems[i]; item.y += 6; // Much faster debt
                     ctx.fillText(item.emoji, item.x + itemSize / 2, item.y + itemSize / 2);
-                     if (isColliding(player, { x: item.x, y: item.y, width: itemSize, height: itemSize })) {
-                         endGame(); return;
-                     } else if (item.y > canvas.height) { debtItems.splice(i, 1); }
+                     if (isColliding(player, { x: item.x, y: item.y, width: itemSize, height: itemSize })) { endGame(); return; }
+                     else if (item.y > canvas.height) { debtItems.splice(i, 1); }
                 }
             }
 
-            function isColliding(rect1, rect2) { /* ... Collision logic (unchanged) ... */
-                return ( rect1.x < rect2.x + rect2.width && rect1.x + rect1.width > rect2.x &&
-                         rect1.y < rect2.y + rect2.height && rect1.y + rect1.height > rect2.y );
+            function isColliding(rect1, rect2) { /* ... (collision logic, unchanged) ... */
+                return ( rect1.x < rect2.x + rect2.width && rect1.x + rect1.width > rect2.x && rect1.y < rect2.y + rect2.height && rect1.y + rect1.height > rect2.y );
             }
 
-            // --- Other Dynamic Elements (Ticker Price, Meme Alerts) ---
-            function updatePrice() { /* ... Price update logic (unchanged)... */
-                if (!priceValue || !priceChange) return;
-                let currentPrice = parseFloat(priceValue.textContent) || 0.00000169;
-                const changePercent = (Math.random() * 0.60) - 0.25; // Wild swings: -25% to +35%
-                let newPrice = currentPrice * (1 + changePercent);
-                newPrice = Math.max(0.00000001, newPrice); // Floor
-                priceValue.textContent = newPrice.toFixed(8);
-                const displayChange = (changePercent * 100).toFixed(1);
-                priceChange.textContent = (changePercent >= 0 ? '+' : '') + displayChange + '%';
-                priceChange.className = 'price-change ' + (changePercent >= 0 ? 'positive' : 'negative');
+            // --- Leaderboard Logic (Using Local Storage) ---
+            function getScores() {
+                const scores = localStorage.getItem('debtGameLeaderboard');
+                return scores ? JSON.parse(scores) : [];
             }
-            setInterval(updatePrice, 2500); // Faster price updates
 
-            // Meme financial facts popup
-            const factsMessages = [
-                "ALERT: Local man buys $DEBT instead of insulin. Says 'YOLO'.",
-                "BREAKING: Jerome Powell seen crying into a pile of useless dollars. $DEBT suspected.",
-                "FACT: 9 out of 10 dentists agree $DEBT is 'probably a bad idea, but kinda funny'.",
-                "WARNING: Holding $DEBT may cause spontaneous diamond hands and delusions of grandeur.",
-                "REPORT: Study finds link between $DEBT ownership and inexplicable urge to tweet rocket emojis.",
-                "ALERT: Wife's boyfriend recommends diversifying into $DEBT. Financial advice?",
-                "FACT: $DEBT has more utility than your degree (it makes people laugh).",
-                "BREAKING: Scientists discover $DEBT cures existential dread*. (*Results may vary, dread may increase).",
-                "WARNING: May cause you to quit your job and tell your boss to 'suck it'. Don't.",
-                "REPORT: $DEBT outperforms S&P 500 (in meme potential).",
-                "ALERT: Buying $DEBT confirmed side effect: uncontrollable giggling during market crashes."
-            ];
+            function saveScore(name, score) {
+                const scores = getScores();
+                scores.push({ name: name || "AnonDegen", score });
+                // Sort descending and keep top N
+                scores.sort((a, b) => b.score - a.score);
+                const topScores = scores.slice(0, MAX_LEADERBOARD_ENTRIES);
+                localStorage.setItem('debtGameLeaderboard', JSON.stringify(topScores));
+                updateLeaderboardDisplay(); // Update display immediately
+            }
 
-             function showRandomFact() {
+            function updateLeaderboardDisplay() {
+                if (!leaderboardList) return;
+                const scores = getScores();
+                leaderboardList.innerHTML = ''; // Clear previous list
+
+                if (scores.length === 0) {
+                    leaderboardList.innerHTML = '<li>No scores yet. Play the game, loser!</li>';
+                    return;
+                }
+
+                scores.forEach((entry, index) => {
+                    const li = document.createElement('li');
+                    const rankSpan = document.createElement('span');
+                    rankSpan.textContent = `#${index + 1}`;
+                    rankSpan.style.fontWeight = 'normal';
+                    rankSpan.style.color = '#888';
+                    rankSpan.style.marginRight = '10px';
+
+                    const nameSpan = document.createElement('span');
+                    nameSpan.className = 'leaderboard-name';
+                    nameSpan.textContent = entry.name;
+
+                    const scoreSpan = document.createElement('span');
+                    scoreSpan.className = 'leaderboard-score';
+                    scoreSpan.textContent = entry.score;
+
+                    li.appendChild(rankSpan);
+                    li.appendChild(nameSpan);
+                    li.appendChild(scoreSpan);
+                    leaderboardList.appendChild(li);
+                });
+            }
+
+            // --- Real-Time Price Feed (Placeholder) ---
+            async function fetchAndUpdatePrice() {
+                if (!priceValueEl || !priceChangeEl) return;
+
+                // !!! REPLACE WITH ACTUAL API ENDPOINT AND TOKEN ADDRESS !!!
+                const tokenAddress = "YOUR_TOKEN_ADDRESS_ON_SOLANA";
+                 const apiUrl = `https://public-api.birdeye.so/public/price?address=${tokenAddress}`; // EXAMPLE ONLY - VERIFY ENDPOINT
+
+                try {
+                    // ** NOTE: Birdeye might require an API Key header: 'X-API-KEY': 'YOUR_KEY' **
+                    const response = await fetch(apiUrl);
+                    if (!response.ok) {
+                        throw new Error(`API Error: ${response.statusText}`);
+                    }
+                    const data = await response.json();
+
+                     // ** Adjust parsing based on the ACTUAL API response structure **
+                     // Example structure assumption for Birdeye:
+                     if (data && data.data && data.data.value) {
+                         const price = data.data.value;
+                         const priceChange24h = data.data.priceChange24hPercent || 0; // Use 0 if unavailable
+
+                         priceValueEl.textContent = price.toFixed(8); // Adjust precision as needed
+                         priceChangeEl.textContent = `${priceChange24h >= 0 ? '+' : ''}${priceChange24h.toFixed(2)}%`;
+                         priceChangeEl.className = 'price-change ' + (priceChange24h >= 0 ? 'positive' : 'negative');
+                     } else {
+                         console.warn("Price API response format unexpected:", data);
+                         priceValueEl.textContent = 'N/A';
+                         priceChangeEl.textContent = '-.--%';
+                          priceChangeEl.className = 'price-change'; // Reset class
+                     }
+
+                } catch (error) {
+                    console.error("Failed to fetch price:", error);
+                    priceValueEl.textContent = 'Error';
+                    priceChangeEl.textContent = '-.--%';
+                    priceChangeEl.className = 'price-change'; // Reset class
+                }
+            }
+
+
+            // --- Initializations ---
+            updateLeaderboardDisplay(); // Load leaderboard on page load
+            fetchAndUpdatePrice(); // Initial price fetch
+            setInterval(fetchAndUpdatePrice, 30000); // Fetch price every 30 seconds
+
+
+            // --- Fact Popup (Unchanged from previous version) ---
+             const factsMessages = [ /* ... Your meme facts ... */
+                 "ALERT: Local man buys $DEBT instead of insulin. Says 'YOLO'.", "BREAKING: Jerome Powell seen crying into a pile of useless dollars. $DEBT suspected.",
+                 "FACT: 9 out of 10 dentists agree $DEBT is 'probably a bad idea, but kinda funny'.", "WARNING: Holding $DEBT may cause spontaneous diamond hands and delusions of grandeur.",
+                 "REPORT: Study finds link between $DEBT ownership and inexplicable urge to tweet rocket emojis.", "ALERT: Wife's boyfriend recommends diversifying into $DEBT. Financial advice?",
+                 "FACT: $DEBT has more utility than your degree (it makes people laugh).", "BREAKING: Scientists discover $DEBT cures existential dread*. (*Results may vary, dread may increase).",
+                 "WARNING: May cause you to quit your job and tell your boss to 'suck it'. Don't.", "REPORT: $DEBT outperforms S&P 500 (in meme potential).",
+                 "ALERT: Buying $DEBT confirmed side effect: uncontrollable giggling during market crashes."
+             ];
+             function showRandomFact() { /* ... (unchanged) ... */
                  if (document.querySelector('.facts-popup')) return;
                  const msg = factsMessages[Math.floor(Math.random() * factsMessages.length)];
-                 const popup = document.createElement('div');
-                 popup.className = 'facts-popup';
-                 popup.textContent = msg;
+                 const popup = document.createElement('div'); popup.className = 'facts-popup'; popup.textContent = msg;
                  document.body.appendChild(popup);
                  popup.addEventListener('animationend', () => { if (popup.parentNode) { popup.remove(); } });
-                 setTimeout(() => { if (popup.parentNode) { popup.remove(); } }, 6100); // Fallback
+                 setTimeout(() => { if (popup.parentNode) { popup.remove(); } }, 6100);
              }
-            function scheduleFact() {
-                const delay = Math.random() * 10000 + 10000; // Show every 10-20 seconds
-                setTimeout(() => { showRandomFact(); scheduleFact(); }, delay);
-            }
-            setTimeout(scheduleFact, 6000); // Initial delay
+             function scheduleFact() { /* ... (unchanged) ... */
+                 const delay = Math.random() * 11000 + 12000; // 12-23 seconds
+                 setTimeout(() => { showRandomFact(); scheduleFact(); }, delay);
+             }
+             setTimeout(scheduleFact, 7000); // Initial delay
 
         }); // End DOMContentLoaded
     </script>
