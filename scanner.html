@@ -3,243 +3,310 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>$DEBT Contract Scanner - Degenerates Exposed</title>
+    <title>$DEBT Hodler Surveillance - Exposing The Degens</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Poppins', 'Arial', sans-serif; /* Match main page font */
             background-color: #0a0a0a;
             color: #f0f0f0;
-            line-height: 1.6;
+            line-height: 1.7;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+        .container { max-width: 1300px; /* Wider for table */ margin: 0 auto; padding: 20px; }
 
-        .construction-banner {
-            background-color: #ff8c00;
-            color: #000;
-            text-align: center;
-            padding: 15px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
-            font-size: 1.2rem;
-        }
+        /* Removed construction banner - meme coins ARE construction */
 
         .page-header {
-            background-color: #111;
+            background: linear-gradient(rgba(10,10,10,0.8), rgba(10,10,10,0.8)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"><path d="M25 0 L50 25 L25 50 L0 25 Z" fill="rgba(255, 62, 62, 0.03)" /></svg>') repeat; /* Subtle bg pattern */
             color: #ff3e3e;
             text-align: center;
-            padding: 30px 0;
-            border-bottom: 3px solid #ff3e3e;
+            padding: 40px 20px; /* More padding */
+            border-bottom: 4px solid #ff3e3e;
+            margin-bottom: 30px;
         }
 
         .page-header h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
+            font-size: 3.5rem; /* Larger */
+            margin-bottom: 15px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px; /* Wider spacing */
+            font-weight: 900; /* Bolder */
+            text-shadow: 0 0 10px rgba(255, 62, 62, 0.5); /* Red glow */
         }
 
         .page-header p {
             color: #ccc;
-            font-size: 1.1rem;
+            font-size: 1.3rem; /* Larger */
+            font-style: italic;
+        }
+
+        /* Glitch Effect */
+         .glitch { animation: glitch 2s linear infinite alternate-reverse; display: inline-block; }
+         @keyframes glitch {
+             2%, 64% { transform: translate(3px, 0) skew(0.5deg); text-shadow: -2px 0 #00ffff, 2px 0 #ff00ff; }
+             4%, 60% { transform: translate(-3px, 0) skew(-0.5deg); text-shadow: 2px 0 #00ffff, -2px 0 #ff00ff;}
+             62% { transform: translate(0, 0) skew(5deg); text-shadow: 1px 1px #00ff00, -1px -1px #ff0000; }
+         }
+
+        .summary-stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap; /* Allow wrap */
+            background-color: #111;
+            padding: 25px;
+            margin-top: 30px;
+            margin-bottom: 30px; /* Add bottom margin */
+            border-radius: 8px; /* Rounded corners */
+            border: 1px solid #333;
+        }
+
+        .stat-box {
+            text-align: center;
+            flex: 1;
+            min-width: 180px; /* Min width before wrap */
+            padding: 15px;
+            border-right: 1px solid #444; /* Darker border */
+        }
+
+        .stat-box:last-child { border-right: none; }
+
+        .stat-box h3 {
+            color: #ff3e3e;
+            margin-bottom: 12px;
+            font-size: 1.1rem; /* Slightly smaller title */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-box p {
+            font-size: 2rem; /* Larger numbers */
+            font-weight: 700; /* Bolder */
+            font-family: 'Courier New', monospace; /* Monospace for numbers */
+            color: #fff; /* White numbers */
         }
 
         .holders-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 30px;
-            background-color: #1a1a1a;
-            box-shadow: 0 0 20px rgba(255, 62, 62, 0.1);
+            background-color: #151515; /* Slightly lighter dark */
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5); /* Stronger shadow */
+            border: 1px solid #333;
+            border-radius: 8px; /* Rounded table */
+            overflow: hidden; /* Ensure border radius applies */
         }
 
         .holders-table th, .holders-table td {
-            padding: 15px;
+            padding: 16px 18px; /* More padding */
             text-align: left;
-            border-bottom: 1px solid #333;
-            font-family: 'Courier New', monospace;
+            border-bottom: 1px solid #2a2a2a; /* Darker internal border */
+            font-size: 0.95rem; /* Base font size */
+            vertical-align: middle; /* Align content vertically */
         }
 
         .holders-table th {
-            background-color: #111;
+            background-color: #0a0a0a; /* Black header */
             color: #ff3e3e;
             text-transform: uppercase;
-            font-weight: bold;
+            font-weight: 700; /* Bold */
+            letter-spacing: 0.8px;
+            font-size: 0.9rem;
         }
 
-        .holders-table tr:nth-child(even) {
-            background-color: #151515;
+        .holders-table tr {
+             transition: background-color 0.2s ease-out;
         }
+
+        .holders-table tr:last-child td {
+            border-bottom: none; /* Remove border on last row */
+        }
+
+        /* No alternating background needed if hover is strong */
+        /* .holders-table tr:nth-child(even) { background-color: #181818; } */
 
         .holders-table tr:hover {
-            background-color: #222;
-            transition: background-color 0.3s ease;
+            background-color: #252525; /* Darker hover */
         }
 
-        .pnl-positive {
-            color: #28a745;
+        .rank {
             font-weight: bold;
-        }
-
-        .pnl-negative {
-            color: #dc3545;
-            font-weight: bold;
-        }
-
-        .debt-indicator {
-            background-color: #2a0000;
-            color: #ff3e3e;
-            padding: 5px 10px;
-            border-radius: 3px;
-            font-weight: bold;
-        }
-
-        .degen-status {
-            font-style: italic;
-            color: #aaa;
-            font-size: 0.9em;
+            color: #ccc;
+            font-size: 1.1rem;
+            text-align: center;
+            width: 5%; /* Allocate width */
         }
 
         .wallet-address {
             font-family: 'Courier New', monospace;
-            color: #ff3e3e;
+            color: #ff8c00; /* Orange for addresses? */
             cursor: pointer;
             transition: color 0.3s ease;
+            word-break: break-all; /* Break long addresses */
+            font-size: 0.9rem;
+            max-width: 250px; /* Limit width */
+            display: inline-block; /* Allow max-width */
+            overflow: hidden;
+            text-overflow: ellipsis; /* Add ellipsis */
+            white-space: nowrap; /* Prevent wrapping */
+        }
+        .wallet-address:hover { color: #ffa500; text-decoration: underline; }
+
+        .holdings {
+             font-weight: 600;
+             color: #eee;
+             font-family: 'Courier New', monospace;
+             white-space: nowrap; /* Prevent wrapping */
         }
 
-        .wallet-address:hover {
-            color: #ff6e6e;
-            text-decoration: underline;
+        .avg-buy {
+             color: #aaa;
+             font-family: 'Courier New', monospace;
+             font-size: 0.85rem;
+             white-space: nowrap;
+        }
+        .avg-buy-skull { /* Add skull if entry is terrible */
+             margin-left: 5px;
+             display: inline-block;
+             transform: translateY(2px);
+         }
+
+
+        .pnl-cell { /* Container for PNL display */
+             white-space: nowrap;
+        }
+        .pnl-percentage {
+            font-weight: bold;
+            font-size: 1.1rem; /* Larger PNL */
+            font-family: 'Courier New', monospace;
+            display: block; /* Percentage on its own line */
+            margin-bottom: 4px;
+        }
+        .pnl-positive { color: #28a745; }
+        .pnl-negative { color: #ff3e3e; } /* Use main red */
+
+        .pnl-tooltip-icon {
+             cursor: help;
+             margin-left: 5px;
+             font-size: 0.8em;
+             color: #888;
+         }
+
+
+        .degen-status {
+            font-style: italic;
+            color: #bbb;
+            font-size: 0.9em;
+            line-height: 1.3; /* Tighter line height */
+            max-width: 200px; /* Limit width */
         }
 
         .loading {
-            text-align: center;
-            padding: 50px;
-            font-size: 1.2rem;
-            color: #ccc;
+            text-align: center; padding: 60px; font-size: 1.4rem; color: #ccc; font-style: italic;
+        }
+        .loading::after { /* Simple loading animation */
+             content: '...';
+             display: inline-block;
+             animation: loadingDots 1.5s infinite;
+        }
+        @keyframes loadingDots {
+             0%, 20% { content: '.'; } 40% { content: '..'; } 60%, 100% { content: '...'; }
         }
 
         .error {
-            background-color: #2a0000;
-            color: #ff3e3e;
-            padding: 20px;
-            text-align: center;
-            border: 1px solid #ff3e3e;
-            margin-top: 30px;
+            background-color: #2a0000; color: #ff3e3e; padding: 25px; text-align: center;
+            border: 2px solid #ff3e3e; margin: 30px 0; border-radius: 8px; font-weight: bold;
+            font-size: 1.1rem;
         }
 
         .disclaimer {
-            margin-top: 30px;
-            padding: 15px;
-            background-color: rgba(255, 62, 62, 0.1);
-            border: 1px solid #ff3e3e;
-            text-align: center;
-            font-size: 0.9em;
-            color: #ccc;
+            margin: 40px 0; padding: 20px; background-color: rgba(255, 62, 62, 0.1);
+            border: 1px solid #ff3e3e; text-align: center; font-size: 1rem; color: #bbb;
+            border-radius: 8px; line-height: 1.8;
         }
+        .disclaimer strong { color: #ff3e3e;}
 
-        .back-button {
-            display: block;
-            width: 200px;
-            margin: 30px auto;
-            padding: 12px;
-            background-color: #ff3e3e;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
+        .back-button { /* Style like main CTA */
+            display: block; width: fit-content; /* Fit content */ margin: 40px auto; padding: 14px 30px;
+            background: linear-gradient(45deg, #ff3e3e, #ff6e6e); color: white; text-align: center;
+            text-decoration: none; border-radius: 6px; transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 62, 62, 0.4); text-transform: uppercase; font-weight: 700;
+            font-size: 0.95rem; letter-spacing: 1px; border: none; cursor: pointer;
         }
-
         .back-button:hover {
-            background-color: #ff6e6e;
+            background: linear-gradient(45deg, #e02a2a, #f05a5a); transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 8px 20px rgba(255, 62, 62, 0.6);
         }
 
-        .summary-stats {
-            display: flex;
-            justify-content: space-around;
-            background-color: #111;
-            padding: 20px;
-            margin-top: 20px;
-            border-radius: 5px;
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .holders-table th, .holders-table td { padding: 14px 12px; font-size: 0.9rem; }
+            .wallet-address { max-width: 180px; }
+             .degen-status { max-width: 150px; }
+             .rank { width: auto;} /* Remove fixed width */
         }
-
-        .stat-box {
-            text-align: center;
-            flex: 1;
-            padding: 10px;
-            border-right: 1px solid #333;
+        @media (max-width: 992px) {
+             .page-header h1 { font-size: 2.8rem; }
+             .page-header p { font-size: 1.1rem; }
+             .stat-box p { font-size: 1.6rem; }
+             /* Consider hiding less important columns */
+             .holders-table th:nth-child(4), .holders-table td:nth-child(4) { /* Hide Avg Buy Price */
+                 /* display: none; */
+             }
         }
-
-        .stat-box:last-child {
-            border-right: none;
-        }
-
-        .stat-box h3 {
-            color: #ff3e3e;
-            margin-bottom: 10px;
-        }
-
-        .stat-box p {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
         @media (max-width: 768px) {
-            .summary-stats {
-                flex-direction: column;
-            }
-
-            .stat-box {
-                border-right: none;
-                border-bottom: 1px solid #333;
-            }
-
-            .stat-box:last-child {
-                border-bottom: none;
-            }
+            .summary-stats { flex-direction: column; }
+            .stat-box { border-right: none; border-bottom: 1px solid #444; }
+            .stat-box:last-child { border-bottom: none; }
+            .page-header h1 { font-size: 2.2rem; }
+            .page-header p { font-size: 1rem; }
+             .holders-table { display: block; overflow-x: auto; white-space: nowrap; border: none; border-radius: 0; } /* Make table scrollable */
+             .holders-table thead, .holders-table tbody, .holders-table tr { display: block; }
+             .holders-table th, .holders-table td { display: block; text-align: right !important; padding-left: 50%; position: relative; border-bottom: 1px solid #2a2a2a; }
+             .holders-table td::before { content: attr(data-label); position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-weight: bold; text-transform: uppercase; color: #ff3e3e; text-align: left; padding-right: 10px; font-size: 0.8em;}
+             .holders-table thead { display: none; } /* Hide header on mobile */
+             .wallet-address { max-width: none; display: block; text-align: right; }
+             .degen-status { max-width: none; text-align: right;}
+             .rank { text-align: right !important;}
+             .pnl-percentage { display: inline-block; margin-bottom: 0; margin-right: 5px;}
         }
+         @media (max-width: 480px) {
+             .page-header h1 { font-size: 1.8rem; }
+             .stat-box p { font-size: 1.4rem; }
+             .holders-table td { padding-left: 40%;} /* Adjust label space */
+             .holders-table td::before { font-size: 0.7em; }
+         }
+
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="construction-banner">
-            🚧 UNDER CONSTRUCTION 🚧 This page is currently displaying mock data for demonstration purposes only.
-        </div>
-        
+
         <div class="page-header">
-            <h1>$DEBT Contract Scanner</h1>
-            <p>Exposing the Degenerates, One Wallet at a Time</p>
+            <h1 class="glitch">$DEBT HODLER SURVEILLANCE</h1>
+            <p>Where We Publicly Shame (or Worship) The Biggest Bags</p>
         </div>
 
         <div class="summary-stats">
             <div class="stat-box">
-                <h3>Total Holders</h3>
-                <p id="totalHolders">0</p>
+                <h3>Total Degens Counted</h3>
+                <p id="totalHolders">?</p>
             </div>
             <div class="stat-box">
-                <h3>Total $DEBT Locked</h3>
-                <p id="totalTokensLocked">0</p>
+                <h3>Total $DEBT Hostages</h3>
+                <p id="totalTokensLocked">?</p>
             </div>
             <div class="stat-box">
-                <h3>Top Holder %</h3>
-                <p id="topHolderPercentage">0%</p>
+                <h3>Top Wallet Dominance</h3>
+                <p id="topHolderPercentage">?%</p>
             </div>
         </div>
 
         <div id="loadingIndicator" class="loading">
-            Loading top hodlers... Judging in progress 🕵️‍♀️
+            Summoning blockchain demons... Judging wallets...
         </div>
 
         <div id="errorContainer" class="error" style="display: none;"></div>
@@ -247,12 +314,12 @@
         <table id="holdersTable" class="holders-table" style="display: none;">
             <thead>
                 <tr>
-                    <th>Rank</th>
-                    <th>Wallet Address</th>
-                    <th>$DEBT Holdings</th>
-                    <th>Avg Buy Price</th>
-                    <th>PNL</th>
-                    <th>Degen Status</th>
+                    <th class="rank">#</th>
+                    <th>Wallet (Click to Stalk)</th>
+                    <th>$DEBT Bag</th>
+                    <th>Entry Price (LMAO)</th>
+                    <th>Profit/Loss (Mostly Loss)</th>
+                    <th>Certified Condition</th>
                 </tr>
             </thead>
             <tbody id="holdersTableBody">
@@ -261,105 +328,153 @@
         </table>
 
         <div class="disclaimer">
-            ⚠️ WARNING: This data is for entertainment purposes. 
-            Your financial decisions are your own. Don't blame us when you lose money. 
-            We're just here to roast the biggest $DEBT degenerates.
+            <strong>⚠️ REALITY CHECK, MAGGOTS:</strong> This data is probably wrong, outdated, or pulled straight from our asses. It's for entertainment ONLY. Clicking wallet addresses might lead to weird shit. We ain't responsible if you copy a whale and get REKT. <strong>DYOR = Don't Yield, Obviously Retarded.</strong> Assume everyone here is losing money, including you.
         </div>
 
-        <a href="index.html" class="back-button">Back to $DEBT Cult</a>
+        <!-- Ensure index.html exists or change the href -->
+        <a href="index.html" class="back-button">Escape Back to Cult HQ</a>
     </div>
 
     <script>
-        // Mock data generator for demonstration (replace with real API)
-        function generateMockHolders() {
+        // Mock data generator - ENHANCED VIBE
+        function generateMockHolders(count = 50) {
             const holders = [];
-            const currentPrice = 0.00371; // Current $DEBT price
+            // Lower current price for more red candles
+            const currentPrice = 0.00000150 + (Math.random() - 0.5) * 0.000001; // Add some randomness
             const degenStatuses = [
-                "Certified Moonboi 🚀", 
-                "Bag Holder Supreme 💼", 
-                "Degen Extraordinaire 🤪", 
-                "Diamond Hands Club 💎", 
-                "Professional Gambler 🎲", 
-                "Retirement: Cancelled 🔥", 
-                "YOLO Master 💸", 
-                "Chart Wizard 📈", 
-                "Risk Management: Never Heard of It 🤷‍♂️"
+                "Maxi Degen Lord 👑", "Holding Til Zero 💀", "Wife Changer Fund 💔",
+                "Diamond Hand Ape 🦍", "Professional Bag Fumbler 🛍️", "Clinically Online 💻",
+                "Ramen Connoisseur 🍜", "Chart Sniffer 📉", "Risk? Never Met Her 🤷",
+                "Top Signal Enjoyer ⛰️", "Believes Own Hype ✨", "Liquidation Candidate 💸",
+                "Mentally Unwell 😊", "Trust Me Bro Source 🙏", "Future McDonald's Manager 🍔"
             ];
+            const solanaAddressChars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
 
-            const walletPrefixes = ['SOL', '0x'];
-            
-            for (let i = 1; i <= 50; i++) {
-                const holdings = Math.random() * 10_000_000; // Random $DEBT amount
-                const avgBuyPrice = Math.random() * 0.01; // Random buy price
-                const totalInvested = holdings * avgBuyPrice;
-                const currentValue = holdings * currentPrice;
-                const pnl = ((currentValue - totalInvested) / totalInvested) * 100;
+             function generateSolAddress() {
+                let address = '';
+                for (let i = 0; i < 44; i++) { // Solana addresses are typically 32-44 chars base58
+                    address += solanaAddressChars.charAt(Math.floor(Math.random() * solanaAddressChars.length));
+                }
+                // Ensure it starts with a valid character (1-9, A-Z)
+                const firstCharIndex = Math.floor(Math.random() * (solanaAddressChars.length - 26)) + 1; // Avoid lowercase starting chars potentially? Adjust range if needed.
+                return solanaAddressChars[firstCharIndex] + address.substring(1);
+            }
+
+
+            let totalHoldings = 0;
+            for (let i = 1; i <= count; i++) {
+                // Skew holdings towards smaller bags with occasional whales
+                let holdings;
+                 if (i === 1) holdings = Math.random() * 50_000_000 + 50_000_000; // Top holder is whale
+                 else if (i <= 5) holdings = Math.random() * 10_000_000 + 5_000_000; // Top 5 are decent size
+                 else holdings = Math.random() * 1_000_000 + 1000; // Rest are smaller
+
+                // Skew buy prices - some early, some late FOMO
+                let avgBuyPrice;
+                 if (i <= 3) avgBuyPrice = Math.random() * 0.0000005 + 0.0000001; // Early buyers
+                 else if (i <= 15) avgBuyPrice = Math.random() * 0.000005 + 0.000001; // Mid buyers
+                 else avgBuyPrice = Math.random() * (currentPrice * 1.5 - currentPrice * 0.5) + currentPrice * 0.5; // Recent / FOMO buyers centered around current
+
+                const pnl = currentPrice > 0 && avgBuyPrice > 0
+                    ? ((currentPrice - avgBuyPrice) / avgBuyPrice) * 100
+                    : (avgBuyPrice === 0 ? Infinity : -100); // Handle zero buy price
+
+                totalHoldings += holdings;
 
                 holders.push({
                     rank: i,
-                    address: `${walletPrefixes[Math.floor(Math.random() * walletPrefixes.length)]}${Math.random().toString(36).substring(2, 15)}`,
-                    holdings: holdings.toLocaleString(),
-                    avgBuyPrice: `$${avgBuyPrice.toFixed(6)}`,
-                    pnl: pnl,
+                    address: generateSolAddress(),
+                    holdingsRaw: holdings, // Keep raw number for calcs
+                    holdings: holdings.toLocaleString(undefined, {maximumFractionDigits: 0}), // Format for display
+                    avgBuyPriceRaw: avgBuyPrice, // Keep raw number
+                    avgBuyPrice: `$${avgBuyPrice.toFixed(8)}`, // Display formatted
+                    pnl: isFinite(pnl) ? pnl : (pnl > 0 ? 10000 : -100), // Cap infinite PNL for display sorting maybe?
                     degenStatus: degenStatuses[Math.floor(Math.random() * degenStatuses.length)]
                 });
             }
 
-            return holders.sort((a, b) => Math.abs(b.pnl) - Math.abs(a.pnl));
+            // Sort by holdings for ranking
+             holders.sort((a, b) => b.holdingsRaw - a.holdingsRaw);
+            // Re-assign rank after sorting
+            holders.forEach((h, index) => h.rank = index + 1);
+
+            return { holders, totalHoldings }; // Return total as well
         }
 
         // Function to render holders table
-        function renderHoldersTable(holders) {
+        function renderHoldersTable(data) {
+            const { holders, totalHoldings } = data;
             const tableBody = document.getElementById('holdersTableBody');
             const loadingIndicator = document.getElementById('loadingIndicator');
             const holdersTable = document.getElementById('holdersTable');
             const errorContainer = document.getElementById('errorContainer');
 
+             // Check if elements exist
+             if (!tableBody || !loadingIndicator || !holdersTable || !errorContainer) {
+                 console.error("Table rendering elements not found!");
+                 return;
+             }
+
             // Update summary stats
-            document.getElementById('totalHolders').textContent = holders.length;
-            const totalTokens = holders.reduce((sum, holder) => sum + parseFloat(holder.holdings.replace(/,/g, '')), 0);
-            document.getElementById('totalTokensLocked').textContent = `${(totalTokens / 1_000_000).toFixed(2)}M`;
-            
-            // Calculate top holder percentage
-            const topHolderPercentage = (parseFloat(holders[0].holdings.replace(/,/g, '')) / totalTokens * 100).toFixed(2);
-            document.getElementById('topHolderPercentage').textContent = `${topHolderPercentage}%`;
+             try {
+                document.getElementById('totalHolders').textContent = holders.length.toLocaleString();
+                // Assuming 1 Billion total supply for percentage calculation
+                const circulatingSupply = 1_000_000_000; // Replace if different
+                const lockedPercentage = totalHoldings > 0 ? (totalHoldings / circulatingSupply * 100).toFixed(2) : 0;
+                document.getElementById('totalTokensLocked').textContent = `${lockedPercentage}% Held`; // Changed stat meaning
 
-            // Clear any existing rows
-            tableBody.innerHTML = '';
+                // Top holder percentage OF TOTAL SUPPLY
+                const topHolderPercentage = holders.length > 0 ? (holders[0].holdingsRaw / circulatingSupply * 100).toFixed(2) : 0;
+                document.getElementById('topHolderPercentage').textContent = `${topHolderPercentage}%`;
+            } catch(e) {
+                 console.error("Error updating summary stats:", e);
+                  // Set default text on error
+                  document.getElementById('totalHolders').textContent = 'ERR';
+                  document.getElementById('totalTokensLocked').textContent = 'ERR';
+                  document.getElementById('topHolderPercentage').textContent = 'ERR%';
+             }
 
-            // Hide loading, show table
+
+            tableBody.innerHTML = ''; // Clear previous rows
+
             loadingIndicator.style.display = 'none';
-            holdersTable.style.display = 'table';
+            holdersTable.style.display = 'table'; // Use 'table' display
             errorContainer.style.display = 'none';
 
-            // Populate table
             holders.forEach(holder => {
                 const row = document.createElement('tr');
-                
-                // Determine PNL color and add snarky commentary
-                let pnlClass = holder.pnl >= 0 ? 'pnl-positive' : 'pnl-negative';
-                let pnlDisplay = `${holder.pnl.toFixed(2)}%`;
-                let pnlTooltip = holder.pnl >= 0 
-                    ? "Congratulations, you've defied the laws of financial gravity!" 
-                    : "Oof. Your portfolio is more red than a communist parade.";
 
-                // Generate debt/gain indicator
-                let debtIndicator = holder.pnl < 0 
-                    ? `<span class="debt-indicator">-$${Math.abs((holder.pnl / 100 * holder.holdings.replace(/,/g, '')).toFixed(2))}</span>`
-                    : `<span style="color: #28a745;">+$${(holder.pnl / 100 * holder.holdings.replace(/,/g, '')).toFixed(2)}</span>`;
+                let pnlClass = 'pnl-neutral'; // Default state? Or maybe just black/white
+                 let pnlDisplay = 'N/A';
+                 let pnlTooltip = "Probably bought at the top.";
+                 let skull = ''; // Skull emoji for bad entries
 
-                row.innerHTML = `
-                    <td>${holder.rank}</td>
-                    <td>
-                        <span class="wallet-address" title="Click to copy" onclick="copyToClipboard('${holder.address}')">${holder.address}</span>
+                 if (isFinite(holder.pnl)) {
+                    pnlClass = holder.pnl >= 0 ? 'pnl-positive' : 'pnl-negative';
+                    pnlDisplay = `${holder.pnl.toFixed(1)}%`; // Less precision maybe?
+                    pnlTooltip = holder.pnl > 100 ? "This guy fucks (probably lying)." : holder.pnl >= 0 ? "Lucky bastard." : holder.pnl > -50 ? "Down bad, but not out." : "Clinically REKT. Seek help.";
+                 }
+
+                 // Add skull if buy price was significantly higher than current (e.g., > 3x)
+                  const currentPriceApprox = 0.00000150; // Use the base from generation for comparison
+                 if (holder.avgBuyPriceRaw > currentPriceApprox * 3) {
+                     skull = '<span class="avg-buy-skull" title="Bought the absolute top LMAO">💀</span>';
+                 }
+
+
+                 // Add data-label attributes for mobile view CSS
+                 row.innerHTML = `
+                    <td data-label="Rank" class="rank">${holder.rank}</td>
+                    <td data-label="Wallet">
+                        <span class="wallet-address" title="Copy ${holder.address}" onclick="copyToClipboard('${holder.address}')">${holder.address}</span>
                     </td>
-                    <td>${holder.holdings} $DEBT</td>
-                    <td>${holder.avgBuyPrice}</td>
-                    <td>
-                        <span class="${pnlClass}" title="${pnlTooltip}">${pnlDisplay}</span>
-                        <br>${debtIndicator}
+                    <td data-label="$DEBT Bag" class="holdings">${holder.holdings}</td>
+                    <td data-label="Entry Price" class="avg-buy">${holder.avgBuyPrice}${skull}</td>
+                    <td data-label="PNL" class="pnl-cell">
+                        <span class="pnl-percentage ${pnlClass}" title="${pnlTooltip}">${pnlDisplay}</span>
+                         <span class="pnl-tooltip-icon">ℹ️</span>
                     </td>
-                    <td class="degen-status">${holder.degenStatus}</td>
+                    <td data-label="Condition" class="degen-status">${holder.degenStatus}</td>
                 `;
 
                 tableBody.appendChild(row);
@@ -369,33 +484,46 @@
         // Copy wallet address to clipboard
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
-                alert(`Wallet address ${text} copied to clipboard!`);
+                // Maybe add a subtle temporary feedback instead of alert
+                console.log(`Address copied: ${text}`);
             }).catch(err => {
                 console.error('Failed to copy: ', err);
+                alert("Copy failed. Your browser might be too old or insecure, boomer.");
             });
         }
 
-        // Simulate API call (replace with real API in production)
+        // Simulate API call
         function fetchHolders() {
-            try {
-                // Simulate network delay
-                setTimeout(() => {
-                    const holders = generateMockHolders();
-                    renderHoldersTable(holders);
-                }, 1500);
-            } catch (error) {
-                const errorContainer = document.getElementById('errorContainer');
-                const loadingIndicator = document.getElementById('loadingIndicator');
-                const holdersTable = document.getElementById('holdersTable');
+            const errorContainer = document.getElementById('errorContainer');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const holdersTable = document.getElementById('holdersTable');
 
+             // Ensure elements exist before proceeding
+             if (!errorContainer || !loadingIndicator || !holdersTable) {
+                 console.error("Core display elements missing, cannot fetch/render.");
+                 return;
+             }
+
+             loadingIndicator.style.display = 'block'; // Show loading
+             holdersTable.style.display = 'none';
+             errorContainer.style.display = 'none';
+
+
+            try {
+                setTimeout(() => { // Simulate network delay
+                    const data = generateMockHolders(100); // Generate more holders
+                    renderHoldersTable(data);
+                }, 1800); // Longer delay
+            } catch (error) {
+                console.error("Error fetching/generating holder data:", error);
                 loadingIndicator.style.display = 'none';
                 holdersTable.style.display = 'none';
                 errorContainer.style.display = 'block';
-                errorContainer.textContent = `Error: ${error.message}. The degen gods are displeased.`;
+                errorContainer.textContent = `Error: ${error.message}. The blockchain gods are angry. Or the mock data broke. Whatever.`;
             }
         }
 
-        // Kick off the process when page loads
+        // Initial fetch on page load
         document.addEventListener('DOMContentLoaded', fetchHolders);
     </script>
 </body>
