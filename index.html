@@ -1422,12 +1422,17 @@ setInterval(updateDebtCounters, 100); // Update every 100ms for smooth counting
 
 // --- Price Feed Logic ---
 async function fetchAndUpdatePrice() {
-    if (!priceValueEl || !priceChangeEl) return;
+    console.log("Fetching price at:", new Date().toLocaleTimeString());
     
-    // Using the test contract address
+    if (!priceValueEl || !priceChangeEl) {
+        console.error("Price elements not found in DOM");
+        return;
+    }
+    
+    // Using the token contract address
     const tokenAddress = "Cz75ZtjwgZmr5J1VDBRTm5ZybZvEFR5DEdb8hEy59pWq";
     
-    // Updated to use the correct Birdeye API endpoint
+    // Birdeye API endpoint for Solana tokens
     const apiUrl = `https://public-api.birdeye.so/defi/price?address=${tokenAddress}`;
     const options = {
         method: 'GET',
@@ -1444,17 +1449,14 @@ async function fetchAndUpdatePrice() {
         }
         
         const data = await response.json();
-        console.log("API Response:", data); // Debug the response
+        console.log("API Response:", data);
         
         // Check if we received valid data
         if (data && data.success && data.data) {
             const price = data.data.value;
-            // Use priceChange24h
             const priceChange24h = data.data.priceChange24h * 100; // Convert to percentage
             
-            // Update price display with correct formatting
-            // Don't use toFixed(9) which forces 9 decimal places
-            // Instead use a more dynamic approach
+            // Dynamic price formatting based on value
             const formattedPrice = price < 0.01 
                 ? '$' + price.toFixed(9).replace(/0+$/, '') // Remove trailing zeros
                 : '$' + price.toFixed(4).replace(/0+$/, ''); // Fewer decimals for larger values
@@ -1463,25 +1465,39 @@ async function fetchAndUpdatePrice() {
             priceChangeEl.textContent = `${priceChange24h >= 0 ? '+' : ''}${priceChange24h.toFixed(2)}%`;
             priceChangeEl.className = 'price-change ' + (priceChange24h >= 0 ? 'positive' : 'negative');
             
-            // Add the actual price you showed to debug comparison
-            console.log("Expected price: ~$0.01214, API returned:", price);
+            console.log("Price updated:", formattedPrice, "Change:", priceChange24h.toFixed(2) + "%");
         } else {
-            // If data exists but not in expected format
             console.log("Unexpected API response format:", data);
             throw new Error("Unexpected API response format");
         }
     } catch (error) {
         console.error("Failed to fetch price:", error);
         
-        // For now, since we know the actual price, just hardcode it for testing
-        priceValueEl.textContent = '$0.01214';
+        // Fallback to simulated price
+        const newPrice = (Math.random() * 0.02 + 0.01).toFixed(6);
+        priceValueEl.textContent = '$' + newPrice;
         
         // Simulate a negative change
-        const change = -(Math.random() * 5 + 10).toFixed(2); // More realistic negative change (-10% to -15%)
+        const change = -(Math.random() * 5 + 10).toFixed(2);
         priceChangeEl.textContent = change + '%';
         priceChangeEl.className = 'price-change negative';
+        
+        console.log("Using fallback price:", '$' + newPrice, "Change:", change + "%");
     }
 }
+
+// Clear any existing intervals to prevent duplicates
+if (window.priceUpdateInterval) {
+    clearInterval(window.priceUpdateInterval);
+    console.log("Cleared previous price update interval");
+}
+
+// Initial fetch when page loads
+fetchAndUpdatePrice();
+
+// Set up interval to update every 10 seconds and store the interval ID
+window.priceUpdateInterval = setInterval(fetchAndUpdatePrice, 10000);
+console.log("Price updates scheduled every 10 seconds");
 
 // --- Initializations Outside Game Block ---
 try {
