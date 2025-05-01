@@ -1484,27 +1484,31 @@ async function fetchAndUpdatePrice() {
     const staticPriceValueEl = document.getElementById('static-price-value');
     const staticPriceChangeEl = document.getElementById('static-price-change');
     
-    if ((!priceValueEl || !priceChangeEl) && (!staticPriceValueEl || !staticPriceChangeEl)) {
+    if ((!priceValueEl && !priceChangeEl) && (!staticPriceValueEl && !staticPriceChangeEl)) {
         console.error("Price elements not found in DOM");
         return;
     }
     
-    // Using the token contract address
+    // Using your DEBT token contract address
     const tokenAddress = "Cz75ZtjwgZmr5J1VDBRTm5ZybZvEFR5DEdb8hEy59pWq";
     
-    // Birdeye API endpoint for Solana tokens
-    const apiUrl = `https://public-api.birdeye.so/defi/price?address=${tokenAddress}`;
-    const options = {
-        method: 'GET',
-        headers: {
-            'accept': 'application/json',
-            'x-chain': 'solana'
-        }
-    };
-    
     try {
+        // Using the public-api.birdeye.so/public/price endpoint
+        const apiUrl = `https://public-api.birdeye.so/public/price?address=${tokenAddress}`;
+        
+        const options = {
+            method: 'GET',
+            headers: {
+                'accept': 'application/json',
+                'x-chain': 'solana'
+            }
+        };
+        
+        console.log("Sending API request to:", apiUrl);
         const response = await fetch(apiUrl, options);
+        
         if (!response.ok) {
+            console.error("API Error:", response.status, response.statusText);
             throw new Error(`API Error (${response.status}): ${response.statusText}`);
         }
         
@@ -1512,67 +1516,163 @@ async function fetchAndUpdatePrice() {
         console.log("Raw API Response:", data);
         
         // Check if we received valid data
-        if (data && data.success && data.data) {
-            // Log the raw price value to debug
-            console.log("Raw price value:", data.data.value);
+        if (data && data.data && typeof data.data.value === 'number') {
+            // Extract price value and format it properly
+            const price = data.data.value;
+            console.log("Raw price from API:", price);
             
-            // Get the price - make sure we're using the correct property
-            const price = parseFloat(data.data.value);
+            // Format with proper precision for small numbers
+            let formattedPrice;
+            if (price < 0.0001) {
+                formattedPrice = '$' + price.toFixed(10);
+            } else if (price < 0.01) {
+                formattedPrice = '$' + price.toFixed(6);
+            } else {
+                formattedPrice = '$' + price.toFixed(5);
+            }
             
-            // Convert percentage change - some APIs use decimal (0.10) and others use percentage (10)
-            // Check the format in the console log to determine which one to use
-            const priceChange24h = data.data.priceChange24h;
-            const changeIsDecimal = Math.abs(priceChange24h) < 10; // Check if it's likely to be a decimal
-            const changePercentage = changeIsDecimal ? priceChange24h * 100 : priceChange24h;
+            // Remove trailing zeros after decimal point
+            formattedPrice = formattedPrice.replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, '');
             
-            console.log("Parsed price:", price);
-            console.log("Change raw value:", priceChange24h);
-            console.log("Calculated change percentage:", changePercentage);
+            // Get price change data
+            let changePercentage = 0;
             
-            // Format price with correct precision based on the actual value
-            // For $0.004487, we want enough decimals to show the significant digits
-            const formattedPrice = '$' + price.toFixed(6);
+            if (typeof data.data.priceChange24h === 'number') {
+                // This is usually a decimal (e.g., 0.05 for 5%)
+                changePercentage = data.data.priceChange24h * 100;
+            } else if (typeof data.data.priceChange24hPercent === 'number') {
+                // This is already a percentage
+                changePercentage = data.data.priceChange24hPercent;
+            }
             
-            // Update UI elements
+            console.log("Raw change percentage:", changePercentage);
+            
+            // Format percentage with one decimal place
+            const formattedChange = `${changePercentage >= 0 ? '+' : ''}${changePercentage.toFixed(1)}%`;
+            const changeClass = changePercentage >= 0 ? 'positive' : 'negative';
+            
+            // Update ticker elements if they exist
             if (priceValueEl) priceValueEl.textContent = formattedPrice;
             if (priceChangeEl) {
-                priceChangeEl.textContent = `${changePercentage >= 0 ? '+' : ''}${changePercentage.toFixed(1)}%`;
-                priceChangeEl.className = 'price-change ' + (changePercentage >= 0 ? 'positive' : 'negative');
+                priceChangeEl.textContent = formattedChange;
+                priceChangeEl.className = 'price-change ' + changeClass;
             }
             
+            // Update static price display if it exists
             if (staticPriceValueEl) staticPriceValueEl.textContent = formattedPrice;
             if (staticPriceChangeEl) {
-                staticPriceChangeEl.textContent = `${changePercentage >= 0 ? '+' : ''}${changePercentage.toFixed(1)}%`;
-                staticPriceChangeEl.className = 'price-change-static ' + (changePercentage >= 0 ? 'positive' : 'negative');
+                staticPriceChangeEl.textContent = formattedChange;
+                staticPriceChangeEl.className = 'price-change-static ' + changeClass;
             }
             
-            console.log("Price updated to:", formattedPrice);
+            console.log("Price successfully updated to:", formattedPrice, "Change:", formattedChange);
         } else {
-            console.warn("Invalid API response format:", data);
+            // Fallback to the defi/price endpoint if the first one fails
+            console.warn("First API format unexpected, trying alternate endpoint");
             throw new Error("API data format unexpected");
         }
     } catch (error) {
-        console.error("Failed to fetch price:", error);
+        console.error("First API attempt failed:", error);
         
-        // Fallback to hardcoded price from your chart
-        const fallbackPrice = '$0.025628';
-        const fallbackChange = '-10.1%';
-        
-        if (priceValueEl) priceValueEl.textContent = fallbackPrice;
-        if (priceChangeEl) {
-            priceChangeEl.textContent = fallbackChange;
-            priceChangeEl.className = 'price-change negative';
+        // Try the alternate endpoint
+        try {
+            const altApiUrl = `https://public-api.birdeye.so/defi/price?address=${tokenAddress}`;
+            
+            const options = {
+                method: 'GET',
+                headers: {
+                    'accept': 'application/json',
+                    'x-chain': 'solana'
+                }
+            };
+            
+            console.log("Trying alternative API endpoint:", altApiUrl);
+            const response = await fetch(altApiUrl, options);
+            
+            if (!response.ok) {
+                throw new Error(`Alt API Error (${response.status}): ${response.statusText}`);
+            }
+            
+            const data = await response.json();
+            console.log("Alt API Response:", data);
+            
+            if (data && data.success && data.data && typeof data.data.value === 'number') {
+                const price = data.data.value;
+                console.log("Raw price from alt API:", price);
+                
+                let formattedPrice;
+                if (price < 0.0001) {
+                    formattedPrice = '$' + price.toFixed(10);
+                } else if (price < 0.01) {
+                    formattedPrice = '$' + price.toFixed(6);
+                } else {
+                    formattedPrice = '$' + price.toFixed(5);
+                }
+                
+                formattedPrice = formattedPrice.replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, '');
+                
+                // Get change percentage (formats vary by endpoint)
+                let changePercentage = 0;
+                if (typeof data.data.priceChange24h === 'number') {
+                    changePercentage = data.data.priceChange24h * 100;
+                }
+                
+                const formattedChange = `${changePercentage >= 0 ? '+' : ''}${changePercentage.toFixed(1)}%`;
+                const changeClass = changePercentage >= 0 ? 'positive' : 'negative';
+                
+                // Update UI elements
+                if (priceValueEl) priceValueEl.textContent = formattedPrice;
+                if (priceChangeEl) {
+                    priceChangeEl.textContent = formattedChange;
+                    priceChangeEl.className = 'price-change ' + changeClass;
+                }
+                
+                if (staticPriceValueEl) staticPriceValueEl.textContent = formattedPrice;
+                if (staticPriceChangeEl) {
+                    staticPriceChangeEl.textContent = formattedChange;
+                    staticPriceChangeEl.className = 'price-change-static ' + changeClass;
+                }
+                
+                console.log("Price updated from alt API:", formattedPrice, "Change:", formattedChange);
+            } else {
+                throw new Error("Alternative API data format unexpected");
+            }
+        } catch (altError) {
+            console.error("Both API attempts failed:", altError);
+            
+            // Use a fallback from trading view as last resort
+            const fallbackPrice = "$0.00371"; // Current price from your trading view
+            const fallbackChange = "-9.94%";   // Current change from your trading view
+            
+            if (priceValueEl) priceValueEl.textContent = fallbackPrice;
+            if (priceChangeEl) {
+                priceChangeEl.textContent = fallbackChange;
+                priceChangeEl.className = 'price-change negative';
+            }
+            
+            if (staticPriceValueEl) staticPriceValueEl.textContent = fallbackPrice;
+            if (staticPriceChangeEl) {
+                staticPriceChangeEl.textContent = fallbackChange;
+                staticPriceChangeEl.className = 'price-change-static negative';
+            }
+            
+            console.log("Using fallback price:", fallbackPrice, "Change:", fallbackChange);
         }
-        
-        if (staticPriceValueEl) staticPriceValueEl.textContent = fallbackPrice;
-        if (staticPriceChangeEl) {
-            staticPriceChangeEl.textContent = fallbackChange;
-            staticPriceChangeEl.className = 'price-change-static negative';
-        }
-        
-        console.log("Using fallback price:", fallbackPrice);
     }
 }
+
+// Clear any existing intervals to prevent duplicates
+if (window.priceUpdateInterval) {
+    clearInterval(window.priceUpdateInterval);
+    console.log("Cleared previous price update interval");
+}
+
+// Initial fetch when page loads
+fetchAndUpdatePrice();
+
+// Set up interval to update every 10 seconds and store the interval ID
+window.priceUpdateInterval = setInterval(fetchAndUpdatePrice, 10000);
+console.log("Price updates scheduled every 10 seconds");
 
 // Clear any existing intervals to prevent duplicates
 if (window.priceUpdateInterval) {
