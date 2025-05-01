@@ -1292,7 +1292,7 @@
                          if (gameOverlay) { gameOverlay.style.display = 'flex'; gameOverlay.innerHTML = "<p style='color:red;'>Critical Game Error Occurred.<br>Check console (F12) & Refresh.</p>"; }
                     }
                 } // End updateGame
-// National Debt Counter Setup
+// National Debt Counter Setup with localStorage persistence
 const debtData = {
     us: 36880000000000,       // $36.88 trillion
     china: 14780000000000,    // $14.78 trillion
@@ -1312,11 +1312,30 @@ const debtRatePerSecond = {
     australia: 720,  // Approx $22 billion per year
 };
 
-// Initialize current debt values
-let currentDebt = {...debtData};
+// Initialize with localStorage values if they exist, otherwise use starting values
+let currentDebt = {};
+let lastUpdated = localStorage.getItem('debtLastUpdated') ? 
+    parseInt(localStorage.getItem('debtLastUpdated')) : Date.now();
+
+// Load saved debt values from localStorage or use defaults
+Object.keys(debtData).forEach(country => {
+    const savedDebt = localStorage.getItem(`debt_${country}`);
+    currentDebt[country] = savedDebt ? parseFloat(savedDebt) : debtData[country];
+});
+
+// Calculate time elapsed since last update (if page was closed)
+const timeElapsedSeconds = (Date.now() - lastUpdated) / 1000;
+if (timeElapsedSeconds > 0) {
+    // Add debt that would have accumulated while page was closed
+    Object.keys(debtRatePerSecond).forEach(country => {
+        currentDebt[country] += debtRatePerSecond[country] * timeElapsedSeconds;
+    });
+}
 
 // Calculate global debt (sum of all countries)
-currentDebt.global = Object.values(debtData).reduce((a, b) => a + b, 0);
+currentDebt.global = Object.keys(debtRatePerSecond).reduce(
+    (total, country) => total + currentDebt[country], 0
+);
 
 // Format large numbers with commas
 function formatCurrency(number) {
@@ -1330,6 +1349,9 @@ function updateDebtCounters() {
         currentDebt[country] += debtRatePerSecond[country];
         const el = document.getElementById(`${country}-debt`);
         if (el) el.textContent = formatCurrency(currentDebt[country]);
+        
+        // Save to localStorage
+        localStorage.setItem(`debt_${country}`, currentDebt[country].toString());
     });
     
     // Calculate global debt (sum of all countries)
@@ -1342,9 +1364,12 @@ function updateDebtCounters() {
     if (globalCounter) {
         globalCounter.textContent = formatCurrency(currentDebt.global);
     }
+    
+    // Save last updated timestamp
+    localStorage.setItem('debtLastUpdated', Date.now().toString());
 }
 
-// Initialize debt values
+// Initialize debt values on the page
 function initializeDebtCounters() {
     Object.keys(debtRatePerSecond).forEach(country => {
         const el = document.getElementById(`${country}-debt`);
@@ -1360,15 +1385,6 @@ function initializeDebtCounters() {
 // Start debt counter
 initializeDebtCounters();
 setInterval(updateDebtCounters, 100); // Update every 100ms for smooth counting
-                function isColliding(rect1, rect2) {
-                    // Axis-Aligned Bounding Box collision detection
-                    return (
-                        rect1.x < rect2.x + rect2.width &&
-                        rect1.x + rect1.width > rect2.x &&
-                        rect1.y < rect2.y + rect2.height &&
-                        rect1.y + rect1.height > rect2.y
-                    );
-                }
 
                 // --- Leaderboard Functions (Inside game scope) ---
                  function getScores() { /* ... (unchanged) ... */
