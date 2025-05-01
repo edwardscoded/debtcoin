@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$DEBT Contract Scanner - Degenerates Exposed</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0a0a0a;
+            color: #f0f0f0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .page-header {
+            background-color: #111;
+            color: #ff3e3e;
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 3px solid #ff3e3e;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .page-header p {
+            color: #ccc;
+            font-size: 1.1rem;
+        }
+
+        .summary-stats {
+            display: flex;
+            justify-content: space-around;
+            background-color: #111;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        .stat-box {
+            text-align: center;
+            flex: 1;
+            padding: 10px;
+            border-right: 1px solid #333;
+        }
+
+        .stat-box:last-child {
+            border-right: none;
+        }
+
+        .stat-box h3 {
+            color: #ff3e3e;
+            margin-bottom: 10px;
+        }
+
+        .stat-box p {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .holders-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            background-color: #1a1a1a;
+            box-shadow: 0 0 20px rgba(255, 62, 62, 0.1);
+        }
+
+        .holders-table th, .holders-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+            font-family: 'Courier New', monospace;
+        }
+
+        .holders-table th {
+            background-color: #111;
+            color: #ff3e3e;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .holders-table tr:nth-child(even) {
+            background-color: #151515;
+        }
+
+        .holders-table tr:hover {
+            background-color: #222;
+            transition: background-color 0.3s ease;
+        }
+
+        .wallet-address {
+            font-family: 'Courier New', monospace;
+            color: #ff3e3e;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .wallet-address:hover {
+            color: #ff6e6e;
+            text-decoration: underline;
+        }
+
+        .degen-status {
+            font-style: italic;
+            color: #aaa;
+            font-size: 0.9em;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+
+        .error {
+            background-color: #2a0000;
+            color: #ff3e3e;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #ff3e3e;
+            margin-top: 30px;
+        }
+
+        .disclaimer {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: rgba(255, 62, 62, 0.1);
+            border: 1px solid #ff3e3e;
+            text-align: center;
+            font-size: 0.9em;
+            color: #ccc;
+        }
+
+        .back-button {
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+            padding: 12px;
+            background-color: #ff3e3e;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #ff6e6e;
+        }
+
+        @media (max-width: 768px) {
+            .summary-stats {
+                flex-direction: column;
+            }
+
+            .stat-box {
+                border-right: none;
+                border-bottom: 1px solid #333;
+            }
+
+            .stat-box:last-child {
+                border-bottom: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>$DEBT Contract Scanner</h1>
+            <p>Exposing the Degenerates, One Wallet at a Time</p>
+        </div>
+
+        <div class="summary-stats">
+            <div class="stat-box">
+                <h3>Total Holders</h3>
+                <p id="totalHolders">Loading...</p>
+            </div>
+            <div class="stat-box">
+                <h3>Total $DEBT Locked</h3>
+                <p id="totalTokensLocked">Loading...</p>
+            </div>
+            <div class="stat-box">
+                <h3>Top Holder %</h3>
+                <p id="topHolderPercentage">Loading...</p>
+            </div>
+        </div>
+
+        <div id="loadingIndicator" class="loading">
+            Loading top hodlers... Judging in progress 🕵️‍♀️
+        </div>
+
+        <div id="errorContainer" class="error" style="display: none;"></div>
+
+        <table id="holdersTable" class="holders-table" style="display: none;">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Wallet Address</th>
+                    <th>$DEBT Holdings</th>
+                    <th>% of Total Supply</th>
+                    <th>Degen Status</th>
+                </tr>
+            </thead>
+            <tbody id="holdersTableBody">
+                <!-- Holders will be dynamically inserted here -->
+            </tbody>
+        </table>
+
+        <div class="disclaimer">
+            ⚠️ WARNING: This data is for entertainment purposes. 
+            Your financial decisions are your own. Don't blame us when you lose money. 
+            We're just here to roast the biggest $DEBT degenerates.
+        </div>
+
+        <a href="index.html" class="back-button">Back to $DEBT Cult</a>
+    </div>
+
+    <script>
+        // $DEBT token address on Solana
+        const DEBT_TOKEN_ADDRESS = '8ncucXv6U6epZKHPbgaEBcEK399TpHGKCquSt4RnmX4f';
+        const BIRDEYE_API_KEY = 'bf9466033dd145769b1a07d8c8c51d4a';
+        const TOTAL_SUPPLY = 1_000_000_000; // 1 Billion $DEBT tokens
+
+        // Degen status generator
+        function getDegenStatus(percentage) {
+            const statuses = [
+                { range: [0, 1], status: "Baby Degen 🍼" },
+                { range: [1, 5], status: "Emerging Threat 🚀" },
+                { range: [5, 10], status: "Whale in Training 🐳" },
+                { range: [10, 20], status: "Certified Moonboi 💎" },
+                { range: [20, 50], status: "CULT LEADER 👑" },
+                { range: [50, 100], status: "ABSOLUTE MADLAD 🤯" }
+            ];
+
+            return statuses.find(s => 
+                percentage >= s.range[0] && percentage < s.range[1]
+            )?.status || "Random Degen 🤪";
+        }
+
+        // Fetch top holders from Birdeye API
+        async function fetchTopHolders() {
+            const options = {
+                method: 'GET',
+                headers: {
+                    'accept': 'application/json',
+                    'X-API-KEY': BIRDEYE_API_KEY,
+                    'x-chain': 'solana'
+                }
+            };
+
+            try {
+                const response = await fetch(
+                    `https://public-api.birdeye.so/defi/v3/token/holder?address=${DEBT_TOKEN_ADDRESS}&offset=0&limit=50`, 
+                    options
+                );
+
+                if (!response.ok) {
+                    throw new Error(`API response status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                return data.data || [];
+            } catch (error) {
+                console.error('Error fetching top holders:', error);
+                throw error;
+            }
+        }
+
+        // Render holders table
+        function renderHoldersTable(holders) {
+            const tableBody = document.getElementById('holdersTableBody');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const holdersTable = document.getElementById('holdersTable');
+            const errorContainer = document.getElementById('errorContainer');
+
+            // Update summary stats
+            document.getElementById('totalHolders').textContent = holders.length;
+            
+            // Calculate total tokens in top holders
+            const totalTokensInTopHolders = holders.reduce((sum, holder) => 
+                sum + parseFloat(holder.amount), 0
+            );
+
+            document.getElementById('totalTokensLocked').textContent = 
+                `${(totalTokensInTopHolders / 1_000_000).toFixed(2)}M`;
+            
+            // Calculate top holder percentage
+            const topHolderPercentage = (
+                (parseFloat(holders[0].amount) / TOTAL_SUPPLY) * 100
+            ).toFixed(2);
+            document.getElementById('topHolderPercentage').textContent = `${topHolderPercentage}%`;
+
+            // Clear any existing rows
+            tableBody.innerHTML = '';
+
+            // Hide loading, show table
+            loadingIndicator.style.display = 'none';
+            holdersTable.style.display = 'table';
+            errorContainer.style.display = 'none';
+
+            // Populate table
+            holders.forEach((holder, index) => {
+                const row = document.createElement('tr');
+                
+                // Calculate percentage of total supply
+                const percentage = ((parseFloat(holder.amount) / TOTAL_SUPPLY) * 100).toFixed(2);
+                
+                // Generate degen status based on percentage
+                const degenStatus = getDegenStatus(percentage);
+
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>
+                        <span class="wallet-address" title="Click to copy" onclick="copyToClipboard('${holder.address}')">${holder.address}</span>
+                    </td>
+                    <td>${parseFloat(holder.amount).toLocaleString()} $DEBT</td>
+                    <td>${percentage}%</td>
+                    <td class="degen-status">${degenStatus}</td>
+                `;
+
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Copy wallet address to clipboard
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert(`Wallet address ${text} copied to clipboard!`);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        // Main fetch and render function
+        async function initializeHoldersPage() {
+            try {
+                const holdersTable = document.getElementById('holdersTable');
+                const loadingIndicator = document.getElementById('loadingIndicator');
+                const errorContainer = document.getElementById('errorContainer');
+
+                // Show loading
+                loadingIndicator.style.display = 'block';
+                holdersTable.style.display = 'none';
+                errorContainer.style.display = 'none';
+
+                // Fetch and render holders
+                const holders = await fetchTopHolders();
+                renderHoldersTable(holders);
+            } catch (error) {
+                const errorContainer = document.getElementById('errorContainer');
+                const loadingIndicator = document.getElementById('loadingIndicator');
+                const holdersTable = document.getElementById('holdersTable');
+
+                loadingIndicator.style.display = 'none';
+                holdersTable.style.display = 'none';
+                errorContainer.style.display = 'block';
+                errorContainer.textContent = `Error: ${error.message}. The degen gods are displeased.`;
+            }
+        }
+
+        // Kick off the process when page loads
+        document.addEventListener('DOMContentLoaded', initializeHoldersPage);
+    </script>
+</body>
+</html>
