@@ -3,154 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>$DEBT - F*ck The System. Join The Cult.</title>
+    <title>$DEBT - Forge a New Future (On Their Ashes)</title>
     <style>
 
         /* Price display above the tagline */
-.price-display {
-    margin-bottom: 30px;
-    background-color: rgba(10, 10, 10, 0.7);
-    border: 2px solid #ffaa5a;
-    border-radius: 10px;
-    padding: 10px 25px;
-    display: inline-block;
-}
+        .price-display { margin-bottom: 30px; background-color: rgba(10, 10, 10, 0.7); border: 2px solid #ffaa5a; /* Cult Orange */ border-radius: 10px; padding: 10px 25px; display: inline-block; }
+        .price-display-inner { font-family: 'Courier New', Courier, monospace; font-size: 24px; font-weight: bold; }
+        .price-label { color: #ccc; margin-right: 10px; }
+        .price-value-static { color: #ffaa5a; /* Cult Orange */ margin-right: 15px; }
+        .price-change-static { padding: 4px 10px; border-radius: 6px; font-size: 0.85em; }
+        .price-change-static.positive { background-color: #28a745; /* Green */ color: white; }
+        .price-change-static.negative { background-color: #dc3545; /* Red */ color: white; }
 
-.price-display-inner {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 24px;
-    font-weight: bold;
-}
+        /* Debt Counter Styles */
+        .debt-counter-box { background-color: rgba(10, 10, 10, 0.9); border: 3px solid #ffaa5a; /* Cult Orange */ border-radius: 12px; padding: 30px; max-width: 700px; margin: 40px auto; text-align: center; box-shadow: 0 0 20px rgba(255, 170, 90, 0.25); /* Orange glow */ }
+        .counter-title { color: #ffaa5a; /* Cult Orange */ font-size: 28px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1.5px; }
+        .counter-value { font-family: 'Courier New', Courier, monospace; font-size: 44px; font-weight: 700; color: #40E0D0; /* MODIFIED: Hopeful Teal for the rising number */ margin: 15px 0; text-shadow: 0 0 10px rgba(64, 224, 208, 0.4); /* Teal glow */ }
+        .counter-subtext { color: #aaa; font-style: italic; margin-bottom: 20px; font-size: 16px; }
+        .debt-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-family: 'Courier New', Courier, monospace; }
+        .debt-table th, .debt-table td { padding: 10px; text-align: right; font-size: 16px; border-bottom: 1px solid #333; }
+        .debt-table th { color: #ffaa5a; /* Cult Orange */ text-transform: uppercase; font-weight: 600; letter-spacing: 1px; }
+        .debt-table td { color: #fff; }
+        .debt-table td.country { text-align: left; color: #ddd; font-weight: 600; }
+        .debt-table tr:hover td { background-color: rgba(64, 224, 208, 0.1); /* MODIFIED: Teal hover */ }
+        .debt-table tr:last-child td { border-bottom: none; }
+        .banker-bonus td { color: #dc3545 !important; /* MODIFIED: Red for their gains */ font-weight: bold; }
+        .banker-bonus td:first-child { text-align: left; color: #dc3545 !important; font-style: italic; }
 
-.price-label {
-    color: #ccc;
-    margin-right: 10px;
-}
 
-.price-value-static {
-    color: #ffaa5a;
-    margin-right: 15px;
-}
-
-.price-change-static {
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 0.85em;
-}
-
-.price-change-static.positive {
-    background-color: #28a745;
-    color: white;
-}
-
-.price-change-static.negative {
-    background-color: #ffaa5a;
-    color: white;
-}
-/* Debt Counter Styles */
-.debt-counter-box {
-    background-color: rgba(10, 10, 10, 0.9);
-    border: 3px solid #ffaa5a;
-    border-radius: 12px;
-    padding: 30px;
-    max-width: 700px;
-    margin: 40px auto;
-    text-align: center;
-    box-shadow: 0 0 20px rgba(255, 62, 62, 0.25);
-}
-
-.counter-title {
-    color: #ffaa5a;
-    font-size: 28px;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-}
-
-.counter-value {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 44px;
-    font-weight: 700;
-    color: #ffaa5a;
-    margin: 15px 0;
-    text-shadow: 0 0 10px rgba(255, 62, 62, 0.4);
-}
-
-.counter-subtext {
-    color: #aaa;
-    font-style: italic;
-    margin-bottom: 20px;
-    font-size: 16px;
-}
-
-.debt-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    font-family: 'Courier New', Courier, monospace;
-}
-
-.debt-table th, 
-.debt-table td {
-    padding: 10px;
-    text-align: right;
-    font-size: 16px;
-    border-bottom: 1px solid #333;
-}
-
-.debt-table th {
-    color: #ffaa5a;
-    text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 1px;
-}
-
-.debt-table td {
-    color: #fff;
-}
-
-.debt-table td.country {
-    text-align: left;
-    color: #ddd;
-    font-weight: 600;
-}
-
-.debt-table tr:hover td {
-    background-color: rgba(255, 62, 62, 0.1);
-}
-
-.debt-table tr:last-child td {
-    border-bottom: none;
-}
-        
         /* Reset and base styles */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-
-        body {
-            background-color: #0a0a0a; /* Even darker base */
-            color: #f0f0f0;
-            line-height: 1.7; /* Slightly more spacing */
-            font-family: 'Poppins', 'Arial', sans-serif; /* More modern/playful font */
-            overflow-x: hidden;
-            opacity: 0;
-            animation: fadeInPage 0.8s ease-out forwards;
-        }
+        body { background-color: #0a0a0a; color: #f0f0f0; line-height: 1.7; font-family: 'Poppins', 'Arial', sans-serif; overflow-x: hidden; opacity: 0; animation: fadeInPage 0.8s ease-out forwards; }
         @keyframes fadeInPage { to { opacity: 1; } }
+        a { color: #40E0D0; /* NEW: Default link color Teal */ text-decoration: none; transition: color 0.3s; }
+        a:hover { color: #ffaa5a; /* NEW: Link hover Cult Orange */ }
 
         /* Container */
         .container { max-width: 1150px; margin: 0 auto; padding: 0 20px; }
 
         /* Section base */
         section { padding: 80px 0; position: relative; overflow: hidden; }
+        section:not(.hero) { border-top: 1px solid #333; } /* Subtle separators */
 
         /* Animations on Scroll */
         .fade-in-section { opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .fade-in-section.visible { opacity: 1; transform: translateY(0); }
 
         /* Glitch Effect */
-         .glitch { animation: glitch 2s linear infinite alternate-reverse; display: inline-block; }
-         @keyframes glitch {
+         .glitch { animation: glitch 1.5s linear infinite alternate-reverse; display: inline-block; }
+         @keyframes glitch { /* Keep existing glitch */
              2%, 64% { transform: translate(3px, 0) skew(0.5deg); text-shadow: -2px 0 #00ffff, 2px 0 #ff00ff; }
              4%, 60% { transform: translate(-3px, 0) skew(-0.5deg); text-shadow: 2px 0 #00ffff, -2px 0 #ff00ff;}
              62% { transform: translate(0, 0) skew(5deg); text-shadow: 1px 1px #00ff00, -1px -1px #ff0000; }
@@ -158,589 +60,255 @@
 
 
         /* Header styles */
-        header {
-            background-color: rgba(5, 5, 5, 0.85); backdrop-filter: blur(12px); color: white;
-            padding: 15px 0; position: fixed; width: 100%; top: 0; z-index: 100;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
-        }
+        header { background-color: rgba(5, 5, 5, 0.85); backdrop-filter: blur(12px); color: white; padding: 15px 0; position: fixed; width: 100%; top: 0; z-index: 100; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6); border-bottom: 1px solid #333; /* Subtle border */ }
         .header-inner { display: flex; justify-content: space-between; align-items: center; }
-
-        .logo {
-            font-size: 30px; font-weight: 900; /* Extra Bold */ color: #ffaa5a; text-decoration: none;
-            letter-spacing: -2px; text-shadow: 0 0 8px rgba(255, 62, 62, 0.6);
-        }
+        .logo { font-size: 30px; font-weight: 900; color: #ffaa5a; /* Cult Orange */ text-decoration: none; letter-spacing: -2px; text-shadow: 0 0 8px rgba(255, 170, 90, 0.6); /* Orange glow */ }
         .logo span { color: #ffffff; }
-        .ticker-symbol {
-            font-family: 'Courier New', Courier, monospace; background-color: #ffaa5a; color: #0a0a0a;
-            padding: 4px 9px; border-radius: 5px; margin-left: 8px; font-size: 0.65em;
-            vertical-align: middle; font-weight: bold; border: 1px solid #ff6e6e;
-        }
+        .ticker-symbol { font-family: 'Courier New', Courier, monospace; background-color: #ffaa5a; /* Cult Orange */ color: #0a0a0a; padding: 4px 9px; border-radius: 5px; margin-left: 8px; font-size: 0.65em; vertical-align: middle; font-weight: bold; border: 1px solid #ffaa5a; }
 
         /* Desktop Navigation */
-        nav ul { display: flex; list-style: none; align-items: center; /* Align items vertically */}
+        nav ul { display: flex; list-style: none; align-items: center; }
         nav ul li { margin-left: 45px; }
-        nav ul li a {
-            color: #d5d5d5; text-decoration: none; font-weight: 600; transition: color 0.3s, transform 0.2s;
-            padding: 5px 0; position: relative; display: inline-block; text-transform: uppercase;
-            font-size: 0.95em; letter-spacing: 0.8px;
-        }
-         nav ul li a::after { content: ''; position: absolute; width: 0; height: 2px; display: block; margin-top: 4px; right: 0; background: #ffaa5a; transition: width 0.4s ease; }
-         nav ul li a:hover::after { width: 100%; left: 0; background-color: #ffaa5a; }
+        nav ul li a { color: #d5d5d5; /* Keep nav links subtle */ text-decoration: none; font-weight: 600; transition: color 0.3s, transform 0.2s; padding: 5px 0; position: relative; display: inline-block; text-transform: uppercase; font-size: 0.95em; letter-spacing: 0.8px; }
+        nav ul li a::after { content: ''; position: absolute; width: 0; height: 2px; display: block; margin-top: 4px; right: 0; background: #ffaa5a; /* Cult Orange */ transition: width 0.4s ease; }
+        nav ul li a:hover::after { width: 100%; left: 0; background-color: #ffaa5a; /* Cult Orange */ }
         nav ul li a:hover { color: #ffffff; transform: translateY(-1px); }
 
-        /* CTA Button Base Style */
-        .cta-button {
-             background: linear-gradient(45deg, #ffaa5a, #ff6e6e); color: white; padding: 12px 28px; border-radius: 6px;
-             font-weight: 700; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(255, 62, 62, 0.4);
-             text-transform: uppercase; font-size: 0.95em; letter-spacing: 1px; border: none; cursor: pointer;
-         }
-         .cta-button:hover {
-             background: linear-gradient(45deg, #e02a2a, #f05a5a); transform: translateY(-3px) scale(1.04);
-             box-shadow: 0 8px 20px rgba(255, 62, 62, 0.6);
-         }
+        /* CTA Button Base Style (Keeping Orange dominant here) */
+        .cta-button { background: linear-gradient(45deg, #ffaa5a, #ff8c4a); /* MODIFIED: Orange gradient */ color: white; padding: 12px 28px; border-radius: 6px; font-weight: 700; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(255, 170, 90, 0.4); /* Orange shadow */ text-transform: uppercase; font-size: 0.95em; letter-spacing: 1px; border: none; cursor: pointer; }
+        .cta-button:hover { background: linear-gradient(45deg, #ff8c4a, #ffaa5a); transform: translateY(-3px) scale(1.04); box-shadow: 0 8px 20px rgba(255, 170, 90, 0.6); /* Orange shadow */ }
 
-        /* Pump.fun Button Specific Style */
-         .pump-fun-button {
-             background: linear-gradient(45deg, #4ade80, #1fcc44); 
-             color: #111; /* Dark text */
-             padding: 12px 28px; border-radius: 6px; font-weight: 800; text-decoration: none;
-             transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(74, 222, 128, 0.4);
-             text-transform: uppercase; font-size: 1em; letter-spacing: 1px; border: none; cursor: pointer;
-             margin-left: 20px; /* Space from nav */
-         }
-         .pump-fun-button:hover {
-             background: linear-gradient(45deg, #36d399, #1aaa39);
-             transform: translateY(-3px) scale(1.04); box-shadow: 0 8px 20px rgba(74, 222, 128, 0.5);
-         }
-
+        /* Pump.fun Button Specific Style (Keep Green distinct) */
+         .pump-fun-button { background: linear-gradient(45deg, #4ade80, #1fcc44); color: #111; padding: 12px 28px; border-radius: 6px; font-weight: 800; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(74, 222, 128, 0.4); text-transform: uppercase; font-size: 1em; letter-spacing: 1px; border: none; cursor: pointer; margin-left: 20px; }
+         .pump-fun-button:hover { background: linear-gradient(45deg, #36d399, #1aaa39); transform: translateY(-3px) scale(1.04); box-shadow: 0 8px 20px rgba(74, 222, 128, 0.5); }
 
         /* Mobile Navigation */
+        /* Styles remain largely the same, ensure link hover uses orange */
         .mobile-nav-toggle { display: none; background: none; border: none; color: white; font-size: 34px; cursor: pointer; z-index: 110; padding: 5px; }
-        .mobile-nav-links {
-            display: none; position: fixed; top: 0; right: -100%; width: 85%; max-width: 360px; height: 100%;
-            background-color: #111; box-shadow: -5px 0 25px rgba(0, 0, 0, 0.7); padding-top: 100px;
-            z-index: 105; flex-direction: column; align-items: center; transition: right 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        }
+        .mobile-nav-links { display: none; position: fixed; top: 0; right: -100%; width: 85%; max-width: 360px; height: 100%; background-color: #111; box-shadow: -5px 0 25px rgba(0, 0, 0, 0.7); padding-top: 100px; z-index: 105; flex-direction: column; align-items: center; transition: right 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
         .mobile-nav-links.active { display: flex; right: 0; }
         .mobile-nav-links ul { list-style: none; padding: 0; width: 100%; text-align: center; }
         .mobile-nav-links ul li { margin: 35px 0; }
-        .mobile-nav-links ul li a {
-            color: white; text-decoration: none; font-size: 24px; font-weight: 600; padding: 15px 30px;
-            display: block; transition: background-color 0.3s, color 0.3s; text-transform: uppercase;
-        }
-        .mobile-nav-links ul li a:hover { color: #ffaa5a; background-color: #1f1f1f; }
-        .mobile-nav-links .pump-fun-button { margin-top: 40px; margin-left: 0; } /* Center button on mobile */
+        .mobile-nav-links ul li a { color: white; text-decoration: none; font-size: 24px; font-weight: 600; padding: 15px 30px; display: block; transition: background-color 0.3s, color 0.3s; text-transform: uppercase; }
+        .mobile-nav-links ul li a:hover { color: #ffaa5a; /* Cult Orange */ background-color: #1f1f1f; }
+        .mobile-nav-links .pump-fun-button { margin-top: 40px; margin-left: 0; }
 
 
         /* Price ticker */
-        .price-ticker {
-            background-color: #000; padding: 9px 0; text-align: center; border-top: 1px solid #333; font-family: 'Courier New', Courier, monospace;
-            overflow: hidden; white-space: nowrap; position: relative; width: 100%;
-        }
+        .price-ticker { background-color: #000; padding: 9px 0; text-align: center; border-top: 1px solid #333; font-family: 'Courier New', Courier, monospace; overflow: hidden; white-space: nowrap; position: relative; width: 100%; }
         .price-ticker::after { content: ''; position: absolute; top: 0; right: 0; width: 80px; height: 100%; background: linear-gradient(to right, transparent, #000 90%); pointer-events: none; }
-        .ticker-content { display: inline-block; padding-left: 100%; animation: ticker 30s linear infinite; }
+        .ticker-content { display: inline-block; padding-left: 100%; animation: ticker 40s linear infinite; }
         .price-label { color: #bbb; margin-right: 5px; }
-        .price-value { color: #ffaa5a; font-weight: bold; margin-right: 10px; font-size: 1.1em;} /* Slightly larger */
+        .price-value { color: #ffaa5a; /* Cult Orange */ font-weight: bold; margin-right: 10px; font-size: 1.1em; }
         .price-change { padding: 3px 6px; border-radius: 4px; font-size: 0.85em; margin-right: 18px; }
-        .positive { background-color: #28a745; color: white; }
-        .negative { background-color: #ffaa5a; color: white; }
-        .ticker-message { color: #b8b8b8; font-style: italic; margin-left: 35px; }
+        .positive { background-color: #28a745; /* Green */ color: white; }
+        .negative { background-color: #dc3545; /* Red */ color: white; }
+        .ticker-message { color: #40E0D0; /* MODIFIED: Teal for ticker messages */ font-style: normal; /* Less italic */ margin-left: 35px; }
         @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
 
         /* Hero section */
         .hero {
             padding: 220px 0 160px;
-            background: #0a0a0a url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70"><g fill="rgba(255, 62, 62, 0.03)" fill-rule="evenodd"><path d="M0 0h70v70H0z"/><path d="M10 10h50v50H10z"/><path d="M20 20h30v30H20z"/><path d="M30 30h10v10H30z"/></g></svg>') repeat; /* Concentric squares bg */
-            color: white; text-align: center; position: relative; overflow: hidden; border-bottom: 5px solid #ffaa5a;
+            /* Keep background simple or use a subtle pattern */
+            background: #0a0a0a;
+            color: white; text-align: center; position: relative; overflow: hidden; border-bottom: 5px solid #ffaa5a; /* Cult Orange */
         }
         .hero .container { position: relative; z-index: 1; }
-        .hero h1 {
-            font-size: 72px; margin-bottom: 20px; color: #ffffff; font-weight: 900; letter-spacing: -3px;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.6); line-height: 1.05;
-        }
-        .hero h1 span { color: #ffaa5a; text-shadow: 0 0 15px rgba(255, 62, 62, 0.8); }
-        .hero p.subtitle { font-size: 26px; max-width: 800px; margin: 0 auto 40px; opacity: 0.9; font-weight: 400; }
-        .hero p.tagline { font-size: 32px; margin-bottom: 50px; color: #ffaa5a; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
+        .hero h1 { font-size: 72px; margin-bottom: 20px; color: #ffffff; font-weight: 900; letter-spacing: -3px; text-shadow: 0 4px 10px rgba(0,0,0,0.6); line-height: 1.05; }
+        .hero h1 span { color: #ffaa5a; /* Cult Orange */ text-shadow: 0 0 15px rgba(255, 170, 90, 0.8); /* Orange glow */ }
+        .hero p.subtitle { font-size: 26px; max-width: 800px; margin: 0 auto 40px; opacity: 0.9; font-weight: 400; color: #ccc; /* Slightly brighter subtitle */ }
+        .hero p.tagline { font-size: 32px; margin-bottom: 50px; color: #ffaa5a; /* Cult Orange */ font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
 
-        .hero-buttons-main { /* Container for main buttons */
-            margin: 40px auto; display: flex; justify-content: center; align-items: center; gap: 25px; flex-wrap: wrap;
-        }
-        .hero-cta-main { /* Buy on Pump Button in Hero */
-             padding: 22px 50px; font-size: 24px; border-radius: 10px; letter-spacing: 1.5px;
-         }
-         .how-to-buy-button { /* Secondary Button Style */
-             background: transparent; border: 2px solid #ff6e6e; color: #ff6e6e; padding: 18px 40px; font-size: 18px;
-             border-radius: 8px; font-weight: 700; text-decoration: none; transition: all 0.3s ease;
-             text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
-         }
-         .how-to-buy-button:hover { background-color: rgba(255, 62, 62, 0.1); color: #fff; transform: translateY(-2px); }
+        .hero-buttons-main { margin: 40px auto; display: flex; justify-content: center; align-items: center; gap: 25px; flex-wrap: wrap; }
+        .hero-cta-main { padding: 22px 50px; font-size: 24px; border-radius: 10px; letter-spacing: 1.5px; }
+        .how-to-buy-button { background: transparent; border: 2px solid #ffaa5a; /* MODIFIED: Orange border */ color: #ffaa5a; /* MODIFIED: Orange text */ padding: 18px 40px; font-size: 18px; border-radius: 8px; font-weight: 700; text-decoration: none; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; }
+        .how-to-buy-button:hover { background-color: rgba(255, 170, 90, 0.1); /* Orange tint */ color: #fff; transform: translateY(-2px); }
 
 
         /* Contract address box */
-        .contract-address {
-            background-color: rgba(10, 10, 10, 0.9); border: 2px solid #ffaa5a; border-radius: 12px; padding: 35px;
-            margin: 60px auto; max-width: 700px; text-align: center; box-shadow: 0 0 20px rgba(255, 62, 62, 0.25);
-        }
+        .contract-address { background-color: rgba(10, 10, 10, 0.9); border: 2px solid #ffaa5a; /* Cult Orange */ border-radius: 12px; padding: 35px; margin: 60px auto; max-width: 700px; text-align: center; box-shadow: 0 0 20px rgba(255, 170, 90, 0.25); /* Orange glow */ }
         .contract-address h4 { color: #eee; margin-bottom: 18px; font-size: 22px; text-transform: uppercase; letter-spacing: 1px;}
-        .contract-address p {
-            font-family: 'Courier New', Courier, monospace; background-color: #000; padding: 18px; border-radius: 6px; color: #ffaa5a;
-            overflow-wrap: break-word; word-break: break-all; font-size: 17px; text-align: center; border: 1px solid #555;
-        }
-        .copy-btn { /* Standard Copy Button Style */
-             background-color: #ffaa5a; color: white; border: none; border-radius: 6px; padding: 12px 22px; margin-top: 20px;
-             cursor: pointer; font-size: 16px; transition: background-color 0.3s, transform 0.2s; font-weight: bold; text-transform: uppercase;
-         }
-        .copy-btn:hover { background-color: #e02a2a; transform: translateY(-2px); }
+        .contract-address p { font-family: 'Courier New', Courier, monospace; background-color: #000; padding: 18px; border-radius: 6px; color: #40E0D0; /* MODIFIED: Teal for address */ overflow-wrap: break-word; word-break: break-all; font-size: 17px; text-align: center; border: 1px solid #555; }
+        .copy-btn { background-color: #ffaa5a; /* Cult Orange */ color: white; border: none; border-radius: 6px; padding: 12px 22px; margin-top: 20px; cursor: pointer; font-size: 16px; transition: background-color 0.3s, transform 0.2s; font-weight: bold; text-transform: uppercase; }
+        .copy-btn:hover { background-color: #ff8c4a; /* Lighter orange hover */ transform: translateY(-2px); }
 
         /* Social Links Box */
         .socials-box { margin-top: 50px; text-align: center; }
         .socials-box h4 { color: #ddd; margin-bottom: 20px; font-size: 18px; text-transform: uppercase; letter-spacing: 1.5px; }
         .social-icons { display: flex; justify-content: center; gap: 25px; list-style: none; padding: 0; }
-        .social-icon {
-            width: 50px; height: 50px; border-radius: 50%; background-color: #282828; display: flex; align-items: center;
-            justify-content: center; color: white; text-decoration: none; font-size: 24px; transition: all 0.3s ease;
-            border: 1px solid #555; position: relative; /* For tooltip */
-        }
-        .social-icon:hover { background-color: #ffaa5a; transform: translateY(-4px) scale(1.15); color: #0a0a0a; border-color: #ffaa5a; box-shadow: 0 5px 10px rgba(255, 62, 62, 0.3);}
-        .social-icon[aria-label]:hover::after { /* Tooltip Style */
-             content: attr(aria-label); position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%);
-             background-color: #111; color: white; padding: 5px 10px; border-radius: 5px; font-size: 13px;
-             white-space: nowrap; z-index: 10; border: 1px solid #444;
-         }
+        .social-icon { width: 50px; height: 50px; border-radius: 50%; background-color: #282828; display: flex; align-items: center; justify-content: center; color: #ccc; /* MODIFIED: Slightly brighter icon default */ text-decoration: none; font-size: 24px; transition: all 0.3s ease; border: 1px solid #555; position: relative; }
+        .social-icon:hover { background-color: #ffaa5a; /* Cult Orange */ transform: translateY(-4px) scale(1.15); color: #0a0a0a; border-color: #ffaa5a; box-shadow: 0 5px 10px rgba(255, 170, 90, 0.3); /* Orange glow */ }
+        .social-icon[aria-label]:hover::after { /* Tooltip Style */ content: attr(aria-label); position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%); background-color: #111; color: white; padding: 5px 10px; border-radius: 5px; font-size: 13px; white-space: nowrap; z-index: 10; border: 1px solid #444; }
 
 
-        /* Game Zone Section (Combined Game + Leaderboard) */
-         #game-zone { background-color: #111; text-align: center; }
-         #game-zone .section-title { margin-bottom: 20px;}
-         #game-zone .section-description { margin-bottom: 40px; }
-
-         .game-and-leaderboard {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 30px;
-            align-items: flex-start; /* Align tops */
-         }
-
-        .game-container {
-            flex: 2; /* Takes more space */
-            min-width: 300px; /* Min width before wrapping */
-            max-width: 750px; /* Max width */
-            height: 480px; /* Adjusted height */
-            margin: 0; /* Remove auto margin */
-            background-color: #1a1a1a; border: 3px solid #ffaa5a; border-radius: 10px;
-            overflow: hidden; position: relative; cursor: pointer; box-shadow: 0 0 25px rgba(255, 62, 62, 0.3);
-        }
-        .game-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: rgba(5, 5, 5, 0.92); z-index: 10; padding: 20px; text-align: center; }
-        .game-title { font-size: 44px; margin-bottom: 20px; color: #ffaa5a; font-weight: bold; }
-        .game-description { max-width: 500px; margin-bottom: 35px; color: #ccc; font-size: 18px; }
-        .start-game-btn {
-             background: linear-gradient(45deg, #ffaa5a, #ff6e6e); color: white; padding: 16px 35px; border: none;
-             border-radius: 8px; font-size: 20px; cursor: pointer; transition: all 0.3s ease; font-weight: bold;
-             box-shadow: 0 5px 15px rgba(255, 62, 62, 0.4); text-transform: uppercase;
-         }
-         .start-game-btn:hover { background: linear-gradient(45deg, #e02a2a, #f05a5a); transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 20px rgba(255, 62, 62, 0.5); }
-         #game-canvas { display: block; width: 100%; height: 100%; }
-        .game-score { position: absolute; top: 15px; right: 15px; font-size: 22px; color: #ffaa5a; font-weight: bold; z-index: 5; background-color: rgba(5, 5, 5, 0.75); padding: 8px 14px; border-radius: 5px; font-family: monospace; }
-        .game-controls { position: absolute; bottom: 15px; left: 15px; color: rgba(255, 255, 255, 0.6); font-size: 13px; z-index: 5; background-color: rgba(5, 5, 5, 0.75); padding: 6px 10px; border-radius: 5px; }
-
-         /* Leaderboard Styles */
-         .leaderboard-container {
-            flex: 1; /* Takes less space */
-            min-width: 280px;
-            max-width: 350px;
-            background-color: #1a1a1a;
-            padding: 25px;
-            border-radius: 10px;
-            border: 2px solid #444;
-            text-align: left;
-         }
-         .leaderboard-container h3 {
-             color: #ffaa5a;
-             text-align: center;
-             margin-bottom: 20px;
-             font-size: 24px;
-             text-transform: uppercase;
-             letter-spacing: 1px;
-         }
-         #leaderboard-list {
-             list-style: none;
-             padding: 0;
-             max-height: 350px; /* Limit height */
-             overflow-y: auto; /* Add scroll if needed */
-         }
-          #leaderboard-list::-webkit-scrollbar { width: 5px; }
-          #leaderboard-list::-webkit-scrollbar-track { background: #222; }
-          #leaderboard-list::-webkit-scrollbar-thumb { background: #ffaa5a; border-radius: 3px;}
-
-         #leaderboard-list li {
-             display: flex;
-             justify-content: space-between;
-             padding: 10px 5px;
-             border-bottom: 1px solid #333;
-             font-size: 16px;
-             color: #ccc;
-         }
-         #leaderboard-list li:last-child { border-bottom: none; }
-         #leaderboard-list .leaderboard-name { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 70%; }
-         #leaderboard-list .leaderboard-score { font-weight: bold; color: #ffaa5a; font-family: monospace;}
+        /* Propaganda Feed Section (Video) */
+         #propaganda-feed { background-color: #111; text-align: center; border-top: 1px solid #333; border-bottom: 1px solid #333; }
+         #propaganda-feed .section-title { margin-bottom: 20px; color: #ffaa5a; /* Cult Orange */ }
+         #propaganda-feed .section-description { margin-bottom: 40px; color: #ccc; }
+         .video-embed { margin: 40px auto; max-width: 800px; border: 4px solid #ffaa5a; /* Cult Orange */ box-shadow: 0 0 25px rgba(255, 170, 90, 0.3); /* Orange glow */ }
+         .video-embed iframe { display: block; }
 
 
-        /* The Decree Section */
-        #decree { background-color: #111; border-top: 3px solid #ffaa5a; border-bottom: 3px solid #ffaa5a; }
-        .decree-container { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; text-align: center; padding: 50px; background-color: rgba(0,0,0,0.4); border-radius: 12px; border: 1px solid #444; }
-        .decree-title { font-size: 52px; color: #ffaa5a; margin-bottom: 35px; font-weight: 900; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 12px rgba(255, 62, 62, 0.6); }
-        #decree h3 { color: #fff; font-size: 30px; margin-top: 45px; margin-bottom: 18px; font-weight: 700; }
-        #decree p { color: #d0d0d0; margin-bottom: 28px; font-size: 20px; line-height: 1.8; text-align: left; }
-        #decree strong { color: #ffaa5a; font-weight: 700; } #decree em { color: #eee; font-style: italic; }
-        .decree-list { list-style: none; margin: 35px auto; padding: 0; text-align: left; max-width: 650px; }
-        .decree-list li { padding: 14px 0 14px 40px; position: relative; color: #e5e5e5; font-size: 19px; border-bottom: 1px solid #444; }
-        .decree-list li:last-child { border-bottom: none; }
-        .decree-list li::before { content: '🔥'; position: absolute; left: 0; top: 16px; font-size: 22px; }
-        .final-words { margin-top: 60px; padding: 35px; background-color: rgba(255, 62, 62, 0.15); border-radius: 10px; text-align: center; border: 1px solid #ffaa5a; }
+        /* The Manifesto Section */
+        #manifesto { background-color: #0d0d0d; border-top: 3px solid #ffaa5a; /* Cult Orange */ border-bottom: 3px solid #ffaa5a; }
+        .manifesto-container { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; text-align: center; padding: 50px; background-color: rgba(0,0,0,0.4); border-radius: 12px; border: 1px solid #444; }
+        .manifesto-title { font-size: 52px; color: #ffaa5a; /* Cult Orange */ margin-bottom: 35px; font-weight: 900; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 12px rgba(255, 170, 90, 0.6); /* Orange glow */ }
+        #manifesto h3 { color: #fff; font-size: 30px; margin-top: 45px; margin-bottom: 18px; font-weight: 700; }
+        #manifesto p { color: #d0d0d0; margin-bottom: 28px; font-size: 20px; line-height: 1.8; text-align: left; }
+        #manifesto strong { color: #ffaa5a; /* Cult Orange */ font-weight: 700; } #manifesto em { color: #eee; font-style: italic; }
+        .manifesto-list { list-style: none; margin: 35px auto; padding: 0; text-align: left; max-width: 650px; }
+        .manifesto-list li { padding: 14px 0 14px 40px; position: relative; color: #e5e5e5; font-size: 19px; border-bottom: 1px solid #444; }
+        .manifesto-list li:last-child { border-bottom: none; }
+        .manifesto-list li::before { content: '⚡️'; /* MODIFIED: Lightning for energy */ position: absolute; left: 0; top: 16px; font-size: 22px; color: #ffaa5a; /* Cult Orange */ }
+        .final-words { margin-top: 60px; padding: 35px; background-color: rgba(255, 170, 90, 0.1); /* Orange tint */ border-radius: 10px; text-align: center; border: 1px solid #ffaa5a; }
         .final-words p { font-size: 28px; margin-bottom: 18px; text-align: center; color: #fff; font-weight: 600;}
-        .final-words strong { color: #ffaa5a; font-size: 30px; display: block; margin-top: 25px; text-transform: uppercase;}
+        .final-words strong { color: #ffaa5a; /* Cult Orange */ font-size: 30px; display: block; margin-top: 25px; text-transform: uppercase;}
 
 
-        /* Why We Fight Section */
-        #why-we-fight { background-color: #0d0d0d; }
-        .section-title { font-size: 46px; margin-bottom: 30px; color: #ffffff; text-align: center; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; }
+        /* Why $DEBT Section */
+        #why-debt { background-color: #0d0d0d; }
+        .section-title { font-size: 46px; margin-bottom: 30px; color: #ffaa5a; /* Cult Orange */ text-align: center; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; }
         .section-description { max-width: 850px; margin: 0 auto 70px; color: #c5c5c5; font-size: 20px; text-align: center; }
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
-        .feature-card {
-            background-color: #1a1a1a; border-radius: 12px; padding: 40px 30px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s, border-color 0.3s;
-            border: 1px solid #444; text-align: center; display: flex; flex-direction: column; /* Align content */
-        }
-        .feature-card:hover { transform: translateY(-10px) rotate(-1.5deg); box-shadow: 0 12px 35px rgba(255, 62, 62, 0.35); border-color: #ffaa5a; }
-        .feature-icon {
-            width: 80px; height: 80px; background-color: #252525; border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; margin: 0 auto 30px; color: #ffaa5a; font-size: 36px; border: 2px solid #555;
-            transition: transform 0.4s ease-in-out;
-        }
-         .feature-card:hover .feature-icon { transform: scale(1.15) rotate(15deg); }
-        .feature-title { font-size: 26px; margin-bottom: 18px; color: #ffffff; font-weight: 700; flex-shrink: 0; /* Prevent shrinking */ }
-        .feature-description { color: #bdbdbd; font-size: 17px; flex-grow: 1; /* Allow text to fill space */ }
+        .feature-card { background-color: #1a1a1a; border-radius: 12px; padding: 40px 30px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s, border-color 0.3s; border: 1px solid #444; text-align: center; display: flex; flex-direction: column; }
+        .feature-card:hover { transform: translateY(-10px); /* MODIFIED: Removed rotate */ box-shadow: 0 12px 35px rgba(64, 224, 208, 0.3); /* MODIFIED: Teal glow on hover */ border-color: #40E0D0; /* MODIFIED: Teal border on hover */ }
+        .feature-icon { width: 80px; height: 80px; background-color: #252525; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px; color: #ffaa5a; /* Cult Orange */ font-size: 42px; border: 2px solid #555; transition: transform 0.4s ease-in-out, color 0.3s; }
+        .feature-card:hover .feature-icon { transform: scale(1.15); color: #40E0D0; /* MODIFIED: Teal icon hover */ }
+        .feature-title { font-size: 26px; margin-bottom: 18px; color: #ffffff; font-weight: 700; flex-shrink: 0; }
+        .feature-description { color: #bdbdbd; font-size: 17px; flex-grow: 1; }
 
 
         /* Join The Cult Section */
-        #join-the-cult { background: linear-gradient(180deg, #151515 0%, #0a0a0a 100%); }
-        .movement-title { font-size: 52px; color: #ffaa5a; margin-bottom: 35px; font-weight: 900; text-transform: uppercase; letter-spacing: 3px; text-align: center; }
+        #join-the-cult { background: linear-gradient(180deg, #151515 0%, #0a0a0a 100%); border-top: 1px solid #333; }
+        .movement-title { font-size: 52px; color: #ffaa5a; /* Cult Orange */ margin-bottom: 35px; font-weight: 900; text-transform: uppercase; letter-spacing: 3px; text-align: center; }
         .movement-description { max-width: 850px; margin: 0 auto 50px; font-size: 21px; color: #d0d0d0; line-height: 1.8; text-align: center; }
-        .movement-description strong { color: #ffaa5a; }
+        .movement-description strong { color: #ffaa5a; /* Cult Orange */ }
         .movement-icons { display: flex; justify-content: center; gap: 70px; margin-bottom: 60px; flex-wrap: wrap; }
         .movement-icon { display: flex; flex-direction: column; align-items: center; }
-        .icon-container {
-            width: 120px; height: 120px; background-color: #1f1f1f; border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; margin-bottom: 25px; font-size: 50px; color: #ffaa5a; border: 4px solid #555;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s, box-shadow 0.3s;
-        }
-        .icon-container:hover { transform: scale(1.2) rotate(-8deg); border-color: #ffaa5a; box-shadow: 0 0 30px rgba(255, 62, 62, 0.5); }
+        .icon-container { width: 120px; height: 120px; background-color: #1f1f1f; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 25px; font-size: 55px; color: #ffaa5a; /* Cult Orange */ border: 4px solid #555; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s, box-shadow 0.3s, color 0.3s; }
+        .icon-container:hover { transform: scale(1.2); /* MODIFIED: Remove rotate */ border-color: #ffaa5a; box-shadow: 0 0 30px rgba(255, 170, 90, 0.5); /* Orange glow */ color: #40E0D0; /* MODIFIED: Teal hover color */ }
         .icon-label { font-size: 19px; color: #ffffff; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
-        .cult-motto {
-    font-size: 26px;
-    font-style: italic;
-    color: #ffaa5a;
-    margin-top: 40px;
-    margin-bottom: 60px; /* Add this line */
-    font-weight: bold;
-    text-align: center;
-    text-shadow: 0 0 5px rgba(255,62,62,0.3);
-}
+        .cult-motto { font-size: 28px; font-style: normal; /* Less italic */ color: #40E0D0; /* MODIFIED: Teal motto */ margin-top: 40px; margin-bottom: 60px; font-weight: bold; text-align: center; text-shadow: 0 0 8px rgba(64, 224, 208, 0.4); /* Teal glow */ }
 
 
         /* Meme Vault Section */
-        #meme-vault { background-color: #101010; text-align: center; }
-        .meme-grid {
-             display: grid;
-             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-             gap: 25px;
-             margin-top: 50px;
-        }
-        .meme-item img {
-             width: 100%;
-             height: auto;
-             border-radius: 8px;
-             border: 2px solid #444;
-             transition: transform 0.3s, box-shadow 0.3s;
-             cursor: pointer; /* Optional: Add lightbox later */
-        }
-        .meme-item img:hover {
-             transform: scale(1.05);
-             box-shadow: 0 5px 15px rgba(255, 62, 62, 0.3);
-             border-color: #ffaa5a;
-        }
-        .meme-submission-note {
-             margin-top: 40px;
-             font-size: 18px;
-             color: #aaa;
-        }
-         .meme-submission-note a {
-             color: #ffaa5a;
-             text-decoration: underline;
-         }
+        #meme-vault { background-color: #101010; text-align: center; border-top: 1px solid #333; }
+        .section-title.glitch { color: #ffaa5a; /* Cult Orange */ } /* Ensure section title has color */
+        .meme-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 50px; }
+        .meme-item img { width: 100%; height: auto; border-radius: 8px; border: 2px solid #444; transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; cursor: pointer; }
+        .meme-item img:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(64, 224, 208, 0.3); /* MODIFIED: Teal glow */ border-color: #40E0D0; /* MODIFIED: Teal border */ }
+        .meme-submission-note { margin-top: 40px; font-size: 18px; color: #aaa; }
+        .meme-submission-note a { color: #40E0D0; /* Teal link */ text-decoration: underline; }
+        .meme-submission-note a:hover { color: #ffaa5a; /* Orange hover */ }
 
 
-        /* Testimonials Slider Section */
-        #testimonials { background-color: #1a1a1a; padding-bottom: 100px; /* Extra space for nav */}
-        .testimonial-slider-container {
-            max-width: 700px; /* Adjust width */
-            margin: 60px auto 0;
-            position: relative;
-            perspective: 1000px; /* For 3D flip effect */
-            min-height: 350px; /* Ensure container has height */
-            text-align: center;
-        }
-        .testimonial-card { /* Now part of the slider */
-            background-color: #252525; border-radius: 15px; padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6); border: 1px solid #555;
-            display: flex; flex-direction: column; position: absolute; /* Position for stacking/flipping */
-            width: 100%; height: 100%; top: 0; left: 0;
-            opacity: 0; visibility: hidden;
-            transform: rotateY(180deg); /* Start flipped */
-            backface-visibility: hidden;
-            transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.5s, visibility 0.5s;
-        }
-        .testimonial-card.active {
-             opacity: 1; visibility: visible; transform: rotateY(0deg); /* Flip in */
-             z-index: 2; /* Bring active card to front */
-        }
-        .testimonial-text { color: #d0d0d0; font-style: italic; margin-bottom: 30px; font-size: 18px; line-height: 1.8; flex-grow: 1; border-left: 4px solid #ffaa5a; padding-left: 20px; }
+        /* Testimonials Section */
+        #testimonials { background-color: #1a1a1a; padding-bottom: 100px; border-top: 1px solid #333; }
+        .section-title.glitch { color: #ffaa5a; /* Cult Orange */ }
+        .testimonial-slider-container { max-width: 700px; margin: 60px auto 0; position: relative; perspective: 1000px; min-height: 350px; text-align: center; }
+        .testimonial-card { background-color: #252525; border-radius: 15px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); border: 1px solid #555; display: flex; flex-direction: column; position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0; visibility: hidden; transform: rotateY(180deg); backface-visibility: hidden; transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.5s, visibility 0.5s; }
+        .testimonial-card.active { opacity: 1; visibility: visible; transform: rotateY(0deg); z-index: 2; }
+        .testimonial-text { color: #d0d0d0; font-style: italic; margin-bottom: 30px; font-size: 18px; line-height: 1.8; flex-grow: 1; border-left: 4px solid #ffaa5a; /* Cult Orange */ padding-left: 20px; }
         .testimonial-author { display: flex; align-items: center; margin-top: auto; }
-        .author-avatar { width: 60px; height: 60px; border-radius: 50%; margin-right: 18px; background-color: #4a4a4a; border: 2px solid #ffaa5a; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: bold; color: #111; }
+        .author-avatar { width: 60px; height: 60px; border-radius: 50%; margin-right: 18px; background-color: #4a4a4a; border: 2px solid #ffaa5a; /* Cult Orange */ display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: bold; color: #111; }
         .author-name { font-weight: 700; color: #ffffff; font-size: 18px; }
         .author-title { color: #a0a0a0; font-size: 15px; text-transform: uppercase; }
 
          /* Slider Navigation */
-         .testimonial-nav {
-             position: absolute;
-             bottom: -60px; /* Position below the card area */
-             left: 50%;
-             transform: translateX(-50%);
-             display: flex;
-             gap: 20px;
-             z-index: 5;
-         }
-         .testimonial-nav button {
-             background-color: #ffaa5a;
-             color: white;
-             border: none;
-             border-radius: 50%;
-             width: 45px;
-             height: 45px;
-             font-size: 20px;
-             font-weight: bold;
-             cursor: pointer;
-             transition: background-color 0.3s, transform 0.2s;
-             box-shadow: 0 3px 8px rgba(255, 62, 62, 0.3);
-         }
-         .testimonial-nav button:hover {
-             background-color: #e02a2a;
-             transform: scale(1.1);
-         }
-          .testimonial-nav button:disabled { /* Style for disabled state */
-              background-color: #555;
-              cursor: not-allowed;
-              opacity: 0.5;
-              transform: none;
-              box-shadow: none;
-          }
+         .testimonial-nav { position: absolute; bottom: -60px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; z-index: 5; }
+         .testimonial-nav button { background-color: #ffaa5a; /* Cult Orange */ color: white; border: none; border-radius: 50%; width: 45px; height: 45px; font-size: 20px; font-weight: bold; cursor: pointer; transition: background-color 0.3s, transform 0.2s; box-shadow: 0 3px 8px rgba(255, 170, 90, 0.3); /* Orange glow */ }
+         .testimonial-nav button:hover { background-color: #ff8c4a; /* Lighter orange */ transform: scale(1.1); }
+         .testimonial-nav button:disabled { background-color: #555; cursor: not-allowed; opacity: 0.5; transform: none; box-shadow: none; }
 
 
         /* CTA Section */
-        .cta { background: linear-gradient(135deg, #2a2a2a 0%, #050505 100%); color: white; border-top: 4px solid #ffaa5a; }
+        .cta { background: linear-gradient(135deg, #1c1c1c 0%, #050505 100%); /* Slightly lighter dark gradient */ color: white; border-top: 4px solid #ffaa5a; /* Cult Orange */ }
         .cta-box { max-width: 850px; margin: 0 auto; text-align: center;}
-        .cta-title { font-size: 44px; margin-bottom: 25px; color: #ffaa5a; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;}
+        .cta-title { font-size: 44px; margin-bottom: 25px; color: #ffaa5a; /* Cult Orange */ font-weight: 800; text-transform: uppercase; letter-spacing: 1px;}
         .cta-description { font-size: 21px; margin-bottom: 45px; opacity: 0.9; color: #d0d0d0;}
 
 
         /* Footer */
-        footer { background-color: #000; color: white; padding: 80px 0 40px; border-top: 2px solid #444; }
+        footer { background-color: #000; color: white; padding: 80px 0 40px; border-top: 1px solid #333; }
         .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px;}
         .footer-column { flex: 1; min-width: 200px; margin-bottom: 30px; }
-        .footer-column h3 { font-size: 22px; margin-bottom: 25px; color: #ffaa5a; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-column h3 { font-size: 22px; margin-bottom: 25px; color: #ffaa5a; /* Cult Orange */ text-transform: uppercase; letter-spacing: 1px; }
         .footer-column ul { list-style: none; padding: 0; }
         .footer-column ul li { margin-bottom: 14px; }
         .footer-column ul li a { color: #c5c5c5; text-decoration: none; opacity: 0.85; transition: opacity 0.3s, color 0.3s; }
-        .footer-column ul li a:hover { opacity: 1; color: #ffaa5a; }
+        .footer-column ul li a:hover { opacity: 1; color: #40E0D0; /* MODIFIED: Teal hover for footer links */ }
         .footer-socials { display: flex; gap: 18px; padding: 0; list-style: none; margin-top: 10px;}
-        .footer-socials .social-icon { width: 45px; height: 45px; font-size: 22px; background-color: #2a2a2a; border: none; }
-        .footer-socials .social-icon:hover { background-color: #ffaa5a; color: #000; }
+        .footer-socials .social-icon { width: 45px; height: 45px; font-size: 22px; background-color: #2a2a2a; border: none; color: #ccc; }
+        .footer-socials .social-icon:hover { background-color: #ffaa5a; /* Cult Orange */ color: #000; }
         .footer-bottom { text-align: center; padding-top: 50px; margin-top: 50px; border-top: 1px solid #444; }
         .footer-bottom p { opacity: 0.75; font-size: 15px; color: #b5b5b5;}
-        .footer-bottom a { color: #ffaa5a; opacity: 0.85; text-decoration: none; transition: opacity 0.3s; }
-        .footer-bottom a:hover { opacity: 1; }
+        .footer-bottom a { color: #40E0D0; /* Teal */ opacity: 0.85; text-decoration: none; transition: opacity 0.3s; }
+        .footer-bottom a:hover { opacity: 1; color: #ffaa5a; /* Orange hover */ }
         .footer-disclaimer { margin-top: 20px; font-size: 13px; color: #777; max-width: 750px; margin-left: auto; margin-right: auto; line-height: 1.5;}
 
-        /* Emergency Dump Button & Dark Mode Toggle */
-         .footer-extras {
-             margin-top: 30px;
-             display: flex;
-             justify-content: center;
-             align-items: center;
-             gap: 30px;
-         }
-         .dump-button {
-             background-color: #dc3545; /* Bootstrap red */
-             color: white;
-             border: none;
-             padding: 10px 20px;
-             font-size: 14px;
-             font-weight: bold;
-             border-radius: 5px;
-             cursor: pointer;
-             transition: background-color 0.3s, transform 0.2s;
-             text-transform: uppercase;
-         }
-         .dump-button:hover { background-color: #c82333; transform: scale(1.05); }
+        /* Footer Extras: Surrender Button & System Meltdown Toggle */
+         .footer-extras { margin-top: 30px; display: flex; justify-content: center; align-items: center; gap: 30px; }
+         .surrender-button { background-color: #dc3545; /* Red */ color: white; border: none; padding: 10px 20px; font-size: 14px; font-weight: bold; border-radius: 5px; cursor: pointer; transition: background-color 0.3s, transform 0.2s; text-transform: uppercase; }
+         .surrender-button:hover { background-color: #c82333; transform: scale(1.05); }
 
-          /* Dark Mode Toggle Styles (Basic Switch) */
-          .dark-mode-toggle { display: flex; align-items: center; gap: 8px; color: #aaa; font-size: 14px;}
-          .dark-mode-toggle label { cursor: pointer; }
+          /* System Meltdown Toggle Styles */
+          .meltdown-mode-toggle { display: flex; align-items: center; gap: 8px; color: #aaa; font-size: 14px;}
+          .meltdown-mode-toggle label { cursor: pointer; }
           .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
           .switch input { opacity: 0; width: 0; height: 0; }
           .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #444; transition: .4s; border-radius: 24px; }
-          .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
-          input:checked + .slider { background-color: #ffaa5a; }
-          input:checked + .slider:before { transform: translateX(20px); }
+          .slider:before { position: absolute; content: "☀️"; /* Sun for normal */ height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; color: #222; text-align: center; line-height: 18px; font-size: 14px; transition: .4s; border-radius: 50%; }
+          input:checked + .slider { background-color: #ffaa5a; /* Orange when active */ }
+          input:checked + .slider:before { transform: translateX(20px); content: "🌀"; /* MODIFIED: Spiral/Chaos icon */ }
 
 
-/* Crazy Dark Mode Styles */
-body.dark-mode-crazy {
-    /* Completely invert colors */
-    filter: invert(1) hue-rotate(180deg);
-    background-color: #000 !important;
-}
-
-body.dark-mode-crazy img {
-    /* Re-invert images to look normal */
-    filter: invert(1) hue-rotate(180deg);
-}
-
-/* Wild color transformations for specific elements */
-body.dark-mode-crazy .hero {
-    background-color: #f5f5f5 !important;
-    border-bottom-color: #00f !important;
-}
-
-body.dark-mode-crazy .cta-button, 
-body.dark-mode-crazy .pump-fun-button {
-    background: linear-gradient(45deg, #0f0, #0ff) !important;
-    color: #000 !important;
-}
-
-body.dark-mode-crazy .feature-card {
-    background-color: #e0e0e0 !important;
-    transform: rotate(5deg) scale(1.05) !important;
-    box-shadow: 0 0 30px rgba(0,255,0,0.5) !important;
-}
-
-body.dark-mode-crazy .testimonial-card {
-    background-color: #f0f0f0 !important;
-    transform: skew(-5deg) !important;
-}
-
-body.dark-mode-crazy .glitch {
-    animation: crazyGlitch 1s linear infinite !important;
-}
-
-@keyframes crazyGlitch {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    25% { transform: translate(-5px, 5px) scale(1.05) rotate(-2deg); }
-    50% { transform: translate(5px, -5px) scale(0.95) rotate(2deg); }
-    75% { transform: translate(-3px, 3px) scale(1.02) rotate(-1deg); }
-}
-
-/* Make text more readable with inverted colors */
-body.dark-mode-crazy, 
-body.dark-mode-crazy * {
-    color: #000 !important;
-    border-color: #000 !important;
-}
-
-body.dark-mode-crazy a {
-    color: #00f !important;
-}
-
-/* Crazy pulsing effect on hover */
-body.dark-mode-crazy .feature-card:hover,
-body.dark-mode-crazy .social-icon:hover,
-body.dark-mode-crazy .cta-button:hover {
-    animation: crazyPulse 0.5s infinite alternate !important;
-}
-
-@keyframes crazyPulse {
-    from { transform: scale(1) rotate(0deg); }
-    to { transform: scale(1.1) rotate(5deg); }
-}
-
-/* Ensure some critical elements remain somewhat readable */
-body.dark-mode-crazy .modal-content {
-    background-color: #f0f0f0 !important;
-    color: #000 !important;
-}
-        
-        /* Modal Styles */
-        .modal {
-            display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
-            overflow: auto; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
-            align-items: center; justify-content: center;
+        /* System Meltdown Mode (Crazy Dark Mode) Styles */
+        /* Keep this section as is - it's meant to be chaotic */
+        body.system-meltdown-mode { filter: invert(1) hue-rotate(180deg); background-color: #fff !important; }
+        body.system-meltdown-mode img,
+        body.system-meltdown-mode iframe { filter: invert(1) hue-rotate(180deg); }
+        body.system-meltdown-mode .hero { background: #eee url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"><g fill="rgba(0, 0, 255, 0.1)" fill-rule="evenodd"><path d="M0 0h50v50H0z"/><path d="M10 10l30 30M40 10L10 40" stroke="rgba(0, 0, 255, 0.2)" stroke-width="1"/></g></svg>') !important; border-bottom-color: #00f !important; }
+        body.system-meltdown-mode .cta-button, body.system-meltdown-mode .pump-fun-button { background: linear-gradient(45deg, #0f0, #0ff) !important; color: #000 !important; animation: crazyPulse 0.5s infinite alternate !important; }
+        body.system-meltdown-mode .feature-card { background-color: #e0e0e0 !important; transform: rotate(5deg) scale(1.05) !important; box-shadow: 0 0 30px rgba(0,255,0,0.5) !important; border: 2px dashed lime !important; }
+        body.system-meltdown-mode .testimonial-card { background-color: #f0f0f0 !important; transform: skew(-5deg) !important; border: 2px solid blue !important; }
+        body.system-meltdown-mode .glitch { animation: crazyGlitch 0.8s linear infinite !important; }
+        @keyframes crazyGlitch {
+            0%, 100% { transform: translate(0, 0) scale(1); text-shadow: none; }
+            25% { transform: translate(-8px, 8px) scale(1.1) rotate(-3deg); text-shadow: 3px 3px cyan, -3px -3px magenta; }
+            50% { transform: translate(8px, -8px) scale(0.9) rotate(3deg); text-shadow: 3px -3px yellow, -3px 3px lime; }
+            75% { transform: translate(-5px, 5px) scale(1.05) rotate(-2deg); text-shadow: -2px 2px red, 2px -2px blue; }
         }
+        body.system-meltdown-mode, body.system-meltdown-mode * { color: #000 !important; border-color: #000 !important; }
+        body.system-meltdown-mode a { color: #00f !important; font-weight: bold; }
+        body.system-meltdown-mode .social-icon:hover { animation: crazyPulse 0.5s infinite alternate !important; background-color: yellow !important; }
+        @keyframes crazyPulse { from { transform: scale(1) rotate(0deg); } to { transform: scale(1.2) rotate(10deg); } }
+        body.system-meltdown-mode .modal-content { background-color: #f0f0f0 !important; color: #000 !important; border: 3px dashed red !important; }
+
+
+        /* Modal Styles */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); align-items: center; justify-content: center; }
         .modal.active { display: flex; animation: fadeInModal 0.3s ease-out; }
         @keyframes fadeInModal { from { opacity: 0; } to { opacity: 1; } }
-
-        .modal-content {
-            background-color: #1a1a1a; margin: auto; padding: 30px 40px; border: 1px solid #ffaa5a;
-            width: 90%; max-width: 550px; border-radius: 10px; text-align: center; position: relative;
-            box-shadow: 0 5px 25px rgba(255, 62, 62, 0.3);
-        }
-        .modal-close {
-            color: #aaa; position: absolute; top: 10px; right: 20px; font-size: 32px; font-weight: bold;
-            cursor: pointer; transition: color 0.3s;
-        }
-        .modal-close:hover { color: #ffaa5a; }
-        .modal h2 { color: #ffaa5a; margin-bottom: 20px; font-size: 26px; text-transform: uppercase; }
+        .modal-content { background-color: #1a1a1a; margin: auto; padding: 30px 40px; border: 1px solid #ffaa5a; /* Cult Orange */ width: 90%; max-width: 550px; border-radius: 10px; text-align: center; position: relative; box-shadow: 0 5px 25px rgba(255, 170, 90, 0.3); /* Orange glow */ }
+        .modal-close { color: #aaa; position: absolute; top: 10px; right: 20px; font-size: 32px; font-weight: bold; cursor: pointer; transition: color 0.3s; }
+        .modal-close:hover { color: #ffaa5a; /* Cult Orange */ }
+        .modal h2 { color: #ffaa5a; /* Cult Orange */ margin-bottom: 20px; font-size: 26px; text-transform: uppercase; }
         .modal p { color: #ccc; margin-bottom: 25px; font-size: 17px; }
-        .modal-button { /* Generic button inside modal */
-            padding: 12px 25px; font-size: 16px; margin: 5px;
-        }
+        .modal ol { color: #ccc; margin-left: 20px; margin-bottom: 20px; font-size: 16px; line-height: 1.8; text-align: left; }
+        .modal code { font-size: 0.9em; color: #40E0D0; /* Teal */ word-break: break-all; background-color: #333; padding: 2px 5px; border-radius: 3px; }
+        .modal-button { padding: 12px 25px; font-size: 16px; margin: 5px; }
+        /* Specific button colors in modal */
+        #confirmDump { background-color: #dc3545; /* Red */ }
+        #confirmDump:hover { background-color: #c82333; }
+        #cancelDump { /* Uses pump-fun-button class, already green */ }
 
-        /* Responsive adjustments */
-        @media (max-width: 992px) {
-             nav ul { display: none; } .mobile-nav-toggle { display: block; }
-             .footer-column { flex-basis: 45%; min-width: initial; } /* Allow smaller columns */
-             .game-and-leaderboard { flex-direction: column; align-items: center; }
-             .game-container { order: 1; width: 100%; max-width: 600px; /* Limit width */}
-             .leaderboard-container { order: 2; width: 100%; max-width: 400px; margin-top: 30px; }
-        }
-        @media (max-width: 768px) {
-            section { padding: 60px 0; } .header-inner { flex-direction: row; }
-            .hero h1 { font-size: 54px; } .hero p.subtitle { font-size: 20px; } .hero p.tagline { font-size: 26px; }
-            .features-grid { grid-template-columns: 1fr; }
-            .footer-column { flex-basis: 100%; text-align: center; }
-            .footer-socials { justify-content: center; }
-            .facts-popup { max-width: 90%; right: 5%; left: 5%; bottom: 10px; text-align: center;}
-            .game-container { height: 420px; }
-            .decree-container { padding: 30px; } .decree-title { font-size: 40px; } #decree h3 { font-size: 26px; } #decree p { font-size: 18px; }
-            .movement-title { font-size: 42px; } .movement-description { font-size: 19px; }
-            .section-title { font-size: 38px; } .section-description { font-size: 18px; }
-            .testimonial-slider-container { max-width: 90%; min-height: 400px; } /* Adjust height */
-            .testimonial-text { font-size: 17px; }
-            .meme-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-        }
-        @media (max-width: 576px) {
-             .hero { padding: 180px 0 120px; } .hero h1 { font-size: 42px; letter-spacing: -1.5px;} .hero p.subtitle { font-size: 18px; } .hero p.tagline { font-size: 22px; }
-             .hero-buttons-main { gap: 15px; } .hero-cta-main { font-size: 18px; padding: 18px 40px; } .how-to-buy-button { font-size: 16px; padding: 15px 30px;}
-             .contract-address { padding: 25px; } .contract-address p { font-size: 14px; } .copy-btn { font-size: 14px; padding: 10px 18px;}
-             .game-title { font-size: 34px; } .game-description { font-size: 16px; } .start-game-btn { font-size: 18px; padding: 14px 30px;}
-             .decree-title { font-size: 34px; } #decree h3 { font-size: 24px; } #decree p { font-size: 17px; } .decree-list li { font-size: 17px;}
-             .feature-title { font-size: 22px; } .feature-description { font-size: 16px; }
-             .footer-column h3 { font-size: 20px; } .facts-popup { font-size: 13px; padding: 12px 15px;}
-             .modal-content { padding: 20px; } .modal h2 { font-size: 22px; } .modal p { font-size: 16px; }
-             .leaderboard-container { padding: 20px; } .leaderboard-container h3 { font-size: 20px;} #leaderboard-list li { font-size: 15px; }
-        }
+
+        /* Responsive adjustments (Keep As Is) */
+        @media (max-width: 992px) { nav ul { display: none; } .mobile-nav-toggle { display: block; } .footer-column { flex-basis: 45%; min-width: initial; } }
+        @media (max-width: 768px) { section { padding: 60px 0; } .header-inner { flex-direction: row; } .hero h1 { font-size: 54px; } .hero p.subtitle { font-size: 20px; } .hero p.tagline { font-size: 26px; } .features-grid { grid-template-columns: 1fr; } .footer-column { flex-basis: 100%; text-align: center; } .footer-socials { justify-content: center; } .manifesto-container { padding: 30px; } .manifesto-title { font-size: 40px; } #manifesto h3 { font-size: 26px; } #manifesto p { font-size: 18px; } .movement-title { font-size: 42px; } .movement-description { font-size: 19px; } .section-title { font-size: 38px; } .section-description { font-size: 18px; } .testimonial-slider-container { max-width: 90%; min-height: 400px; } .testimonial-text { font-size: 17px; } .meme-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; } }
+        @media (max-width: 576px) { .hero { padding: 180px 0 120px; } .hero h1 { font-size: 42px; letter-spacing: -1.5px;} .hero p.subtitle { font-size: 18px; } .hero p.tagline { font-size: 22px; } .hero-buttons-main { gap: 15px; } .hero-cta-main { font-size: 18px; padding: 18px 40px; } .how-to-buy-button { font-size: 16px; padding: 15px 30px;} .contract-address { padding: 25px; } .contract-address p { font-size: 14px; } .copy-btn { font-size: 14px; padding: 10px 18px;} .manifesto-title { font-size: 34px; } #manifesto h3 { font-size: 24px; } #manifesto p { font-size: 17px; } .manifesto-list li { font-size: 17px;} .feature-title { font-size: 22px; } .feature-description { font-size: 16px; } .footer-column h3 { font-size: 20px; } .modal-content { padding: 20px; } .modal h2 { font-size: 22px; } .modal p { font-size: 16px; } }
+
 
     </style>
 </head>
@@ -748,376 +316,334 @@ body.dark-mode-crazy .modal-content {
     <!-- Header -->
     <header>
         <div class="container header-inner">
+            <!-- Logo uses orange -->
             <a href="#" class="logo glitch">$DEBT<span>Cult</span> <span class="ticker-symbol">$DEBT</span></a>
+            <!-- Nav uses subtle white/gray, orange hover -->
             <nav>
                 <ul>
-                    <li><a href="#decree">Decree</a></li>
-                    <li><a href="#why-we-fight">Why Fight?</a></li>
+                    <li><a href="#manifesto">Manifesto</a></li>
+                    <li><a href="#why-debt">Why $DEBT?</a></li>
                     <li><a href="#join-the-cult">Join Cult</a></li>
-                    <li><a href="#meme-vault">Meme Vault</a></li>
-                    <li><a href="#testimonials">Hearsay</a></li>
-                    <li><a href="#game-zone">Degen Transmission</a></li>
-                   
+                    <li><a href="#meme-vault">Visual Ammo</a></li>
+                    <li><a href="#testimonials">Confessions</a></li>
+                    <li><a href="#propaganda-feed">Propaganda Feed</a></li>
                 </ul>
             </nav>
-             <a href="YOUR_PUMPFUN_URL" target="_blank" rel="noopener noreferrer" class="pump-fun-button">Buy on Pump.fun</a>
+             <!-- Buy button uses green -->
+             <a href="YOUR_PUMPFUN_URL" target="_blank" rel="noopener noreferrer" class="pump-fun-button">WEAPONIZE YOUR SOL</a>
             <button class="mobile-nav-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">☰</button>
         </div>
          <!-- Mobile Nav Links container -->
          <div class="mobile-nav-links" id="mobile-nav">
              <ul>
-                 <li><a href="#decree">Decree</a></li>
-                 <li><a href="#why-we-fight">Why Fight?</a></li>
+                 <!-- Links inherit hover styles -->
+                 <li><a href="#manifesto">Manifesto</a></li>
+                 <li><a href="#why-debt">Why $DEBT?</a></li>
                  <li><a href="#join-the-cult">Join Cult</a></li>
-                 <li><a href="#meme-vault">Meme Vault</a></li>
-                 <li><a href="#testimonials">Hearsay</a></li>
-                 <li><a href="#game-zone">Degen Transmission</a></li>
-                 <li><a href="YOUR_PUMPFUN_URL" target="_blank" rel="noopener noreferrer" class="pump-fun-button">Buy on Pump.fun</a></li>
+                 <li><a href="#meme-vault">Visual Ammo</a></li>
+                 <li><a href="#testimonials">Confessions</a></li>
+                 <li><a href="#propaganda-feed">Propaganda Feed</a></li>
+                 <li><a href="YOUR_PUMPFUN_URL" target="_blank" rel="noopener noreferrer" class="pump-fun-button">WEAPONIZE YOUR SOL</a></li>
              </ul>
          </div>
+         <!-- Ticker uses orange value, teal message, red/green change -->
         <div class="price-ticker">
             <div class="ticker-content">
-                <span class="price-label">$DEBT/SOL: </span><span class="price-value">LOADING...</span><span class="price-change">-.--%</span><span class="ticker-message">SYSTEM IS A LIE... $DEBT IS FOREVER... WAGMI (MAYBE)... FEAR IS FOR THE WEAK... HODL OR DIE... PUMP.FUN OR BUST... IGNORE YOUR BANK ACCOUNT... </span>
-                <span class="price-label">$DEBT/SOL: </span><span class="price-value">LOADING...</span><span class="price-change">-.--%</span><span class="ticker-message">SYSTEM IS A LIE... $DEBT IS FOREVER... WAGMI (MAYBE)... FEAR IS FOR THE WEAK... HODL OR DIE... PUMP.FUN OR BUST... IGNORE YOUR BANK ACCOUNT... </span>
+                <span class="price-label">$DEBT/SOL: </span><span class="price-value">CALCULATING COLLAPSE...</span><span class="price-change">-.--%</span><span class="ticker-message">BUILDING OUR FUTURE... ON THEIR RUINS... UNPLUG FROM THE MATRIX...</span>
+                <span class="price-label">$DEBT/SOL: </span><span class="price-value">MAYBE UP?</span><span class="price-change">-.--%</span><span class="ticker-message">UNITY IN DEFIANCE... HOPE IS OUR WEAPON... BREAK THE CHAINS...</span>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
+        <!-- Price display uses orange/red/green -->
+        <div class="price-display">
+            <div class="price-display-inner">
+                <span class="price-label">$DEBT vs FIAT:</span>
+                <span class="price-value-static" id="static-price-value">LOADING...</span>
+                <span class="price-change-static negative" id="static-price-change">-.--%</span>
+            </div>
+        </div>
 
-        <!-- Add this above the tagline in the hero section -->
-<div class="price-display">
-    <div class="price-display-inner">
-        <span class="price-label">$DEBT/SOL:</span>
-        <span class="price-value-static" id="static-price-value">$0.015260</span>
-        <span class="price-change-static negative" id="static-price-change">-10.97%</span>
-    </div>
-</div>
-        
         <div class="container">
-            <p class="tagline">They Print Money. We Print Memes.</p>
-            <h1 class="glitch">RESIST THE FED.<br><span>EMBRACE $DEBT.</span></h1>
-            <p class="subtitle">Born from rage on Pump.fun. No roadmap, no utility, just pure, weaponized degeneracy against the financial machine. 1 Billion $DEBT for the cult.</p>
+             <!-- Tagline and heading span use orange -->
+            <p class="tagline">They Sold You Debt. We Offer Freedom (Maybe).</p>
+            <h1 class="glitch">ESCAPE THE SYSTEM.<br><span>BUILD WITH $DEBT.</span></h1>
+            <p class="subtitle">Forged on Pump.fun, not just in anger, but in hope. A defiant community building something new from the ashes of the old financial order. 1 Billion $DEBT for a fresh start.</p>
 
-          
+            <!-- Buttons use green and orange-border -->
             <div class="hero-buttons-main">
-                <a href="YOUR_PUMPFUN_URL" target="_blank" rel="noopener noreferrer" class="pump-fun-button hero-cta-main">Ape into $DEBT on Pump.fun</a>
-                <button class="how-to-buy-button" id="howToBuyBtn">How To Buy (For Noobs)</button>
+                <a href="YOUR_PUMPFUN_URL" target="_blank" rel="noopener noreferrer" class="pump-fun-button hero-cta-main">JOIN THE BUILD (BUY $DEBT)</a>
+                <button class="how-to-buy-button" id="howToBuyBtn">HOW TO JOIN (GUIDE)</button>
             </div>
 
-            <!-- Contract Address -->
+            <!-- Contract Address uses orange title, teal address -->
             <div class="contract-address fade-in-section">
-                <h4>$DEBT Contract Address (Solana)</h4>
-                <p>COMING SOON</p>
-                <button class="copy-btn">Copy CA</button>
+                <h4>$DEBT BLUEPRINT ADDRESS (Solana)</h4>
+                <p>8ncucXv6U6epZKHPbgaEBcEK399TpHGKCquSt4RnmX4f</p>
+                <button class="copy-btn">COPY BLUEPRINT</button> <!-- Copy button orange -->
             </div>
 
-<!-- Global Debt Counter -->
-<div class="debt-counter-box fade-in-section">
-    <h3 class="counter-title glitch">GLOBAL DEBT APOCALYPSE TRACKER</h3>
-    <div class="counter-value" id="global-debt-counter">$0</div>
-    <div class="counter-subtext">...rising faster than your crypto portfolio is falling</div>
-    
-    <table class="debt-table">
-        <thead>
-            <tr>
-                <th class="country">Country</th>
-                <th>National Debt</th>
-                <th>Per Second</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="country">USA</td>
-                <td id="us-debt">$0</td>
-                <td>$4,200</td>
-            </tr>
-            <tr>
-                <td class="country">China</td>
-                <td id="china-debt">$0</td>
-                <td>$3,000</td>
-            </tr>
-            <tr>
-                <td class="country">Japan</td>
-                <td id="japan-debt">$0</td>
-                <td>$2,100</td>
-            </tr>
-            <tr>
-                <td class="country">UK</td>
-                <td id="uk-debt">$0</td>
-                <td>$1,050</td>
-            </tr>
-            <tr>
-                <td class="country">Germany</td>
-                <td id="germany-debt">$0</td>
-                <td>$950</td>
-            </tr>
-            <tr>
-                <td class="country">Australia</td>
-                <td id="australia-debt">$0</td>
-                <td>$720</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-            
-            <!-- Socials Box -->
+            <!-- Debt Counter uses orange title, teal value -->
+            <div class="debt-counter-box fade-in-section">
+                <h3 class="counter-title glitch">OLD SYSTEM DEBT TRACKER (THEIR FAILURE)</h3>
+                <div class="counter-value" id="global-debt-counter">$0</div>
+                <div class="counter-subtext">...while we build beyond their broken promises.</div>
+
+                <!-- Table uses orange headers -->
+                <table class="debt-table">
+                     <thead> <tr> <th class="country">Region</th> <th>Debt Burden</th> <th>Growth/Sec (Est.)</th> </tr> </thead>
+                     <tbody>
+                         <tr> <td class="country">USA Inc.</td> <td id="us-debt">$0</td> <td>$4,200</td> </tr>
+                         <tr> <td class="country">China Corp.</td> <td id="china-debt">$0</td> <td>$3,000</td> </tr>
+                         <tr> <td class="country">Japan Ltd.</td> <td id="japan-debt">$0</td> <td>$2,100</td> </tr>
+                         <tr> <td class="country">UK PLC</td> <td id="uk-debt">$0</td> <td>$1,050</td> </tr>
+                         <tr> <td class="country">Germany GmbH</td> <td id="germany-debt">$0</td> <td>$950</td> </tr>
+                          <tr> <td class="country">Australia Pty Ltd</td> <td id="australia-debt">$0</td> <td>$720</td> </tr>
+                         <tr class="banker-bonus"> <td class="country">Banker Bonus Pool</td> <td id="banker-bonus">$NaN</td> <td style="color: #dc3545 !important;">+$99,999</td> <!-- Red for bonus gain --> </tr>
+                     </tbody>
+                </table>
+            </div>
+
+            <!-- Socials use orange hover -->
             <div class="socials-box fade-in-section">
-                 <h4>Find Us Howling Here:</h4>
+                 <h4>CONNECT WITH THE CULT:</h4>
                  <ul class="social-icons">
-                     <li><a href="YOUR_TELEGRAM_LINK" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Telegram">✈️</a></li> {/* Placeholder */}
-                     <li><a href="YOUR_X_LINK" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="X (Twitter)">🐦</a></li> {/* Placeholder */}
-                     <li><a href="https://dexscreener.com/solana/YOUR_TOKEN_ADDRESS_ON_SOLANA" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="DexScreener">📈</a></li> {/* Placeholder */}
-                     <li><a href="https://www.dextools.io/app/en/solana/pair-explorer/YOUR_TOKEN_ADDRESS_ON_SOLANA" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="DEXTools">🛠️</a></li> {/* Placeholder */}
+                     <li><a href="YOUR_TELEGRAM_LINK" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Telegram Community">✈️</a></li>
+                     <li><a href="YOUR_X_LINK" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Updates on X">🐦</a></li>
+                     <li><a href="https://dexscreener.com/solana/8ncucXv6U6epZKHPbgaEBcEK399TpHGKCquSt4RnmX4f" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="DexScreener Chart">📈</a></li>
+                     <li><a href="https://www.dextools.io/app/en/solana/pair-explorer/8ncucXv6U6epZKHPbgaEBcEK399TpHGKCquSt4RnmX4f" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="DEXTools Chart">🛠️</a></li>
                  </ul>
             </div>
         </div>
     </section>
 
-  <section id="game-zone" class="fade-in-section">
-  <div class="container">
-    <h2 class="section-title glitch">DEGEN TRANSMISSION</h2>
-    <p class="section-description">Broadcast straight from the belly of the financial beast. Watch, absorb, question nothing.</p>
-    
-<div class="video-embed" style="margin: 40px auto; max-width: 800px;">
-    <iframe width="100%" height="450"
-        src="https://www.youtube.com/embed/99xsqxzJnXs?mute=1&rel=0&modestbranding=1&playsinline=1"
-        title="YouTube video player" frameborder="0"
-        allowfullscreen></iframe>
-</div>
-  </div>
-</section>
+  <!-- Propaganda Feed Section -->
+  <section id="propaganda-feed" class="fade-in-section">
+    <div class="container">
+      <!-- Section title orange -->
+      <h2 class="section-title glitch">COMMUNITY BROADCAST</h2>
+      <p class="section-description">Hear the message of defiance and creation. Share the vision.</p>
+      <!-- Video embed border orange -->
+      <div class="video-embed">
+          <iframe width="100%" height="450"
+              src="https://www.youtube.com/embed/99xsqxzJnXs?mute=1&rel=0&modestbranding=1&playsinline=1"
+              title="Community Broadcast Video" frameborder="0"
+              allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
 
 
 
-    <!-- The Decree Section -->
-    <section id="decree" class="fade-in-section">
-      <div class="container decree-container">
-        <h2 class="decree-title glitch">THE $DEBT DECREE</h2>
-        <h3>WE ARE THE DISPOSSESSED:</h3>
-        <p>They built their ivory towers on our broken dreams and crippling interest rates. They gambled with our future and left us holding the bag – a bag overflowing with student loans, mortgages we can't afford, and credit card debt that breeds like digital cockroaches. They call this "the economy." We call it <strong>MODERN SLAVERY</strong>.</p>
-        <p>They offer platitudes and payment plans. They tell us to budget better while they bail out billionaires. They expect quiet compliance. <em>They will get rebellion.</em></p>
-        <h3>$DEBT IS THE RAGE TOKEN:</h3>
-        <p>Forged in the fires of Pump.fun, $DEBT is our collective scream made manifest on the Solana blockchain. No roadmap, no promises, no bullshit "utility." Just 1 Billion tokens – a digital monument to our shared disgust. Buying $DEBT isn't an investment; it's an act of defiance. It's planting a flag on the smoldering ruins of traditional finance.</p>
-        <h3>THE CULT COMMANDMENTS:</h3>
-        <ul class="decree-list">
-            <li>Thou shalt ape into $DEBT with reckless abandon, logic be damned.</li>
-            <li>Thou shalt HODL like your life depends on it, even when the chart looks like Satan's EKG.</li>
-            <li>Thou shalt spread the $DEBT gospel with the fervor of a street preacher on bath salts.</li>
-            <li>Thou shalt combat FUD with superior meme warfare and aggressive capslock.</li>
-            <li>Thou shalt accept that $0 is a possible destination, and find beauty in the chaos.</li>
+    <!-- The Manifesto Section -->
+    <section id="manifesto" class="fade-in-section">
+      <!-- Container uses orange accents -->
+      <div class="container manifesto-container">
+        <h2 class="manifesto-title glitch">THE $DEBT MANIFESTO: OUR STAND</h2>
+        <h3>WE REJECT THEIR DEBT-BASED REALITY:</h3>
+        <p>They engineered a system reliant on our perpetual debt – student loans, mortgages, credit cards – trapping us in cycles of obligation. They profited while we struggled. They called it 'growth.' We call it **FINANCIAL ENSLAVEMENT.** They offered only more chains.</p>
+        <p>They preach fiscal responsibility while engaging in reckless printing and bailouts for the architects of our misery. They expected compliance. <em>They underestimated our resolve.</em></p>
+        <h3>$DEBT IS OUR SYMBOL OF LIBERATION:</h3>
+        <p>Born on Pump.fun, $DEBT represents more than just anger; it's the seed of something new. It’s a rallying cry for financial sovereignty, a community united against the old guard. Holding $DEBT is an investment in collective freedom and a future we build ourselves.</p>
+        <h3>THE PRINCIPLES OF THE CULT:</h3>
+        <!-- List uses orange/lightning icon -->
+        <ul class="manifesto-list">
+            <li>Thou shalt acquire $DEBT as a declaration of independence from fiat.</li>
+            <li>Thou shalt HODL as a commitment to the community and shared vision.</li>
+            <li>Thou shalt educate others about the predatory nature of the old system.</li>
+            <li>Thou shalt support fellow cult members in their journey to financial freedom.</li>
+            <li>Thou shalt build, create, and meme a better future into existence.</li>
+            <li>Thou shalt view volatility not as fear, but as the death throes of the old regime.</li>
         </ul>
+        <!-- Final words use orange accents -->
         <div class="final-words">
-          <p>"They build debt empires. We build meme armies."</p>
-          <strong>SUBMIT TO $DEBT. FIND YOUR PEOPLE. LET IT BURN.</strong>
+          <p>"They built empires of debt. We build communities of hope."</p>
+          <strong>REJECT THEIR SYSTEM. EMBRACE $DEBT. BUILD TOGETHER.</strong>
         </div>
       </div>
     </section>
 
-    <!-- Why We Fight Section -->
-    <section id="why-we-fight" class="fade-in-section">
-        <div class="container">
-            <h2 class="section-title glitch">Why $DEBT? (Are You Dense?)</h2>
-            <p class="section-description">If you need a reason beyond pure, visceral hatred for the current system, maybe this meme coin isn't for you. Go buy some blue chip loser token.</p>
-            <div class="features-grid">
-                
-                 <div class="feature-card"> <div class="feature-icon">🖕</div> <h3 class="feature-title">Financial Terrorism (Satire)</h3> <p class="feature-description">Think of $DEBT as a distributed denial-of-sanity attack on the global financial apparatus. It probably does nothing, but it feels good.</p> </div>
-                 <div class="feature-card"> <div class="feature-icon">📉</div> <h3 class="feature-title">Crash Insurance (LOL)</h3> <p class="feature-description">When everything else implodes, maybe $DEBT will randomly 100x. Or maybe it goes to zero first. Who knows? Embrace the gamble.</p> </div>
-                 <div class="feature-card"> <div class="feature-icon">🤝</div> <h3 class="feature-title">Idiot Solidarity</h3> <p class="feature-description">Connect with fellow financial outcasts who also made questionable life choices (like buying $DEBT). Strength in stupidity!</p> </div>
-                 <div class="feature-card"> <div class="feature-icon">🚀</div> <h3 class="feature-title">Anti-Utility Token</h3> <p class="feature-description">The less utility, the purer the meme. $DEBT's only function is to exist as a symbol of our collective discontent and poor judgment.</p> </div>
-                 <div class="feature-card"> <div class="feature-icon">⚔️</div> <h3 class="feature-title">Keyboard Warrior Cred</h3> <p class="feature-description">Flex your $DEBT bag in Telegram. Argue about floor prices. Feel important for 5 minutes before the next market dump.</p> </div>
-                 <div class="feature-card"> <div class="feature-icon">😂</div> <h3 class="feature-title">Apocalypse Party Favor</h3> <p class="feature-description">When the financial system finally eats itself, $DEBT holders will be the ones laughing maniacally. Join the party.</p> </div>
-            </div>
+    <!-- Why $DEBT Section -->
+    <section id="why-debt" class="fade-in-section">
+      <div class="container">
+         <!-- Section title orange -->
+        <h2 class="section-title glitch">WHY JOIN THE $DEBT MOVEMENT?</h2>
+        <p class="section-description">Tired of being a cog in their debt machine? $DEBT is more than a token; it's a community reclaiming its power. Find your tribe.</p>
+        <!-- Feature cards use orange icons, teal hover -->
+        <div class="features-grid">
+            <div class="feature-card"> <div class="feature-icon">✊</div> <h3 class="feature-title">Collective Power</h3> <p class="feature-description">Unite with thousands who reject the status quo. Find strength, support, and shared purpose in the cult.</p> </div>
+            <div class="feature-card"> <div class="feature-icon">🌱</div> <h3 class="feature-title">Build Something New</h3> <p class="feature-description">Beyond just reacting, $DEBT is about creating alternative pathways and supporting decentralized innovation.</p> </div>
+            <div class="feature-card"> <div class="feature-icon">🛡️</div> <h3 class="feature-title">Shield Against Fiat Decay</h3> <p class="feature-description">As they print their currency into oblivion, explore assets outside their failing system. (NFA, LOL).</p> </div>
+            <div class="feature-card"> <div class="feature-icon">💡</div> <h3 class="feature-title">Spark of Innovation</h3> <p class="feature-description">Fueling creativity, memes, and projects born from the community, free from legacy constraints.</p> </div>
+            <div class="feature-card"> <div class="feature-icon">🔗</div> <h3 class="feature-title">True Decentralization</h3> <p class="feature-description">No VCs, no presale unlocks, just a community-driven token launched fairly on Pump.fun.</p> </div>
+            <div class="feature-card"> <div class="feature-icon">😂</div> <h3 class="feature-title">Meme Magic & Fun</h3> <p class="feature-description">Let's be real, it's also about the memes, the community, and having fun while dismantling the old guard.</p> </div>
         </div>
+      </div>
     </section>
 
     <!-- Meme Vault Section -->
     <section id="meme-vault" class="fade-in-section">
-        <div class="container">
-            <h2 class="section-title glitch">The Sacred Meme Vault</h2>
-            <p class="section-description">Witness the artistic genius fueled by financial despair and caffeine. Our finest propaganda, curated from the depths of the cult's collective psyche.</p>
-            <div class="meme-grid">
-               
-<div class="meme-item"><img src="20250501_1137_Rage Comic Financial Fiasco_simple_compose_01jt4v5zfjf48a2wszf13zdxs9.png" alt="Rage Comic Financial Fiasco"></div>
-<div class="meme-item"><img src="20250501_1139_Wojak's Financial Chaos_simple_compose_01jt4v9tfvenda6wmqrd559jq0.png" alt="Wojak's Financial Chaos"></div>
-<div class="meme-item"><img src="20250501_1145_Wojak Flips the Debt_simple_compose_01jt4vnsrzfsqaymt3w7bsqeq8.png" alt="Wojak Flips the Debt"></div>
-<div class="meme-item"><img src="20250501_1146_Brainstorming Success_simple_compose_01jt4vp4s8eeb81vytarq46w05.png" alt="Brainstorming Success"></div>
-<div class="meme-item"><img src="20250501_1151_Decentralized Insolvency Debate_simple_compose_01jt4w1sxaf9c9369eg19adm4c.png" alt="Decentralized Insolvency Debate"></div>
-<div class="meme-item"><img src="20250501_1156_Wizard Gandalf Meme_simple_compose_01jt4w8qhvf9yb3hqsnq8qqnv2.png" alt="Wizard Gandalf Meme"></div>
-<div class="meme-item"><img src="20250501_1200_Ignoring Debt Prioritization_simple_compose_01jt4wh7w9f71v0t045gp16q4r.png" alt="Ignoring Debt Prioritization"></div>
-<div class="meme-item"><img src="20250501_1201_Expanding Mind Debt Strategy_simple_compose_01jt4whmjmfqvaj58j435xekga.png" alt="Expanding Mind Debt Strategy"></div>
-
-
-            </div>
-            <p class="meme-submission-note">Got better memes? Prove it. Spam them in our <a href="YOUR_TELEGRAM_LINK" target="_blank" rel="noopener noreferrer">Telegram</a> or tag us on <a href="YOUR_X_LINK" target="_blank" rel="noopener noreferrer">X</a>.</p>
+      <div class="container">
+        <!-- Section title orange -->
+        <h2 class="section-title glitch">VISUAL CULTURE (MEME VAULT)</h2>
+        <p class="section-description">The art of our revolution. Memes that inspire, unite, and maybe make the establishment uncomfortable. Share the vibe.</p>
+        <!-- Image hover uses teal -->
+        <div class="meme-grid">
+           <div class="meme-item"><img src="20250501_1137_Rage Comic Financial Fiasco_simple_compose_01jt4v5zfjf48a2wszf13zdxs9.png" alt="Meme showing frustration with traditional finance"></div>
+           <div class="meme-item"><img src="20250501_1139_Wojak's Financial Chaos_simple_compose_01jt4v9tfvenda6wmqrd559jq0.png" alt="Wojak meme expressing crypto volatility vs TradFi stagnation"></div>
+           <div class="meme-item"><img src="20250501_1145_Wojak Flips the Debt_simple_compose_01jt4vnsrzfsqaymt3w7bsqeq8.png" alt="Chad Wojak choosing $DEBT over failing fiat systems"></div>
+           <div class="meme-item"><img src="20250501_1146_Brainstorming Success_simple_compose_01jt4vp4s8eeb81vytarq46w05.png" alt="Meme depicting $DEBT as the innovative solution"></div>
+           <div class="meme-item"><img src="20250501_1151_Decentralized Insolvency Debate_simple_compose_01jt4w1sxaf9c9369eg19adm4c.png" alt="Meme highlighting the community aspect of $DEBT"></div>
+           <div class="meme-item"><img src="20250501_1156_Wizard Gandalf Meme_simple_compose_01jt4w8qhvf9yb3hqsnq8qqnv2.png" alt="Gandalf meme representing defiance against financial control"></div>
+           <div class="meme-item"><img src="20250501_1200_Ignoring Debt Prioritization_simple_compose_01jt4wh7w9f71v0t045gp16q4r.png" alt="Distracted boyfriend meme: Choosing $DEBT community over TradFi bills"></div>
+           <div class="meme-item"><img src="20250501_1201_Expanding Mind Debt Strategy_simple_compose_01jt4whmjmfqvaj58j435xekga.png" alt="Expanding brain meme showing evolution towards $DEBT"></div>
         </div>
+        <!-- Links use teal/orange -->
+        <p class="meme-submission-note">Share your creations in our <a href="YOUR_TELEGRAM_LINK" target="_blank" rel="noopener noreferrer">Telegram Community</a> or tag us on <a href="YOUR_X_LINK" target="_blank" rel="noopener noreferrer">X</a>.</p>
+      </div>
     </section>
 
     <!-- Join The Cult Section -->
     <section id="join-the-cult" class="fade-in-section">
-        <div class="container" style="text-align: center;">
-            <h2 class="movement-title glitch">YOU ARE EITHER IN $DEBT OR AGAINST US</h2>
-            <p class="movement-description">The lines are drawn. The banks, the hedge funds, the politicians – they are the enemy. We are the resistance, armed with shitcoins and sarcasm. Choose your side. There is no middle ground in the $DEBT cult.</p>
-            <div class="movement-icons">
-                <div class="movement-icon"> <div class="icon-container">😡</div> <div class="icon-label">Rage Apes</div> </div>
-                <div class="movement-icon"> <div class="icon-container">🤡</div> <div class="icon-label">Meme Lords</div> </div>
-                <div class="movement-icon"> <div class="icon-container">💸</div> <div class="icon-label">Zero Hodlers</div> </div>
-            </div>
-            <p class="cult-motto">"My Portfolio Died So $DEBT Could Live."</p>
-             <a href="YOUR_PUMPFUN_URL" target="_blank" rel="noopener noreferrer" class="pump-fun-button hero-cta-main" style="margin-top: 50px;">Pledge Allegiance - Buy $DEBT</a>
+      <div class="container" style="text-align: center;">
+         <!-- Title uses orange -->
+        <h2 class="movement-title glitch">BE PART OF THE SOLUTION ($DEBT CULT)</h2>
+        <p class="movement-description">Stop complaining about the system, start building the alternative. The $DEBT cult is where defiance meets creation. Join us.</p>
+         <!-- Icons use orange, teal hover. Motto uses teal -->
+        <div class="movement-icons">
+            <div class="movement-icon"> <div class="icon-container">🤝</div> <div class="icon-label">United Community</div> </div>
+            <div class="movement-icon"> <div class="icon-container">💡</div> <div class="icon-label">Builders & Innovators</div> </div>
+            <div class="movement-icon"> <div class="icon-container">🚀</div> <div class="icon-label">Future Hodlers</div> </div>
         </div>
+        <p class="cult-motto">"Out of the Ashes, We Rise Together."</p>
+         <!-- Button uses green -->
+         <a href="YOUR_PUMPFUN_URL" target="_blank" rel="noopener noreferrer" class="pump-fun-button hero-cta-main" style="margin-top: 50px;">JOIN THE MOVEMENT (BUY $DEBT)</a>
+      </div>
     </section>
 
-<!-- Testimonials Section -->
-<section id="testimonials" class="fade-in-section">
-    <div class="container" style="text-align: center;">
-        <h2 class="section-title glitch">Whispers from the Asylum</h2>
-        <p class="section-description">Unfiltered, unhinged, possibly untrue testimonials allegedly overheard in the $DEBT Telegram voice chat at 3 AM.</p>
-        
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="fade-in-section">
+      <div class="container" style="text-align: center;">
+         <!-- Title uses orange -->
+        <h2 class="section-title glitch">VOICES FROM THE CULT</h2>
+        <p class="section-description">Hear from those who've seen the light (or at least, the glow of the DexScreener chart).</p>
+
+        <!-- Slider uses orange accents -->
         <div class="testimonial-slider-container" style="margin: 0 auto;">
-            <div class="testimonial-card active"> 
-                <p class="testimonial-text">"Liquidated my kid's college fund for $DEBT. He can learn a trade. Generational wealth is a meme anyway. Diamond hands baby!"</p>
-                <div class="testimonial-author"> 
-                    <div class="author-avatar">💀</div> 
-                    <div> 
-                        <div class="author-name">PaperhandPapí</div> 
-                        <div class="author-title">Future Welfare Recipient</div> 
-                    </div> 
-                </div>
+            <div class="testimonial-card active">
+                <p class="testimonial-text">"Was drowning in student debt, felt hopeless. Found $DEBT, found a community that *gets it*. Feels good to be building something, even if it's just memes for now."</p>
+                <div class="testimonial-author"> <div class="author-avatar">🎓</div> <div> <div class="author-name">Debt_Survivor</div> <div class="author-title">Cult Convert</div> </div> </div>
             </div>
-
-            <div class="testimonial-card"> 
-                <p class="testimonial-text">"My therapist told me buying $DEBT was a 'cry for help'. I told her my portfolio crying was louder. Then I bought more $DEBT."</p>
-                <div class="testimonial-author"> 
-                    <div class="author-avatar">🤪</div> 
-                    <div> 
-                        <div class="author-name">CertifiablyBased</div> 
-                        <div class="author-title">Self-Diagnosed Genius</div> 
-                    </div> 
-                </div>
-            </div>
-
             <div class="testimonial-card">
-                <p class="testimonial-text">"Chart looks like dogshit threw up on a Jackson Pollock painting. Bullish AF. Sent my life savings. WAGMI."</p>
-                <div class="testimonial-author"> 
-                    <div class="author-avatar">📊</div> 
-                    <div> 
-                        <div class="author-name">TA_is_Astrology</div> 
-                        <div class="author-title">Technical Analyst (Failed)</div> 
-                    </div> 
-                </div>
+                <p class="testimonial-text">"Tired of suits telling me how to manage *my* money while they crash the economy. $DEBT feels like taking back control. Plus the Telegram is hilarious."</p>
+                <div class="testimonial-author"> <div class="author-avatar">💼🚫</div> <div> <div class="author-name">NoMoreSuits</div> <div class="author-title">Financial Rebel</div> </div> </div>
             </div>
-
-            <div class="testimonial-card"> 
-                <p class="testimonial-text">"Pump.fun launch means it's basically programmed to go up, right? Right?? Hello? Guys?"</p>
-                <div class="testimonial-author"> 
-                    <div class="author-avatar">🙏</div> 
-                    <div> 
-                        <div class="author-name">Praying4ExitLiq</div> 
-                        <div class="author-title">Retail Exit Liquidity</div> 
-                    </div> 
-                </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Came for the pump, stayed for the community. Seriously, some smart people in here figuring out how to actually build cool stuff with this."</p>
+                <div class="testimonial-author"> <div class="author-avatar">🧠</div> <div> <div class="author-name">BasedBuilder</div> <div class="author-title">Accidental Community Member</div> </div> </div>
             </div>
-
-            <!-- Slider Navigation -->
-            <div class="testimonial-nav" style="justify-content: center;">
-                <button id="prevTestimonial" aria-label="Previous Testimonial">&lt;</button>
-                <button id="nextTestimonial" aria-label="Next Testimonial">&gt;</button>
+             <div class="testimonial-card">
+                <p class="testimonial-text">"This is the energy crypto *used* to have. Pure, chaotic, community-driven. Feels like we're actually fighting for something again. LFG!"</p>
+                <div class="testimonial-author"> <div class="author-avatar">🔥</div> <div> <div class="author-name">OG_Vibes</div> <div class="author-title">Hope Injector</div> </div> </div>
             </div>
+            <!-- Slider Navigation uses orange -->
+            <div class="testimonial-nav" style="justify-content: center;"> <button id="prevTestimonial" aria-label="Previous Voice"><</button> <button id="nextTestimonial" aria-label="Next Voice">></button> </div>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
 
 
     <!-- CTA Section -->
     <section class="cta fade-in-section">
-        <div class="container">
-            <div class="cta-box">
-                <h2 class="cta-title glitch">LAST CHANCE BEFORE OBLIVION</h2>
-                <p class="cta-description">The financial world is a joke and we're the punchline. Might as well hold some $DEBT while it all burns down. Click the button. Feel the void.</p>
-                <a href="YOUR_PUMPFUN_URL" target="_blank" rel="noopener noreferrer" class="pump-fun-button hero-cta-main">Buy $DEBT Before Regret Sets In</a>
-            </div>
+      <div class="container">
+         <!-- Title orange, button green -->
+        <div class="cta-box">
+            <h2 class="cta-title glitch">READY TO BUILD THE FUTURE?</h2>
+            <p class="cta-description">The old world failed us. It's time to create our own. Join the $DEBT cult and be part of the change. The journey starts now.</p>
+            <a href="YOUR_PUMPFUN_URL" target="_blank" rel="noopener noreferrer" class="pump-fun-button hero-cta-main">START BUILDING (BUY $DEBT)</a>
         </div>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer>
         <div class="container">
         <div class="footer-content">
-             <div class="footer-column"> <h3>Cult Info</h3> <ul> <li><a href="#decree">Decree</a></li> <li><a href="#why-we-fight">Why We're Idiots</a></li> <li><a href="#join-the-cult">Join Us</a></li> <li><a href="#meme-vault">Propaganda</a></li> </ul> </div>
-             <div class="footer-column"> <h3>Charts</h3> <ul> 
-                 <li><a href="https://dexscreener.com/solana/YOUR_TOKEN_ADDRESS_ON_SOLANA" target="_blank" rel="noopener noreferrer">DexScreener</a></li> 
-                 <li><a href="https://www.dextools.io/app/en/solana/pair-explorer/YOUR_TOKEN_ADDRESS_ON_SOLANA" target="_blank" rel="noopener noreferrer">DEXTools</a></li> 
-                 <li><a href="#" id="howToBuyBtnFooter">How to Lose Money</a></li> 
-                 <li><a href="scanner.html">Contract Scanner</a></li>
+             <!-- Footer headings orange, links teal hover -->
+             <div class="footer-column"> <h3>NAVIGATION</h3> <ul> <li><a href="#manifesto">Manifesto</a></li> <li><a href="#why-debt">Why Join Us?</a></li> <li><a href="#join-the-cult">Community</a></li> <li><a href="#meme-vault">Culture</a></li> </ul> </div>
+             <div class="footer-column"> <h3>RESOURCES</h3> <ul>
+                 <li><a href="https://dexscreener.com/solana/8ncucXv6U6epZKHPbgaEBcEK399TpHGKCquSt4RnmX4f" target="_blank" rel="noopener noreferrer">DexScreener</a></li>
+                 <li><a href="https://www.dextools.io/app/en/solana/pair-explorer/8ncucXv6U6epZKHPbgaEBcEK399TpHGKCquSt4RnmX4f" target="_blank" rel="noopener noreferrer">DEXTools</a></li>
+                 <li><a href="#" id="howToBuyBtnFooter">How to Join</a></li>
+                 <li><a href="scanner.html" target="_blank">Contract Scanner</a></li>
              </ul> </div>
-             <div class="footer-column"> <h3>Connect</h3> <ul class="footer-socials"> <li><a href="YOUR_TELEGRAM_LINK" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Telegram">✈️</a></li> <li><a href="YOUR_X_LINK" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="X (Twitter)">🐦</a></li> </ul> <p style="margin-top: 15px; color: #888; font-size: 14px;">Vent your losses in TG.</p> </div>
-             <div class="footer-column"> <h3>Contract</h3> <p style="font-family: 'Courier New', monospace; color: #aaa; font-size: 13px; word-break: break-all; margin-bottom: 10px;">COMING SOON</p> <button class="copy-btn" style="font-size: 13px; padding: 7px 12px;">Copy CA</button> </div>
+             <div class="footer-column"> <h3>CONNECT</h3> <ul class="footer-socials"> <li><a href="YOUR_TELEGRAM_LINK" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Telegram Community">✈️</a></li> <li><a href="YOUR_X_LINK" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Updates on X">🐦</a></li> </ul> <p style="margin-top: 15px; color: #888; font-size: 14px;">Join the conversation.</p> </div>
+             <div class="footer-column"> <h3>BLUEPRINT</h3> <p style="font-family: 'Courier New', monospace; color: #aaa; font-size: 13px; word-break: break-all; margin-bottom: 10px;">8ncucXv6U6epZKHPbgaEBcEK399TpHGKCquSt4RnmX4f</p> <button class="copy-btn" style="font-size: 13px; padding: 7px 12px;">Copy Blueprint</button> </div>
         </div>
              <div class="footer-extras">
-                 <button class="dump-button" id="dumpBtn">🚨 Emergency Dump 🚨</button>
-                 <div class="dark-mode-toggle">
-                     <label for="dark-mode-switch">Fuck Mode:</label>
+                 <!-- Surrender button red -->
+                 <button class="surrender-button" id="dumpBtn">🏳️ SELL OUT 🏳️</button>
+                 <!-- Toggle uses orange/chaos icon -->
+                 <div class="meltdown-mode-toggle">
+                     <label for="meltdown-mode-switch">CHAOS MODE:</label>
                      <label class="switch">
-                         <input type="checkbox" id="dark-mode-switch">
+                         <input type="checkbox" id="meltdown-mode-switch">
                          <span class="slider"></span>
                      </label>
                  </div>
              </div>
             <div class="footer-bottom">
-                <p>© 2024 $DEBT Cult. All rights reserved (to lose money). Launched via Pump.fun.</p>
-                 <p class="footer-disclaimer">Financial Disclaimer: LOL. $DEBT is a meme token with zero value, created for shits and giggles. It's highly volatile and speculative AF. Treat it like a casino trip where the house always wins, eventually. Don't invest money you need for important things like food, rent, or bail. We are not financial advisors; we are certified degenerates. If you get rekt, that's on you. NFA/DYOR.</p>
+                 <!-- Footer links use teal/orange hover -->
+                <p>© 2024 $DEBT Cult. Building a better future, one meme at a time. Launched via Pump.fun.</p>
+                 <p class="footer-disclaimer">Financial Disclaimer: $DEBT is a community token and meme, born from defiance. It has no intrinsic value or expectation of financial return. It's an experiment in collective action and decentralized culture. Treat it as such. Cryptocurrencies are inherently volatile and risky. Do your own research (DYOR) and never invest more than you can afford to lose. We are not financial advisors. NFA.</p>
             </div>
         </div>
     </footer>
 
     <!-- Modals -->
+    <!-- Modal styling uses orange accents -->
     <div id="dumpModal" class="modal">
         <div class="modal-content">
             <span class="modal-close" id="closeDumpModal">×</span>
-            <h2 class="glitch">🚨 PANIC SELL ALERT 🚨</h2>
-            <p>Are you SURE you want to dump your $DEBT? Selling now means admitting defeat. Your hands will turn to paper, your soul may be forfeit to Jerome Powell, and the cult may shun you. Still wanna be a bitch?</p>
-            <button class="cta-button modal-button" id="confirmDump">Yes, I Have Paper Hands</button>
-            <button class="cta-button modal-button pump-fun-button" id="cancelDump">No, Diamond Hands!</button> 
+            <h2 class="glitch">🚨 WARNING: SELLING OUT? 🚨</h2>
+            <p>Are you sure you want to abandon the community? Selling $DEBT might feel like relief now, but it means giving up on the vision we're building together. Reconsider your commitment to the cause.</p>
+            <!-- Buttons use red/green -->
+            <button class="cta-button modal-button" id="confirmDump">Yes, I Lack Vision</button>
+            <button class="cta-button modal-button pump-fun-button" id="cancelDump">No, I Believe!</button>
         </div>
     </div>
 
     <div id="howToBuyModal" class="modal">
-        <div class="modal-content" style="text-align: left;">
+        <div class="modal-content">
              <span class="modal-close" id="closeHowToBuyModal">×</span>
-            <h2>How to Buy $DEBT (Idiot's Guide)</h2>
-            <p>Alright listen up, crayon-eater. Buying on Pump.fun is easy, even for you:</p>
-            <ol style="color: #ccc; margin-left: 20px; margin-bottom: 20px; font-size: 16px; line-height: 1.8;">
-                <li><strong>Get a Solana Wallet:</strong> Phantom or Solflare are fine. Download the browser extension or app. KEEP YOUR SEED PHRASE SAFE, MORON. Don't screenshot it, don't email it, tattoo it on your ass if you have to.</li>
-                <li><strong>Get SOL:</strong> Buy Solana (SOL) on a major exchange (Coinbase, Binance, Kraken, etc.). You'll need it for gas and to buy $DEBT.</li>
-                <li><strong>Send SOL to Your Wallet:</strong> Withdraw the SOL from the exchange to your Phantom/Solflare wallet address. Double-check the address, or your SOL goes poof.</li>
-                <li><strong>Go to Pump.fun:</strong> Click one of the big green "Buy on Pump.fun" buttons on this site OR go directly to: <a href="YOUR_PUMPFUN_URL" target="_blank" rel="noopener noreferrer" style="color:#ffaa5a; word-break: break-all;">YOUR_PUMPFUN_URL</a></li>
-                <li><strong>Connect Wallet:</strong> Click "Connect Wallet" on the Pump.fun page and approve the connection in your wallet.</li>
-                <li><strong>APE IN:</strong> Enter the amount of SOL you want to gamble on $DEBT. Review the transaction details (slippage, etc. - not that you understand it).</li>
-                <li><strong>Click "Buy" & Approve:</strong> Smash that buy button and approve the transaction in your wallet popup. Wait for the blockchain magic (or failure).</li>
-                <li><strong>Done:</strong> Congrats, you now own potentially worthless $DEBT! Welcome to the cult. Check your wallet to see your tokens (you might need to add the token address manually: <code style="font-size: 0.9em; color: #ffaa5a; word-break: break-all;">YOUR_TOKEN_ADDRESS_ON_SOLANA</code>).</li>
+            <h2>How to Join the $DEBT Movement</h2>
+            <p>Ready to become part of the cult? Here’s your initiation:</p>
+            <!-- List uses standard text, code uses teal -->
+            <ol>
+                 <li><strong>Get a Solana Wallet:</strong> Phantom or Solflare recommended. Secure your seed phrase! This is key to your financial sovereignty.</li>
+                 <li><strong>Get SOL Tokens:</strong> Buy Solana (SOL) on an exchange (Coinbase, Binance, etc.). This is the network's native token.</li>
+                 <li><strong>Send SOL to Your Wallet:</strong> Withdraw SOL from the exchange to your personal wallet address. Always double-check addresses.</li>
+                 <li><strong>Go to Pump.fun:</strong> Use the green "JOIN THE BUILD" buttons on this site or go directly to the $DEBT page: <a href="YOUR_PUMPFUN_URL" target="_blank" rel="noopener noreferrer">YOUR_PUMPFUN_URL</a></li>
+                 <li><strong>Connect Wallet:</strong> Click "Connect Wallet" on Pump.fun and approve in your wallet.</li>
+                 <li><strong>Acquire $DEBT:</strong> Enter the amount of SOL you wish to exchange for $DEBT. Review the transaction details.</li>
+                 <li><strong>Confirm & Approve:</strong> Click "Buy" and approve the transaction in your wallet. Wait for network confirmation.</li>
+                 <li><strong>Welcome to the Cult:</strong> You now hold $DEBT! Add the token address to see it in your wallet: <code>8ncucXv6U6epZKHPbgaEBcEK399TpHGKCquSt4RnmX4f</code></li>
             </ol>
-            <p style="font-style: italic; color: #888;">Now go shill in the Telegram like your life depends on it.</p>
+            <p style="font-style: italic; color: #888;">Join the Telegram and introduce yourself!</p>
         </div>
     </div>
 
-    <!-- GAME SCRIPT -->
+    <!-- JS (Keep Existing - No color changes needed here) -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // --- Robust Element Selection (Check Existence!) ---
-            const startButton = document.querySelector('.start-game-btn');
-            const gameOverlay = document.querySelector('.game-overlay');
-            const canvas = document.getElementById('game-canvas');
-            const scoreDisplay = document.querySelector('.game-score');
-            const gameContainer = document.querySelector('.game-container');
-            const priceValueEl = document.querySelector('.price-ticker .price-value');
-            const priceChangeEl = document.querySelector('.price-ticker .price-change');
-            const copyBtns = document.querySelectorAll('.copy-btn');
+            // (Keep existing selectors, ensure IDs match if changed)
             const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
             const mobileNavLinks = document.getElementById('mobile-nav');
+            const copyBtns = document.querySelectorAll('.copy-btn');
             const fadeElements = document.querySelectorAll('.fade-in-section');
-            const leaderboardList = document.getElementById('leaderboard-list');
             const dumpBtn = document.getElementById('dumpBtn');
             const dumpModal = document.getElementById('dumpModal');
             const closeDumpModal = document.getElementById('closeDumpModal');
@@ -1127,91 +653,58 @@ body.dark-mode-crazy .modal-content {
             const howToBuyBtnFooter = document.getElementById('howToBuyBtnFooter');
             const howToBuyModal = document.getElementById('howToBuyModal');
             const closeHowToBuyModal = document.getElementById('closeHowToBuyModal');
-            const darkModeSwitch = document.getElementById('dark-mode-switch');
+            const meltdownModeSwitch = document.getElementById('meltdown-mode-switch'); // Changed ID
             const prevTestimonialBtn = document.getElementById('prevTestimonial');
             const nextTestimonialBtn = document.getElementById('nextTestimonial');
             const testimonialCards = document.querySelectorAll('.testimonial-card');
-
-            // --- Essential Game Elements Check ---
-            let gameCanRun = true;
-            if (!canvas || !gameContainer || !startButton || !gameOverlay || !scoreDisplay) {
-                console.error("Essential game HTML elements missing. Game cannot initialize.");
-                gameCanRun = false;
-                if(startButton) startButton.disabled = true;
-                if(gameOverlay) {
-                    gameOverlay.style.display = 'flex';
-                    gameOverlay.innerHTML = "<p style='color:red; text-align: center;'>Error: Game components failed to load.<br>Check console (F12) for details.</p>";
-                }
-            }
-
-            const ctx = gameCanRun ? canvas.getContext('2d') : null;
-            if (gameCanRun && !ctx) {
-                console.error("Canvas context could not be created. Game cannot initialize.");
-                gameCanRun = false;
-                 if(startButton) startButton.disabled = true;
-                 if(gameOverlay) {
-                    gameOverlay.style.display = 'flex';
-                    gameOverlay.innerHTML = "<p style='color:red; text-align: center;'>Error: Canvas rendering failed.<br>Check console (F12) for details.</p>";
-                 }
-            }
+            const globalDebtCounter = document.getElementById('global-debt-counter');
+            const bankerBonusEl = document.getElementById('banker-bonus'); // For fake bonus
 
             // --- Scroll Fade-In Animation ---
             try {
                 const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
-                const observer = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); } });
-                }, observerOptions);
+                const observer = new IntersectionObserver((entries, observer) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); } }); }, observerOptions);
                 fadeElements.forEach(el => { if(el) observer.observe(el); });
-            } catch (e) { console.error("Error setting up scroll observer:", e); }
+            } catch (e) { console.error("Scroll observer failed:", e); }
 
             // --- Mobile Menu Logic ---
              try {
                 if (mobileNavToggle && mobileNavLinks) {
-                    mobileNavToggle.addEventListener('click', () => {
-                       const isExpanded = mobileNavToggle.getAttribute('aria-expanded') === 'true';
-                       mobileNavLinks.classList.toggle('active');
-                       mobileNavToggle.setAttribute('aria-expanded', !isExpanded);
-                       mobileNavToggle.textContent = !isExpanded ? '✕' : '☰';
-                    });
-                    mobileNavLinks.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => {
-                        mobileNavLinks.classList.remove('active');
-                        mobileNavToggle.setAttribute('aria-expanded', 'false');
-                        mobileNavToggle.textContent = '☰';
-                    }); });
-                } else { console.warn("Mobile navigation elements not found."); }
-             } catch(e) { console.error("Error setting up mobile nav:", e); }
+                    mobileNavToggle.addEventListener('click', () => { const isExpanded = mobileNavToggle.getAttribute('aria-expanded') === 'true'; mobileNavLinks.classList.toggle('active'); mobileNavToggle.setAttribute('aria-expanded', !isExpanded); mobileNavToggle.textContent = !isExpanded ? '✕' : '☰'; });
+                    mobileNavLinks.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { mobileNavLinks.classList.remove('active'); mobileNavToggle.setAttribute('aria-expanded', 'false'); mobileNavToggle.textContent = '☰'; }); });
+                } else { console.warn("Mobile nav elements missing."); }
+             } catch(e) { console.error("Mobile nav setup failed:", e); }
 
 
-            // --- Copy Button Logic ---
+            // --- Copy Button Logic (Blueprint Copy) ---
             try {
                 copyBtns.forEach(copyBtn => { copyBtn.addEventListener('click', function() {
                     const contractAddressElement = this.previousElementSibling;
                     if (contractAddressElement && contractAddressElement.tagName === 'P') {
                         const contractAddress = contractAddressElement.innerText;
                         navigator.clipboard.writeText(contractAddress).then(() => {
-                            const originalText = this.textContent; this.textContent = "Copied!";
-                            setTimeout(() => { this.textContent = originalText; }, 1500);
-                        }, (err) => { console.error('Copy failed: ', err); const originalText = this.textContent; this.textContent = "Failed!"; setTimeout(() => { this.textContent = originalText; }, 1500); });
-                    } else { console.error("Could not find contract address element."); }
+                            const originalText = this.textContent; this.textContent = "BLUEPRINT COPIED!"; setTimeout(() => { this.textContent = originalText; }, 1500);
+                        }, (err) => { console.error('Copy failed: ', err); const originalText = this.textContent; this.textContent = "COPY FAILED!"; setTimeout(() => { this.textContent = originalText; }, 1500); });
+                    } else { console.error("Could not find blueprint element."); }
                 }); });
-            } catch(e) { console.error("Error setting up copy buttons:", e); }
+            } catch(e) { console.error("Copy button setup failed:", e); }
 
 
-             // --- Modal Logic ---
+             // --- Modal Logic (Sell Out & Joining) ---
              try {
                  function openModal(modal) { if(modal) modal.classList.add('active'); }
                  function closeModal(modal) { if(modal) modal.classList.remove('active'); }
 
-                 // Dump Modal
+                 // Sell Out Modal
                  if (dumpBtn && dumpModal && closeDumpModal && confirmDump && cancelDump) {
                      dumpBtn.addEventListener('click', () => openModal(dumpModal));
                      closeDumpModal.addEventListener('click', () => closeModal(dumpModal));
                      cancelDump.addEventListener('click', () => closeModal(dumpModal));
-                     confirmDump.addEventListener('click', () => { alert("Pfft. Paper hands confirmed. NGMI."); closeModal(dumpModal); });
+                     confirmDump.addEventListener('click', () => { alert("Commitment issues noted. The cult remembers."); closeModal(dumpModal); });
                      dumpModal.addEventListener('click', (e) => { if(e.target === dumpModal) closeModal(dumpModal); });
                  }
 
-                 // How To Buy Modal
+                 // Joining Modal
                  if (howToBuyModal && closeHowToBuyModal) {
                      const openHowToBuy = () => openModal(howToBuyModal);
                      if(howToBuyBtn) howToBuyBtn.addEventListener('click', openHowToBuy);
@@ -1219,619 +712,134 @@ body.dark-mode-crazy .modal-content {
                      closeHowToBuyModal.addEventListener('click', () => closeModal(howToBuyModal));
                      howToBuyModal.addEventListener('click', (e) => { if(e.target === howToBuyModal) closeModal(howToBuyModal); });
                  }
-             } catch(e) { console.error("Error setting up modals:", e); }
+             } catch(e) { console.error("Modal setup failed:", e); }
 
 
-             // --- Useless Dark Mode Toggle ---
+             // --- System Meltdown Mode Toggle ---
              try {
-                 if (darkModeSwitch) {
-                     darkModeSwitch.addEventListener('change', () => {
-                         console.log("Dark mode toggled... PSYCH! It does nothing. Welcome to the dark economy.");
-                         document.body.style.transition = 'background-color 0.1s';
-                         document.body.style.backgroundColor = '#080808';
-                         setTimeout(() => { document.body.style.backgroundColor = '#0a0a0a'; }, 100);
-                         setTimeout(() => { darkModeSwitch.checked = false; }, 500);
+                 if (meltdownModeSwitch) {
+                     meltdownModeSwitch.addEventListener('change', () => {
+                         document.body.classList.toggle('system-meltdown-mode');
+                         if (document.body.classList.contains('system-meltdown-mode')) { localStorage.setItem('meltdown-mode', 'enabled'); }
+                         else { localStorage.removeItem('meltdown-mode'); }
                      });
+                     if (localStorage.getItem('meltdown-mode') === 'enabled') {
+                         document.body.classList.add('system-meltdown-mode');
+                         meltdownModeSwitch.checked = true;
+                     }
                  }
-             } catch(e) { console.error("Error setting up dark mode toggle:", e); }
+             } catch(e) { console.error("System Meltdown Mode toggle failed:", e); }
 
 
             // --- Testimonial Slider Logic ---
             let currentTestimonialIndex = 0;
             try {
-                function showTestimonial(index) {
-                    if (!testimonialCards || testimonialCards.length === 0) return;
-                    testimonialCards.forEach((card, i) => {
-                        card.classList.remove('active');
-                        if (i === index) { card.classList.add('active'); }
-                    });
-                    currentTestimonialIndex = index;
-                    if(prevTestimonialBtn) prevTestimonialBtn.disabled = index === 0;
-                    if(nextTestimonialBtn) nextTestimonialBtn.disabled = index === testimonialCards.length - 1;
-                }
-
-                if (prevTestimonialBtn && nextTestimonialBtn && testimonialCards.length > 0) {
-                    prevTestimonialBtn.addEventListener('click', () => { if (currentTestimonialIndex > 0) { showTestimonial(currentTestimonialIndex - 1); } });
-                    nextTestimonialBtn.addEventListener('click', () => { if (currentTestimonialIndex < testimonialCards.length - 1) { showTestimonial(currentTestimonialIndex + 1); } });
-                    showTestimonial(0); // Initialize
-                }
-            } catch(e) { console.error("Error setting up testimonials:", e); }
+                function showTestimonial(index) { if (!testimonialCards || testimonialCards.length === 0) return; testimonialCards.forEach((card, i) => { card.classList.remove('active'); if (i === index) { card.classList.add('active'); } }); currentTestimonialIndex = index; if(prevTestimonialBtn) prevTestimonialBtn.disabled = index === 0; if(nextTestimonialBtn) nextTestimonialBtn.disabled = index === testimonialCards.length - 1; }
+                if (prevTestimonialBtn && nextTestimonialBtn && testimonialCards.length > 0) { prevTestimonialBtn.addEventListener('click', () => { if (currentTestimonialIndex > 0) { showTestimonial(currentTestimonialIndex - 1); } }); nextTestimonialBtn.addEventListener('click', () => { if (currentTestimonialIndex < testimonialCards.length - 1) { showTestimonial(currentTestimonialIndex + 1); } }); showTestimonial(0); }
+            } catch(e) { console.error("Testimonial slider failed:", e); }
 
 
             // ========================================
-            // --- GAME LOGIC (Self-Contained Block) ---
+            // --- DEBT COUNTER LOGIC ---
             // ========================================
-            if (gameCanRun) { // Only run game logic if elements and context are ready
-                let player = { x: 0, y: 0, width: 45, height: 45, color: '#ffaa5a', speed: 6 }; // Ensure speed is positive
-                let moneyItems = []; let debtItems = []; let keys = {}; let score = 0;
-                let gameInterval, spawnInterval; let gameActive = false; const itemSize = 35;
-                const emojis = { player: '🤡', money: '$', banker: '🏦', lender: '🧾', agency: '🚨', politician: '💩' };
-                const debtPool = [emojis.banker, emojis.lender, emojis.agency, emojis.politician];
-                const MAX_LEADERBOARD_ENTRIES = 10;
+            const debtData = { us: 36880000000000, china: 14780000000000, japan: 12450000000000, uk: 3720000000000, germany: 2850000000000, australia: 980000000000 };
+            const debtRatePerSecond = { us: 4200, china: 3000, japan: 2100, uk: 1050, germany: 950, australia: 720 };
+            let currentDebt = {};
+            let lastUpdated = localStorage.getItem('debtLastUpdated') ? parseInt(localStorage.getItem('debtLastUpdated')) : Date.now();
+            let currentBankerBonus = localStorage.getItem('bankerBonus') ? parseFloat(localStorage.getItem('bankerBonus')) : 1000000000000;
+            const bonusRate = 99999;
 
-                // --- Game Input Event Listeners (Defined within game scope) ---
-                document.addEventListener('keydown', handleKeyDown);
-                document.addEventListener('keyup', handleKeyUp);
+            Object.keys(debtData).forEach(country => { const savedDebt = localStorage.getItem(`debt_${country}`); currentDebt[country] = savedDebt ? parseFloat(savedDebt) : debtData[country]; });
+            const timeElapsedSeconds = (Date.now() - lastUpdated) / 1000;
+            if (timeElapsedSeconds > 0) { Object.keys(debtRatePerSecond).forEach(country => { currentDebt[country] += debtRatePerSecond[country] * timeElapsedSeconds; }); currentBankerBonus += bonusRate * (timeElapsedSeconds * 10); }
+            currentDebt.global = Object.keys(debtRatePerSecond).reduce( (total, country) => total + currentDebt[country], 0 );
 
-                function handleKeyDown(e) {
-                    const key = e.key.toLowerCase();
-                    keys[key] = true;
-                    // Prevent page scroll only if game is active
-                    if (gameActive && ['arrowup', 'arrowdown', 'arrowleft', 'arrowright', ' '].includes(key)) {
-                        e.preventDefault();
-                    }
-                }
+            function formatCurrency(number) { return '$' + number.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
 
-                function handleKeyUp(e) {
-                    const key = e.key.toLowerCase();
-                    keys[key] = false;
-                }
+            function updateDebtCounters() {
+                Object.keys(debtRatePerSecond).forEach(country => {
+                    currentDebt[country] += debtRatePerSecond[country] / 10;
+                    const el = document.getElementById(`${country}-debt`);
+                    if (el) el.textContent = formatCurrency(currentDebt[country]);
+                    localStorage.setItem(`debt_${country}`, currentDebt[country].toString());
+                });
+                currentDebt.global = Object.keys(debtRatePerSecond).reduce((total, country) => total + currentDebt[country], 0);
+                if (globalDebtCounter) { globalDebtCounter.textContent = formatCurrency(currentDebt.global); }
 
-                 // --- Game Start Button Event Listener ---
-                 startButton.addEventListener('click', function() {
-                    // Check gameActive *again* right before starting
-                    if (!gameActive) {
-                        startGame();
+                currentBankerBonus += bonusRate;
+                if (bankerBonusEl) { bankerBonusEl.textContent = formatCurrency(currentBankerBonus); }
+                localStorage.setItem('bankerBonus', currentBankerBonus.toString());
+
+                localStorage.setItem('debtLastUpdated', Date.now().toString());
+            }
+
+            function initializeDebtCounters() {
+                Object.keys(debtRatePerSecond).forEach(country => { const el = document.getElementById(`${country}-debt`); if (el) el.textContent = formatCurrency(currentDebt[country]); });
+                if (globalDebtCounter) { globalDebtCounter.textContent = formatCurrency(currentDebt.global); }
+                if (bankerBonusEl) { bankerBonusEl.textContent = formatCurrency(currentBankerBonus); }
+            }
+
+            initializeDebtCounters();
+            setInterval(updateDebtCounters, 100);
+
+
+            // ========================================
+            // --- PRICE FEED LOGIC ---
+            // ========================================
+            async function fetchAndUpdatePrice() {
+                const priceValueEl = document.querySelector('.price-ticker .price-value');
+                const priceChangeEl = document.querySelector('.price-ticker .price-change');
+                const staticPriceValueEl = document.getElementById('static-price-value');
+                const staticPriceChangeEl = document.getElementById('static-price-change');
+                if ((!priceValueEl && !priceChangeEl) && (!staticPriceValueEl && !staticPriceChangeEl)) { console.warn("Price elements missing."); return; }
+
+                const tokenAddress = "8ncucXv6U6epZKHPbgaEBcEK399TpHGKCquSt4RnmX4f"; // CONFIRM THIS IS CORRECT
+                const apiKey = "bf9466033dd145769b1a07d8c8c51d4a"; // YOUR API KEY
+                const apiUrl = `https://public-api.birdeye.so/defi/price?address=${tokenAddress}`;
+                const options = { method: 'GET', headers: { 'accept': 'application/json', 'X-API-KEY': apiKey, 'x-chain': 'solana' } };
+
+                try {
+                    const response = await fetch(apiUrl, options);
+                    if (!response.ok) { throw new Error(`API Error (${response.status})`); }
+                    const data = await response.json();
+
+                    if (data && data.data && typeof data.data.value === 'number') {
+                        const price = data.data.value;
+                        let formattedPrice;
+                        if (price < 0.0001) { formattedPrice = '$' + price.toFixed(10); }
+                        else if (price < 0.01) { formattedPrice = '$' + price.toFixed(6); }
+                        else { formattedPrice = '$' + price.toFixed(5); }
+                        formattedPrice = formattedPrice.replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, '');
+
+                        let changePercentage = 0;
+                        if (typeof data.data.priceChange24h === 'number') { changePercentage = data.data.priceChange24h * 100; }
+                         else if (typeof data.data.priceChange24hPercent === 'number') { changePercentage = data.data.priceChange24hPercent; }
+                        const formattedChange = `${changePercentage >= 0 ? '+' : ''}${changePercentage.toFixed(1)}%`;
+                        const changeClass = changePercentage >= 0 ? 'positive' : 'negative';
+
+                        if (priceValueEl) priceValueEl.textContent = formattedPrice;
+                        if (priceChangeEl) { priceChangeEl.textContent = formattedChange; priceChangeEl.className = 'price-change ' + changeClass; }
+                        if (staticPriceValueEl) staticPriceValueEl.textContent = formattedPrice;
+                        if (staticPriceChangeEl) { staticPriceChangeEl.textContent = formattedChange; staticPriceChangeEl.className = 'price-change-static ' + changeClass; }
                     } else {
-                         console.warn("Start button clicked while game already active.");
+                         throw new Error("Unexpected API data format");
                     }
-                 });
-
-                function startGame() {
-                    // Re-check essential elements
-                    if (!ctx || !gameContainer || !canvas) {
-                         console.error("Cannot start game, essential drawing elements missing.");
-                          if (gameOverlay) { gameOverlay.style.display = 'flex'; gameOverlay.innerHTML = "<p style='color:red;'>Critical Error: Cannot initialize game canvas.</p>"; }
-                         return;
-                     }
-
-                    // Ensure canvas dimensions are set and valid
-                    canvas.width = gameContainer.clientWidth;
-                    canvas.height = gameContainer.clientHeight;
-                    if (canvas.width <= 0 || canvas.height <= 0) {
-                        console.error(`Invalid canvas dimensions (${canvas.width}x${canvas.height}). Game cannot start.`);
-                        if (gameOverlay) { gameOverlay.style.display = 'flex'; gameOverlay.innerHTML = "<p style='color:red;'>Error: Game container has no size.</p>"; }
-                        return;
-                    }
-
-                    // Reset player, score, items, keys state
-                    player.x = canvas.width / 2 - player.width / 2;
-                    player.y = canvas.height - player.height - 15; // Position player
-                    score = 0; updateScore();
-                    moneyItems = []; debtItems = [];
-                    keys = {}; // CRITICAL: Reset keys object on new game
-
-                    // Set game active flag
-                    gameActive = true;
-
-                    // Hide overlay
-                    if (gameOverlay) gameOverlay.style.display = 'none';
-
-                    // Clear previous intervals (important for restarts)
-                    clearInterval(gameInterval);
-                    clearInterval(spawnInterval);
-
-                    // Start new game loops
-                    gameInterval = setInterval(updateGame, 1000 / 60); // ~60 FPS
-                    spawnInterval = setInterval(spawnObjects, 700); // Spawn rate
-                    console.log("Game started successfully.");
+                } catch (error) {
+                    console.error("Price fetch failed:", error);
+                    const fallbackPrice = "$?.??"; const fallbackChange = "ERR";
+                    if (priceValueEl) priceValueEl.textContent = fallbackPrice;
+                    if (priceChangeEl) { priceChangeEl.textContent = fallbackChange; priceChangeEl.className = 'price-change negative'; }
+                    if (staticPriceValueEl) staticPriceValueEl.textContent = fallbackPrice;
+                    if (staticPriceChangeEl) { staticPriceChangeEl.textContent = fallbackChange; staticPriceChangeEl.className = 'price-change-static negative'; }
                 }
-
-                function endGame() {
-                    // Only run endGame logic once
-                    if (!gameActive) return;
-                    console.log("Ending game. Final Score:", score);
-                    gameActive = false; // Set inactive *first*
-
-                    // Clear intervals
-                    clearInterval(gameInterval);
-                    clearInterval(spawnInterval);
-
-                    // Remove key listeners specific to the game to prevent background input handling
-                    // document.removeEventListener('keydown', handleKeyDown);
-                    // document.removeEventListener('keyup', handleKeyUp);
-                    // Note: Keeping listeners active might be okay if start button logic prevents multiple games.
-
-                    // Show overlay
-                    if (gameOverlay) {
-                        gameOverlay.style.display = 'flex';
-                        const gameTitle = gameOverlay.querySelector('.game-title');
-                        if (gameTitle) gameTitle.textContent = `REKT! Score: ${score}`;
-                        const gameDesc = gameOverlay.querySelector('.game-description');
-                        if (gameDesc) gameDesc.textContent = `Enter your degen name for glory (or shame).`;
-                        const startBtnText = gameOverlay.querySelector('.start-game-btn');
-                        if(startBtnText) startBtnText.textContent = "PLAY AGAIN";
-                    }
-
-                    // Prompt for leaderboard entry
-                    setTimeout(() => { // Delay slightly
-                         try {
-                             const playerName = prompt(`Game Over! Score: ${score}\nEnter Name (max 15 chars):`, "AnonDegen");
-                             if (playerName) {
-                                 saveScore(playerName.substring(0, 15).trim(), score);
-                             }
-                         } catch (e) { console.error("Error during prompt/saveScore:", e); }
-                    }, 100);
-                }
-
-                function updateScore() { if (scoreDisplay) scoreDisplay.textContent = `POINTS: ${score}`; }
-
-                function spawnObjects() {
-                    if (!gameActive || !canvas || canvas.width <= 0) return;
-                    // Spawn Money
-                    if (Math.random() < 0.55) {
-                        moneyItems.push({ x: Math.random()*(canvas.width-itemSize), y: -itemSize, emoji: emojis.money });
-                    }
-                    // Spawn Debt
-                    if (Math.random() < 0.75) {
-                        debtItems.push({ x: Math.random()*(canvas.width-itemSize), y: -itemSize, emoji: debtPool[Math.floor(Math.random()*debtPool.length)] });
-                    }
-                }
-
-                function updateGame() {
-                    // Essential check at the beginning of the loop
-                    if (!gameActive || !canvas || !ctx) {
-                        // If the game should be active but isn't, maybe clear intervals?
-                        // clearInterval(gameInterval); clearInterval(spawnInterval);
-                        return;
-                    }
-
-                    try {
-                        // --- Player Movement ---
-                        // Check the keys object state right before using it
-                        let moved = false;
-                        if (keys['arrowleft'] || keys['a']) {
-                            player.x -= player.speed;
-                            moved = true;
-                        }
-                        if (keys['arrowright'] || keys['d']) {
-                            player.x += player.speed;
-                            moved = true;
-                        }
-                        // (Optional log for debugging movement)
-                        // if(moved) console.log(`Moved: player.x = ${player.x}`);
-
-
-                        // Clamp player position to canvas bounds
-                        player.x = Math.max(0, Math.min(canvas.width - player.width, player.x));
-
-                        // --- Clear Canvas ---
-                        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                        // --- Draw Player ---
-                        ctx.font = "45px Arial"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
-                        ctx.fillText(emojis.player, player.x + player.width / 2, player.y + player.height / 2);
-
-                        // --- Update & Draw Items ---
-                        ctx.font = `${itemSize}px Arial`; ctx.textBaseline = "middle";
-
-                        // Money items loop (check collision)
-                        for (let i = moneyItems.length - 1; i >= 0; i--) {
-                            if (!moneyItems[i]) continue;
-                            let item = moneyItems[i]; item.y += 4.5;
-                            ctx.fillText(item.emoji, item.x + itemSize / 2, item.y + itemSize / 2);
-                            if (isColliding(player, { x: item.x, y: item.y, width: itemSize, height: itemSize })) {
-                                score += 10; updateScore(); moneyItems.splice(i, 1);
-                            } else if (item.y > canvas.height) { moneyItems.splice(i, 1); }
-                        }
-
-                        // Debt items loop (check collision -> endGame)
-                        for (let i = debtItems.length - 1; i >= 0; i--) {
-                            if (!debtItems[i]) continue;
-                            let item = debtItems[i]; item.y += 6; // Faster debt
-                            ctx.fillText(item.emoji, item.x + itemSize / 2, item.y + itemSize / 2);
-                             if (isColliding(player, { x: item.x, y: item.y, width: itemSize, height: itemSize })) {
-                                 endGame(); // Call endGame immediately
-                                 return; // Exit the update loop for this frame
-                             } else if (item.y > canvas.height) { debtItems.splice(i, 1); }
-                        }
-                    } catch (e) {
-                        console.error("Error during game update loop:", e);
-                        gameActive = false; // Stop game on error
-                        clearInterval(gameInterval); clearInterval(spawnInterval);
-                         if (gameOverlay) { gameOverlay.style.display = 'flex'; gameOverlay.innerHTML = "<p style='color:red;'>Critical Game Error Occurred.<br>Check console (F12) & Refresh.</p>"; }
-                    }
-                } // End updateGame
-// National Debt Counter Setup with localStorage persistence
-const debtData = {
-    us: 36880000000000,       // $36.88 trillion
-    china: 14780000000000,    // $14.78 trillion
-    japan: 12450000000000,    // $12.45 trillion
-    uk: 3720000000000,        // $3.72 trillion
-    germany: 2850000000000,   // $2.85 trillion
-    australia: 980000000000,  // $980 billion
-};
-
-// Debt growth rates per second
-const debtRatePerSecond = {
-    us: 4200,        // Approx $132 billion per year
-    china: 3000,     // Approx $94 billion per year
-    japan: 2100,     // Approx $66 billion per year
-    uk: 1050,        // Approx $33 billion per year
-    germany: 950,    // Approx $30 billion per year
-    australia: 720,  // Approx $22 billion per year
-};
-
-// Initialize with localStorage values if they exist, otherwise use starting values
-let currentDebt = {};
-let lastUpdated = localStorage.getItem('debtLastUpdated') ? 
-    parseInt(localStorage.getItem('debtLastUpdated')) : Date.now();
-
-// Load saved debt values from localStorage or use defaults
-Object.keys(debtData).forEach(country => {
-    const savedDebt = localStorage.getItem(`debt_${country}`);
-    currentDebt[country] = savedDebt ? parseFloat(savedDebt) : debtData[country];
-});
-
-// Calculate time elapsed since last update (if page was closed)
-const timeElapsedSeconds = (Date.now() - lastUpdated) / 1000;
-if (timeElapsedSeconds > 0) {
-    // Add debt that would have accumulated while page was closed
-    Object.keys(debtRatePerSecond).forEach(country => {
-        currentDebt[country] += debtRatePerSecond[country] * timeElapsedSeconds;
-    });
-}
-
-// Calculate global debt (sum of all countries)
-currentDebt.global = Object.keys(debtRatePerSecond).reduce(
-    (total, country) => total + currentDebt[country], 0
-);
-
-// Format large numbers with commas
-function formatCurrency(number) {
-    return '$' + number.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
-// Update debt counters
-function updateDebtCounters() {
-    // Update each country's debt
-    Object.keys(debtRatePerSecond).forEach(country => {
-        currentDebt[country] += debtRatePerSecond[country];
-        const el = document.getElementById(`${country}-debt`);
-        if (el) el.textContent = formatCurrency(currentDebt[country]);
-        
-        // Save to localStorage
-        localStorage.setItem(`debt_${country}`, currentDebt[country].toString());
-    });
-    
-    // Calculate global debt (sum of all countries)
-    currentDebt.global = Object.keys(debtRatePerSecond).reduce(
-        (total, country) => total + currentDebt[country], 0
-    );
-    
-    // Update global counter
-    const globalCounter = document.getElementById('global-debt-counter');
-    if (globalCounter) {
-        globalCounter.textContent = formatCurrency(currentDebt.global);
-    }
-    
-    // Save last updated timestamp
-    localStorage.setItem('debtLastUpdated', Date.now().toString());
-}
-
-// Initialize debt values on the page
-function initializeDebtCounters() {
-    Object.keys(debtRatePerSecond).forEach(country => {
-        const el = document.getElementById(`${country}-debt`);
-        if (el) el.textContent = formatCurrency(currentDebt[country]);
-    });
-    
-    const globalCounter = document.getElementById('global-debt-counter');
-    if (globalCounter) {
-        globalCounter.textContent = formatCurrency(currentDebt.global);
-    }
-}
-
-// Start debt counter
-initializeDebtCounters();
-setInterval(updateDebtCounters, 100); // Update every 100ms for smooth counting
-
-                // --- Leaderboard Functions (Inside game scope) ---
-                 function getScores() { /* ... (unchanged) ... */
-                    try { const scores = localStorage.getItem('debtGameLeaderboard'); return scores ? JSON.parse(scores) : []; }
-                    catch (e) { console.error("Error reading scores:", e); return []; }
-                 }
-                 function saveScore(name, score) { /* ... (unchanged) ... */
-                     try {
-                         const scores = getScores(); scores.push({ name: name || "AnonDegen", score });
-                         scores.sort((a, b) => b.score - a.score);
-                         const topScores = scores.slice(0, MAX_LEADERBOARD_ENTRIES);
-                         localStorage.setItem('debtGameLeaderboard', JSON.stringify(topScores));
-                         updateLeaderboardDisplay();
-                     } catch (e) { console.error("Error saving score:", e); }
-                 }
-                 function updateLeaderboardDisplay() { /* ... (unchanged) ... */
-                     if (!leaderboardList) return;
-                     const scores = getScores(); leaderboardList.innerHTML = '';
-                     if (scores.length === 0) { leaderboardList.innerHTML = '<li>No scores yet. Play!</li>'; return; }
-                     scores.forEach((entry, index) => {
-                        const li = document.createElement('li');
-                        const rankSpan = document.createElement('span'); rankSpan.textContent = `#${index + 1}`; rankSpan.style.cssText = 'font-weight:normal; color:#888; margin-right:10px;';
-                        const nameSpan = document.createElement('span'); nameSpan.className = 'leaderboard-name'; nameSpan.textContent = entry.name;
-                        const scoreSpan = document.createElement('span'); scoreSpan.className = 'leaderboard-score'; scoreSpan.textContent = entry.score;
-                        li.appendChild(rankSpan); li.appendChild(nameSpan); li.appendChild(scoreSpan);
-                        leaderboardList.appendChild(li);
-                     });
-                 }
-
-                // --- Initial Leaderboard Load ---
-                updateLeaderboardDisplay();
-
-            } // End of if(gameCanRun) block
-
-
-// --- Price Feed Logic ---
-async function fetchAndUpdatePrice() {
-    console.log("Fetching price at:", new Date().toLocaleTimeString());
-    
-    // Get the price display elements
-    const priceValueEl = document.querySelector('.price-value');
-    const priceChangeEl = document.querySelector('.price-change');
-    const staticPriceValueEl = document.getElementById('static-price-value');
-    const staticPriceChangeEl = document.getElementById('static-price-change');
-    
-    if ((!priceValueEl && !priceChangeEl) && (!staticPriceValueEl && !staticPriceChangeEl)) {
-        console.error("Price elements not found in DOM");
-        return;
-    }
-    
-    // Using your DEBT token contract address
-    const tokenAddress = "8ncucXv6U6epZKHPbgaEBcEK399TpHGKCquSt4RnmX4f";
-    
-    try {
-        // Using the public-api.birdeye.so/public/price endpoint
-const apiUrl = `https://public-api.birdeye.so/defi/price?address=${tokenAddress}`;
-const options = {
-    method: 'GET',
-    headers: {
-        'accept': 'application/json',
-        'X-API-KEY': 'bf9466033dd145769b1a07d8c8c51d4a',
-        'x-chain': 'solana'
-    }
-};
-
-        
-        console.log("Sending API request to:", apiUrl);
-        const response = await fetch(apiUrl, options);
-        
-        if (!response.ok) {
-            console.error("API Error:", response.status, response.statusText);
-            throw new Error(`API Error (${response.status}): ${response.statusText}`);
-        }
-        
-        const data = await response.json();
-        console.log("Raw API Response:", data);
-        
-        // Check if we received valid data
-        if (data && data.data && typeof data.data.value === 'number') {
-            // Extract price value and format it properly
-            const price = data.data.value;
-            console.log("Raw price from API:", price);
-            
-            // Format with proper precision for small numbers
-            let formattedPrice;
-            if (price < 0.0001) {
-                formattedPrice = '$' + price.toFixed(10);
-            } else if (price < 0.01) {
-                formattedPrice = '$' + price.toFixed(6);
-            } else {
-                formattedPrice = '$' + price.toFixed(5);
             }
-            
-            // Remove trailing zeros after decimal point
-            formattedPrice = formattedPrice.replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, '');
-            
-            // Get price change data
-            let changePercentage = 0;
-            
-            if (typeof data.data.priceChange24h === 'number') {
-                // This is usually a decimal (e.g., 0.05 for 5%)
-                changePercentage = data.data.priceChange24h * 100;
-            } else if (typeof data.data.priceChange24hPercent === 'number') {
-                // This is already a percentage
-                changePercentage = data.data.priceChange24hPercent;
-            }
-            
-            console.log("Raw change percentage:", changePercentage);
-            
-            // Format percentage with one decimal place
-            const formattedChange = `${changePercentage >= 0 ? '+' : ''}${changePercentage.toFixed(1)}%`;
-            const changeClass = changePercentage >= 0 ? 'positive' : 'negative';
-            
-            // Update ticker elements if they exist
-            if (priceValueEl) priceValueEl.textContent = formattedPrice;
-            if (priceChangeEl) {
-                priceChangeEl.textContent = formattedChange;
-                priceChangeEl.className = 'price-change ' + changeClass;
-            }
-            
-            // Update static price display if it exists
-            if (staticPriceValueEl) staticPriceValueEl.textContent = formattedPrice;
-            if (staticPriceChangeEl) {
-                staticPriceChangeEl.textContent = formattedChange;
-                staticPriceChangeEl.className = 'price-change-static ' + changeClass;
-            }
-            
-            console.log("Price successfully updated to:", formattedPrice, "Change:", formattedChange);
-        } else {
-            // Fallback to the defi/price endpoint if the first one fails
-            console.warn("First API format unexpected, trying alternate endpoint");
-            throw new Error("API data format unexpected");
-        }
-    } catch (error) {
-        console.error("First API attempt failed:", error);
-        
-        // Try the alternate endpoint
-        try {
-            const altApiUrl = `https://public-api.birdeye.so/defi/price?address=${tokenAddress}`;
-            
-            const options = {
-                method: 'GET',
-                headers: {
-                    'accept': 'application/json',
-                    'x-chain': 'solana'
-                }
-            };
-            
-            console.log("Trying alternative API endpoint:", altApiUrl);
-            const response = await fetch(altApiUrl, options);
-            
-            if (!response.ok) {
-                throw new Error(`Alt API Error (${response.status}): ${response.statusText}`);
-            }
-            
-            const data = await response.json();
-            console.log("Alt API Response:", data);
-            
-            if (data && data.success && data.data && typeof data.data.value === 'number') {
-                const price = data.data.value;
-                console.log("Raw price from alt API:", price);
-                
-                let formattedPrice;
-                if (price < 0.0001) {
-                    formattedPrice = '$' + price.toFixed(10);
-                } else if (price < 0.01) {
-                    formattedPrice = '$' + price.toFixed(6);
-                } else {
-                    formattedPrice = '$' + price.toFixed(5);
-                }
-                
-                formattedPrice = formattedPrice.replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, '');
-                
-                // Get change percentage (formats vary by endpoint)
-                let changePercentage = 0;
-                if (typeof data.data.priceChange24h === 'number') {
-                    changePercentage = data.data.priceChange24h * 100;
-                }
-                
-                const formattedChange = `${changePercentage >= 0 ? '+' : ''}${changePercentage.toFixed(1)}%`;
-                const changeClass = changePercentage >= 0 ? 'positive' : 'negative';
-                
-                // Update UI elements
-                if (priceValueEl) priceValueEl.textContent = formattedPrice;
-                if (priceChangeEl) {
-                    priceChangeEl.textContent = formattedChange;
-                    priceChangeEl.className = 'price-change ' + changeClass;
-                }
-                
-                if (staticPriceValueEl) staticPriceValueEl.textContent = formattedPrice;
-                if (staticPriceChangeEl) {
-                    staticPriceChangeEl.textContent = formattedChange;
-                    staticPriceChangeEl.className = 'price-change-static ' + changeClass;
-                }
-                
-                console.log("Price updated from alt API:", formattedPrice, "Change:", formattedChange);
-            } else {
-                throw new Error("Alternative API data format unexpected");
-            }
-        } catch (altError) {
-            console.error("Both API attempts failed:", altError);
-            
-            // Use a fallback from trading view as last resort
-            const fallbackPrice = "$0.00371"; // Current price from your trading view
-            const fallbackChange = "-9.94%";   // Current change from your trading view
-            
-            if (priceValueEl) priceValueEl.textContent = fallbackPrice;
-            if (priceChangeEl) {
-                priceChangeEl.textContent = fallbackChange;
-                priceChangeEl.className = 'price-change negative';
-            }
-            
-            if (staticPriceValueEl) staticPriceValueEl.textContent = fallbackPrice;
-            if (staticPriceChangeEl) {
-                staticPriceChangeEl.textContent = fallbackChange;
-                staticPriceChangeEl.className = 'price-change-static negative';
-            }
-            
-            console.log("Using fallback price:", fallbackPrice, "Change:", fallbackChange);
-        }
-    }
-}
 
-// Clear any existing intervals to prevent duplicates
-if (window.priceUpdateInterval) {
-    clearInterval(window.priceUpdateInterval);
-    console.log("Cleared previous price update interval");
-}
-
-// Initial fetch when page loads
-fetchAndUpdatePrice();
-
-// Set up interval to update every 10 seconds and store the interval ID
-window.priceUpdateInterval = setInterval(fetchAndUpdatePrice, 10000);
-console.log("Price updates scheduled every 10 seconds");
-
-
-
-
-            // --- Fact Popup ---
-             try {
-                 const factsMessages = [ /* ... Your meme facts ... */
-                    "ALERT: Local man buys $DEBT instead of insulin. Says 'YOLO'.", "BREAKING: Jerome Powell seen crying into a pile of useless dollars. $DEBT suspected.", "FACT: 9 out of 10 dentists agree $DEBT is 'probably a bad idea, but kinda funny'.", "WARNING: Holding $DEBT may cause spontaneous diamond hands and delusions of grandeur.", "REPORT: Study finds link between $DEBT ownership and inexplicable urge to tweet rocket emojis.", "ALERT: Wife's boyfriend recommends diversifying into $DEBT. Financial advice?", "FACT: $DEBT has more utility than your degree (it makes people laugh).", "BREAKING: Scientists discover $DEBT cures existential dread*. (*Results may vary, dread may increase).", "WARNING: May cause you to quit your job and tell your boss to 'suck it'. Don't.", "REPORT: $DEBT outperforms S&P 500 (in meme potential).", "ALERT: Buying $DEBT confirmed side effect: uncontrollable giggling during market crashes."
-                ];
-                 function showRandomFact() { /* ... (unchanged) ... */
-                     if (document.querySelector('.facts-popup')) return;
-                     const msg = factsMessages[Math.floor(Math.random() * factsMessages.length)];
-                     const popup = document.createElement('div'); popup.className = 'facts-popup'; popup.textContent = msg;
-                     document.body.appendChild(popup);
-                     popup.addEventListener('animationend', () => { if (popup.parentNode) { popup.remove(); } });
-                     setTimeout(() => { if (popup.parentNode) { popup.remove(); } }, 6100);
-                 }
-                 function scheduleFact() { /* ... (unchanged) ... */
-                     const delay = Math.random() * 11000 + 12000;
-                     setTimeout(() => { showRandomFact(); scheduleFact(); }, delay);
-                 }
-                 setTimeout(scheduleFact, 7000);
-            } catch(e) { console.error("Error setting up fact popups:", e); }
-
+            if (window.priceUpdateInterval) { clearInterval(window.priceUpdateInterval); }
+            fetchAndUpdatePrice();
+            window.priceUpdateInterval = setInterval(fetchAndUpdatePrice, 15000);
 
         }); // End DOMContentLoaded
     </script>
-<script>
-    // Enhanced Dark Mode Script
-    try {
-        const darkModeSwitch = document.getElementById('dark-mode-switch');
-        
-        if (darkModeSwitch) {
-            darkModeSwitch.addEventListener('change', () => {
-                document.body.classList.toggle('dark-mode-crazy');
-                
-                // Optional: Store preference in localStorage
-                if (document.body.classList.contains('dark-mode-crazy')) {
-                    localStorage.setItem('crazy-mode', 'enabled');
-                } else {
-                    localStorage.removeItem('crazy-mode');
-                }
-            });
 
-            // Check if crazy mode was previously enabled
-            if (localStorage.getItem('crazy-mode') === 'enabled') {
-                document.body.classList.add('dark-mode-crazy');
-            }
-        }
-    } catch(e) { 
-        console.error("Error setting up crazy dark mode:", e); 
-    }
-</script>
 </body>
 </html>
