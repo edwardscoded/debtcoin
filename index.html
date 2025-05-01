@@ -1494,15 +1494,16 @@ async function fetchAndUpdatePrice() {
     
     try {
         // Using the public-api.birdeye.so/public/price endpoint
-        const apiUrl = `https://public-api.birdeye.so/public/price?address=${tokenAddress}`;
-        
-        const options = {
-            method: 'GET',
-            headers: {
-                'accept': 'application/json',
-                'x-chain': 'solana'
-            }
-        };
+const apiUrl = `https://public-api.birdeye.so/defi/price?address=${tokenAddress}`;
+const options = {
+    method: 'GET',
+    headers: {
+        'accept': 'application/json',
+        'X-API-KEY': 'bf9466033dd145769b1a07d8c8c51d4a',
+        'x-chain': 'solana'
+    }
+};
+
         
         console.log("Sending API request to:", apiUrl);
         const response = await fetch(apiUrl, options);
