@@ -1675,11 +1675,6 @@ window.priceUpdateInterval = setInterval(fetchAndUpdatePrice, 10000);
 console.log("Price updates scheduled every 10 seconds");
 
 
-            // --- Initializations Outside Game Block ---
-            try { // Wrap async call for safety
-                fetchAndUpdatePrice();
-                setInterval(fetchAndUpdatePrice, 45000);
-            } catch(e) { console.error("Error initiating price fetch:", e); }
 
 
             // --- Fact Popup ---
