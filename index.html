@@ -1478,7 +1478,7 @@ setInterval(updateDebtCounters, 100); // Update every 100ms for smooth counting
 async function fetchAndUpdatePrice() {
     console.log("Fetching price at:", new Date().toLocaleTimeString());
     
-    // Get both price display elements - the one in the ticker and the new static one
+    // Get the price display elements
     const priceValueEl = document.querySelector('.price-value');
     const priceChangeEl = document.querySelector('.price-change');
     const staticPriceValueEl = document.getElementById('static-price-value');
@@ -1509,62 +1509,83 @@ async function fetchAndUpdatePrice() {
         }
         
         const data = await response.json();
-        console.log("API Response:", data);
+        console.log("Raw API Response:", data);
         
         // Check if we received valid data
         if (data && data.success && data.data) {
-            const price = data.data.value;
-            const priceChange24h = data.data.priceChange24h * 100; // Convert to percentage
+            // Log the raw price value to debug
+            console.log("Raw price value:", data.data.value);
             
-            // Dynamic price formatting based on value
-            const formattedPrice = price < 0.01 
-                ? '$' + price.toFixed(9).replace(/0+$/, '') // Remove trailing zeros
-                : '$' + price.toFixed(6).replace(/0+$/, ''); // Fewer decimals for larger values
+            // Get the price - make sure we're using the correct property
+            const price = parseFloat(data.data.value);
             
-            // Update ticker price if elements exist
-            if (priceValueEl && priceChangeEl) {
-                priceValueEl.textContent = formattedPrice;
-                priceChangeEl.textContent = `${priceChange24h >= 0 ? '+' : ''}${priceChange24h.toFixed(2)}%`;
-                priceChangeEl.className = 'price-change ' + (priceChange24h >= 0 ? 'positive' : 'negative');
+            // Convert percentage change - some APIs use decimal (0.10) and others use percentage (10)
+            // Check the format in the console log to determine which one to use
+            const priceChange24h = data.data.priceChange24h;
+            const changeIsDecimal = Math.abs(priceChange24h) < 10; // Check if it's likely to be a decimal
+            const changePercentage = changeIsDecimal ? priceChange24h * 100 : priceChange24h;
+            
+            console.log("Parsed price:", price);
+            console.log("Change raw value:", priceChange24h);
+            console.log("Calculated change percentage:", changePercentage);
+            
+            // Format price with correct precision based on the actual value
+            // For $0.004487, we want enough decimals to show the significant digits
+            const formattedPrice = '$' + price.toFixed(6);
+            
+            // Update UI elements
+            if (priceValueEl) priceValueEl.textContent = formattedPrice;
+            if (priceChangeEl) {
+                priceChangeEl.textContent = `${changePercentage >= 0 ? '+' : ''}${changePercentage.toFixed(1)}%`;
+                priceChangeEl.className = 'price-change ' + (changePercentage >= 0 ? 'positive' : 'negative');
             }
             
-            // Update static price above tagline if elements exist
-            if (staticPriceValueEl && staticPriceChangeEl) {
-                staticPriceValueEl.textContent = formattedPrice;
-                staticPriceChangeEl.textContent = `${priceChange24h >= 0 ? '+' : ''}${priceChange24h.toFixed(2)}%`;
-                staticPriceChangeEl.className = 'price-change-static ' + (priceChange24h >= 0 ? 'positive' : 'negative');
+            if (staticPriceValueEl) staticPriceValueEl.textContent = formattedPrice;
+            if (staticPriceChangeEl) {
+                staticPriceChangeEl.textContent = `${changePercentage >= 0 ? '+' : ''}${changePercentage.toFixed(1)}%`;
+                staticPriceChangeEl.className = 'price-change-static ' + (changePercentage >= 0 ? 'positive' : 'negative');
             }
             
-            console.log("Price updated:", formattedPrice, "Change:", priceChange24h.toFixed(2) + "%");
+            console.log("Price updated to:", formattedPrice);
         } else {
-            console.log("Unexpected API response format:", data);
-            throw new Error("Unexpected API response format");
+            console.warn("Invalid API response format:", data);
+            throw new Error("API data format unexpected");
         }
     } catch (error) {
         console.error("Failed to fetch price:", error);
         
-        // Fallback to simulated price
-        const newPrice = (Math.random() * 0.02 + 0.01).toFixed(6);
-        const formattedPrice = '$' + newPrice;
-        const change = -(Math.random() * 5 + 10).toFixed(2);
+        // Fallback to hardcoded price from your chart
+        const fallbackPrice = '$0.025628';
+        const fallbackChange = '-10.1%';
         
-        // Update ticker
-        if (priceValueEl && priceChangeEl) {
-            priceValueEl.textContent = formattedPrice;
-            priceChangeEl.textContent = change + '%';
+        if (priceValueEl) priceValueEl.textContent = fallbackPrice;
+        if (priceChangeEl) {
+            priceChangeEl.textContent = fallbackChange;
             priceChangeEl.className = 'price-change negative';
         }
         
-        // Update static price
-        if (staticPriceValueEl && staticPriceChangeEl) {
-            staticPriceValueEl.textContent = formattedPrice;
-            staticPriceChangeEl.textContent = change + '%';
+        if (staticPriceValueEl) staticPriceValueEl.textContent = fallbackPrice;
+        if (staticPriceChangeEl) {
+            staticPriceChangeEl.textContent = fallbackChange;
             staticPriceChangeEl.className = 'price-change-static negative';
         }
         
-        console.log("Using fallback price:", formattedPrice, "Change:", change + "%");
+        console.log("Using fallback price:", fallbackPrice);
     }
 }
+
+// Clear any existing intervals to prevent duplicates
+if (window.priceUpdateInterval) {
+    clearInterval(window.priceUpdateInterval);
+    console.log("Cleared previous price update interval");
+}
+
+// Initial fetch when page loads
+fetchAndUpdatePrice();
+
+// Set up interval to update every 10 seconds and store the interval ID
+window.priceUpdateInterval = setInterval(fetchAndUpdatePrice, 10000);
+console.log("Price updates scheduled every 10 seconds");
 
 // Clear any existing intervals to prevent duplicates
 if (window.priceUpdateInterval) {
