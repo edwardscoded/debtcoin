@@ -9,42 +9,43 @@
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Poppins', 'Arial', sans-serif; /* Match main page font */
+            font-family: 'Poppins', 'Arial', sans-serif;
             background-color: #0a0a0a;
-            color: #f0f0f0;
+            color: #f0f0f0; /* Main text color */
             line-height: 1.7;
             overflow-x: hidden;
         }
 
-        .container { max-width: 1300px; /* Wider for table */ margin: 0 auto; padding: 20px; }
+        .container { max-width: 1300px; margin: 0 auto; padding: 20px; }
 
-        /* Removed construction banner - meme coins ARE construction */
+        /* Construction Banner Removed */
 
         .page-header {
-            background: linear-gradient(rgba(10,10,10,0.8), rgba(10,10,10,0.8)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"><path d="M25 0 L50 25 L25 50 L0 25 Z" fill="rgba(255, 62, 62, 0.03)" /></svg>') repeat; /* Subtle bg pattern */
-            color: #ff3e3e;
+            /* background: linear-gradient(rgba(10,10,10,0.8), rgba(10,10,10,0.8)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"><path d="M25 0 L50 25 L25 50 L0 25 Z" fill="rgba(255, 62, 62, 0.03)" /></svg>') repeat; */
+            background-color: #111; /* Simpler dark background */
+            color: #ff3e3e; /* Red Accent */
             text-align: center;
-            padding: 40px 20px; /* More padding */
-            border-bottom: 4px solid #ff3e3e;
+            padding: 40px 20px;
+            border-bottom: 4px solid #ff3e3e; /* Red Accent */
             margin-bottom: 30px;
         }
 
         .page-header h1 {
-            font-size: 3.5rem; /* Larger */
+            font-size: 3.5rem;
             margin-bottom: 15px;
             text-transform: uppercase;
-            letter-spacing: 3px; /* Wider spacing */
-            font-weight: 900; /* Bolder */
+            letter-spacing: 3px;
+            font-weight: 900;
             text-shadow: 0 0 10px rgba(255, 62, 62, 0.5); /* Red glow */
         }
 
         .page-header p {
-            color: #ccc;
-            font-size: 1.3rem; /* Larger */
+            color: #ccc; /* Secondary text */
+            font-size: 1.3rem;
             font-style: italic;
         }
 
-        /* Glitch Effect */
+        /* Glitch Effect (Keep as is) */
          .glitch { animation: glitch 2s linear infinite alternate-reverse; display: inline-block; }
          @keyframes glitch {
              2%, 64% { transform: translate(3px, 0) skew(0.5deg); text-shadow: -2px 0 #00ffff, 2px 0 #ff00ff; }
@@ -55,182 +56,78 @@
         .summary-stats {
             display: flex;
             justify-content: space-around;
-            flex-wrap: wrap; /* Allow wrap */
-            background-color: #111;
+            flex-wrap: wrap;
+            background-color: #111; /* Dark background */
             padding: 25px;
             margin-top: 30px;
-            margin-bottom: 30px; /* Add bottom margin */
-            border-radius: 8px; /* Rounded corners */
-            border: 1px solid #333;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            border: 1px solid #333; /* Dark border */
         }
 
-        .stat-box {
-            text-align: center;
-            flex: 1;
-            min-width: 180px; /* Min width before wrap */
-            padding: 15px;
-            border-right: 1px solid #444; /* Darker border */
-        }
-
+        .stat-box { text-align: center; flex: 1; min-width: 180px; padding: 15px; border-right: 1px solid #444; }
         .stat-box:last-child { border-right: none; }
-
-        .stat-box h3 {
-            color: #ff3e3e;
-            margin-bottom: 12px;
-            font-size: 1.1rem; /* Slightly smaller title */
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .stat-box p {
-            font-size: 2rem; /* Larger numbers */
-            font-weight: 700; /* Bolder */
-            font-family: 'Courier New', monospace; /* Monospace for numbers */
-            color: #fff; /* White numbers */
-        }
+        .stat-box h3 { color: #ff3e3e; margin-bottom: 12px; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; }
+        .stat-box p { font-size: 2rem; font-weight: 700; font-family: 'Courier New', monospace; color: #f0f0f0; /* Use main text color */ }
 
         .holders-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 30px;
-            background-color: #151515; /* Slightly lighter dark */
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5); /* Stronger shadow */
-            border: 1px solid #333;
-            border-radius: 8px; /* Rounded table */
-            overflow: hidden; /* Ensure border radius applies */
+            width: 100%; border-collapse: collapse; margin-top: 30px; background-color: #151515;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5); border: 1px solid #333; border-radius: 8px; overflow: hidden;
         }
+        .holders-table th, .holders-table td { padding: 16px 18px; text-align: left; border-bottom: 1px solid #2a2a2a; font-size: 0.95rem; vertical-align: middle; }
+        .holders-table th { background-color: #0a0a0a; color: #ff3e3e; text-transform: uppercase; font-weight: 700; letter-spacing: 0.8px; font-size: 0.9rem; }
+        .holders-table tr { transition: background-color 0.2s ease-out; }
+        .holders-table tr:last-child td { border-bottom: none; }
+        .holders-table tr:hover { background-color: #252525; /* Consistent dark hover */ }
 
-        .holders-table th, .holders-table td {
-            padding: 16px 18px; /* More padding */
-            text-align: left;
-            border-bottom: 1px solid #2a2a2a; /* Darker internal border */
-            font-size: 0.95rem; /* Base font size */
-            vertical-align: middle; /* Align content vertically */
-        }
-
-        .holders-table th {
-            background-color: #0a0a0a; /* Black header */
-            color: #ff3e3e;
-            text-transform: uppercase;
-            font-weight: 700; /* Bold */
-            letter-spacing: 0.8px;
-            font-size: 0.9rem;
-        }
-
-        .holders-table tr {
-             transition: background-color 0.2s ease-out;
-        }
-
-        .holders-table tr:last-child td {
-            border-bottom: none; /* Remove border on last row */
-        }
-
-        /* No alternating background needed if hover is strong */
-        /* .holders-table tr:nth-child(even) { background-color: #181818; } */
-
-        .holders-table tr:hover {
-            background-color: #252525; /* Darker hover */
-        }
-
-        .rank {
-            font-weight: bold;
-            color: #ccc;
-            font-size: 1.1rem;
-            text-align: center;
-            width: 5%; /* Allocate width */
-        }
+        .rank { font-weight: bold; color: #ccc; font-size: 1.1rem; text-align: center; width: 5%; }
 
         .wallet-address {
             font-family: 'Courier New', monospace;
-            color: #ff8c00; /* Orange for addresses? */
+            color: #ddd; /* <<< FIXED: Changed from orange to light grey */
             cursor: pointer;
             transition: color 0.3s ease;
-            word-break: break-all; /* Break long addresses */
+            word-break: break-all;
             font-size: 0.9rem;
-            max-width: 250px; /* Limit width */
-            display: inline-block; /* Allow max-width */
+            max-width: 250px;
+            display: inline-block;
             overflow: hidden;
-            text-overflow: ellipsis; /* Add ellipsis */
-            white-space: nowrap; /* Prevent wrapping */
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
-        .wallet-address:hover { color: #ffa500; text-decoration: underline; }
-
-        .holdings {
-             font-weight: 600;
-             color: #eee;
-             font-family: 'Courier New', monospace;
-             white-space: nowrap; /* Prevent wrapping */
+        .wallet-address:hover {
+            color: #ff6e6e; /* <<< FIXED: Hover to lighter red */
+            text-decoration: underline;
         }
 
-        .avg-buy {
-             color: #aaa;
-             font-family: 'Courier New', monospace;
-             font-size: 0.85rem;
-             white-space: nowrap;
-        }
-        .avg-buy-skull { /* Add skull if entry is terrible */
-             margin-left: 5px;
-             display: inline-block;
-             transform: translateY(2px);
-         }
+        .holdings { font-weight: 600; color: #eee; /* Slightly brighter */ font-family: 'Courier New', monospace; white-space: nowrap; }
+        .avg-buy { color: #aaa; font-family: 'Courier New', monospace; font-size: 0.85rem; white-space: nowrap; }
+        .avg-buy-skull { margin-left: 5px; display: inline-block; transform: translateY(2px); }
 
+        .pnl-cell { white-space: nowrap; }
+        .pnl-percentage { font-weight: bold; font-size: 1.1rem; font-family: 'Courier New', monospace; display: block; margin-bottom: 4px; }
+        .pnl-positive { color: #28a745; /* Standard green */ }
+        .pnl-negative { color: #ff3e3e; /* Main red */ }
+        .pnl-tooltip-icon { cursor: help; margin-left: 5px; font-size: 0.8em; color: #888; }
 
-        .pnl-cell { /* Container for PNL display */
-             white-space: nowrap;
-        }
-        .pnl-percentage {
-            font-weight: bold;
-            font-size: 1.1rem; /* Larger PNL */
-            font-family: 'Courier New', monospace;
-            display: block; /* Percentage on its own line */
-            margin-bottom: 4px;
-        }
-        .pnl-positive { color: #28a745; }
-        .pnl-negative { color: #ff3e3e; } /* Use main red */
+        .degen-status { font-style: italic; color: #bbb; /* Standard secondary text */ font-size: 0.9em; line-height: 1.3; max-width: 200px; }
 
-        .pnl-tooltip-icon {
-             cursor: help;
-             margin-left: 5px;
-             font-size: 0.8em;
-             color: #888;
-         }
+        .loading { text-align: center; padding: 60px; font-size: 1.4rem; color: #ccc; font-style: italic; }
+        .loading::after { content: '...'; display: inline-block; animation: loadingDots 1.5s infinite; }
+        @keyframes loadingDots { 0%, 20% { content: '.'; } 40% { content: '..'; } 60%, 100% { content: '...'; } }
 
-
-        .degen-status {
-            font-style: italic;
-            color: #bbb;
-            font-size: 0.9em;
-            line-height: 1.3; /* Tighter line height */
-            max-width: 200px; /* Limit width */
-        }
-
-        .loading {
-            text-align: center; padding: 60px; font-size: 1.4rem; color: #ccc; font-style: italic;
-        }
-        .loading::after { /* Simple loading animation */
-             content: '...';
-             display: inline-block;
-             animation: loadingDots 1.5s infinite;
-        }
-        @keyframes loadingDots {
-             0%, 20% { content: '.'; } 40% { content: '..'; } 60%, 100% { content: '...'; }
-        }
-
-        .error {
-            background-color: #2a0000; color: #ff3e3e; padding: 25px; text-align: center;
-            border: 2px solid #ff3e3e; margin: 30px 0; border-radius: 8px; font-weight: bold;
-            font-size: 1.1rem;
-        }
+        .error { background-color: #2a0000; color: #ff3e3e; padding: 25px; text-align: center; border: 2px solid #ff3e3e; margin: 30px 0; border-radius: 8px; font-weight: bold; font-size: 1.1rem; }
 
         .disclaimer {
-            margin: 40px 0; padding: 20px; background-color: rgba(255, 62, 62, 0.1);
-            border: 1px solid #ff3e3e; text-align: center; font-size: 1rem; color: #bbb;
+            margin: 40px 0; padding: 20px; background-color: rgba(255, 62, 62, 0.1); /* Red tint */
+            border: 1px solid #ff3e3e; /* Red border */
+            text-align: center; font-size: 1rem; color: #bbb; /* Use consistent secondary text */
             border-radius: 8px; line-height: 1.8;
         }
-        .disclaimer strong { color: #ff3e3e;}
+        .disclaimer strong { color: #ff3e3e; /* Red accent */ }
 
-        .back-button { /* Style like main CTA */
-            display: block; width: fit-content; /* Fit content */ margin: 40px auto; padding: 14px 30px;
+        .back-button { /* Style matches main page CTA */
+            display: block; width: fit-content; margin: 40px auto; padding: 14px 30px;
             background: linear-gradient(45deg, #ff3e3e, #ff6e6e); color: white; text-align: center;
             text-decoration: none; border-radius: 6px; transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(255, 62, 62, 0.4); text-transform: uppercase; font-weight: 700;
@@ -241,49 +138,41 @@
             box-shadow: 0 8px 20px rgba(255, 62, 62, 0.6);
         }
 
-        /* Responsive adjustments */
+        /* Responsive adjustments (Keep as is, colors were okay here) */
         @media (max-width: 1200px) {
             .holders-table th, .holders-table td { padding: 14px 12px; font-size: 0.9rem; }
             .wallet-address { max-width: 180px; }
              .degen-status { max-width: 150px; }
-             .rank { width: auto;} /* Remove fixed width */
+             .rank { width: auto;}
         }
         @media (max-width: 992px) {
-             .page-header h1 { font-size: 2.8rem; }
-             .page-header p { font-size: 1.1rem; }
+             .page-header h1 { font-size: 2.8rem; } .page-header p { font-size: 1.1rem; }
              .stat-box p { font-size: 1.6rem; }
-             /* Consider hiding less important columns */
-             .holders-table th:nth-child(4), .holders-table td:nth-child(4) { /* Hide Avg Buy Price */
-                 /* display: none; */
-             }
         }
         @media (max-width: 768px) {
             .summary-stats { flex-direction: column; }
             .stat-box { border-right: none; border-bottom: 1px solid #444; }
             .stat-box:last-child { border-bottom: none; }
-            .page-header h1 { font-size: 2.2rem; }
-            .page-header p { font-size: 1rem; }
-             .holders-table { display: block; overflow-x: auto; white-space: nowrap; border: none; border-radius: 0; } /* Make table scrollable */
+            .page-header h1 { font-size: 2.2rem; } .page-header p { font-size: 1rem; }
+             .holders-table { display: block; overflow-x: auto; white-space: nowrap; border: none; border-radius: 0; }
              .holders-table thead, .holders-table tbody, .holders-table tr { display: block; }
              .holders-table th, .holders-table td { display: block; text-align: right !important; padding-left: 50%; position: relative; border-bottom: 1px solid #2a2a2a; }
              .holders-table td::before { content: attr(data-label); position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-weight: bold; text-transform: uppercase; color: #ff3e3e; text-align: left; padding-right: 10px; font-size: 0.8em;}
-             .holders-table thead { display: none; } /* Hide header on mobile */
+             .holders-table thead { display: none; }
              .wallet-address { max-width: none; display: block; text-align: right; }
              .degen-status { max-width: none; text-align: right;}
              .rank { text-align: right !important;}
              .pnl-percentage { display: inline-block; margin-bottom: 0; margin-right: 5px;}
         }
          @media (max-width: 480px) {
-             .page-header h1 { font-size: 1.8rem; }
-             .stat-box p { font-size: 1.4rem; }
-             .holders-table td { padding-left: 40%;} /* Adjust label space */
-             .holders-table td::before { font-size: 0.7em; }
+             .page-header h1 { font-size: 1.8rem; } .stat-box p { font-size: 1.4rem; }
+             .holders-table td { padding-left: 40%;} .holders-table td::before { font-size: 0.7em; }
          }
-
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Construction Banner Removed -->
 
         <div class="page-header">
             <h1 class="glitch">$DEBT HODLER SURVEILLANCE</h1>
@@ -296,8 +185,8 @@
                 <p id="totalHolders">?</p>
             </div>
             <div class="stat-box">
-                <h3>Total $DEBT Hostages</h3>
-                <p id="totalTokensLocked">?</p>
+                <h3>% Supply Hostage</h3> {/* Changed Label */}
+                <p id="totalTokensLocked">?%</p>
             </div>
             <div class="stat-box">
                 <h3>Top Wallet Dominance</h3>
@@ -337,130 +226,100 @@
 
     <script>
         // Mock data generator - ENHANCED VIBE
-        function generateMockHolders(count = 50) {
+        function generateMockHolders(count = 100) { // Generate more for realism
             const holders = [];
-            // Lower current price for more red candles
-            const currentPrice = 0.00000150 + (Math.random() - 0.5) * 0.000001; // Add some randomness
+            const currentPrice = 0.00000150 + (Math.random() - 0.5) * 0.000001;
             const degenStatuses = [
-                "Maxi Degen Lord 👑", "Holding Til Zero 💀", "Wife Changer Fund 💔",
-                "Diamond Hand Ape 🦍", "Professional Bag Fumbler 🛍️", "Clinically Online 💻",
-                "Ramen Connoisseur 🍜", "Chart Sniffer 📉", "Risk? Never Met Her 🤷",
-                "Top Signal Enjoyer ⛰️", "Believes Own Hype ✨", "Liquidation Candidate 💸",
-                "Mentally Unwell 😊", "Trust Me Bro Source 🙏", "Future McDonald's Manager 🍔"
+                "Maxi Degen Lord 👑", "Holding Til Zero 💀", "Wife Changer Fund 💔", "Diamond Hand Ape 🦍",
+                "Professional Bag Fumbler 🛍️", "Clinically Online 💻", "Ramen Connoisseur 🍜",
+                "Chart Sniffer 📉", "Risk? Never Met Her 🤷", "Top Signal Enjoyer ⛰️",
+                "Believes Own Hype ✨", "Liquidation Candidate 💸", "Mentally Unwell 😊",
+                "Trust Me Bro Source 🙏", "Future McDonald's Manager 🍔"
             ];
             const solanaAddressChars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
 
              function generateSolAddress() {
                 let address = '';
-                for (let i = 0; i < 44; i++) { // Solana addresses are typically 32-44 chars base58
-                    address += solanaAddressChars.charAt(Math.floor(Math.random() * solanaAddressChars.length));
-                }
-                // Ensure it starts with a valid character (1-9, A-Z)
-                const firstCharIndex = Math.floor(Math.random() * (solanaAddressChars.length - 26)) + 1; // Avoid lowercase starting chars potentially? Adjust range if needed.
+                for (let i = 0; i < 44; i++) { address += solanaAddressChars.charAt(Math.floor(Math.random() * solanaAddressChars.length)); }
+                const firstCharIndex = Math.floor(Math.random() * (solanaAddressChars.length - 26)) + 1;
                 return solanaAddressChars[firstCharIndex] + address.substring(1);
             }
 
-
-            let totalHoldings = 0;
+            let totalHoldingsInList = 0; // Calculate based on generated list only
             for (let i = 1; i <= count; i++) {
-                // Skew holdings towards smaller bags with occasional whales
                 let holdings;
-                 if (i === 1) holdings = Math.random() * 50_000_000 + 50_000_000; // Top holder is whale
-                 else if (i <= 5) holdings = Math.random() * 10_000_000 + 5_000_000; // Top 5 are decent size
-                 else holdings = Math.random() * 1_000_000 + 1000; // Rest are smaller
+                 if (i === 1) holdings = Math.random() * 50_000_000 + 50_000_000;
+                 else if (i <= 5) holdings = Math.random() * 10_000_000 + 5_000_000;
+                 else holdings = Math.random() * 1_000_000 + 1000;
 
-                // Skew buy prices - some early, some late FOMO
                 let avgBuyPrice;
-                 if (i <= 3) avgBuyPrice = Math.random() * 0.0000005 + 0.0000001; // Early buyers
-                 else if (i <= 15) avgBuyPrice = Math.random() * 0.000005 + 0.000001; // Mid buyers
-                 else avgBuyPrice = Math.random() * (currentPrice * 1.5 - currentPrice * 0.5) + currentPrice * 0.5; // Recent / FOMO buyers centered around current
+                 if (i <= 3) avgBuyPrice = Math.random() * 0.0000005 + 0.0000001;
+                 else if (i <= 15) avgBuyPrice = Math.random() * 0.000005 + 0.000001;
+                 else avgBuyPrice = Math.random() * (currentPrice * 1.5 - currentPrice * 0.5) + currentPrice * 0.5;
 
-                const pnl = currentPrice > 0 && avgBuyPrice > 0
-                    ? ((currentPrice - avgBuyPrice) / avgBuyPrice) * 100
-                    : (avgBuyPrice === 0 ? Infinity : -100); // Handle zero buy price
-
-                totalHoldings += holdings;
+                const pnl = currentPrice > 0 && avgBuyPrice > 0 ? ((currentPrice - avgBuyPrice) / avgBuyPrice) * 100 : (avgBuyPrice === 0 ? Infinity : -100);
+                totalHoldingsInList += holdings; // Add to the sum for *this generated list*
 
                 holders.push({
-                    rank: i,
-                    address: generateSolAddress(),
-                    holdingsRaw: holdings, // Keep raw number for calcs
-                    holdings: holdings.toLocaleString(undefined, {maximumFractionDigits: 0}), // Format for display
-                    avgBuyPriceRaw: avgBuyPrice, // Keep raw number
-                    avgBuyPrice: `$${avgBuyPrice.toFixed(8)}`, // Display formatted
-                    pnl: isFinite(pnl) ? pnl : (pnl > 0 ? 10000 : -100), // Cap infinite PNL for display sorting maybe?
+                    rank: i, address: generateSolAddress(), holdingsRaw: holdings,
+                    holdings: holdings.toLocaleString(undefined, {maximumFractionDigits: 0}),
+                    avgBuyPriceRaw: avgBuyPrice, avgBuyPrice: `$${avgBuyPrice.toFixed(8)}`,
+                    pnl: isFinite(pnl) ? pnl : (pnl > 0 ? 10000 : -100), // Cap infinite PNL
                     degenStatus: degenStatuses[Math.floor(Math.random() * degenStatuses.length)]
                 });
             }
-
-            // Sort by holdings for ranking
-             holders.sort((a, b) => b.holdingsRaw - a.holdingsRaw);
-            // Re-assign rank after sorting
+            holders.sort((a, b) => b.holdingsRaw - a.holdingsRaw);
             holders.forEach((h, index) => h.rank = index + 1);
 
-            return { holders, totalHoldings }; // Return total as well
+            return { holders, totalHoldingsInList }; // Return calculated total
         }
 
         // Function to render holders table
         function renderHoldersTable(data) {
-            const { holders, totalHoldings } = data;
+            const { holders, totalHoldingsInList } = data; // Get total from generated data
             const tableBody = document.getElementById('holdersTableBody');
             const loadingIndicator = document.getElementById('loadingIndicator');
             const holdersTable = document.getElementById('holdersTable');
             const errorContainer = document.getElementById('errorContainer');
 
-             // Check if elements exist
-             if (!tableBody || !loadingIndicator || !holdersTable || !errorContainer) {
-                 console.error("Table rendering elements not found!");
-                 return;
-             }
+             if (!tableBody || !loadingIndicator || !holdersTable || !errorContainer) { console.error("Table rendering elements not found!"); return; }
 
             // Update summary stats
              try {
                 document.getElementById('totalHolders').textContent = holders.length.toLocaleString();
-                // Assuming 1 Billion total supply for percentage calculation
-                const circulatingSupply = 1_000_000_000; // Replace if different
-                const lockedPercentage = totalHoldings > 0 ? (totalHoldings / circulatingSupply * 100).toFixed(2) : 0;
-                document.getElementById('totalTokensLocked').textContent = `${lockedPercentage}% Held`; // Changed stat meaning
+                const circulatingSupply = 1_000_000_000; // Assume 1B total supply
+                // Calculate % held BY THE HOLDERS IN THIS LIST compared to total supply
+                const heldPercentage = totalHoldingsInList > 0 ? (totalHoldingsInList / circulatingSupply * 100).toFixed(2) : 0;
+                document.getElementById('totalTokensLocked').textContent = `${heldPercentage}%`; // Updated label text
 
-                // Top holder percentage OF TOTAL SUPPLY
                 const topHolderPercentage = holders.length > 0 ? (holders[0].holdingsRaw / circulatingSupply * 100).toFixed(2) : 0;
                 document.getElementById('topHolderPercentage').textContent = `${topHolderPercentage}%`;
             } catch(e) {
                  console.error("Error updating summary stats:", e);
-                  // Set default text on error
                   document.getElementById('totalHolders').textContent = 'ERR';
-                  document.getElementById('totalTokensLocked').textContent = 'ERR';
+                  document.getElementById('totalTokensLocked').textContent = 'ERR%';
                   document.getElementById('topHolderPercentage').textContent = 'ERR%';
              }
 
-
-            tableBody.innerHTML = ''; // Clear previous rows
-
+            tableBody.innerHTML = '';
             loadingIndicator.style.display = 'none';
-            holdersTable.style.display = 'table'; // Use 'table' display
+            holdersTable.style.display = 'table';
             errorContainer.style.display = 'none';
 
             holders.forEach(holder => {
                 const row = document.createElement('tr');
-
-                let pnlClass = 'pnl-neutral'; // Default state? Or maybe just black/white
-                 let pnlDisplay = 'N/A';
-                 let pnlTooltip = "Probably bought at the top.";
-                 let skull = ''; // Skull emoji for bad entries
+                let pnlClass = 'pnl-neutral'; let pnlDisplay = 'N/A'; let pnlTooltip = "Probably bought at the top."; let skull = '';
 
                  if (isFinite(holder.pnl)) {
                     pnlClass = holder.pnl >= 0 ? 'pnl-positive' : 'pnl-negative';
-                    pnlDisplay = `${holder.pnl.toFixed(1)}%`; // Less precision maybe?
-                    pnlTooltip = holder.pnl > 100 ? "This guy fucks (probably lying)." : holder.pnl >= 0 ? "Lucky bastard." : holder.pnl > -50 ? "Down bad, but not out." : "Clinically REKT. Seek help.";
+                    pnlDisplay = `${holder.pnl.toFixed(1)}%`;
+                    pnlTooltip = holder.pnl > 100 ? "This guy fucks (or lies)." : holder.pnl >= 0 ? "Lucky SOB." : holder.pnl > -50 ? "Down bad." : "Clinically REKT.";
                  }
 
-                 // Add skull if buy price was significantly higher than current (e.g., > 3x)
-                  const currentPriceApprox = 0.00000150; // Use the base from generation for comparison
+                 const currentPriceApprox = 0.00000150; // Base price used in generation
                  if (holder.avgBuyPriceRaw > currentPriceApprox * 3) {
-                     skull = '<span class="avg-buy-skull" title="Bought the absolute top LMAO">💀</span>';
+                     skull = '<span class="avg-buy-skull" title="Bought the tippy top LMAO">💀</span>';
                  }
-
 
                  // Add data-label attributes for mobile view CSS
                  row.innerHTML = `
@@ -476,7 +335,6 @@
                     </td>
                     <td data-label="Condition" class="degen-status">${holder.degenStatus}</td>
                 `;
-
                 tableBody.appendChild(row);
             });
         }
@@ -484,11 +342,11 @@
         // Copy wallet address to clipboard
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
-                // Maybe add a subtle temporary feedback instead of alert
-                console.log(`Address copied: ${text}`);
+                 // Subtle feedback perhaps? Maybe change button text briefly?
+                 console.log(`Address copied: ${text}`);
             }).catch(err => {
                 console.error('Failed to copy: ', err);
-                alert("Copy failed. Your browser might be too old or insecure, boomer.");
+                alert("Copy failed. Skill issue?");
             });
         }
 
@@ -498,28 +356,18 @@
             const loadingIndicator = document.getElementById('loadingIndicator');
             const holdersTable = document.getElementById('holdersTable');
 
-             // Ensure elements exist before proceeding
-             if (!errorContainer || !loadingIndicator || !holdersTable) {
-                 console.error("Core display elements missing, cannot fetch/render.");
-                 return;
-             }
-
-             loadingIndicator.style.display = 'block'; // Show loading
-             holdersTable.style.display = 'none';
-             errorContainer.style.display = 'none';
-
+             if (!errorContainer || !loadingIndicator || !holdersTable) { console.error("Core display elements missing, cannot fetch/render."); return; }
+             loadingIndicator.style.display = 'block'; holdersTable.style.display = 'none'; errorContainer.style.display = 'none';
 
             try {
-                setTimeout(() => { // Simulate network delay
-                    const data = generateMockHolders(100); // Generate more holders
+                setTimeout(() => {
+                    const data = generateMockHolders(100); // Generate 100 mock holders
                     renderHoldersTable(data);
-                }, 1800); // Longer delay
+                }, 1800);
             } catch (error) {
                 console.error("Error fetching/generating holder data:", error);
-                loadingIndicator.style.display = 'none';
-                holdersTable.style.display = 'none';
-                errorContainer.style.display = 'block';
-                errorContainer.textContent = `Error: ${error.message}. The blockchain gods are angry. Or the mock data broke. Whatever.`;
+                loadingIndicator.style.display = 'none'; holdersTable.style.display = 'none'; errorContainer.style.display = 'block';
+                errorContainer.textContent = `Error: ${error.message}. Something exploded. Probably your fault.`;
             }
         }
 
