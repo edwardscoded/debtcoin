@@ -1496,8 +1496,8 @@ if (window.priceUpdateInterval) {
 fetchAndUpdatePrice();
 
 // Set up interval to update every 10 seconds and store the interval ID
-window.priceUpdateInterval = setInterval(fetchAndUpdatePrice, 10000);
-console.log("Price updates scheduled every 10 seconds");
+window.priceUpdateInterval = setInterval(fetchAndUpdatePrice, 1000);
+console.log("Price updates scheduled every 1 seconds");
 
 // --- Initializations Outside Game Block ---
 try {
