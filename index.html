@@ -1674,59 +1674,6 @@ fetchAndUpdatePrice();
 window.priceUpdateInterval = setInterval(fetchAndUpdatePrice, 10000);
 console.log("Price updates scheduled every 10 seconds");
 
-// Clear any existing intervals to prevent duplicates
-if (window.priceUpdateInterval) {
-    clearInterval(window.priceUpdateInterval);
-    console.log("Cleared previous price update interval");
-}
-
-// Initial fetch when page loads
-fetchAndUpdatePrice();
-
-// Set up interval to update every 10 seconds and store the interval ID
-window.priceUpdateInterval = setInterval(fetchAndUpdatePrice, 10000);
-console.log("Price updates scheduled every 10 seconds");
-
-// Clear any existing intervals to prevent duplicates
-if (window.priceUpdateInterval) {
-    clearInterval(window.priceUpdateInterval);
-    console.log("Cleared previous price update interval");
-}
-
-// Initial fetch when page loads
-fetchAndUpdatePrice();
-
-// Set up interval to update every 10 seconds and store the interval ID
-window.priceUpdateInterval = setInterval(fetchAndUpdatePrice, 10000);
-console.log("Price updates scheduled every 10 seconds");
-
-// Clear any existing intervals to prevent duplicates
-if (window.priceUpdateInterval) {
-    clearInterval(window.priceUpdateInterval);
-    console.log("Cleared previous price update interval");
-}
-
-// Initial fetch when page loads
-fetchAndUpdatePrice();
-
-// Set up interval to update every 10 seconds and store the interval ID
-window.priceUpdateInterval = setInterval(fetchAndUpdatePrice, 1000);
-console.log("Price updates scheduled every 1 seconds");
-
-// --- Initializations Outside Game Block ---
-try {
-    fetchAndUpdatePrice();
-    setInterval(fetchAndUpdatePrice, 10000); // Update every 30 seconds
-} catch(e) {
-    console.error("Error initiating price feed:", e);
-}
-// --- Initializations Outside Game Block ---
-try {
-    fetchAndUpdatePrice();
-    setInterval(fetchAndUpdatePrice, 30000); // Update every 30 seconds
-} catch(e) {
-    console.error("Error initiating price feed:", e);
-}
 
             // --- Initializations Outside Game Block ---
             try { // Wrap async call for safety
