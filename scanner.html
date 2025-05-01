@@ -240,13 +240,12 @@
             )?.status || "Random Degen 🤪";
         }
 
-// Update the fetchTopHolders function
 async function fetchTopHolders() {
     const options = {
         method: 'GET',
         headers: {
             'accept': 'application/json', 
-            'X-API-KEY': '0b8c5670cc914ceaa3c86345f2003422', // Your Birdeye API key
+            'X-API-KEY': '0b8c5670cc914ceaa3c86345f2003422', // New API key
             'x-chain': 'solana'
         }
     };
@@ -257,7 +256,6 @@ async function fetchTopHolders() {
             options
         );
 
-        // Log the full response for debugging
         if (!response.ok) {
             const errorBody = await response.text();
             console.error('Full error response:', errorBody);
