@@ -1486,7 +1486,7 @@ async function fetchAndUpdatePrice() {
 // --- Initializations Outside Game Block ---
 try {
     fetchAndUpdatePrice();
-    setInterval(fetchAndUpdatePrice, 30000); // Update every 30 seconds
+    setInterval(fetchAndUpdatePrice, 10000); // Update every 30 seconds
 } catch(e) {
     console.error("Error initiating price feed:", e);
 }
