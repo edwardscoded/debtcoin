@@ -5,6 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>$DEBT - F*ck The System. Join The Cult.</title>
     <style>
+
+        /* Price display above the tagline */
+.price-display {
+    margin-bottom: 30px;
+    background-color: rgba(10, 10, 10, 0.7);
+    border: 2px solid #ff3e3e;
+    border-radius: 10px;
+    padding: 10px 25px;
+    display: inline-block;
+}
+
+.price-display-inner {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.price-label {
+    color: #ccc;
+    margin-right: 10px;
+}
+
+.price-value-static {
+    color: #ff3e3e;
+    margin-right: 15px;
+}
+
+.price-change-static {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.85em;
+}
+
+.price-change-static.positive {
+    background-color: #28a745;
+    color: white;
+}
+
+.price-change-static.negative {
+    background-color: #ff3e3e;
+    color: white;
+}
 /* Debt Counter Styles */
 .debt-counter-box {
     background-color: rgba(10, 10, 10, 0.9);
@@ -658,6 +700,18 @@
 
     <!-- Hero Section -->
     <section class="hero">
+
+        <!-- Add this above the tagline in the hero section -->
+<div class="price-display">
+    <div class="price-display-inner">
+        <span class="price-label">$DEBT/SOL:</span>
+        <span class="price-value-static" id="static-price-value">$0.015260</span>
+        <span class="price-change-static negative" id="static-price-change">-10.97%</span>
+    </div>
+</div>
+
+<p class="tagline">They Print Money. We Print Memes.</p>
+        
         <div class="container">
             <p class="tagline">They Print Money. We Print Memes.</p>
             <h1 class="glitch">RESIST THE FED.<br><span>EMBRACE $DEBT.</span></h1>
@@ -1424,7 +1478,13 @@ setInterval(updateDebtCounters, 100); // Update every 100ms for smooth counting
 async function fetchAndUpdatePrice() {
     console.log("Fetching price at:", new Date().toLocaleTimeString());
     
-    if (!priceValueEl || !priceChangeEl) {
+    // Get both price display elements - the one in the ticker and the new static one
+    const priceValueEl = document.querySelector('.price-value');
+    const priceChangeEl = document.querySelector('.price-change');
+    const staticPriceValueEl = document.getElementById('static-price-value');
+    const staticPriceChangeEl = document.getElementById('static-price-change');
+    
+    if ((!priceValueEl || !priceChangeEl) && (!staticPriceValueEl || !staticPriceChangeEl)) {
         console.error("Price elements not found in DOM");
         return;
     }
@@ -1459,11 +1519,21 @@ async function fetchAndUpdatePrice() {
             // Dynamic price formatting based on value
             const formattedPrice = price < 0.01 
                 ? '$' + price.toFixed(9).replace(/0+$/, '') // Remove trailing zeros
-                : '$' + price.toFixed(4).replace(/0+$/, ''); // Fewer decimals for larger values
-                
-            priceValueEl.textContent = formattedPrice;
-            priceChangeEl.textContent = `${priceChange24h >= 0 ? '+' : ''}${priceChange24h.toFixed(2)}%`;
-            priceChangeEl.className = 'price-change ' + (priceChange24h >= 0 ? 'positive' : 'negative');
+                : '$' + price.toFixed(6).replace(/0+$/, ''); // Fewer decimals for larger values
+            
+            // Update ticker price if elements exist
+            if (priceValueEl && priceChangeEl) {
+                priceValueEl.textContent = formattedPrice;
+                priceChangeEl.textContent = `${priceChange24h >= 0 ? '+' : ''}${priceChange24h.toFixed(2)}%`;
+                priceChangeEl.className = 'price-change ' + (priceChange24h >= 0 ? 'positive' : 'negative');
+            }
+            
+            // Update static price above tagline if elements exist
+            if (staticPriceValueEl && staticPriceChangeEl) {
+                staticPriceValueEl.textContent = formattedPrice;
+                staticPriceChangeEl.textContent = `${priceChange24h >= 0 ? '+' : ''}${priceChange24h.toFixed(2)}%`;
+                staticPriceChangeEl.className = 'price-change-static ' + (priceChange24h >= 0 ? 'positive' : 'negative');
+            }
             
             console.log("Price updated:", formattedPrice, "Change:", priceChange24h.toFixed(2) + "%");
         } else {
@@ -1475,16 +1545,39 @@ async function fetchAndUpdatePrice() {
         
         // Fallback to simulated price
         const newPrice = (Math.random() * 0.02 + 0.01).toFixed(6);
-        priceValueEl.textContent = '$' + newPrice;
-        
-        // Simulate a negative change
+        const formattedPrice = '$' + newPrice;
         const change = -(Math.random() * 5 + 10).toFixed(2);
-        priceChangeEl.textContent = change + '%';
-        priceChangeEl.className = 'price-change negative';
         
-        console.log("Using fallback price:", '$' + newPrice, "Change:", change + "%");
+        // Update ticker
+        if (priceValueEl && priceChangeEl) {
+            priceValueEl.textContent = formattedPrice;
+            priceChangeEl.textContent = change + '%';
+            priceChangeEl.className = 'price-change negative';
+        }
+        
+        // Update static price
+        if (staticPriceValueEl && staticPriceChangeEl) {
+            staticPriceValueEl.textContent = formattedPrice;
+            staticPriceChangeEl.textContent = change + '%';
+            staticPriceChangeEl.className = 'price-change-static negative';
+        }
+        
+        console.log("Using fallback price:", formattedPrice, "Change:", change + "%");
     }
 }
+
+// Clear any existing intervals to prevent duplicates
+if (window.priceUpdateInterval) {
+    clearInterval(window.priceUpdateInterval);
+    console.log("Cleared previous price update interval");
+}
+
+// Initial fetch when page loads
+fetchAndUpdatePrice();
+
+// Set up interval to update every 10 seconds and store the interval ID
+window.priceUpdateInterval = setInterval(fetchAndUpdatePrice, 10000);
+console.log("Price updates scheduled every 10 seconds");
 
 // Clear any existing intervals to prevent duplicates
 if (window.priceUpdateInterval) {
