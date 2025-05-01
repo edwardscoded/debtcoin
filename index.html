@@ -5,6 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>$DEBT - F*ck The System. Join The Cult.</title>
     <style>
+/* Debt Counter Styles */
+.debt-counter-box {
+    background-color: rgba(10, 10, 10, 0.9);
+    border: 3px solid #ff3e3e;
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 700px;
+    margin: 40px auto;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(255, 62, 62, 0.25);
+}
+
+.counter-title {
+    color: #ff3e3e;
+    font-size: 28px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.counter-value {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 44px;
+    font-weight: 700;
+    color: #ff3e3e;
+    margin: 15px 0;
+    text-shadow: 0 0 10px rgba(255, 62, 62, 0.4);
+}
+
+.counter-subtext {
+    color: #aaa;
+    font-style: italic;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.debt-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.debt-table th, 
+.debt-table td {
+    padding: 10px;
+    text-align: right;
+    font-size: 16px;
+    border-bottom: 1px solid #333;
+}
+
+.debt-table th {
+    color: #ff3e3e;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.debt-table td {
+    color: #fff;
+}
+
+.debt-table td.country {
+    text-align: left;
+    color: #ddd;
+    font-weight: 600;
+}
+
+.debt-table tr:hover td {
+    background-color: rgba(255, 62, 62, 0.1);
+}
+
+.debt-table tr:last-child td {
+    border-bottom: none;
+}
+        
         /* Reset and base styles */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -599,6 +675,55 @@
                 <button class="copy-btn">Copy CA</button>
             </div>
 
+<!-- Global Debt Counter -->
+<div class="debt-counter-box fade-in-section">
+    <h3 class="counter-title glitch">GLOBAL DEBT APOCALYPSE TRACKER</h3>
+    <div class="counter-value" id="global-debt-counter">$0</div>
+    <div class="counter-subtext">...rising faster than your crypto portfolio is falling</div>
+    
+    <table class="debt-table">
+        <thead>
+            <tr>
+                <th class="country">Country</th>
+                <th>National Debt</th>
+                <th>Per Second</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="country">USA</td>
+                <td id="us-debt">$0</td>
+                <td>$4,200</td>
+            </tr>
+            <tr>
+                <td class="country">China</td>
+                <td id="china-debt">$0</td>
+                <td>$3,000</td>
+            </tr>
+            <tr>
+                <td class="country">Japan</td>
+                <td id="japan-debt">$0</td>
+                <td>$2,100</td>
+            </tr>
+            <tr>
+                <td class="country">UK</td>
+                <td id="uk-debt">$0</td>
+                <td>$1,050</td>
+            </tr>
+            <tr>
+                <td class="country">Germany</td>
+                <td id="germany-debt">$0</td>
+                <td>$950</td>
+            </tr>
+            <tr>
+                <td class="country">Australia</td>
+                <td id="australia-debt">$0</td>
+                <td>$720</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+            
             <!-- Socials Box -->
             <div class="socials-box fade-in-section">
                  <h4>Find Us Howling Here:</h4>
@@ -1167,7 +1292,74 @@
                          if (gameOverlay) { gameOverlay.style.display = 'flex'; gameOverlay.innerHTML = "<p style='color:red;'>Critical Game Error Occurred.<br>Check console (F12) & Refresh.</p>"; }
                     }
                 } // End updateGame
+// National Debt Counter Setup
+const debtData = {
+    us: 36880000000000,       // $36.88 trillion
+    china: 14780000000000,    // $14.78 trillion
+    japan: 12450000000000,    // $12.45 trillion
+    uk: 3720000000000,        // $3.72 trillion
+    germany: 2850000000000,   // $2.85 trillion
+    australia: 980000000000,  // $980 billion
+};
 
+// Debt growth rates per second
+const debtRatePerSecond = {
+    us: 4200,        // Approx $132 billion per year
+    china: 3000,     // Approx $94 billion per year
+    japan: 2100,     // Approx $66 billion per year
+    uk: 1050,        // Approx $33 billion per year
+    germany: 950,    // Approx $30 billion per year
+    australia: 720,  // Approx $22 billion per year
+};
+
+// Initialize current debt values
+let currentDebt = {...debtData};
+
+// Calculate global debt (sum of all countries)
+currentDebt.global = Object.values(debtData).reduce((a, b) => a + b, 0);
+
+// Format large numbers with commas
+function formatCurrency(number) {
+    return '$' + number.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+// Update debt counters
+function updateDebtCounters() {
+    // Update each country's debt
+    Object.keys(debtRatePerSecond).forEach(country => {
+        currentDebt[country] += debtRatePerSecond[country];
+        const el = document.getElementById(`${country}-debt`);
+        if (el) el.textContent = formatCurrency(currentDebt[country]);
+    });
+    
+    // Calculate global debt (sum of all countries)
+    currentDebt.global = Object.keys(debtRatePerSecond).reduce(
+        (total, country) => total + currentDebt[country], 0
+    );
+    
+    // Update global counter
+    const globalCounter = document.getElementById('global-debt-counter');
+    if (globalCounter) {
+        globalCounter.textContent = formatCurrency(currentDebt.global);
+    }
+}
+
+// Initialize debt values
+function initializeDebtCounters() {
+    Object.keys(debtRatePerSecond).forEach(country => {
+        const el = document.getElementById(`${country}-debt`);
+        if (el) el.textContent = formatCurrency(currentDebt[country]);
+    });
+    
+    const globalCounter = document.getElementById('global-debt-counter');
+    if (globalCounter) {
+        globalCounter.textContent = formatCurrency(currentDebt.global);
+    }
+}
+
+// Start debt counter
+initializeDebtCounters();
+setInterval(updateDebtCounters, 100); // Update every 100ms for smooth counting
                 function isColliding(rect1, rect2) {
                     // Axis-Aligned Bounding Box collision detection
                     return (
