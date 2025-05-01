@@ -597,6 +597,81 @@
           input:checked + .slider:before { transform: translateX(20px); }
 
 
+/* Crazy Dark Mode Styles */
+body.dark-mode-crazy {
+    /* Completely invert colors */
+    filter: invert(1) hue-rotate(180deg);
+    background-color: #000 !important;
+}
+
+body.dark-mode-crazy img {
+    /* Re-invert images to look normal */
+    filter: invert(1) hue-rotate(180deg);
+}
+
+/* Wild color transformations for specific elements */
+body.dark-mode-crazy .hero {
+    background-color: #f5f5f5 !important;
+    border-bottom-color: #00f !important;
+}
+
+body.dark-mode-crazy .cta-button, 
+body.dark-mode-crazy .pump-fun-button {
+    background: linear-gradient(45deg, #0f0, #0ff) !important;
+    color: #000 !important;
+}
+
+body.dark-mode-crazy .feature-card {
+    background-color: #e0e0e0 !important;
+    transform: rotate(5deg) scale(1.05) !important;
+    box-shadow: 0 0 30px rgba(0,255,0,0.5) !important;
+}
+
+body.dark-mode-crazy .testimonial-card {
+    background-color: #f0f0f0 !important;
+    transform: skew(-5deg) !important;
+}
+
+body.dark-mode-crazy .glitch {
+    animation: crazyGlitch 1s linear infinite !important;
+}
+
+@keyframes crazyGlitch {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(-5px, 5px) scale(1.05) rotate(-2deg); }
+    50% { transform: translate(5px, -5px) scale(0.95) rotate(2deg); }
+    75% { transform: translate(-3px, 3px) scale(1.02) rotate(-1deg); }
+}
+
+/* Make text more readable with inverted colors */
+body.dark-mode-crazy, 
+body.dark-mode-crazy * {
+    color: #000 !important;
+    border-color: #000 !important;
+}
+
+body.dark-mode-crazy a {
+    color: #00f !important;
+}
+
+/* Crazy pulsing effect on hover */
+body.dark-mode-crazy .feature-card:hover,
+body.dark-mode-crazy .social-icon:hover,
+body.dark-mode-crazy .cta-button:hover {
+    animation: crazyPulse 0.5s infinite alternate !important;
+}
+
+@keyframes crazyPulse {
+    from { transform: scale(1) rotate(0deg); }
+    to { transform: scale(1.1) rotate(5deg); }
+}
+
+/* Ensure some critical elements remain somewhat readable */
+body.dark-mode-crazy .modal-content {
+    background-color: #f0f0f0 !important;
+    color: #000 !important;
+}
+        
         /* Modal Styles */
         .modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
@@ -1699,6 +1774,31 @@ console.log("Price updates scheduled every 10 seconds");
 
         }); // End DOMContentLoaded
     </script>
+<script>
+    // Enhanced Dark Mode Script
+    try {
+        const darkModeSwitch = document.getElementById('dark-mode-switch');
+        
+        if (darkModeSwitch) {
+            darkModeSwitch.addEventListener('change', () => {
+                document.body.classList.toggle('dark-mode-crazy');
+                
+                // Optional: Store preference in localStorage
+                if (document.body.classList.contains('dark-mode-crazy')) {
+                    localStorage.setItem('crazy-mode', 'enabled');
+                } else {
+                    localStorage.removeItem('crazy-mode');
+                }
+            });
 
+            // Check if crazy mode was previously enabled
+            if (localStorage.getItem('crazy-mode') === 'enabled') {
+                document.body.classList.add('dark-mode-crazy');
+            }
+        }
+    } catch(e) { 
+        console.error("Error setting up crazy dark mode:", e); 
+    }
+</script>
 </body>
 </html>
