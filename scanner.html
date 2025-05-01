@@ -165,21 +165,6 @@
         .back-button:hover {
             background-color: #ff6e6e;
         }
-
-        @media (max-width: 768px) {
-            .summary-stats {
-                flex-direction: column;
-            }
-
-            .stat-box {
-                border-right: none;
-                border-bottom: 1px solid #333;
-            }
-
-            .stat-box:last-child {
-                border-bottom: none;
-            }
-        }
     </style>
 </head>
 <body>
@@ -237,7 +222,6 @@
     <script>
         // $DEBT token address on Solana
         const DEBT_TOKEN_ADDRESS = '8ncucXv6U6epZKHPbgaEBcEK399TpHGKCquSt4RnmX4f';
-        const BIRDEYE_API_KEY = 'bf9466033dd145769b1a07d8c8c51d4a';
         const TOTAL_SUPPLY = 1_000_000_000; // 1 Billion $DEBT tokens
 
         // Degen status generator
@@ -261,8 +245,7 @@
             const options = {
                 method: 'GET',
                 headers: {
-                    'accept': 'application/json',
-                    'X-API-KEY': BIRDEYE_API_KEY,
+                    'accept': 'application/json', 
                     'x-chain': 'solana'
                 }
             };
@@ -274,13 +257,20 @@
                 );
 
                 if (!response.ok) {
-                    throw new Error(`API response status: ${response.status}`);
+                    const errorBody = await response.text();
+                    console.error('Full error response:', errorBody);
+                    throw new Error(`API response status: ${response.status}. ${errorBody}`);
                 }
 
                 const data = await response.json();
-                return data.data || [];
+                
+                if (!data || !data.data || !data.data.items) {
+                    throw new Error('No data received from API');
+                }
+
+                return data.data.items || [];
             } catch (error) {
-                console.error('Error fetching top holders:', error);
+                console.error('Detailed error fetching top holders:', error);
                 throw error;
             }
         }
@@ -297,15 +287,15 @@
             
             // Calculate total tokens in top holders
             const totalTokensInTopHolders = holders.reduce((sum, holder) => 
-                sum + parseFloat(holder.amount), 0
+                sum + parseFloat(holder.ui_amount), 0
             );
 
             document.getElementById('totalTokensLocked').textContent = 
-                `${(totalTokensInTopHolders / 1_000_000).toFixed(2)}M`;
+                `${totalTokensInTopHolders.toFixed(2)}`;
             
             // Calculate top holder percentage
             const topHolderPercentage = (
-                (parseFloat(holders[0].amount) / TOTAL_SUPPLY) * 100
+                (parseFloat(holders[0].ui_amount) / TOTAL_SUPPLY) * 100
             ).toFixed(2);
             document.getElementById('topHolderPercentage').textContent = `${topHolderPercentage}%`;
 
@@ -322,7 +312,7 @@
                 const row = document.createElement('tr');
                 
                 // Calculate percentage of total supply
-                const percentage = ((parseFloat(holder.amount) / TOTAL_SUPPLY) * 100).toFixed(2);
+                const percentage = ((parseFloat(holder.ui_amount) / TOTAL_SUPPLY) * 100).toFixed(2);
                 
                 // Generate degen status based on percentage
                 const degenStatus = getDegenStatus(percentage);
@@ -330,9 +320,9 @@
                 row.innerHTML = `
                     <td>${index + 1}</td>
                     <td>
-                        <span class="wallet-address" title="Click to copy" onclick="copyToClipboard('${holder.address}')">${holder.address}</span>
+                        <span class="wallet-address" title="Click to copy" onclick="copyToClipboard('${holder.owner}')">${holder.owner}</span>
                     </td>
-                    <td>${parseFloat(holder.amount).toLocaleString()} $DEBT</td>
+                    <td>${holder.ui_amount.toLocaleString()} $DEBT</td>
                     <td>${percentage}%</td>
                     <td class="degen-status">${degenStatus}</td>
                 `;
@@ -364,16 +354,30 @@
 
                 // Fetch and render holders
                 const holders = await fetchTopHolders();
+                
+                // Check if holders array is empty
+                if (holders.length === 0) {
+                    throw new Error('No holders data found');
+                }
+
                 renderHoldersTable(holders);
             } catch (error) {
-                const errorContainer = document.getElementById('errorContainer');
+                console.error('Initialization error:', error);
+
                 const loadingIndicator = document.getElementById('loadingIndicator');
                 const holdersTable = document.getElementById('holdersTable');
+                const errorContainer = document.getElementById('errorContainer');
 
                 loadingIndicator.style.display = 'none';
                 holdersTable.style.display = 'none';
                 errorContainer.style.display = 'block';
-                errorContainer.textContent = `Error: ${error.message}. The degen gods are displeased.`;
+                
+                // More informative error message
+                errorContainer.textContent = `Error: ${error.message}. 
+                Possible issues:
+                - Network connection problem
+                - API service is down
+                The degen gods are displeased.`;
             }
         }
 
