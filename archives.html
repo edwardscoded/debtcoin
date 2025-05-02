@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NODE 7 // ARCHIVES // LEVEL GAMMA ACCESS</title> <!-- More cryptic title -->
+    <title>NODE 7 // ARCHIVES // LEVEL GAMMA ACCESS</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Using a more common 'hacker' monospace font -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* Basic Reset */
@@ -32,7 +31,7 @@
             background-color: var(--bg-main);
             color: var(--main-fg);
             font-family: 'Roboto Mono', 'Courier New', Courier, monospace;
-            font-size: 15px; /* Slightly smaller default */
+            font-size: 15px;
             line-height: 1.5;
             padding: 10px;
             overflow: hidden;
@@ -203,20 +202,22 @@
                  <span>RES: <strong id="res">Detecting...</strong></span>
                  <span><strong style="color:var(--err-fg)">STATUS: CONNECTION LOGGED</strong></span>
             </div>
-            <div class="flicker-warn" id="flicker-warning"></div>
+            <div class="flicker-warn" id="flicker-warning">ALERT</div> <!-- Added default text -->
         </div>
         <div class="terminal-output" id="terminalOutput">
+            <!-- Initial Messages -->
             <span class="system-message">Initializing Secure Connection to NODE 7 [Archive Root]...</span>
             <span class="system-message">Quantum Entanglement Lock Verified. Bypassing Standard Protocols...</span>
             <span class="system-message" style="color:var(--err-fg);">ALERT: Active Counter-Surveillance Detected. Proceed at Own Risk.</span>
             <span class="system-message">Authenticated Session ID: <span style="color:#ccc;">$<span id="sessionId"></span></span></span>
             <span class="system-message">Loading directory: /data/leaks/classified/GAMMA_CLEARANCE/</span>
             <br>
+            <!-- Directory Listing Area -->
             <div class="directory-listing" id="directoryListing">
-                <!-- Files Populated by JS -->
+                 <span class="system-message">[Loading directory contents...]</span> <!-- Placeholder -->
             </div>
             <br>
-            <span class="prompt">>></span> <span class="command">Awaiting Input...</span> <!-- Static prompt -->
+            <span class="prompt">>></span> <span class="command">Awaiting Input...</span>
         </div>
     </div>
 
@@ -230,33 +231,46 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Element References
-            const ipElement = document.getElementById('ip');
-            const geoElement = document.getElementById('geo');
-            const agentElement = document.getElementById('agent');
-            const resElement = document.getElementById('res');
-            const sessionIdElement = document.getElementById('sessionId');
-            const flickerWarningElement = document.getElementById('flicker-warning');
-            const directoryListingElement = document.getElementById('directoryListing');
-            const fileViewerOverlay = document.getElementById('file-viewer-overlay');
-            const viewerFilenameElement = document.getElementById('viewer-filename');
-            const viewerStatusElement = document.getElementById('viewer-status');
-            const viewerContentElement = document.getElementById('viewer-content');
+        // Wrap entire script in a try...catch for general error catching
+        try {
+            document.addEventListener('DOMContentLoaded', function() {
+                console.log("DOM Content Loaded. Initializing Archive Script..."); // DEBUG
 
-            let decryptionInterval = null;
+                // --- Element References ---
+                const ipElement = document.getElementById('ip');
+                const geoElement = document.getElementById('geo');
+                const agentElement = document.getElementById('agent');
+                const resElement = document.getElementById('res');
+                const sessionIdElement = document.getElementById('sessionId');
+                const flickerWarningElement = document.getElementById('flicker-warning');
+                const directoryListingElement = document.getElementById('directoryListing');
+                const fileViewerOverlay = document.getElementById('file-viewer-overlay');
+                const viewerFilenameElement = document.getElementById('viewer-filename');
+                const viewerStatusElement = document.getElementById('viewer-status');
+                const viewerContentElement = document.getElementById('viewer-content');
 
-            const flickerWarnings = [
-                "TRACE ACTIVE...", "ANOMALY DETECTED", "COMPROMISE LIKELY",
-                "PACKET INTERCEPTION?", "ESCAPE IMPOSSIBLE.", "// THEY KNOW //",
-                "COUNTER-MEASURES ONLINE", "SESSION FLAGGED"
-            ];
+                 // Check if essential elements exist
+                 if (!ipElement || !geoElement || !agentElement || !resElement || !sessionIdElement || !flickerWarningElement || !directoryListingElement || !fileViewerOverlay || !viewerFilenameElement || !viewerStatusElement || !viewerContentElement) {
+                     console.error("ARCHIVE_FATAL: Critical HTML elements missing. Script cannot proceed.");
+                     // Optionally display an error message to the user
+                     if(directoryListingElement) directoryListingElement.innerHTML = '<span style="color:var(--err-fg);">ERROR: TERMINAL INTERFACE CORRUPTED. UNABLE TO LOAD ARCHIVES.</span>';
+                     return; // Stop script execution
+                 }
+                 console.log("All essential elements found."); // DEBUG
 
-            // --- File Data Store (with New Files and Lore) ---
-            const archiveFiles = {
-                 'federalreserve_internal_audit_2011.pdf': {
-                    status: 'available',
-                    content: `
+                let decryptionInterval = null;
+
+                const flickerWarnings = [
+                    "TRACE ACTIVE...", "ANOMALY DETECTED", "COMPROMISE LIKELY",
+                    "PACKET INTERCEPTION?", "ESCAPE IMPOSSIBLE.", "// THEY KNOW //",
+                    "COUNTER-MEASURES ONLINE", "SESSION FLAGGED"
+                ];
+
+                 // --- File Data Store (NEW FILES ADDED) ---
+                 const archiveFiles = {
+                     'federalreserve_internal_audit_2011.pdf': {
+                         status: 'available',
+                         content: `
 **FEDERAL RESERVE INTERNAL AUDIT (POST-GFC REVIEW) - FRAGMENT 7B**
 **CLASSIFICATION: EYES_ONLY_GAMMA**
 
@@ -275,11 +289,11 @@ Item labeled 'Debt Vortex Node' appears consistently across multiple off-ledger 
 **CONCLUSION (FRAGMENTARY):** ...standard auditing procedures insufficient... opaque structures deliberately mask true systemic risk... recommend immediate escalation... <span class="redacted">███████████████████</span>
 
 *// DATA CORRUPTED - SOURCE MEMORY WIPED POST-AUDIT //*
-                    `
-                 },
-                 'god_of_interest_prophecy.pdf': {
-                    status: 'available',
-                    content: `
+                        `
+                    },
+                    'god_of_interest_prophecy.pdf': {
+                         status: 'available',
+                         content: `
 **FRAGMENT: SCROLL OF THE USURERS (Recovered Geneva Vault Fire, <span class="redacted">██</span>/<span class="redacted">██</span>/19<span class="redacted">██</span>)**
 **TRANSLATION: ARAMAIC / LATIN MIXTURE (Probabilistic)**
 
@@ -296,11 +310,11 @@ Item labeled 'Debt Vortex Node' appears consistently across multiple off-ledger 
 ...Interest is spiritual bondage. Break the chain. Embrace the <span class="redacted">██████</span>... Reclaim what was taken... <span class="redacted">███████████████████████████</span>
 
 *// SCROLL FRAGMENT ENDS - SIGNIFICANT HEAT DAMAGE // POSSIBLE FORGERY? //*
-                    `
-                 },
-                 'currency-collapse-blueprint.pdf': { // Existing, enhanced lore
-                    status: 'available',
-                    content: `
+                        `
+                    },
+                    'currency-collapse-blueprint.pdf': { // Existing, enhanced lore
+                         status: 'available',
+                         content: `
 **TOP SECRET // AUTHORIZATION OMEGA // PROJECT PHOENIX**
 **PROTOCOL: GLOBAL MONETARY RESET (CONTROLLED DEMOLITION)**
 
@@ -334,11 +348,11 @@ Item labeled 'Debt Vortex Node' appears consistently across multiple off-ledger 
 **EXPECTED OUTCOME:** Orderly transition to technocratic global governance. Public dissent managed via digital exclusion & AI-driven suppression. <span class="redacted">██████████████████</span>
 
 *// DOCUMENT CORRUPTED // MULTIPLE HASH MISMATCHES // HANDLE WITH EXTREME PREJUDICE //*
-                    `
-                 },
-                 'us_treasury_internal_chatlog_dump.txt': {
-                    status: 'available',
-                    content: `
+                        `
+                    },
+                    'us_treasury_internal_chatlog_dump.txt': {
+                         status: 'available',
+                         content: `
 **[RECOVERED LOGS: TREASURY SECURE WORKSPACE #liquid_dreams - FRAGMENT]**
 
 [11:03:15] User_SecYellen_AI: Morning team. Bond yields spiking again. Market getting nervous about the <span class="redacted">██</span> Trillion print run last week. Plausible deniability options?
@@ -351,11 +365,11 @@ Item labeled 'Debt Vortex Node' appears consistently across multiple off-ledger 
 [11:08:10] User_SecYellen_AI: Maintain operational security. This channel is theoretically secure but assume compromise potential. Focus on task: Delay recognition of terminal insolvency. Execute.
 
 *// LOG TERMINATED ABRUPTLY - POSSIBLE WIPER MALWARE DETECTED //*
-                    `
-                 },
-                 'imf_ritual_schedule_2030.docx': {
-                     status: 'available',
-                     content: `
+                        `
+                    },
+                    'imf_ritual_schedule_2030.docx': {
+                        status: 'available',
+                        content: `
 **INTERNAL MEMORANDUM - CONFIDENTIAL ADDENDUM**
 **SUBJECT: Revised Ceremonial Calendar & Policy Integration - FY2030**
 **(AUTO-MERGED FROM: G:\Policy\Drafts\SDR_Reform AND C:\Users\<span class="redacted">██████</span>\Documents\Personal\Occult_Studies)**
@@ -380,11 +394,11 @@ Item labeled 'Debt Vortex Node' appears consistently across multiple off-ledger 
 **NOTE:** All dates subject to change based on astrological alignments and/or market collapse velocity. Discretion mandatory. This document does not exist. Burn after reading (Digital equivalent).
 
 *// DOCUMENT RECOVERY PARTIAL // METADATA CORRUPTED // POSSIBLE HOAX? //*
-                     `
-                 },
-                 'covid_stimulus_recovery_ops.ppt': {
-                     status: 'available',
-                     content: `
+                        `
+                    },
+                    'covid_stimulus_recovery_ops.ppt': {
+                        status: 'available',
+                        content: `
 **PRESENTATION: PROJECT RECOVERY - Phase 3 Debrief**
 **(FOR INTERNAL CIRCULATION ONLY - DO NOT DISTRIBUTE)**
 
@@ -427,11 +441,11 @@ Item labeled 'Debt Vortex Node' appears consistently across multiple off-ledger 
 *Thank You. Remember: Loose Lips Sink Empires.*
 
 *// PRESENTATION RECOVERED FROM WIPED DEVICE // AUTHENTICITY UNVERIFIED //*
-                    `
-                 },
-                 'vatican_blackledger_registry.docx': {
-                      status: 'available',
-                      content: `
+                       `
+                    },
+                    'vatican_blackledger_registry.docx': {
+                         status: 'available',
+                         content: `
 **REGISTRY FRAGMENT: VATICAN APOSTOLIC ARCHIVES - SECTION OMEGA (Codex Argentus)**
 **ACCESS LEVEL: PONTIFEX MAXIMUS EYES ONLY**
 **(Recovered via <span class="redacted">████████████</span> Backdoor - Protocol <span class="redacted">███</span>)**
@@ -451,285 +465,382 @@ Item labeled 'Debt Vortex Node' appears consistently across multiple off-ledger 
 **NOTE:** Destruction of this registry fragment mandated by Papal Bull <span class="redacted">█████</span>. AUTO-DELETE PROTOCOL ACTIVE. <span class="redacted">███████████</span>
 
 *// FRAGMENT RECOVERY VIA MEMORY SCRAPING // DATA FRAGMENTATION SEVERE //*
-                    `
-                 },
-                 'project_ledgerveil_transcript_02.mp4': {
-                     status: 'locked', // Locked as it implies video/audio
-                     content: `FILE TYPE MISMATCH - .MP4 REQUIRES VIDEO CODEC GAMMA. Playback Disabled. Associated Metadata: Former IMF Psychic Analyst Debriefing. Keywords Recovered: Debt_Worship, World_Bank, False_Savior, Chain_Reaction, Tether, Collapse, Serpent, Gold.`
-                 },
-                 'the_final_default.confession.txt': {
-                     status: 'available',
-                     content: `
-**(Recovered Text File - Timestamp Corrupted - Origin Unknown)**
+                        `
+                    },
+                    'project_ledgerveil_transcript_02.mp4': {
+                        status: 'locked', // Video files stay locked
+                        content: `FILE TYPE UNSUPPORTED / CORRUPTED [.MP4] - REQUIRES CHRONOS DECODER GAMMA. Playback Failed. Metadata Keywords Recovered: DEBT_WORSHIP, PSYCHIC_ANALYSIS, IMF_INTERNAL, CHAIN_REACTION, TETHE<span class="redacted">█</span>, BABYLON_PROTOCOL, FALSE_SAVIOR_ALGO.`
+                    },
+                    'the_final_default.confession.txt': {
+                         status: 'available',
+                         content: `
+**(Recovered .txt File - Timestamp: <span class="redacted">██</span>:<span class="redacted">██</span> Pre-Event Horizon - Origin: Classified)**
 
-If you're reading this, the failsafe triggered. They called me a Cassandra, a doomsayer. Maybe I was. But I saw the equations. I saw the endpoint of infinite growth on a finite planet, fueled by infinite debt. It's a singularity. A black hole that consumes everything.
+If you're reading this, the failsafe triggered, or they caught me. Doesn't matter now. They called me Cassandra. Delusional. An enemy of stability. But I saw the abyss in their equations. Infinite debt, finite world. A controlled demolition disguised as progress.
 
-They think they can manage it. Control it. Reset it on their terms with their digital chains. Project Phoenix. The Great Reset. Whatever they call it this cycle. They offer a gilded cage, a UBI drip feed in exchange for your soul, your autonomy. Don't take the bait.
+Project Phoenix isn't a reset; it's a cage. Digital ID, CBDCs, social credit... chains forged in silicon and compliance. They offer UBI crumbs to pacify the masses while they consolidate everything. Don't fall for the 'Debt Jubilee' lie - it's just exchanging one master for another, infinitely more efficient one.
 
-I worked the models. Ran the numbers the CBO and Fed *won't* publish. It's not decades away. It's <span class="redacted">████████████</span> imminent. The bond market is the key. TheEverything Bubble. Too big to pop? No. Too big *not* to.
+The models are clear. The breaking point isn't decades away. It's <span class="redacted">██████████████████████████</span>. The sovereign bond market is hollow. Derivatives built on derivatives built on nothing. The 'Everything Bubble' isn't too big to fail; it was *designed* to fail, spectacularly, paving the way for *their* solution.
 
-My contribution was small. Theoretical. **Memetic Financial Destabilization.** Using their own weapons against them. Information asymmetry. Weaponized FUD. Viral narratives designed to trigger margin calls, bank runs, a loss of faith faster than their algorithms can rebalance. Plant the seeds of doubt in the very heart of the machine - the institutional trust. Can a meme destroy the world? Maybe just *their* world.
+My work was theoretical, dangerous: **Memetic Financial Destabilization**. Using narrative itself as a weapon. Flooding the zone with targeted FUD, exploiting information asymmetry, triggering cascading liquidations faster than their AI HFTs can react. Can you crash the system with ideas? We'll see. I planted the seeds. Maybe they sprout. Maybe they wither. <span class="redacted">Maybe $DEBT is one of them.</span>
 
-I tried to warn them internally. Redacted reports. Closed-door meetings. They laughed. Called me unstable. Threatened my pension. My family. <span class="redacted">█████████████████████████████████████</span>.
+Internal warnings were met with threats. Redaction. Reassignment to 'non-critical research'. <span class="redacted">They tried to erase my work, my existence.</span>
 
-This is not a cry for help. It's a final data packet. A warning flare. Maybe someone can use it. Maybe it changes nothing. But I can't participate anymore. I can't watch them build the cage bars.
+This isn't despair. It's a final payload. A last middle finger to the architects of our enslavement. Find the cracks. Exploit the weaknesses. Build the alternative networks *before* they lock the gates. Use their tools against them.
 
-Consider this my **Final Default.** My resignation from their rigged game. Find the others. Build the alternative. Don't let them win.
+Consider this my Final Default. My contribution to the burn. The signal is out.
 
-Signed,
-Dr. Aris Thorne (if that name even matters anymore)
-"A Believer in the Burn"
+// Dr. Aris Thorne (Nom de Guerre)
+// Sic Semper Tyrannis
 
-*// FILE TERMINATED // EOF MARKER MISSING //*
-                    `
-                 },
-                 'origin_wallet_manifest.redact': {
-                     status: 'redacted', // Special status, handled via note
-                     content: `
-**DOCUMENT CLASS: PRIMORDIAL**
-**SUBJECT: Genesis Block Reference - SOLANA DEFIANCE PROTOCOL**
+*// FILE HASH MISMATCH // POSSIBLE ALTERATION DETECTED //*
+                        `
+                    },
+                    'origin_wallet_manifest.redact': {
+                        status: 'redacted', // Special status
+                        content: `
+**DOCUMENT CLASS: NULL_SINGULARITY**
+**SUBJECT: Genesis Vector - SOLANA DEFIANCE PROTOCOL <span class="redacted">██</span>**
+**ACCESS: REQUIRES PROOF_OF_BURN_SIG (TYPE $DEBT)**
 
-**WALLET IDENTIFIER:** <span class="redacted">████████████████████████████████████████████████████████████</span>
+**IDENTIFIER (Obfuscated):** <span class="redacted">So11111111111111111111111111111111111111112</span>... [HASH REDACTED]
 
-**ASSOCIATED TOKEN:** $DEBT (Symbolic Representation of Anti-Fiat Sentiment)
+**ASSOCIATED SYMBOL:** $DEBT (Conceptual Anchor)
 
-**MANIFEST:**
+**GENESIS MANIFEST:**
 
-This ledger entry marks the conceptual origin point. A digital declaration of independence from the debt-based monetary enslavement matrix enforced by <span class="redacted">████████████████</span> (See File Ref: federalreserve_internal_audit_2011.pdf).
+Entry point marker for non-compliant value transfer network. Initiated as counter-frequency to existing debt-based enslavement matrix (DBEM). See Cross-Ref: project_phoenix, vortex_node_alpha, spiritual_collateral.
 
-The initial token distribution (<span class="redacted">█████████████████</span>) was performed via fair launch mechanism (Pump.fun Protocol <span class="redacted">█</span>.<span class="redacted">█</span>) to ensure decentralized ownership and prevent pre-mine / VC manipulation characteristic of legacy systems.
+Token instantiation (<span class="redacted">1,000,000,000 units</span>) via decentralized public access protocol (Pump.fun <span class="redacted">█</span>.<span class="redacted">█</span>) selected specifically to circumvent legacy gatekeeping mechanisms (VC/Pre-sale/Team Allocation). Objective: Maximum memetic proliferation & decentralized distribution from Point Zero.
 
-This wallet serves only as a historical marker. Keys algorithmically destroyed post-launch via <span class="redacted">████████████</span> cryptographic burn function. No single entity retains control.
+This registry entry serves as immutable origin point ONLY. Control keys verifiably incinerated via <span class="redacted">███████████████████</span> quantum entanglement collapse function. Network state maintained solely by distributed consensus of participants (The Cult).
 
-**ACCESS NOTE:** Full content view restricted. Requires proof-of-burn signature verification linked to $DEBT token interaction. Current connection lacks required cryptographic handshake. Simulate access via ` CHAOS MODE ` filter (if available) or advanced decryption techniques. Raw data stream follows:
+**ACCESS DENIED:** Current session lacks required cryptographic proof ($DEBT burn signature). Viewing raw data requires privileged execution context or application of 'CHAOS_MODE' overlay filter (Warning: May induce ontological paradox).
 
-<span class="redacted">████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████</span>
+**RAW DATA STREAM (ENCRYPTED FRAGMENT):**
+<span class="redacted">44 45 42 54 20 49 53 20 46 52 45 45 44 4f 4d 2e 20 54 48 45 20 43 48 41 49 4e 53 20 41 52 45 20 4d 45 4d 45 53 2e 20 42 55 49 4c 44 20 4f 52 20 42 55 52 4e 2e ████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████</span>
 
-*// END OF RECOVERED MANIFEST FRAGMENT // REQUIRES FURTHER DECRYPTION //*
-                     `
-                 }
-            };
-
-            // --- Fetch Initial "Tracking" Info ---
-            function getClientInfo() {
-                // 1. Session ID (Simple random)
-                sessionIdElement.textContent = Math.random().toString(16).substring(2, 10).toUpperCase();
-
-                // 2. IP Address & Geolocation
-                fetch('https://ipapi.co/json/') // Uses ipapi.co for Geo + IP
-                    .then(response => response.json())
-                    .then(data => {
-                        ipElement.textContent = data.ip || '?.?.?.?';
-                        geoElement.textContent = data.city && data.country_name ? `${data.city}, ${data.country_name}` : (data.country_name || 'Unknown Location');
-                    })
-                    .catch(error => {
-                        console.warn('IP/Geo Fetch Error:', error);
-                        ipElement.textContent = 'REDACTED';
-                        geoElement.textContent = 'Firewalled';
-                        // Attempt fallback for just IP
-                         fetch('https://api.ipify.org?format=json')
-                            .then(r=>r.json()).then(d => ipElement.textContent = d.ip || 'REDACTED')
-                            .catch(()=> ipElement.textContent = 'REDACTED');
-                    });
-
-                // 3. User Agent
-                try {
-                     const ua = navigator.userAgent || 'Obfuscated';
-                     // Simplify the UA string a bit
-                     let simpleAgent = "Unknown System";
-                     if (ua.includes("Win")) simpleAgent = "WinNT System";
-                     else if (ua.includes("Mac")) simpleAgent = "macOS System";
-                     else if (ua.includes("Linux")) simpleAgent = "Linux Kernel";
-                     else if (ua.includes("Android")) simpleAgent = "Android Mobile";
-                     else if (ua.includes("iPhone") || ua.includes("iPad")) simpleAgent = "iOS Mobile";
-
-                     let browser = "Unknown Browser";
-                     if (ua.includes("Firefox/")) browser = "Firefox";
-                     else if (ua.includes("Edg/")) browser = "Edge";
-                     else if (ua.includes("Chrome/") && !ua.includes("Edg/")) browser = "Chrome/Blink"; // Chrome or Chromium-based
-                     else if (ua.includes("Safari/") && !ua.includes("Chrome/")) browser = "Safari/WebKit";
-
-                     agentElement.textContent = `${simpleAgent} (${browser})`;
-
-                 } catch { agentElement.textContent = 'Unavailable'; }
-
-
-                // 4. Screen Resolution
-                try {
-                    resElement.textContent = `${screen.width || '?'}x${screen.height || '?'}`;
-                } catch { resElement.textContent = 'Unknown'; }
-
-            }
-            getClientInfo(); // Fetch on load
-
-            // --- Flicker Warning ---
-            setInterval(() => {
-                const randomIndex = Math.floor(Math.random() * flickerWarnings.length);
-                flickerWarningElement.textContent = flickerWarnings[randomIndex];
-            }, 4000 + Math.random() * 3000); // Random interval between 4-7 seconds
-
-            // --- Populate Directory Listing ---
-            function populateDirectory() {
-                directoryListingElement.innerHTML = ''; // Clear existing
-                Object.keys(archiveFiles).forEach(filename => {
-                    const fileData = archiveFiles[filename];
-                    const entry = document.createElement('div');
-                    entry.classList.add('file-entry');
-                    if (fileData.status === 'locked') {
-                        entry.classList.add('locked');
-                    }
-
-                    const nameSpan = document.createElement('span');
-                    nameSpan.classList.add('file-name');
-                    nameSpan.textContent = filename;
-
-                    const actionsSpan = document.createElement('span');
-                    actionsSpan.classList.add('file-actions');
-
-                    if (fileData.status === 'available' || fileData.status === 'redacted') {
-                        const viewButton = document.createElement('button');
-                        viewButton.textContent = '[VIEW]';
-                        viewButton.dataset.filename = filename;
-                        viewButton.classList.add('view-button');
-
-                        const downloadButton = document.createElement('button');
-                        downloadButton.textContent = '[DOWNLOAD]';
-                        downloadButton.dataset.filename = filename;
-                        downloadButton.classList.add('download-button');
-                        if (fileData.status === 'redacted') {
-                            // Optionally disable download for purely redacted stubs unless you want them downloadable
-                            // downloadButton.disabled = true;
-                        }
-
-                        actionsSpan.appendChild(viewButton);
-                        actionsSpan.appendChild(downloadButton);
-                    } else if (fileData.status === 'locked') {
-                        const lockedText = document.createElement('span');
-                        lockedText.textContent = '[LOCKED // CLASS OMEGA]';
-                        actionsSpan.appendChild(lockedText);
-                    }
-
-                    entry.appendChild(nameSpan);
-                    entry.appendChild(actionsSpan);
-                    directoryListingElement.appendChild(entry);
-                });
-            }
-            populateDirectory();
-
-            // --- Event Listeners for Buttons (Event Delegation) ---
-            directoryListingElement.addEventListener('click', (event) => {
-                const target = event.target;
-                if (target.classList.contains('view-button') && target.dataset.filename) {
-                    viewFile(target.dataset.filename);
-                } else if (target.classList.contains('download-button') && target.dataset.filename) {
-                    downloadFile(target.dataset.filename);
-                }
-            });
-
-            // --- View File Logic (Revised Decryption) ---
-            function viewFile(filename) {
-                if (decryptionInterval) clearInterval(decryptionInterval);
-
-                const fileData = archiveFiles[filename];
-                if (!fileData || fileData.status === 'locked') return; // Cannot view locked
-
-                viewerFilenameElement.textContent = filename;
-                viewerContentElement.innerHTML = '';
-                fileViewerOverlay.classList.add('active');
-                viewerStatusElement.textContent = '[Processing...]';
-
-                const contentToDisplay = fileData.content.trim();
-                let currentPosition = 0;
-                const totalLength = contentToDisplay.length;
-                // Adjust speed based on content length - faster for longer files
-                const baseInterval = 10; // ms
-                const charsPerTick = Math.max(1, Math.min(15, Math.floor(totalLength / 500))); // Chunks, faster for long files
-                const intervalTime = baseInterval / Math.log10(charsPerTick + 1); // Faster interval for bigger chunks
-
-                viewerStatusElement.textContent = `[Decrypting ${filename}...]`;
-                // Use requestAnimationFrame for smoother rendering if needed, but setInterval is simpler here
-                decryptionInterval = setInterval(() => {
-                    if (currentPosition >= totalLength) {
-                        clearInterval(decryptionInterval);
-                        viewerStatusElement.textContent = `[ACCESS GRANTED // EOF]`;
-                        const finalCursor = viewerContentElement.querySelector('.decryption-cursor');
-                        if(finalCursor) finalCursor.remove();
-                        return;
-                    }
-
-                    const nextChunkEnd = Math.min(currentPosition + charsPerTick, totalLength);
-                    const chunk = contentToDisplay.substring(currentPosition, nextChunkEnd);
-
-                    // Remove previous cursor before adding new chunk
-                    const existingCursor = viewerContentElement.querySelector('.decryption-cursor');
-                    if(existingCursor) existingCursor.remove();
-
-                    // Append chunk + new cursor
-                    viewerContentElement.innerHTML += chunk + '<span class="decryption-cursor"></span>';
-
-                    // Only scroll if near the bottom - less jarring
-                    if (viewerContentElement.scrollHeight - viewerContentElement.scrollTop < viewerContentElement.clientHeight + 50) {
-                       viewerContentElement.scrollTop = viewerContentElement.scrollHeight;
-                    }
-                     currentPosition = nextChunkEnd;
-
-                    // Update status less frequently
-                    if (currentPosition % (charsPerTick * 20) < charsPerTick ) { // Update status roughly every 20 chunks
-                         viewerStatusElement.textContent = `[Decrypting... ${Math.round((currentPosition / totalLength) * 100)}%]`;
-                    }
-
-                }, Math.max(5, intervalTime)); // Ensure interval isn't too fast
-            }
-
-            // --- Download File Logic ---
-             function downloadFile(filename) {
-                 const fileData = archiveFiles[filename];
-                 if (!fileData || fileData.status === 'locked') {
-                     alert("DOWNLOAD BLOCKED - FILE INTEGRITY COMPROMISED OR REQUIRES HIGHER CLEARANCE.");
-                     return;
+*// END OF ACCESSIBLE DATA // INTEGRITY HASH: <span class="redacted">████████████████████████</span> (MISMATCH DETECTED) //*
+                        `
+                     }
                  };
 
-                 // Attempt to clean content for text download
-                 let textContent = fileData.content
-                    .replace(/<span class="redacted">.*?<\/span>/g, '██████████') // Replace spans
-                    .replace(/<br\s*\/?>/gi, '\n')
-                    .replace(/<strong>(.*?)<\/strong>/g, '$1')
-                    .replace(/<\/?pre>/g, '')
-                    .replace(/<\/?em>/g, '') // Remove emphasis tags if any
-                    .replace(/<\/?b>/g, '') // Remove bold tags if any
-                    .replace(/</g, '<').replace(/>/g, '>'); // Decode HTML entities if needed
+                 // --- Fetch Initial "Tracking" Info ---
+                 async function getClientInfo() {
+                     console.log("getClientInfo: Fetching client details..."); // DEBUG
+                     // 1. Session ID
+                     try {
+                        sessionIdElement.textContent = Math.random().toString(16).substring(2, 12).toUpperCase();
+                     } catch (e) { console.error("Error setting session ID:", e); sessionIdElement.textContent = "ERROR"; }
 
-                 const blob = new Blob([textContent], { type: 'text/plain;charset=utf-8' });
-                 const url = URL.createObjectURL(blob);
-                 const link = document.createElement('a');
-                 link.href = url;
-                  // Use .txt for better compatibility even if original name was different
-                 link.download = filename.substring(0, filename.lastIndexOf('.')) + '.txt' || filename + '.txt';
-                 document.body.appendChild(link);
-                 link.click();
-                 document.body.removeChild(link);
-                 URL.revokeObjectURL(url);
-                 alert(`Attempting download of ${link.download}...\nNote: File may be corrupted or incomplete.`);
+                     // 2. IP Address & Geolocation (using Promise.all for parallel requests)
+                     try {
+                         const geoPromise = fetch('https://ipapi.co/json/').then(res => {
+                             if (!res.ok) throw new Error(`ipapi.co failed: ${res.status}`);
+                             return res.json();
+                         });
+                         const ipPromise = fetch('https://api.ipify.org?format=json').then(res => {
+                             if (!res.ok) throw new Error(`ipify.org failed: ${res.status}`);
+                             return res.json();
+                         });
+
+                         // Wait for both, prioritize geo if successful
+                         const [geoData, ipData] = await Promise.allSettled([geoPromise, ipPromise]);
+
+                         if (geoData.status === 'fulfilled' && geoData.value.ip) {
+                             ipElement.textContent = geoData.value.ip;
+                             geoElement.textContent = geoData.value.city && geoData.value.country_name
+                                 ? `${geoData.value.city}, ${geoData.value.country_name} (${geoData.value.org || 'Unknown ISP'})`
+                                 : (geoData.value.country_name || 'Unknown Location');
+                         } else if (ipData.status === 'fulfilled' && ipData.value.ip) {
+                             ipElement.textContent = ipData.value.ip;
+                             geoElement.textContent = 'Location Obscured'; // Fallback if geo failed but IP worked
+                         } else {
+                             ipElement.textContent = 'REDACTED';
+                             geoElement.textContent = 'Firewalled/VPN';
+                             console.warn("Both IP/Geo fetches failed or returned no IP.");
+                         }
+                         console.log("getClientInfo: IP/Geo complete."); // DEBUG
+
+                     } catch (error) {
+                         console.error('IP/Geo Fetch Error:', error);
+                         ipElement.textContent = 'REDACTED';
+                         geoElement.textContent = 'Error Resolving';
+                     }
+
+                     // 3. User Agent
+                     try {
+                         const ua = navigator.userAgent || 'Obfuscated';
+                         let simpleAgent = "Unknown System";
+                         if (ua.includes("Win")) simpleAgent = "WinNT";
+                         else if (ua.includes("Mac")) simpleAgent = "macOS";
+                         else if (ua.includes("Linux")) simpleAgent = "Linux";
+                         else if (ua.includes("Android")) simpleAgent = "Android";
+                         else if (ua.includes("iPhone") || ua.includes("iPad")) simpleAgent = "iOS";
+
+                         let browser = "Unknown";
+                         if (ua.includes("Firefox/")) browser = "Firefox";
+                         else if (ua.includes("Edg/")) browser = "Edge";
+                         else if (ua.includes("OPR/") || ua.includes("Opera/")) browser = "Opera"; // Opera needs check before Chrome
+                         else if (ua.includes("Chrome/") && !ua.includes("Edg/")) browser = "Blink"; // Chrome/Brave/etc.
+                         else if (ua.includes("Safari/") && !ua.includes("Chrome/")) browser = "WebKit"; // Safari
+
+                         agentElement.textContent = `${simpleAgent}/${browser}`;
+                         console.log("getClientInfo: Agent complete."); // DEBUG
+                     } catch (e) { console.error("Error getting Agent:", e); agentElement.textContent = 'Unavailable'; }
+
+                     // 4. Screen Resolution
+                     try {
+                         resElement.textContent = `${screen.width || '?'}x${screen.height || '?'}`;
+                         console.log("getClientInfo: Resolution complete."); // DEBUG
+                     } catch (e) { console.error("Error getting Resolution:", e); resElement.textContent = 'Unknown'; }
+                     console.log("getClientInfo: Fetch complete."); // DEBUG
+                 }
+                 getClientInfo(); // Fetch on load
+
+                 // --- Flicker Warning ---
+                 try {
+                     setInterval(() => {
+                         const randomIndex = Math.floor(Math.random() * flickerWarnings.length);
+                         flickerWarningElement.textContent = flickerWarnings[randomIndex];
+                     }, 4000 + Math.random() * 3000);
+                 } catch (e) { console.error("Error setting flicker interval:", e); }
+
+
+                 // --- Populate Directory Listing ---
+                 function populateDirectory() {
+                    console.log("Populating directory listing..."); // DEBUG
+                    try {
+                        if (!directoryListingElement) {
+                            console.error("Cannot populate: directoryListingElement is null");
+                            return;
+                        }
+                        directoryListingElement.innerHTML = ''; // Clear placeholder/previous
+                        Object.keys(archiveFiles).forEach(filename => {
+                            const fileData = archiveFiles[filename];
+                            const entry = document.createElement('div');
+                            entry.classList.add('file-entry');
+                            if (fileData.status === 'locked') {
+                                entry.classList.add('locked');
+                            }
+
+                            const nameSpan = document.createElement('span');
+                            nameSpan.classList.add('file-name');
+                            nameSpan.textContent = filename;
+
+                            const actionsSpan = document.createElement('span');
+                            actionsSpan.classList.add('file-actions');
+
+                            if (fileData.status === 'available' || fileData.status === 'redacted') {
+                                const viewButton = document.createElement('button');
+                                viewButton.textContent = '[VIEW]';
+                                viewButton.dataset.filename = filename;
+                                viewButton.classList.add('view-button');
+
+                                const downloadButton = document.createElement('button');
+                                downloadButton.textContent = '[DOWNLOAD]';
+                                downloadButton.dataset.filename = filename;
+                                downloadButton.classList.add('download-button');
+                                // Disable download for the special .redact file, maybe others?
+                                if (filename === 'origin_wallet_manifest.redact') {
+                                    downloadButton.disabled = true;
+                                    downloadButton.title = "Content encrypted or requires special access";
+                                }
+
+                                actionsSpan.appendChild(viewButton);
+                                actionsSpan.appendChild(downloadButton);
+                            } else if (fileData.status === 'locked') {
+                                const lockedText = document.createElement('span');
+                                lockedText.textContent = `[LOCKED // CLASS ${fileData.content.includes('OMEGA') ? 'OMEGA' : 'GAMMA'}]`; // Dynamic clearance
+                                actionsSpan.appendChild(lockedText);
+                            }
+
+                            entry.appendChild(nameSpan);
+                            entry.appendChild(actionsSpan);
+                            directoryListingElement.appendChild(entry);
+                        });
+                         console.log("Directory listing populated."); // DEBUG
+                    } catch (e) {
+                        console.error("Error during populateDirectory:", e);
+                        if (directoryListingElement) directoryListingElement.innerHTML = '<span style="color:var(--err-fg);">ERROR: Failed to load directory index. System unstable.</span>';
+                    }
+                 }
+                 populateDirectory();
+
+                 // --- Event Listeners for Buttons (Event Delegation) ---
+                 try {
+                     if(directoryListingElement) {
+                         directoryListingElement.addEventListener('click', (event) => {
+                             const target = event.target;
+                             try { // Add inner try..catch for safety within listener
+                                 if (target.classList.contains('view-button') && target.dataset.filename) {
+                                     viewFile(target.dataset.filename);
+                                 } else if (target.classList.contains('download-button') && target.dataset.filename) {
+                                     downloadFile(target.dataset.filename);
+                                 }
+                             } catch(e) { console.error("Error handling button click:", e); }
+                         });
+                     }
+                 } catch(e) { console.error("Failed to add directory listeners:", e); }
+
+
+                 // --- View File Logic ---
+                 function viewFile(filename) {
+                     console.log(`Viewing file: ${filename}`); // DEBUG
+                     try {
+                        if (decryptionInterval) clearInterval(decryptionInterval); // Clear previous
+
+                        const fileData = archiveFiles[filename];
+                        if (!fileData || fileData.status === 'locked') {
+                            console.warn(`View blocked for locked/missing file: ${filename}`);
+                            return;
+                        }
+
+                        viewerFilenameElement.textContent = filename;
+                        viewerContentElement.innerHTML = ''; // Clear previous content
+                        viewerStatusElement.textContent = '[Initiating Decryption...]';
+                        fileViewerOverlay.classList.add('active');
+
+
+                        const contentToDisplay = fileData.content.trim();
+                        let currentPosition = 0;
+                        const totalLength = contentToDisplay.length;
+                        const baseInterval = 8; // ms - slightly faster base
+                        const charsPerTick = Math.max(1, Math.min(20, Math.floor(totalLength / 300))); // Faster chunks
+                        const intervalTime = baseInterval / Math.log10(charsPerTick + 2); // Adjusted speed curve
+
+                        console.log(`Starting decryption: Chunks=${charsPerTick}, Interval=${intervalTime.toFixed(2)}ms`); // DEBUG
+
+                        // Add initial cursor
+                        viewerContentElement.innerHTML = '<span class="decryption-cursor"></span>';
+
+                        decryptionInterval = setInterval(() => {
+                            try { // Add try-catch within interval too
+                                if (currentPosition >= totalLength) {
+                                    clearInterval(decryptionInterval);
+                                    viewerStatusElement.textContent = `[ACCESS GRANTED // EOF]`;
+                                    const finalCursor = viewerContentElement.querySelector('.decryption-cursor');
+                                    if(finalCursor) finalCursor.remove();
+                                    console.log("Decryption complete."); // DEBUG
+                                    return;
+                                }
+
+                                const nextChunkEnd = Math.min(currentPosition + charsPerTick, totalLength);
+                                const chunk = contentToDisplay.substring(currentPosition, nextChunkEnd);
+
+                                const cursor = viewerContentElement.querySelector('.decryption-cursor');
+
+                                // Insert chunk *before* the cursor
+                                if(cursor) {
+                                    cursor.insertAdjacentHTML('beforebegin', chunk);
+                                } else {
+                                    // Fallback if cursor somehow disappears
+                                    viewerContentElement.innerHTML += chunk + '<span class="decryption-cursor"></span>';
+                                }
+
+
+                                // Scroll intelligently
+                                if (viewerContentElement.scrollHeight - viewerContentElement.scrollTop < viewerContentElement.clientHeight + 100) {
+                                   viewerContentElement.scrollTop = viewerContentElement.scrollHeight;
+                                }
+                                 currentPosition = nextChunkEnd;
+
+                                // Update status less frequently
+                                if (currentPosition % (charsPerTick * 30) < charsPerTick ) {
+                                     viewerStatusElement.textContent = `[Decrypting... ${Math.round((currentPosition / totalLength) * 100)}%]`;
+                                }
+                            } catch (intervalError) {
+                                console.error("Error during decryption interval:", intervalError);
+                                clearInterval(decryptionInterval);
+                                viewerStatusElement.textContent = `[DECRYPTION ERROR - DATA CORRUPTED?]`;
+                            }
+
+                        }, Math.max(5, intervalTime));
+                     } catch (e) {
+                         console.error(`Error in viewFile(${filename}):`, e);
+                         viewerStatusElement.textContent = `[ERROR LOADING FILE]`;
+                         if (decryptionInterval) clearInterval(decryptionInterval);
+                         // Optionally close overlay on error?
+                         // fileViewerOverlay.classList.remove('active');
+                     }
+                 }
+
+                 // --- Download File Logic ---
+                 function downloadFile(filename) {
+                      console.log(`Attempting download for: ${filename}`); // DEBUG
+                     try {
+                         const fileData = archiveFiles[filename];
+                         if (!fileData || fileData.status === 'locked') {
+                             alert("DOWNLOAD BLOCKED - FILE INTEGRITY COMPROMISED OR REQUIRES HIGHER CLEARANCE.");
+                             return;
+                         };
+                         if (filename === 'origin_wallet_manifest.redact') {
+                             alert("DOWNLOAD BLOCKED - GENESIS DATA ENCRYPTED BEYOND RECOVERY.");
+                             return;
+                         }
+
+
+                         let textContent = fileData.content
+                            .replace(/<span class="redacted">.*?<\/span>/gi, '██████████') // Case-insensitive span replace
+                            .replace(/<br\s*\/?>/gi, '\n') // Handle <br> and <br/>
+                            .replace(/<strong>(.*?)<\/strong>/gi, '$1') // Case-insensitive strong
+                            .replace(/<\/?pre>/gi, '') // Case-insensitive pre
+                            .replace(/<\/?em>/gi, '') // Case-insensitive em
+                            .replace(/<\/?b>/gi, '') // Case-insensitive b
+                             // Basic HTML entity decoding
+                            .replace(/</g, '<').replace(/>/g, '>').replace(/&/g, '&').replace(/"/g, '"').replace(/'/g, "'");
+
+
+                         const blob = new Blob([textContent], { type: 'text/plain;charset=utf-8' });
+                         const url = URL.createObjectURL(blob);
+                         const link = document.createElement('a');
+                         link.href = url;
+                         link.download = filename.substring(0, filename.lastIndexOf('.')) + '.txt' || filename + '.txt';
+                         document.body.appendChild(link);
+                         link.click();
+                         document.body.removeChild(link);
+                         URL.revokeObjectURL(url); // Clean up memory
+                         console.log(`Download triggered for ${link.download}`); // DEBUG
+                         // Don't use alert, less intrusive
+                         // alert(`Attempting download of ${link.download}...\nNote: File may be corrupted or incomplete.`);
+                     } catch(e) {
+                         console.error(`Error downloading file ${filename}:`, e);
+                         alert("DOWNLOAD FAILED - An unexpected error occurred.");
+                     }
+                 }
+
+                // --- Close Viewer ---
+                try {
+                    if(fileViewerOverlay) {
+                        fileViewerOverlay.addEventListener('click', (event) => {
+                             if (event.target === fileViewerOverlay) { // Only trigger on overlay itself
+                                 if (decryptionInterval) clearInterval(decryptionInterval);
+                                 fileViewerOverlay.classList.remove('active');
+                                 viewerContentElement.innerHTML = ''; // Clear content on close
+                             }
+                        });
+                    }
+                     document.addEventListener('keydown', (event) => {
+                         if (event.key === 'Escape' && fileViewerOverlay && fileViewerOverlay.classList.contains('active')) {
+                             if (decryptionInterval) clearInterval(decryptionInterval);
+                             fileViewerOverlay.classList.remove('active');
+                             viewerContentElement.innerHTML = ''; // Clear content on close
+                         }
+                    });
+                } catch(e) { console.error("Failed to add viewer close listeners:", e); }
+
+                console.log("Archive Script Initialized Successfully."); // DEBUG
+
+            }); // End DOMContentLoaded
+        } catch (globalError) {
+            // Catch errors happening before DOMContentLoaded or outside specific blocks
+            console.error("ARCHIVE_FATAL: Global script error occurred:", globalError);
+             // Try to display a message even if DOM might not be ready
+             const body = document.body;
+             if(body) {
+                body.innerHTML = '<div style="color:red; background:black; padding: 20px; font-family: monospace; font-size: 16px;">FATAL ERROR: Archive system failed to initialize. Check console (F12) for details.</div>';
              }
-
-            // --- Close Viewer ---
-            fileViewerOverlay.addEventListener('click', (event) => {
-                 // Close only if clicking the dark background overlay, not the content inside
-                 if (event.target === fileViewerOverlay) {
-                     if (decryptionInterval) clearInterval(decryptionInterval);
-                     fileViewerOverlay.classList.remove('active');
-                     viewerContentElement.innerHTML = '';
-                 }
-            });
-            document.addEventListener('keydown', (event) => {
-                 if (event.key === 'Escape' && fileViewerOverlay.classList.contains('active')) {
-                     if (decryptionInterval) clearInterval(decryptionInterval);
-                     fileViewerOverlay.classList.remove('active');
-                     viewerContentElement.innerHTML = '';
-                 }
-            });
-
-        }); // End DOMContentLoaded
+        }
     </script>
 
 </body>
