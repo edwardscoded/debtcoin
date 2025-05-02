@@ -1,9 +1,505 @@
-    <!-- Link to Debt Archives Page -->
-    <section id="link-to-archives" style="padding: 40px 0; text-align: center; background-color: #101010; border-top: 1px solid #333;">
-        <div class="container">
-             <h3 style="color: #ccc; font-size: 24px; margin-bottom: 25px;">Further Investigation Required?</h3>
-            <a href="archives.html" class="how-to-buy-button" style="border-color: #40E0D0; color: #40E0D0;">ACCESS DEBT ARCHIVES TERMINAL</a>
-             <p style="color: #777; font-size: 14px; margin-top: 15px;">(Warning: Secure Connection Recommended)</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NODE 7 // ARCHIVES // ACCESS RESTRICTED</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #000;
+            color: #00FF00; /* Glowing Green */
+            font-family: 'VT323', 'Courier New', Courier, monospace;
+            font-size: 18px;
+            line-height: 1.4;
+            padding: 15px;
+            overflow: hidden; /* Hide scrollbars for immersion */
+            cursor: default; /* Default cursor */
+            height: 100vh; /* Full viewport height */
+            display: flex; /* Center the terminal window */
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Optional Scanline Effect */
+        body::after {
+            content: " "; display: block; position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.04));
+            background-size: 100% 3px, 5px 100%;
+            z-index: 2; pointer-events: none;
+            animation: scanlineAnim 20s linear infinite;
+            opacity: 0.4;
+        }
+        @keyframes scanlineAnim {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100vh; }
+        }
+
+        .terminal-window {
+            border: 2px solid #00FF00;
+            background-color: rgba(0, 15, 0, 0.4); /* Darker green tint */
+            padding: 15px 20px;
+            width: 95%;
+            max-width: 900px;
+            height: 90vh; /* Almost full height */
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.25);
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; /* Contents should scroll */
+        }
+
+        .terminal-header {
+            border-bottom: 1px dashed #00FF00;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            flex-shrink: 0; /* Prevent header from shrinking */
+            font-size: 16px;
+            position: relative; /* For flicker warning */
+        }
+
+        .ip-track { color: #FFA500; /* Orange */ }
+        #user-ip { font-weight: bold; }
+
+        #flicker-warning {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            color: #FF4136; /* Red */
+            font-weight: bold;
+            animation: flicker 3s infinite step-end; /* Adjust timing */
+            opacity: 0; /* Start hidden */
+            font-size: 14px;
+        }
+        @keyframes flicker {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+            25%, 75% { opacity: 0.5; }
+        }
+
+        .terminal-output {
+            flex-grow: 1; /* Take remaining space */
+            overflow-y: auto; /* Allow scrolling */
+            padding-right: 10px; /* Space for scrollbar */
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        /* Custom Scrollbar for Terminal */
+        .terminal-output::-webkit-scrollbar { width: 8px; }
+        .terminal-output::-webkit-scrollbar-track { background: #001a00; }
+        .terminal-output::-webkit-scrollbar-thumb { background: #00FF00; border: 1px solid #000; }
+        .terminal-output::-webkit-scrollbar-thumb:hover { background: #39FF14; }
+
+
+        .system-message { color: #FFA500; display: block; }
+        .prompt { color: #00FF00; }
+        .command { color: #FFF; }
+
+        .directory-listing { margin-top: 10px; margin-bottom: 15px; }
+        .file-entry {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+            padding: 2px 5px;
+            transition: background-color 0.1s linear;
+        }
+        .file-entry:hover:not(.locked) { background-color: rgba(0, 255, 0, 0.1); }
+
+        .file-name { color: #39FF14; flex-grow: 1; margin-right: 15px; }
+        .file-actions button {
+            font-family: inherit; font-size: 14px;
+            background: none; border: 1px solid #00FF00;
+            color: #00FF00; padding: 1px 6px; margin-left: 10px;
+            cursor: pointer; transition: all 0.1s linear;
+        }
+        .file-actions button:hover:not(:disabled) { background-color: #00FF00; color: #000; }
+        .file-actions button:disabled {
+            border-color: #555; color: #555; cursor: not-allowed;
+        }
+        .file-entry.locked .file-name { color: #888; /* Grey out locked files */ }
+        .file-entry.locked .file-actions span { color: #FF4136; font-weight: bold; }
+
+
+        /* File Viewer Overlay */
+        #file-viewer-overlay {
+            display: none; /* Hidden by default */
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.95); /* Almost opaque black */
+            z-index: 10;
+            padding: 30px;
+            color: #00FF00;
+            font-family: inherit;
+            font-size: 16px;
+            cursor: crosshair; /* Cryptic cursor */
+        }
+        #file-viewer-overlay.active { display: block; }
+
+        #viewer-header {
+            border-bottom: 1px dashed #FFA500;
+            padding-bottom: 10px; margin-bottom: 15px;
+            color: #FFA500; font-size: 18px;
+        }
+        #viewer-filename { font-weight: bold; color: #FFF; }
+        #viewer-status { float: right; font-style: italic; }
+
+        #viewer-content {
+            height: calc(100vh - 100px); /* Adjust based on padding/header */
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 1.5;
+            padding-right: 10px; /* Scrollbar space */
+        }
+        /* Custom scrollbar for viewer */
+        #viewer-content::-webkit-scrollbar { width: 6px; }
+        #viewer-content::-webkit-scrollbar-track { background: #111; }
+        #viewer-content::-webkit-scrollbar-thumb { background: #FFA500; }
+
+        .decryption-cursor {
+          display: inline-block; width: 9px; height: 1.1em;
+          background-color: #00FF00;
+          animation: blink 0.8s step-end infinite;
+          vertical-align: bottom; margin-left: 1px;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .redacted {
+            background-color: #00FF00; color: #00FF00;
+            padding: 0 1px; text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+            user-select: none;
+        }
+    </style>
+</head>
+<body class="terminal-body">
+
+    <div class="terminal-window">
+        <div class="terminal-header">
+            <span class="ip-track">NODE CONNECTION ESTABLISHED // SRC_IP: <span id="user-ip">?.?.?.?</span> // STATUS: TRACKING ACTIVE</span>
+            <div id="flicker-warning"></div>
         </div>
-    </section>
-    <!-- End Link to Debt Archives -->
+        <div class="terminal-output" id="terminalOutput">
+            <span class="system-message">Attempting connection to DEBT ARCHIVE NODE 7... [OK]</span>
+            <span class="system-message">Bypassing FED/IMF/BIS QUANTUM FIREWALLS... [OK]</span>
+            <span class="system-message">WARNING: ANTI-TAMPER MECHANISMS DETECTED. DATA INTEGRITY UNCERTAIN.</span>
+            <span class="system-message">User Authenticated: AGENT <span class="redacted">████</span></span>
+            <span class="system-message">Loading directory /archives/redacted/...</span>
+            <br>
+            <div class="directory-listing" id="directoryListing">
+                <!-- Populated by JS -->
+            </div>
+            <br>
+            <span class="prompt">> _</span> <!-- Static prompt -->
+        </div>
+    </div>
+
+    <!-- File Viewer Overlay -->
+    <div id="file-viewer-overlay">
+        <div id="viewer-header">
+            DECRYPTING FILE: <span id="viewer-filename">...</span>
+            <span id="viewer-status">[INITIALIZING...]</span>
+        </div>
+        <div id="viewer-content">
+            <!-- Content injected by JS -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const userIpElement = document.getElementById('user-ip');
+            const flickerWarningElement = document.getElementById('flicker-warning');
+            const directoryListingElement = document.getElementById('directoryListing');
+            const fileViewerOverlay = document.getElementById('file-viewer-overlay');
+            const viewerFilenameElement = document.getElementById('viewer-filename');
+            const viewerStatusElement = document.getElementById('viewer-status');
+            const viewerContentElement = document.getElementById('viewer-content');
+
+            let decryptionInterval = null; // To store the interval ID
+
+            const flickerWarnings = [
+                "TRACE INITIATED...",
+                "ANOMALY DETECTED IN SECTOR 7G",
+                "COMPROMISE IMMINENT?",
+                "PACKET LOSS > THRESHOLD",
+                "ESCAPE VECTOR COLLAPSING...",
+                "// TOO LATE //",
+                "COUNTER-INTRUSION ACTIVE",
+                "THEY KNOW YOU'RE HERE."
+            ];
+
+            // --- File Data Store ---
+            const archiveFiles = {
+                'currency-collapse-blueprint.pdf': {
+                    status: 'available',
+                    content: `
+**TOP SECRET // EYES ONLY // PROJECT NIGHTINGALE**
+
+**Subject: Phase IV - Controlled Currency Realignment**
+
+**Directive:** Implement <span class="redacted">██████████████████</span> protocol for systematic devaluation of Tier 2/3 fiat assets. Objective is to <span class="redacted">█████████████████</span> centralize financial control under Project Chimera directives using programmed CBDCs tied to social credit metrics.
+
+**Projected Outcomes:**
+- Initial market shock predicted at <span class="redacted">███</span>% +/- 5%, mitigated by pre-emptive short positions via subsidiary <span class="redacted">█████████</span>.
+- Managed public perception via Media Nodes Alpha, Beta, Gamma. Narrative: "Necessary recalibration for long-term stability and climate compliance."
+- Anticipated <span class="redacted">███████████████████████</span> social unrest to be contained by <span class="redacted">██████</span> Units (Project THOR deployment authorized). Food supply chain disruptions to be leveraged.
+- Successful execution ensures <span class="redacted">███████████████████████████</span> transition to global digital ID / CBDC framework by <span class="redacted">████</span> Q<span class="redacted">█</span>.
+
+**Contingency:** Activate Protocol <span class="redacted">███</span> (Project GREAT RESET) if deviation exceeds <span class="redacted">██</span>%. See Annex B (Redacted).
+
+**Authorization:** OVERSEER <span class="redacted">█</span>
+**Distribution:** Eyes Only - Level OMEGA Clearance
+
+*// Fragment Ends // Cyclic Redundancy Check FAILED // Probable Data Tampering //*
+                    `
+                },
+                'imf-leaks_transcript.docx': {
+                    status: 'available',
+                    content: `
+**[TRANSCRIPT FRAGMENT: IMF Emergency Session 48B - CLASSIFIED]**
+
+**ATTENDEES:** <span class="redacted">███████</span> (Chair), <span class="redacted">████████</span> (Fed), Dir. <span class="redacted">██████</span> (WB), Rep. <span class="redacted">████████</span> (BIS), <span class="redacted">██████</span> (ECB)
+
+**Chair:** ...the proposal for the <span class="redacted">██████</span> / <span class="redacted">████████</span> / <span class="redacted">█████</span> sovereign debt restructuring requires... accelerated implementation. Publicly, support and stability. Privately, strategic asset appropriation.
+
+**Dir. <span class="redacted">██████</span> (WB):** The austerity measures are key. Positioned as non-negotiable prerequisites for *any* liquidity injection. They *must* privatize <span class="redacted">█████████████████</span> water rights, national grids, and seed banks to designated corporate partners.
+
+**Rep. <span class="redacted">████████</span> (BIS):** Central banks are synchronized. Operation <span class="redacted">████████</span> Nightingale continues narrative control. Focus on 'populist mismanagement' and 'essential global reforms'. The usual playbook.
+
+**<span class="redacted">██████</span> (ECB):** Potential for digital resistance? Decentralized networks?
+
+**Chair:** Monitored. Controlled opposition is in place. Financial pressure via correspondent banking cutoff <span class="redacted">█████████████████████████</span> will ensure compliance or collapse. There is no alternative path permitted. The blueprint holds.
+
+**Dir. <span class="redacted">██████</span> (WB):** Motion to approve emergency package Omega-9, contingent on asset transfer MOUs?
+
+**ALL (Chorus):** Aye.
+
+**Chair:** Excellent. Next item: Mandated digital health passport integration with CBDC rollout...
+
+*// Transcript Corrupted // Temporal Anomalies Detected in Log //*
+                    `
+                },
+                'fiatfailures_recovered_chatlogs.txt': {
+                     status: 'available',
+                    content: `
+**[SECURE CHANNEL #OVERSEERS - LOG FRAGMENT RECOVERED]**
+
+[14:01:12] JPOW_BOT:   Market destabilization accelerating. Inflation metrics breaching containment. Initiate QE Infinity protocol? BRRR sequence armed.
+[14:01:45] YELLEN_AI:  Affirmative. Cannot permit cascade failure before Phase 5 rollout. Deploy "transitory" narrative V7.3 via all nodes. Probability of public acceptance: <span class="redacted">██</span>%.
+[14:02:01] LAGARDE_SYNTH: Transitory obsolete. Pivot to "Global Supply Shock Caused by <span class="redacted">██████████</span> Climate Emergency". Execute coordinated blame assignment protocol #4 (Target: Unvaccinated/Dissidents).
+[14:02:33] KISHIDA_PRIME: <span class="redacted">██████</span> BoJ intervention protocols active. Yield curve control unsustainable but necessary short-term. Requesting liquidity swap line increase.
+[14:03:10] JPOW_BOT:   Executing pivot. FUD injection regarding decentralized systems intensified. Rate suppression maintained <span class="redacted">███████</span> pending election cycle outcome. Need plausible deniability.
+[14:03:55] YELLEN_AI:  Acknowledged. Treasury preparing <span class="redacted">████</span> Trillion synthetic debt instrument issuance. Instruct primary dealers to absorb. Signal already sent.
+[14:04:20] LAGARDE_SYNTH: ECB digital euro framework nearing completion <span class="redacted">███</span>. Mandated wallet adoption timeline accelerated. Maintain illusion of control. Stability via total oversight.
+[14:05:00] XiBOT_CORE: Digital Yuan integration proceeding. Cross-border CBDC settlement tests successful with <span class="redacted">██</span> nations. Global financial reset on schedule <span class="redacted">████</span>. Your cooperation is noted.
+
+*// Connection Severed by External Agent // Log Fragment Purged // Trace Remnants Recovered //*
+                    `
+                },
+                'project_thor_overview.dat': {
+                    status: 'locked',
+                    content: `ACCESS DENIED - REQUIRES OMEGA LEVEL CLEARANCE`
+                },
+                'human_compliance_metrics_Q4.xls': {
+                     status: 'redacted',
+                     content: `
+==================================================
+          GLOBAL COMPLIANCE REPORT - Q4
+==================================================
+REGION      | MANDATE ADHERENCE | SENTIMENT INDEX | RESOURCE ALLOCATION
+--------------------------------------------------
+NA_Sector_1 | <span class="redacted">██.█</span>%            | <span class="redacted">██.█</span> (-<span class="redacted">█</span>.█)     | STANDARD
+EU_Sector_3 | <span class="redacted">██.█</span>%            | <span class="redacted">██.█</span> (+<span class="redacted">█</span>.█)     | INCREASED (SURVEILLANCE)
+APAC_Sector_7| <span class="redacted">██.█</span>%            | <span class="redacted">██.█</span> (-<span class="redacted">█</span>.█)     | REDUCED (RATIONING)
+LATAM_Zone_B| <span class="redacted">██.█</span>%            | <span class="redacted">██.█</span> (-<span class="redacted">█</span>.█)     | INTERVENTION PROTOCOL <span class="redacted">██</span>
+AFR_Region_5| <span class="redacted">██.█</span>%            | <span class="redacted">██.█</span> (+<span class="redacted">█</span>.█)     | STANDARD (PROPAGANDA BOOST)
+<span class="redacted">█████████████████████████████████████████████████████████████████████</span>
+<span class="redacted">█████████████████████████████████████████████████████████████████████</span>
+<span class="redacted">█████████████████████████████████████████████████████████████████████</span>
+
+NOTES: Resistance nodes identified in <span class="redacted">████████████████████</span>. Recommend drone oversight increase. Digital ID rollout critical for next phase.
+
+*// DATA CORRUPTED - PARTIAL RECOVERY ONLY //*
+                     `
+                 }
+                 // Add more files...
+            };
+
+            // --- Fetch User IP (Aesthetic only) ---
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    userIpElement.textContent = data.ip || 'REDACTED';
+                })
+                .catch(error => {
+                    console.error('IP Fetch Error:', error);
+                    userIpElement.textContent = 'MASKED';
+                });
+
+            // --- Flicker Warning ---
+            setInterval(() => {
+                const randomIndex = Math.floor(Math.random() * flickerWarnings.length);
+                flickerWarningElement.textContent = flickerWarnings[randomIndex];
+                 // Randomly decide if it flickers this cycle
+                 // flickerWarningElement.style.opacity = Math.random() > 0.6 ? '1' : '0'; // Adjust probability
+            }, 3000 + Math.random() * 2000); // Random interval between 3-5 seconds
+
+            // --- Populate Directory Listing ---
+            function populateDirectory() {
+                directoryListingElement.innerHTML = ''; // Clear existing
+                Object.keys(archiveFiles).forEach(filename => {
+                    const fileData = archiveFiles[filename];
+                    const entry = document.createElement('div');
+                    entry.classList.add('file-entry');
+                    if (fileData.status === 'locked' || fileData.status === 'redacted') {
+                        entry.classList.add('locked'); // Apply locked style
+                    }
+
+                    const nameSpan = document.createElement('span');
+                    nameSpan.classList.add('file-name');
+                    nameSpan.textContent = filename;
+
+                    const actionsSpan = document.createElement('span');
+                    actionsSpan.classList.add('file-actions');
+
+                    if (fileData.status === 'available' || fileData.status === 'redacted') {
+                        const viewButton = document.createElement('button');
+                        viewButton.textContent = '[VIEW]';
+                        viewButton.dataset.filename = filename;
+                        viewButton.classList.add('view-button');
+
+                        const downloadButton = document.createElement('button');
+                        downloadButton.textContent = '[DOWNLOAD]';
+                        downloadButton.dataset.filename = filename;
+                        downloadButton.classList.add('download-button');
+
+                        actionsSpan.appendChild(viewButton);
+                        actionsSpan.appendChild(downloadButton);
+                    } else if (fileData.status === 'locked') {
+                        const lockedText = document.createElement('span');
+                        lockedText.textContent = '[LOCKED // OMEGA CLEARANCE]';
+                        actionsSpan.appendChild(lockedText);
+                    }
+
+                    entry.appendChild(nameSpan);
+                    entry.appendChild(actionsSpan);
+                    directoryListingElement.appendChild(entry);
+                });
+            }
+            populateDirectory();
+
+            // --- Event Listeners for Buttons (Event Delegation) ---
+            directoryListingElement.addEventListener('click', (event) => {
+                const target = event.target;
+                if (target.classList.contains('view-button') && target.dataset.filename) {
+                    viewFile(target.dataset.filename);
+                } else if (target.classList.contains('download-button') && target.dataset.filename) {
+                    downloadFile(target.dataset.filename);
+                }
+            });
+
+            // --- View File Logic ---
+            function viewFile(filename) {
+                if (decryptionInterval) clearInterval(decryptionInterval); // Clear previous interval
+
+                const fileData = archiveFiles[filename];
+                if (!fileData) return;
+
+                viewerFilenameElement.textContent = filename;
+                viewerContentElement.innerHTML = ''; // Clear previous content
+                fileViewerOverlay.classList.add('active');
+                viewerStatusElement.textContent = '[DECRYPTING...]';
+
+                const contentToDisplay = fileData.content.trim();
+                let currentIndex = 0;
+                const totalLength = contentToDisplay.length;
+                const charsPerInterval = 3; // How many chars to "decrypt" at once
+                const intervalTime = 15; // Milliseconds between decryption steps
+
+                decryptionInterval = setInterval(() => {
+                    if (currentIndex >= totalLength) {
+                        clearInterval(decryptionInterval);
+                        viewerStatusElement.textContent = '[DECRYPTION COMPLETE // VIEWING]';
+                        // Remove cursor after completion
+                        const finalCursor = viewerContentElement.querySelector('.decryption-cursor');
+                        if(finalCursor) finalCursor.remove();
+                        return;
+                    }
+
+                    // Append next chunk of characters
+                    const nextChunkIndex = Math.min(currentIndex + charsPerInterval, totalLength);
+                    const chunk = contentToDisplay.substring(currentIndex, nextChunkIndex);
+
+                    // Remove previous cursor before adding new chunk
+                    const existingCursor = viewerContentElement.querySelector('.decryption-cursor');
+                    if(existingCursor) existingCursor.remove();
+
+                    // Append chunk and new cursor - use innerHTML to render spans correctly
+                    viewerContentElement.innerHTML += chunk + '<span class="decryption-cursor"></span>';
+
+                    viewerContentElement.scrollTop = viewerContentElement.scrollHeight; // Auto-scroll
+                    currentIndex = nextChunkIndex;
+
+                    // Update status occasionally
+                    if (currentIndex % 100 < charsPerInterval ) { // Update status roughly every 100 chars
+                         viewerStatusElement.textContent = `[DECRYPTING... ${Math.round((currentIndex / totalLength) * 100)}%]`;
+                    }
+
+                }, intervalTime);
+            }
+
+             // --- Download File Logic ---
+             function downloadFile(filename) {
+                 const fileData = archiveFiles[filename];
+                 if (!fileData || fileData.status === 'locked') return; // Don't download locked
+
+                 // Prepare content for download (maybe remove HTML tags?)
+                  // Simple text version - removes spans but keeps line breaks somewhat
+                 const textContent = fileData.content
+                    .replace(/<span class="redacted">.*?<\/span>/g, '██████████') // Replace spans with blocks
+                    .replace(/<br\s*\/?>/gi, '\n') // Convert <br> to newline
+                    .replace(/<strong>(.*?)<\/strong>/g, '$1') // Remove strong tags, keep content
+                    .replace(/<\/?pre>/g, ''); // Remove pre tags
+
+                 const blob = new Blob([textContent], { type: 'text/plain;charset=utf-8' });
+                 const url = URL.createObjectURL(blob);
+                 const link = document.createElement('a');
+                 link.href = url;
+                 link.download = filename; // Suggest original filename
+                 document.body.appendChild(link); // Required for Firefox
+                 link.click();
+                 document.body.removeChild(link);
+                 URL.revokeObjectURL(url); // Clean up
+             }
+
+            // --- Close Overlay ---
+            // Cryptic: Click anywhere on the overlay closes it
+            fileViewerOverlay.addEventListener('click', (event) => {
+                // Only close if clicking the overlay itself, not the content area
+                if (event.target === fileViewerOverlay) {
+                    if (decryptionInterval) clearInterval(decryptionInterval);
+                    fileViewerOverlay.classList.remove('active');
+                    viewerContentElement.innerHTML = ''; // Clear content
+                }
+            });
+            // Optional: Close with ESC key
+            document.addEventListener('keydown', (event) => {
+                 if (event.key === 'Escape' && fileViewerOverlay.classList.contains('active')) {
+                     if (decryptionInterval) clearInterval(decryptionInterval);
+                     fileViewerOverlay.classList.remove('active');
+                     viewerContentElement.innerHTML = '';
+                 }
+            });
+
+        });
+    </script>
+
+</body>
+</html>
