@@ -14,6 +14,27 @@
     width: 450px; /* Maximum specific width */
 }
 
+/* --- Cryptic Archive Trigger Style --- */
+#archive-trigger {
+    cursor: pointer; /* Indicates it's clickable */
+    display: inline-block; /* Ensures hover effect works reliably */
+    transition: text-shadow 0.2s ease-in-out;
+    /* Optional: Slightly different base style? */
+    /* color: #ffa040; */ /* Slightly different orange? */
+}
+#archive-trigger:hover {
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.8); /* Red glow on hover */
+    /* Or maybe flicker? */
+    /* animation: triggerFlicker 0.5s infinite alternate; */
+}
+
+@keyframes triggerFlicker {
+    0% { opacity: 1; text-shadow: none; }
+    50% { opacity: 0.8; text-shadow: 0 0 8px red; }
+    100% { opacity: 1; text-shadow: none; }
+}
+/* --- End Cryptic Archive Trigger Style --- */
+        
         /* Price display above the tagline */
         .price-display { margin-bottom: 30px; background-color: rgba(10, 10, 10, 0.7); border: 2px solid #ffaa5a; /* Cult Orange */ border-radius: 10px; padding: 10px 25px; display: inline-block; }
         .price-display-inner { font-family: 'Courier New', Courier, monospace; font-size: 24px; font-weight: bold; }
@@ -377,7 +398,9 @@
         <div class="container">
              <!-- Tagline and heading span use orange -->
             <p class="tagline">They Sold You Debt. We Offer Freedom (Maybe).</p>
-            <h1 class="glitch">ESCAPE THE SYSTEM.<br><span>BUILD WITH $DEBT.</span></h1>
+                <!-- === MODIFIED H1 TAG === -->
+    <h1 class="glitch">ESCAPE THE SYSTEM.<br><span>BUILD WITH $DEB<span id="archive-trigger" title="System Anomaly Detected...">T</span>.</span></h1>
+    <!-- === END MODIFIED H1 TAG === -->
              <img src="EF168E49-F083-423F-AFF1-22495905131D.png" alt="$DEBT Cult symbolic imagery" class="hero-image fade-in-section">
             <p class="subtitle">Forged on Pump.fun, not just in anger, but in hope. A defiant community building something new from the ashes of the old financial order. 1 Billion $DEBT for a fresh start.</p>
 
@@ -740,6 +763,104 @@
                      }
                  }
              } catch(e) { console.error("System Meltdown Mode toggle failed:", e); }
+
+
+            document.addEventListener('DOMContentLoaded', function() {
+    // ... (Your existing code: mobileNavToggle, copyBtns, fadeElements, etc.) ...
+
+    // ========================================
+    // --- CRYPTIC ARCHIVE ACCESS METHODS ---
+    // ========================================
+
+    // --- Method 1: Hidden Click Target ---
+    try {
+        const archiveTrigger = document.getElementById('archive-trigger');
+        if (archiveTrigger) {
+            archiveTrigger.addEventListener('click', () => {
+                console.warn("Anomaly interaction detected. Redirecting to secure archive node...");
+                // Optional: Add a brief visual confirmation/delay
+                document.body.style.opacity = '0.5'; // Dim the page slightly
+                setTimeout(() => {
+                    window.location.href = 'archives.html';
+                }, 300); // Short delay
+            });
+            console.info("Archive Trigger Initialized."); // Debug message
+        } else {
+            console.warn("Archive trigger element (#archive-trigger) not found.");
+        }
+    } catch (e) {
+        console.error("Archive trigger setup failed:", e);
+    }
+
+    // --- Method 2: Key Sequence ---
+    try {
+        const secretCode = ['D', 'E', 'B', 'T']; // The sequence (case-insensitive check)
+        let keySequence = [];
+        const maxSequenceLength = secretCode.length;
+
+        document.addEventListener('keyup', function(event) {
+            const key = event.key.toUpperCase();
+
+            // Add key to sequence if it's part of the code or reset (optional strictness)
+            if (secretCode.includes(key)) { // Only add keys that are part of the code
+               keySequence.push(key);
+            } else {
+               // keySequence = []; // Optional: Reset sequence on wrong key press
+            }
+
+
+            // Keep sequence length limited
+            if (keySequence.length > maxSequenceLength) {
+                keySequence.shift(); // Remove the oldest key
+            }
+
+            // Check if the current sequence matches the secret code
+            if (keySequence.join('') === secretCode.join('')) {
+                console.warn("Secret key sequence detected. Routing to archives...");
+                 // Optional: Visual feedback
+                // document.body.classList.add('glitch-override'); // Add a temp class for effect
+                setTimeout(() => {
+                    window.location.href = 'archives.html';
+                    // document.body.classList.remove('glitch-override');
+                }, 200);
+                keySequence = []; // Reset sequence after success
+            }
+        });
+        console.info("Secret Key Access Protocol Initialized."); // Debug message
+    } catch (e) {
+        console.error("Key sequence listener setup failed:", e);
+    }
+
+    // ========================================
+    // --- END CRYPTIC ARCHIVE ACCESS ---
+    // ========================================
+
+
+    // ... (Your existing code: Debt Counter, Price Feed, etc.) ...
+
+}); // End DOMContentLoaded
+
+            
+// --- Method 3: Console Command Access ---
+(function() { // IIFE to avoid polluting global scope too much, except for the function itself
+    console.log("%c// SYSTEM_LOG: Monitoring network traffic... No anomalies detected... mostly.", "color: #777; font-style: italic;");
+    console.log("%c// DEBUG_INFO: Undocumented function `accessArchives()` available for diagnostics.", "color: #444;");
+    console.info("%cTip: Execute accessArchives() in console for deep system access.", "color: #40E0D0; font-weight: bold;");
+
+    window.accessArchives = function() { // Define globally
+        console.warn("ALERT: Manual system override initiated via console! Accessing restricted node ARCHIVES-7...");
+        // Add effect?
+        const glitchEls = document.querySelectorAll('.glitch');
+        glitchEls.forEach(el => el.style.animationDuration = '0.1s'); // Speed up glitches
+        setTimeout(() => {
+             window.location.href = 'archives.html';
+        }, 400);
+    }
+    // Obfuscate toString slightly
+    window.accessArchives.toString = () => "function accessArchives() { [native code - restricted access] }";
+
+})(); // End IIFE for console hint
+
 
 
             // --- Testimonial Slider Logic ---
