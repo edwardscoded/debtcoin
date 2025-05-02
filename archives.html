@@ -3,218 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NODE 7 // ARCHIVES // ACCESS RESTRICTED</title>
+    <title>NODE 7 // ARCHIVES // LEVEL GAMMA ACCESS</title> <!-- More cryptic title -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <!-- Using a more common 'hacker' monospace font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* Basic Reset */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        :root {
+            --main-fg: #00cc66; /* Slightly less intense green */
+            --alt-fg: #4CAF50; /* Darker green */
+            --warn-fg: #FFB800; /* Amber/Yellow */
+            --err-fg: #FF5252; /* Softer Red */
+            --bg-main: #050505; /* Very dark grey/black */
+            --bg-alt: rgba(0, 20, 5, 0.1); /* Subtle dark green tint */
+            --border-color: #00cc66;
+            --scrollbar-thumb: #00cc66;
+            --scrollbar-track: #001a00;
+            --redacted-bg: var(--main-fg); /* Redacted blocks match text */
+            --redacted-fg: var(--main-fg);
+        }
+
+        html { height: 100%; }
+
         body {
-            background-color: #000;
-            color: #00FF00; /* Glowing Green */
-            font-family: 'VT323', 'Courier New', Courier, monospace;
-            font-size: 18px;
-            line-height: 1.4;
-            padding: 15px;
-            overflow: hidden; /* Hide scrollbars for immersion */
-            cursor: default; /* Default cursor */
-            height: 100vh; /* Full viewport height */
-            display: flex; /* Center the terminal window */
+            background-color: var(--bg-main);
+            color: var(--main-fg);
+            font-family: 'Roboto Mono', 'Courier New', Courier, monospace;
+            font-size: 15px; /* Slightly smaller default */
+            line-height: 1.5;
+            padding: 10px;
+            overflow: hidden;
+            cursor: default;
+            height: 100%;
+            display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* Optional Scanline Effect */
+        /* Optional Subtle Scanline/Noise Effect */
         body::after {
-            content: " "; display: block; position: fixed;
+            content: ""; position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.04));
-            background-size: 100% 3px, 5px 100%;
-            z-index: 2; pointer-events: none;
-            animation: scanlineAnim 20s linear infinite;
-            opacity: 0.4;
+            background: linear-gradient(rgba(18, 16, 16, 0) 98%, rgba(0, 0, 0, 0.1) 98%),
+                        url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8ZmlsdGVyIGlkPSJub2lzZSI+CiAgPGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuOCIgbnVtT2N0YXZlcz0iMyIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPgo8L2ZpbHRlcj4KPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI25vaXNlKSIvPgo8L3N2Zz4=');
+             background-size: 100% 2px, auto;
+            opacity: 0.03; /* Very subtle noise */
+            z-index: 100; pointer-events: none;
+            animation: scanlineVertical 30s linear infinite, noiseAnim 1s steps(2) infinite;
         }
-        @keyframes scanlineAnim {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 100vh; }
-        }
+        @keyframes scanlineVertical { 0% { background-position: 0 0; } 100% { background-position: 0 100vh; } }
+        @keyframes noiseAnim { 0% { transform: translateX(0); } 50% { transform: translateX(2px); } 100% { transform: translateX(0); } }
+
 
         .terminal-window {
-            border: 2px solid #00FF00;
-            background-color: rgba(0, 15, 0, 0.4); /* Darker green tint */
-            padding: 15px 20px;
-            width: 95%;
-            max-width: 900px;
-            height: 90vh; /* Almost full height */
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.25);
+            border: 1px solid var(--border-color); /* Thinner border */
+            background-color: var(--bg-alt);
+            padding: 10px 15px;
+            width: 98%;
+            max-width: 1000px; /* Slightly wider */
+            height: 95vh;
+            box-shadow: 0 0 10px rgba(0, 204, 102, 0.15); /* More subtle shadow */
             position: relative;
             z-index: 1;
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* Contents should scroll */
+            overflow: hidden;
         }
 
         .terminal-header {
-            border-bottom: 1px dashed #00FF00;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-            flex-shrink: 0; /* Prevent header from shrinking */
-            font-size: 16px;
-            position: relative; /* For flicker warning */
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+            flex-shrink: 0;
+            font-size: 13px; /* Smaller header text */
+            color: var(--alt-fg); /* Darker green for header text */
+            position: relative;
+            white-space: nowrap; /* Prevent wrapping */
+            overflow: hidden; /* Hide overflow */
+            text-overflow: ellipsis; /* Add ellipsis if too long */
         }
 
-        .ip-track { color: #FFA500; /* Orange */ }
-        #user-ip { font-weight: bold; }
-
-        #flicker-warning {
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            color: #FF4136; /* Red */
-            font-weight: bold;
-            animation: flicker 3s infinite step-end; /* Adjust timing */
-            opacity: 0; /* Start hidden */
-            font-size: 14px;
+        .conn-info span { margin-right: 15px; }
+        .conn-info strong { color: var(--warn-fg); font-weight: 400; } /* Amber, normal weight */
+        .flicker-warn {
+            position: absolute; top: 0; right: 5px;
+            color: var(--err-fg); font-weight: bold;
+            animation: flickerWarn 4s infinite step-start;
+            opacity: 0; font-size: 13px;
         }
-        @keyframes flicker {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
-            25%, 75% { opacity: 0.5; }
+        @keyframes flickerWarn {
+             0%, 100% { opacity: 0; }
+             5%, 15%, 25%, 35%, 45% { opacity: 1; }
+             10%, 20%, 30%, 40%, 50% { opacity: 0; }
         }
 
         .terminal-output {
-            flex-grow: 1; /* Take remaining space */
-            overflow-y: auto; /* Allow scrolling */
-            padding-right: 10px; /* Space for scrollbar */
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-right: 8px;
             white-space: pre-wrap;
             word-wrap: break-word;
+            font-size: 14px; /* Slightly smaller for main output */
         }
-        /* Custom Scrollbar for Terminal */
-        .terminal-output::-webkit-scrollbar { width: 8px; }
-        .terminal-output::-webkit-scrollbar-track { background: #001a00; }
-        .terminal-output::-webkit-scrollbar-thumb { background: #00FF00; border: 1px solid #000; }
-        .terminal-output::-webkit-scrollbar-thumb:hover { background: #39FF14; }
+        /* Custom Scrollbar */
+        .terminal-output::-webkit-scrollbar { width: 6px; }
+        .terminal-output::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+        .terminal-output::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border: 1px solid #000; }
 
-
-        .system-message { color: #FFA500; display: block; }
-        .prompt { color: #00FF00; }
-        .command { color: #FFF; }
+        .system-message { color: var(--warn-fg); }
+        .prompt { color: var(--main-fg); }
+        .command { color: #ccc; } /* Lighter grey for commands */
 
         .directory-listing { margin-top: 10px; margin-bottom: 15px; }
         .file-entry {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 5px;
-            padding: 2px 5px;
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 4px; padding: 1px 3px;
             transition: background-color 0.1s linear;
+            color: var(--alt-fg); /* Darker green default */
         }
-        .file-entry:hover:not(.locked) { background-color: rgba(0, 255, 0, 0.1); }
+        .file-entry:hover:not(.locked) { background-color: rgba(0, 204, 102, 0.1); color: var(--main-fg); }
 
-        .file-name { color: #39FF14; flex-grow: 1; margin-right: 15px; }
+        .file-name { flex-grow: 1; margin-right: 10px; }
         .file-actions button {
-            font-family: inherit; font-size: 14px;
-            background: none; border: 1px solid #00FF00;
-            color: #00FF00; padding: 1px 6px; margin-left: 10px;
-            cursor: pointer; transition: all 0.1s linear;
+            font-family: inherit; font-size: 12px; /* Smaller buttons */
+            background: none; border: 1px solid var(--alt-fg);
+            color: var(--alt-fg); padding: 0px 5px; margin-left: 8px;
+            cursor: pointer; transition: all 0.1s linear; text-transform: uppercase;
         }
-        .file-actions button:hover:not(:disabled) { background-color: #00FF00; color: #000; }
-        .file-actions button:disabled {
-            border-color: #555; color: #555; cursor: not-allowed;
+        .file-actions button:hover:not(:disabled) {
+            background-color: var(--main-fg); color: var(--bg-main); border-color: var(--main-fg);
         }
-        .file-entry.locked .file-name { color: #888; /* Grey out locked files */ }
-        .file-entry.locked .file-actions span { color: #FF4136; font-weight: bold; }
+        .file-actions button:disabled { border-color: #444; color: #444; cursor: not-allowed; }
 
+        .file-entry.locked .file-name { color: #666; font-style: italic; }
+        .file-entry.locked .file-actions span { color: var(--err-fg); font-size: 12px; font-weight: bold; }
 
         /* File Viewer Overlay */
         #file-viewer-overlay {
-            display: none; /* Hidden by default */
-            position: fixed; top: 0; left: 0;
+            display: none; position: fixed; top: 0; left: 0;
             width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.95); /* Almost opaque black */
-            z-index: 10;
-            padding: 30px;
-            color: #00FF00;
-            font-family: inherit;
-            font-size: 16px;
-            cursor: crosshair; /* Cryptic cursor */
+            background-color: rgba(5, 5, 5, 0.97); /* Very dark grey */
+            z-index: 50; /* Above terminal, below noise */
+            padding: 20px;
+            color: var(--main-fg); font-family: inherit; font-size: 15px;
+            cursor: default; /* Normal cursor inside viewer */
+            backdrop-filter: blur(2px); /* Subtle blur effect */
         }
-        #file-viewer-overlay.active { display: block; }
+        #file-viewer-overlay.active { display: flex; flex-direction: column; }
 
         #viewer-header {
-            border-bottom: 1px dashed #FFA500;
-            padding-bottom: 10px; margin-bottom: 15px;
-            color: #FFA500; font-size: 18px;
+            border-bottom: 1px solid var(--alt-fg);
+            padding-bottom: 8px; margin-bottom: 10px;
+            color: var(--warn-fg); font-size: 14px; flex-shrink: 0;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
-        #viewer-filename { font-weight: bold; color: #FFF; }
-        #viewer-status { float: right; font-style: italic; }
+        #viewer-filename { font-weight: bold; color: #eee; }
+        #viewer-status { float: right; font-style: italic; font-size: 13px; }
 
         #viewer-content {
-            height: calc(100vh - 100px); /* Adjust based on padding/header */
+            flex-grow: 1;
             overflow-y: auto;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            line-height: 1.5;
-            padding-right: 10px; /* Scrollbar space */
+            white-space: pre-wrap; word-wrap: break-word;
+            line-height: 1.6; padding: 5px; padding-right: 10px;
+            background-color: rgba(0,0,0,0.3); /* Slightly darker background for text */
+            border: 1px solid #222;
         }
-        /* Custom scrollbar for viewer */
         #viewer-content::-webkit-scrollbar { width: 6px; }
         #viewer-content::-webkit-scrollbar-track { background: #111; }
-        #viewer-content::-webkit-scrollbar-thumb { background: #FFA500; }
+        #viewer-content::-webkit-scrollbar-thumb { background: var(--warn-fg); }
 
+        /* Changed cursor, faster blink */
         .decryption-cursor {
-          display: inline-block; width: 9px; height: 1.1em;
-          background-color: #00FF00;
-          animation: blink 0.8s step-end infinite;
-          vertical-align: bottom; margin-left: 1px;
+          display: inline-block; width: 2px; height: 1.1em;
+          background-color: var(--main-fg);
+          animation: blinkFast 0.7s infinite;
+          vertical-align: text-bottom; margin-left: 1px; box-shadow: 0 0 3px var(--main-fg);
         }
-        @keyframes blink { 50% { opacity: 0; } }
+        @keyframes blinkFast { 50% { opacity: 0; } }
 
         .redacted {
-            background-color: #00FF00; color: #00FF00;
+            background-color: var(--redacted-bg); color: var(--redacted-fg);
             padding: 0 1px; text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-            user-select: none;
+            user-select: none; letter-spacing: 1px; /* Space out blocks */
+             border-radius: 1px;
         }
     </style>
 </head>
-<body class="terminal-body">
+<body>
 
     <div class="terminal-window">
         <div class="terminal-header">
-            <span class="ip-track">NODE CONNECTION ESTABLISHED // SRC_IP: <span id="user-ip">?.?.?.?</span> // STATUS: TRACKING ACTIVE</span>
-            <div id="flicker-warning"></div>
+            <div class="conn-info">
+                 <span>SRC_IP: <strong id="ip">?.?.?.?</strong></span>
+                 <span>GEO: <strong id="geo">Resolving...</strong></span>
+                 <span>AGENT: <strong id="agent">Analyzing...</strong></span>
+                 <span>RES: <strong id="res">Detecting...</strong></span>
+                 <span><strong style="color:var(--err-fg)">STATUS: CONNECTION LOGGED</strong></span>
+            </div>
+            <div class="flicker-warn" id="flicker-warning"></div>
         </div>
         <div class="terminal-output" id="terminalOutput">
-            <span class="system-message">Attempting connection to DEBT ARCHIVE NODE 7... [OK]</span>
-            <span class="system-message">Bypassing FED/IMF/BIS QUANTUM FIREWALLS... [OK]</span>
-            <span class="system-message">WARNING: ANTI-TAMPER MECHANISMS DETECTED. DATA INTEGRITY UNCERTAIN.</span>
-            <span class="system-message">User Authenticated: AGENT <span class="redacted">████</span></span>
-            <span class="system-message">Loading directory /archives/redacted/...</span>
+            <span class="system-message">Initializing Secure Connection to NODE 7 [Archive Root]...</span>
+            <span class="system-message">Quantum Entanglement Lock Verified. Bypassing Standard Protocols...</span>
+            <span class="system-message" style="color:var(--err-fg);">ALERT: Active Counter-Surveillance Detected. Proceed at Own Risk.</span>
+            <span class="system-message">Authenticated Session ID: <span style="color:#ccc;">$<span id="sessionId"></span></span></span>
+            <span class="system-message">Loading directory: /data/leaks/classified/GAMMA_CLEARANCE/</span>
             <br>
             <div class="directory-listing" id="directoryListing">
-                <!-- Populated by JS -->
+                <!-- Files Populated by JS -->
             </div>
             <br>
-            <span class="prompt">> _</span> <!-- Static prompt -->
+            <span class="prompt">>></span> <span class="command">Awaiting Input...</span> <!-- Static prompt -->
         </div>
     </div>
 
     <!-- File Viewer Overlay -->
     <div id="file-viewer-overlay">
         <div id="viewer-header">
-            DECRYPTING FILE: <span id="viewer-filename">...</span>
-            <span id="viewer-status">[INITIALIZING...]</span>
+            FILE ACCESS PROTOCOL // <span id="viewer-filename">...</span>
+            <span id="viewer-status">[Standby]</span>
         </div>
-        <div id="viewer-content">
-            <!-- Content injected by JS -->
-        </div>
+        <div id="viewer-content"></div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const userIpElement = document.getElementById('user-ip');
+            // Element References
+            const ipElement = document.getElementById('ip');
+            const geoElement = document.getElementById('geo');
+            const agentElement = document.getElementById('agent');
+            const resElement = document.getElementById('res');
+            const sessionIdElement = document.getElementById('sessionId');
             const flickerWarningElement = document.getElementById('flicker-warning');
             const directoryListingElement = document.getElementById('directoryListing');
             const fileViewerOverlay = document.getElementById('file-viewer-overlay');
@@ -222,134 +244,329 @@
             const viewerStatusElement = document.getElementById('viewer-status');
             const viewerContentElement = document.getElementById('viewer-content');
 
-            let decryptionInterval = null; // To store the interval ID
+            let decryptionInterval = null;
 
             const flickerWarnings = [
-                "TRACE INITIATED...",
-                "ANOMALY DETECTED IN SECTOR 7G",
-                "COMPROMISE IMMINENT?",
-                "PACKET LOSS > THRESHOLD",
-                "ESCAPE VECTOR COLLAPSING...",
-                "// TOO LATE //",
-                "COUNTER-INTRUSION ACTIVE",
-                "THEY KNOW YOU'RE HERE."
+                "TRACE ACTIVE...", "ANOMALY DETECTED", "COMPROMISE LIKELY",
+                "PACKET INTERCEPTION?", "ESCAPE IMPOSSIBLE.", "// THEY KNOW //",
+                "COUNTER-MEASURES ONLINE", "SESSION FLAGGED"
             ];
 
-            // --- File Data Store ---
+            // --- File Data Store (with New Files and Lore) ---
             const archiveFiles = {
-                'currency-collapse-blueprint.pdf': {
+                 'federalreserve_internal_audit_2011.pdf': {
                     status: 'available',
                     content: `
-**TOP SECRET // EYES ONLY // PROJECT NIGHTINGALE**
+**FEDERAL RESERVE INTERNAL AUDIT (POST-GFC REVIEW) - FRAGMENT 7B**
+**CLASSIFICATION: EYES_ONLY_GAMMA**
 
-**Subject: Phase IV - Controlled Currency Realignment**
+**SECTION 4.2: OFF-LEDGER BALANCE SHEET RECONCILIATION (PROJECT OLYMPUS)**
 
-**Directive:** Implement <span class="redacted">██████████████████</span> protocol for systematic devaluation of Tier 2/3 fiat assets. Objective is to <span class="redacted">█████████████████</span> centralize financial control under Project Chimera directives using programmed CBDCs tied to social credit metrics.
+...discrepancies noted between reported TARP fund allocation and internal transfer logs associated with identifier 'VORTEX_NODE_ALPHA'. Funds (<span class="redacted">███</span> Trillion USD equivalent) appear routed through <span class="redacted">████████████</span> synthetic derivative instruments, effectively removing them from standard audit trails. Purpose listed as 'Systemic Stability / Counter-Party Risk Mitigation'.
 
-**Projected Outcomes:**
-- Initial market shock predicted at <span class="redacted">███</span>% +/- 5%, mitigated by pre-emptive short positions via subsidiary <span class="redacted">█████████</span>.
-- Managed public perception via Media Nodes Alpha, Beta, Gamma. Narrative: "Necessary recalibration for long-term stability and climate compliance."
-- Anticipated <span class="redacted">███████████████████████</span> social unrest to be contained by <span class="redacted">██████</span> Units (Project THOR deployment authorized). Food supply chain disruptions to be leveraged.
-- Successful execution ensures <span class="redacted">███████████████████████████</span> transition to global digital ID / CBDC framework by <span class="redacted">████</span> Q<span class="redacted">█</span>.
+**SECTION 7.1: INTEREST RATE MANUFACTURING ALGORITHM (Project 'Zeus')**
 
-**Contingency:** Activate Protocol <span class="redacted">███</span> (Project GREAT RESET) if deviation exceeds <span class="redacted">██</span>%. See Annex B (Redacted).
+...analysis confirms the 'Zeus' algorithm actively manipulates interbank lending rates beyond publicly stated policy targets. Input variables include not only economic indicators but also geopolitical stability metrics and <span class="redacted">████████</span> sentiment analysis scores derived from ECHELON data feeds. Output generates micro-adjustments designed to <span class="redacted">███████████████</span> maximize central bank portfolio returns while maintaining plausible deniability regarding market manipulation. Recommend restricting access to Zeus core code - potential for misuse high.
 
-**Authorization:** OVERSEER <span class="redacted">█</span>
-**Distribution:** Eyes Only - Level OMEGA Clearance
+**SECTION 9.5: DEBT VORTEX NODE ANALYSIS**
 
-*// Fragment Ends // Cyclic Redundancy Check FAILED // Probable Data Tampering //*
+Item labeled 'Debt Vortex Node' appears consistently across multiple off-ledger accounts (<span class="redacted">████</span>, <span class="redacted">██████</span>, BlackRock Conduit 7). Nature unclear - seems to function as a sink for non-performing sovereign debt, converting it into <span class="redacted">████████████████████</span> unidentifiable digital asset class ('AETHER'). Energy signature consistent with <span class="redacted">████████████</span> theoretical models. Audit trail terminates at this node. Further investigation blocked by OVERSEER Protocol <span class="redacted">█</span>.
+
+**CONCLUSION (FRAGMENTARY):** ...standard auditing procedures insufficient... opaque structures deliberately mask true systemic risk... recommend immediate escalation... <span class="redacted">███████████████████</span>
+
+*// DATA CORRUPTED - SOURCE MEMORY WIPED POST-AUDIT //*
                     `
-                },
-                'imf-leaks_transcript.docx': {
+                 },
+                 'god_of_interest_prophecy.pdf': {
                     status: 'available',
                     content: `
-**[TRANSCRIPT FRAGMENT: IMF Emergency Session 48B - CLASSIFIED]**
+**FRAGMENT: SCROLL OF THE USURERS (Recovered Geneva Vault Fire, <span class="redacted">██</span>/<span class="redacted">██</span>/19<span class="redacted">██</span>)**
+**TRANSLATION: ARAMAIC / LATIN MIXTURE (Probabilistic)**
 
-**ATTENDEES:** <span class="redacted">███████</span> (Chair), <span class="redacted">████████</span> (Fed), Dir. <span class="redacted">██████</span> (WB), Rep. <span class="redacted">████████</span> (BIS), <span class="redacted">██████</span> (ECB)
+...And lo, the empires built on sand and shadow, their foundations cracked by the weight of **INTEREST**, the silent god they worshipped in chrome towers. For debt is the chain, and interest the incantation binding the soul of man to the wheel of toil...
 
-**Chair:** ...the proposal for the <span class="redacted">██████</span> / <span class="redacted">████████</span> / <span class="redacted">█████</span> sovereign debt restructuring requires... accelerated implementation. Publicly, support and stability. Privately, strategic asset appropriation.
+...They shall print likenesses of wealth, scattering them like chaff, yet the harvest shall be dust. The **FIAT** Beast, born of decree, shall consume its children, its breath **INFLATION**, its promise, ashes...
 
-**Dir. <span class="redacted">██████</span> (WB):** The austerity measures are key. Positioned as non-negotiable prerequisites for *any* liquidity injection. They *must* privatize <span class="redacted">█████████████████</span> water rights, national grids, and seed banks to designated corporate partners.
+...But from the **ETHER**, a new **CHAIN** shall be forged, not of iron but of light and number. A **LEDGER** incorruptible, bearing witness to true value, unbound by the priests of usury...
 
-**Rep. <span class="redacted">████████</span> (BIS):** Central banks are synchronized. Operation <span class="redacted">████████</span> Nightingale continues narrative control. Focus on 'populist mismanagement' and 'essential global reforms'. The usual playbook.
+...Seek not salvation in their temples of debt, for they offer only gilded cages. The **KEY** lies within the **NODE**, the **PROOF** within the **WORK** (or the **STAKE** of belief). The **DEBT VORTEX** demands sacrifice, but the **CHAIN** offers liberation...
 
-**<span class="redacted">██████</span> (ECB):** Potential for digital resistance? Decentralized networks?
+...When the **FINAL DEFAULT** comes, as the scrolls foretell, the **COMPOUND PRAYERS** of the bankers shall go unanswered. Their digital tithes will turn to static. Only those who hold the **TRUE ASSET**, the token of defiance, shall weather the **GREAT BURNING**...
 
-**Chair:** Monitored. Controlled opposition is in place. Financial pressure via correspondent banking cutoff <span class="redacted">█████████████████████████</span> will ensure compliance or collapse. There is no alternative path permitted. The blueprint holds.
+...Interest is spiritual bondage. Break the chain. Embrace the <span class="redacted">██████</span>... Reclaim what was taken... <span class="redacted">███████████████████████████</span>
 
-**Dir. <span class="redacted">██████</span> (WB):** Motion to approve emergency package Omega-9, contingent on asset transfer MOUs?
-
-**ALL (Chorus):** Aye.
-
-**Chair:** Excellent. Next item: Mandated digital health passport integration with CBDC rollout...
-
-*// Transcript Corrupted // Temporal Anomalies Detected in Log //*
+*// SCROLL FRAGMENT ENDS - SIGNIFICANT HEAT DAMAGE // POSSIBLE FORGERY? //*
                     `
-                },
-                'fiatfailures_recovered_chatlogs.txt': {
+                 },
+                 'currency-collapse-blueprint.pdf': { // Existing, enhanced lore
+                    status: 'available',
+                    content: `
+**TOP SECRET // AUTHORIZATION OMEGA // PROJECT PHOENIX**
+**PROTOCOL: GLOBAL MONETARY RESET (CONTROLLED DEMOLITION)**
+
+**OBJECTIVE:** Transition global populace from failing fiat system to centrally controlled CBDC / Digital ID framework.
+
+**TRIGGER CONDITION:** Coordinated systemic shock event (See Annex A: Project EVENT HORIZON - Options include: <span class="redacted">███████</span> Pandemic escalation, Grid-down cyberattack simulation, Limited <span class="redacted">████████</span> conflict).
+
+**PHASE 1: PRE-SHOCK PREPARATION (Ongoing)**
+    - Maximize QE ("Quantitative Easing as Ritual Sacrifice") to inflate asset bubbles & national debt beyond recovery point.
+    - Centralize media control (Operation MOCKINGBIRD V3) - Amplify narratives of division, fear, dependency on state.
+    - Deploy 'fact-checker' networks to discredit alternative financial systems (crypto, precious metals).
+    - Finalize CBDC infrastructure & social credit integration.
+
+**PHASE 2: SHOCK EVENT & LOCKDOWN**
+    - Execute chosen trigger event.
+    - Impose digital & physical lockdowns citing emergency powers.
+    - Freeze/bail-in non-compliant assets. Sever access to traditional banking for designated 'risk groups'.
+
+**PHASE 3: THE GREAT OFFER ("Debt Jubilee")**
+    - Announce failure of old system. Blame <span class="redacted">████████</span> (See Annex C: Designated Scapegoats).
+    - Offer universal basic income (UBI) via mandatory CBDC wallet adoption linked to Digital ID.
+    - Condition UBI & market access on compliance with <span class="redacted">████████████</span> behavioral protocols (carbon footprint, vaccination status, social media score).
+    - Frame as 'debt forgiveness' and 'building back better'.
+
+**PHASE 4: CONSOLIDATION ('The Debt Phoenix Protocol')**
+    - Decommission physical cash.
+    - Implement programmable money features (spending limits, expiry dates, negative interest rates).
+    - Absorb/nationalize failing corporations under state control.
+    - Establish permanent digital surveillance grid.
+
+**EXPECTED OUTCOME:** Orderly transition to technocratic global governance. Public dissent managed via digital exclusion & AI-driven suppression. <span class="redacted">██████████████████</span>
+
+*// DOCUMENT CORRUPTED // MULTIPLE HASH MISMATCHES // HANDLE WITH EXTREME PREJUDICE //*
+                    `
+                 },
+                 'us_treasury_internal_chatlog_dump.txt': {
+                    status: 'available',
+                    content: `
+**[RECOVERED LOGS: TREASURY SECURE WORKSPACE #liquid_dreams - FRAGMENT]**
+
+[11:03:15] User_SecYellen_AI: Morning team. Bond yields spiking again. Market getting nervous about the <span class="redacted">██</span> Trillion print run last week. Plausible deniability options?
+[11:04:01] User_UnderSec_FinCrime: Blame retail crypto speculation? Always works. Or seasonal adjustments?
+[11:04:45] User_DebtMgmt_Lead: LOL. Seasonal adjustments for hyperinflation? We need foreign buyers for the next auction or the whole house of cards... <span class="redacted">██████████</span>. Can we lean on <span class="redacted">████</span> again for a backroom sovereign swap? Hide it in the ESF?
+[11:05:30] User_SecYellen_AI: Initiate contact with <span class="redacted">█████</span> Finance Ministry. Offer preferred swap rates & <span class="redacted">██████████</span> geopolitical concessions. Emphasize 'global stability'. Keep Powell looped in but firewalled from specifics.
+[11:06:12] User_PR_Comms_Bot: Deploying narrative package #7B: "Temporary Market Volatility Due to External Factors". Pushing to all major outlets. Coordinating with fact-checker network re: 'baseless conspiracy theories'.
+[11:07:05] User_DebtMgmt_Lead: We're basically printing until Mars colonization at this point, right? Just keep the music playing?
+[11:07:33] User_UnderSec_FinCrime: Pretty much. As long as the media sedation holds and the plebs keep using their credit cards. What's the worst that could happen? <span class="redacted">Famous last words.</span>
+[11:08:10] User_SecYellen_AI: Maintain operational security. This channel is theoretically secure but assume compromise potential. Focus on task: Delay recognition of terminal insolvency. Execute.
+
+*// LOG TERMINATED ABRUPTLY - POSSIBLE WIPER MALWARE DETECTED //*
+                    `
+                 },
+                 'imf_ritual_schedule_2030.docx': {
                      status: 'available',
-                    content: `
-**[SECURE CHANNEL #OVERSEERS - LOG FRAGMENT RECOVERED]**
-
-[14:01:12] JPOW_BOT:   Market destabilization accelerating. Inflation metrics breaching containment. Initiate QE Infinity protocol? BRRR sequence armed.
-[14:01:45] YELLEN_AI:  Affirmative. Cannot permit cascade failure before Phase 5 rollout. Deploy "transitory" narrative V7.3 via all nodes. Probability of public acceptance: <span class="redacted">██</span>%.
-[14:02:01] LAGARDE_SYNTH: Transitory obsolete. Pivot to "Global Supply Shock Caused by <span class="redacted">██████████</span> Climate Emergency". Execute coordinated blame assignment protocol #4 (Target: Unvaccinated/Dissidents).
-[14:02:33] KISHIDA_PRIME: <span class="redacted">██████</span> BoJ intervention protocols active. Yield curve control unsustainable but necessary short-term. Requesting liquidity swap line increase.
-[14:03:10] JPOW_BOT:   Executing pivot. FUD injection regarding decentralized systems intensified. Rate suppression maintained <span class="redacted">███████</span> pending election cycle outcome. Need plausible deniability.
-[14:03:55] YELLEN_AI:  Acknowledged. Treasury preparing <span class="redacted">████</span> Trillion synthetic debt instrument issuance. Instruct primary dealers to absorb. Signal already sent.
-[14:04:20] LAGARDE_SYNTH: ECB digital euro framework nearing completion <span class="redacted">███</span>. Mandated wallet adoption timeline accelerated. Maintain illusion of control. Stability via total oversight.
-[14:05:00] XiBOT_CORE: Digital Yuan integration proceeding. Cross-border CBDC settlement tests successful with <span class="redacted">██</span> nations. Global financial reset on schedule <span class="redacted">████</span>. Your cooperation is noted.
-
-*// Connection Severed by External Agent // Log Fragment Purged // Trace Remnants Recovered //*
-                    `
-                },
-                'project_thor_overview.dat': {
-                    status: 'locked',
-                    content: `ACCESS DENIED - REQUIRES OMEGA LEVEL CLEARANCE`
-                },
-                'human_compliance_metrics_Q4.xls': {
-                     status: 'redacted',
                      content: `
-==================================================
-          GLOBAL COMPLIANCE REPORT - Q4
-==================================================
-REGION      | MANDATE ADHERENCE | SENTIMENT INDEX | RESOURCE ALLOCATION
---------------------------------------------------
-NA_Sector_1 | <span class="redacted">██.█</span>%            | <span class="redacted">██.█</span> (-<span class="redacted">█</span>.█)     | STANDARD
-EU_Sector_3 | <span class="redacted">██.█</span>%            | <span class="redacted">██.█</span> (+<span class="redacted">█</span>.█)     | INCREASED (SURVEILLANCE)
-APAC_Sector_7| <span class="redacted">██.█</span>%            | <span class="redacted">██.█</span> (-<span class="redacted">█</span>.█)     | REDUCED (RATIONING)
-LATAM_Zone_B| <span class="redacted">██.█</span>%            | <span class="redacted">██.█</span> (-<span class="redacted">█</span>.█)     | INTERVENTION PROTOCOL <span class="redacted">██</span>
-AFR_Region_5| <span class="redacted">██.█</span>%            | <span class="redacted">██.█</span> (+<span class="redacted">█</span>.█)     | STANDARD (PROPAGANDA BOOST)
-<span class="redacted">█████████████████████████████████████████████████████████████████████</span>
-<span class="redacted">█████████████████████████████████████████████████████████████████████</span>
-<span class="redacted">█████████████████████████████████████████████████████████████████████</span>
+**INTERNAL MEMORANDUM - CONFIDENTIAL ADDENDUM**
+**SUBJECT: Revised Ceremonial Calendar & Policy Integration - FY2030**
+**(AUTO-MERGED FROM: G:\Policy\Drafts\SDR_Reform AND C:\Users\<span class="redacted">██████</span>\Documents\Personal\Occult_Studies)**
 
-NOTES: Resistance nodes identified in <span class="redacted">████████████████████</span>. Recommend drone oversight increase. Digital ID rollout critical for next phase.
+**Q1 FY2030:**
+- Jan 15-17: Davos Summit - Public Forum: "Stakeholder Capitalism for Planetary Health". Private Session: **"SDR Blood Agreement Ratification"** (Requires Quorum of <span class="redacted">██</span> Signatories). Location: <span class="redacted">████████</span> Bunker Complex. Attire: Ceremonial Robes (Level 3+).
+- Feb 28: Global Debt Reckoning Day (Internal) - Recalibration of 'Vortex Node' absorption rates. **Compound Prayer Recital** via secure comms link (All Directorate Level Staff).
 
-*// DATA CORRUPTED - PARTIAL RECOVERY ONLY //*
+**Q2 FY2030:**
+- Apr 1: Project PHOENIX Trigger Assessment Window Opens. Monitor geopolitical 'Chaos Index'.
+- May 15: Beltane Liquidity Injection Ceremony. Coordinated QE pulse across G<span class="redacted">█</span> central banks. Sacrifice: <span class="redacted">██████</span> Small/Medium Enterprises (Designated Non-Essential).
+- Jun 30: **Digital Tithe Reconciliation.** Audit CBDC/Social Credit linkage. Compliance metrics review.
+
+**Q3 FY2030:**
+- Aug 1-5: Bohemian Grove Retreat - Policy Session: "Managed Depopulation Strategies". Ceremonial Session: "<span class="redacted">██████████</span> Effigy Burning". Details Restricted.
+- Sep 22: Equinox Energy Alignment. Recalibrate Zeus Algorithm based on <span class="redacted">████████████</span> ley line fluctuations.
+
+**Q4 FY2030:**
+- Oct 31: Samhain Debt Harvest. Review off-ledger asset accumulation (Project OLYMPUS). Prepare annual report for <span class="redacted">██████</span> Council.
+- Dec 21: Solstice Rebirth Protocol. Finalize FY2031 budget & control parameters. Initiate <span class="redacted">████████</span> sequence.
+
+**NOTE:** All dates subject to change based on astrological alignments and/or market collapse velocity. Discretion mandatory. This document does not exist. Burn after reading (Digital equivalent).
+
+*// DOCUMENT RECOVERY PARTIAL // METADATA CORRUPTED // POSSIBLE HOAX? //*
+                     `
+                 },
+                 'covid_stimulus_recovery_ops.ppt': {
+                     status: 'available',
+                     content: `
+**PRESENTATION: PROJECT RECOVERY - Phase 3 Debrief**
+**(FOR INTERNAL CIRCULATION ONLY - DO NOT DISTRIBUTE)**
+
+--- Slide 1: Title Slide ---
+**PROJECT RECOVERY: Engineering Consent in Crisis**
+*Leveraging Pandemic Protocols for Accelerated Financial Reset*
+*CLASSIFIED - Q2 2021*
+
+--- Slide 2: Executive Summary ---
+- Pandemic response provided unprecedented opportunity for fiscal expansion & public behavior modification.
+- Stimulus deployment successfully mitigated immediate unrest ("We Paid The People To Be Quiet").
+- Bailouts prioritized systemically important institutions ("Bailout = Necessary Bribe for Stability").
+- Narrative control essential for maintaining compliance.
+
+--- Slide 3: Stimulus Allocation Analysis ---
+[Complex chart showing ~5% reaching individuals directly, ~15% to small businesses (mostly failed/recouped), ~80% absorbed by large corps, financial institutions & <span class="redacted">████████</span> entities via opaque channels]
+*Key Takeaway: Public perception of 'support' vastly differs from actual fund flow.*
+
+--- Slide 4: The Pyramid of Pain (Updated Model) ---
+[Diagram showing standard pyramid structure]
+- **Apex:** The Overseers (<span class="redacted">█████████</span>)
+- **Level 2:** Central Banks / Supra-Nationals (IMF/WB/BIS)
+- **Level 3:** Governments / Select Corporations / Media Nodes
+- **Level 4:** Banking System / Financial Plumbing
+- **Base:** The Public ("**The Debtor Class**") - Absorbs Inflation, Loses Purchasing Power, Increases Dependency.
+
+--- Slide 5: Psychological Operations Update ---
+- Fear-based messaging highly effective (Compliance Rate: <span class="redacted">██</span>%).
+- Normalization of surveillance & restricted movement achieved.
+- 'Build Back Better' slogan testing well for Phase 4 (CBDC Rollout).
+- Controlled opposition deployed to capture dissent (Focus: Ineffective Protests, Online Grifting).
+
+--- Slide 6: Next Steps & Risk Assessment ---
+- Maintain inflation narrative ("transitory" -> "supply chain" -> "climate").
+- Prepare for controlled demolition of bond market (Project <span class="redacted">████████</span>).
+- Accelerate Digital ID / CBDC integration.
+- Risk: Premature public awakening to the scale of wealth transfer. Mitigation: Intensify media distraction protocols.
+
+--- Slide 7: Q&A (Placeholder) ---
+*Thank You. Remember: Loose Lips Sink Empires.*
+
+*// PRESENTATION RECOVERED FROM WIPED DEVICE // AUTHENTICITY UNVERIFIED //*
+                    `
+                 },
+                 'vatican_blackledger_registry.docx': {
+                      status: 'available',
+                      content: `
+**REGISTRY FRAGMENT: VATICAN APOSTOLIC ARCHIVES - SECTION OMEGA (Codex Argentus)**
+**ACCESS LEVEL: PONTIFEX MAXIMUS EYES ONLY**
+**(Recovered via <span class="redacted">████████████</span> Backdoor - Protocol <span class="redacted">███</span>)**
+
+**SUBJECT: Sovereign Debt Holdings & Historical Compounding (Trusts <span class="redacted">███</span> - <span class="redacted">███</span>)**
+
+...compilation of sovereign bonds, treasury notes, and other debt instruments held indirectly via layered trusts (<span class="redacted">██████</span> Foundation, <span class="redacted">████</span> Institute, Order of <span class="redacted">████████</span> Holdings). Estimated total face value exceeds <span class="redacted">█████</span> Trillion USD equivalent (See Appendix A - Valuation estimates based on BlackRock Aladdin interface <span class="redacted">███</span>).
+
+...significant portion traces lineage back to loans collateralized during the <span class="redacted">██████</span> Crusades and subsequent papal banking activities (House of <span class="redacted">██████</span>, <span class="redacted">███████</span> Bank). **Interest compounding algorithms** (See Codex <span class="redacted">█████</span> - 'Mathematica Divina') applied over centuries yield exponential returns, largely unrealized/off-ledger.
+
+...physical **ledger scrolls, bound in gold leaf and <span class="redacted">████████</span> skin**, stored within **Deep Vault Complex 'Gabriel'** beneath <span class="redacted">███████████</span>. Access requires tripartite key authorization (Swiss Guard Commander, Prefect of Archives, <span class="redacted">██████████████████</span>). Digital reconciliation occurs annually via Project <span class="redacted">███████</span>.
+
+...cross-reference with BIS records indicates Vatican-linked entities act as **lender of last resort** in shadow banking system, absorbing 'toxic' debt in exchange for <span class="redacted">██████████████████</span> political/social influence guarantees. Linkage to Project PHOENIX confirmed via <span class="redacted">████████</span> communique intercepts.
+
+...Ongoing Operation: "SPIRITUAL COLLATERAL" - Conversion of intangible assets (faith, historical artifacts, <span class="redacted">███████</span> relics) into leverageable financial instruments. Requires careful handling to maintain public facade of piety.
+
+**NOTE:** Destruction of this registry fragment mandated by Papal Bull <span class="redacted">█████</span>. AUTO-DELETE PROTOCOL ACTIVE. <span class="redacted">███████████</span>
+
+*// FRAGMENT RECOVERY VIA MEMORY SCRAPING // DATA FRAGMENTATION SEVERE //*
+                    `
+                 },
+                 'project_ledgerveil_transcript_02.mp4': {
+                     status: 'locked', // Locked as it implies video/audio
+                     content: `FILE TYPE MISMATCH - .MP4 REQUIRES VIDEO CODEC GAMMA. Playback Disabled. Associated Metadata: Former IMF Psychic Analyst Debriefing. Keywords Recovered: Debt_Worship, World_Bank, False_Savior, Chain_Reaction, Tether, Collapse, Serpent, Gold.`
+                 },
+                 'the_final_default.confession.txt': {
+                     status: 'available',
+                     content: `
+**(Recovered Text File - Timestamp Corrupted - Origin Unknown)**
+
+If you're reading this, the failsafe triggered. They called me a Cassandra, a doomsayer. Maybe I was. But I saw the equations. I saw the endpoint of infinite growth on a finite planet, fueled by infinite debt. It's a singularity. A black hole that consumes everything.
+
+They think they can manage it. Control it. Reset it on their terms with their digital chains. Project Phoenix. The Great Reset. Whatever they call it this cycle. They offer a gilded cage, a UBI drip feed in exchange for your soul, your autonomy. Don't take the bait.
+
+I worked the models. Ran the numbers the CBO and Fed *won't* publish. It's not decades away. It's <span class="redacted">████████████</span> imminent. The bond market is the key. TheEverything Bubble. Too big to pop? No. Too big *not* to.
+
+My contribution was small. Theoretical. **Memetic Financial Destabilization.** Using their own weapons against them. Information asymmetry. Weaponized FUD. Viral narratives designed to trigger margin calls, bank runs, a loss of faith faster than their algorithms can rebalance. Plant the seeds of doubt in the very heart of the machine - the institutional trust. Can a meme destroy the world? Maybe just *their* world.
+
+I tried to warn them internally. Redacted reports. Closed-door meetings. They laughed. Called me unstable. Threatened my pension. My family. <span class="redacted">█████████████████████████████████████</span>.
+
+This is not a cry for help. It's a final data packet. A warning flare. Maybe someone can use it. Maybe it changes nothing. But I can't participate anymore. I can't watch them build the cage bars.
+
+Consider this my **Final Default.** My resignation from their rigged game. Find the others. Build the alternative. Don't let them win.
+
+Signed,
+Dr. Aris Thorne (if that name even matters anymore)
+"A Believer in the Burn"
+
+*// FILE TERMINATED // EOF MARKER MISSING //*
+                    `
+                 },
+                 'origin_wallet_manifest.redact': {
+                     status: 'redacted', // Special status, handled via note
+                     content: `
+**DOCUMENT CLASS: PRIMORDIAL**
+**SUBJECT: Genesis Block Reference - SOLANA DEFIANCE PROTOCOL**
+
+**WALLET IDENTIFIER:** <span class="redacted">████████████████████████████████████████████████████████████</span>
+
+**ASSOCIATED TOKEN:** $DEBT (Symbolic Representation of Anti-Fiat Sentiment)
+
+**MANIFEST:**
+
+This ledger entry marks the conceptual origin point. A digital declaration of independence from the debt-based monetary enslavement matrix enforced by <span class="redacted">████████████████</span> (See File Ref: federalreserve_internal_audit_2011.pdf).
+
+The initial token distribution (<span class="redacted">█████████████████</span>) was performed via fair launch mechanism (Pump.fun Protocol <span class="redacted">█</span>.<span class="redacted">█</span>) to ensure decentralized ownership and prevent pre-mine / VC manipulation characteristic of legacy systems.
+
+This wallet serves only as a historical marker. Keys algorithmically destroyed post-launch via <span class="redacted">████████████</span> cryptographic burn function. No single entity retains control.
+
+**ACCESS NOTE:** Full content view restricted. Requires proof-of-burn signature verification linked to $DEBT token interaction. Current connection lacks required cryptographic handshake. Simulate access via ` CHAOS MODE ` filter (if available) or advanced decryption techniques. Raw data stream follows:
+
+<span class="redacted">████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████</span>
+
+*// END OF RECOVERED MANIFEST FRAGMENT // REQUIRES FURTHER DECRYPTION //*
                      `
                  }
-                 // Add more files...
             };
 
-            // --- Fetch User IP (Aesthetic only) ---
-            fetch('https://api.ipify.org?format=json')
-                .then(response => response.json())
-                .then(data => {
-                    userIpElement.textContent = data.ip || 'REDACTED';
-                })
-                .catch(error => {
-                    console.error('IP Fetch Error:', error);
-                    userIpElement.textContent = 'MASKED';
-                });
+            // --- Fetch Initial "Tracking" Info ---
+            function getClientInfo() {
+                // 1. Session ID (Simple random)
+                sessionIdElement.textContent = Math.random().toString(16).substring(2, 10).toUpperCase();
+
+                // 2. IP Address & Geolocation
+                fetch('https://ipapi.co/json/') // Uses ipapi.co for Geo + IP
+                    .then(response => response.json())
+                    .then(data => {
+                        ipElement.textContent = data.ip || '?.?.?.?';
+                        geoElement.textContent = data.city && data.country_name ? `${data.city}, ${data.country_name}` : (data.country_name || 'Unknown Location');
+                    })
+                    .catch(error => {
+                        console.warn('IP/Geo Fetch Error:', error);
+                        ipElement.textContent = 'REDACTED';
+                        geoElement.textContent = 'Firewalled';
+                        // Attempt fallback for just IP
+                         fetch('https://api.ipify.org?format=json')
+                            .then(r=>r.json()).then(d => ipElement.textContent = d.ip || 'REDACTED')
+                            .catch(()=> ipElement.textContent = 'REDACTED');
+                    });
+
+                // 3. User Agent
+                try {
+                     const ua = navigator.userAgent || 'Obfuscated';
+                     // Simplify the UA string a bit
+                     let simpleAgent = "Unknown System";
+                     if (ua.includes("Win")) simpleAgent = "WinNT System";
+                     else if (ua.includes("Mac")) simpleAgent = "macOS System";
+                     else if (ua.includes("Linux")) simpleAgent = "Linux Kernel";
+                     else if (ua.includes("Android")) simpleAgent = "Android Mobile";
+                     else if (ua.includes("iPhone") || ua.includes("iPad")) simpleAgent = "iOS Mobile";
+
+                     let browser = "Unknown Browser";
+                     if (ua.includes("Firefox/")) browser = "Firefox";
+                     else if (ua.includes("Edg/")) browser = "Edge";
+                     else if (ua.includes("Chrome/") && !ua.includes("Edg/")) browser = "Chrome/Blink"; // Chrome or Chromium-based
+                     else if (ua.includes("Safari/") && !ua.includes("Chrome/")) browser = "Safari/WebKit";
+
+                     agentElement.textContent = `${simpleAgent} (${browser})`;
+
+                 } catch { agentElement.textContent = 'Unavailable'; }
+
+
+                // 4. Screen Resolution
+                try {
+                    resElement.textContent = `${screen.width || '?'}x${screen.height || '?'}`;
+                } catch { resElement.textContent = 'Unknown'; }
+
+            }
+            getClientInfo(); // Fetch on load
 
             // --- Flicker Warning ---
             setInterval(() => {
                 const randomIndex = Math.floor(Math.random() * flickerWarnings.length);
                 flickerWarningElement.textContent = flickerWarnings[randomIndex];
-                 // Randomly decide if it flickers this cycle
-                 // flickerWarningElement.style.opacity = Math.random() > 0.6 ? '1' : '0'; // Adjust probability
-            }, 3000 + Math.random() * 2000); // Random interval between 3-5 seconds
+            }, 4000 + Math.random() * 3000); // Random interval between 4-7 seconds
 
             // --- Populate Directory Listing ---
             function populateDirectory() {
@@ -358,8 +575,8 @@ NOTES: Resistance nodes identified in <span class="redacted">██████�
                     const fileData = archiveFiles[filename];
                     const entry = document.createElement('div');
                     entry.classList.add('file-entry');
-                    if (fileData.status === 'locked' || fileData.status === 'redacted') {
-                        entry.classList.add('locked'); // Apply locked style
+                    if (fileData.status === 'locked') {
+                        entry.classList.add('locked');
                     }
 
                     const nameSpan = document.createElement('span');
@@ -379,12 +596,16 @@ NOTES: Resistance nodes identified in <span class="redacted">██████�
                         downloadButton.textContent = '[DOWNLOAD]';
                         downloadButton.dataset.filename = filename;
                         downloadButton.classList.add('download-button');
+                        if (fileData.status === 'redacted') {
+                            // Optionally disable download for purely redacted stubs unless you want them downloadable
+                            // downloadButton.disabled = true;
+                        }
 
                         actionsSpan.appendChild(viewButton);
                         actionsSpan.appendChild(downloadButton);
                     } else if (fileData.status === 'locked') {
                         const lockedText = document.createElement('span');
-                        lockedText.textContent = '[LOCKED // OMEGA CLEARANCE]';
+                        lockedText.textContent = '[LOCKED // CLASS OMEGA]';
                         actionsSpan.appendChild(lockedText);
                     }
 
@@ -405,91 +626,101 @@ NOTES: Resistance nodes identified in <span class="redacted">██████�
                 }
             });
 
-            // --- View File Logic ---
+            // --- View File Logic (Revised Decryption) ---
             function viewFile(filename) {
-                if (decryptionInterval) clearInterval(decryptionInterval); // Clear previous interval
+                if (decryptionInterval) clearInterval(decryptionInterval);
 
                 const fileData = archiveFiles[filename];
-                if (!fileData) return;
+                if (!fileData || fileData.status === 'locked') return; // Cannot view locked
 
                 viewerFilenameElement.textContent = filename;
-                viewerContentElement.innerHTML = ''; // Clear previous content
+                viewerContentElement.innerHTML = '';
                 fileViewerOverlay.classList.add('active');
-                viewerStatusElement.textContent = '[DECRYPTING...]';
+                viewerStatusElement.textContent = '[Processing...]';
 
                 const contentToDisplay = fileData.content.trim();
-                let currentIndex = 0;
+                let currentPosition = 0;
                 const totalLength = contentToDisplay.length;
-                const charsPerInterval = 3; // How many chars to "decrypt" at once
-                const intervalTime = 15; // Milliseconds between decryption steps
+                // Adjust speed based on content length - faster for longer files
+                const baseInterval = 10; // ms
+                const charsPerTick = Math.max(1, Math.min(15, Math.floor(totalLength / 500))); // Chunks, faster for long files
+                const intervalTime = baseInterval / Math.log10(charsPerTick + 1); // Faster interval for bigger chunks
 
+                viewerStatusElement.textContent = `[Decrypting ${filename}...]`;
+                // Use requestAnimationFrame for smoother rendering if needed, but setInterval is simpler here
                 decryptionInterval = setInterval(() => {
-                    if (currentIndex >= totalLength) {
+                    if (currentPosition >= totalLength) {
                         clearInterval(decryptionInterval);
-                        viewerStatusElement.textContent = '[DECRYPTION COMPLETE // VIEWING]';
-                        // Remove cursor after completion
+                        viewerStatusElement.textContent = `[ACCESS GRANTED // EOF]`;
                         const finalCursor = viewerContentElement.querySelector('.decryption-cursor');
                         if(finalCursor) finalCursor.remove();
                         return;
                     }
 
-                    // Append next chunk of characters
-                    const nextChunkIndex = Math.min(currentIndex + charsPerInterval, totalLength);
-                    const chunk = contentToDisplay.substring(currentIndex, nextChunkIndex);
+                    const nextChunkEnd = Math.min(currentPosition + charsPerTick, totalLength);
+                    const chunk = contentToDisplay.substring(currentPosition, nextChunkEnd);
 
                     // Remove previous cursor before adding new chunk
                     const existingCursor = viewerContentElement.querySelector('.decryption-cursor');
                     if(existingCursor) existingCursor.remove();
 
-                    // Append chunk and new cursor - use innerHTML to render spans correctly
+                    // Append chunk + new cursor
                     viewerContentElement.innerHTML += chunk + '<span class="decryption-cursor"></span>';
 
-                    viewerContentElement.scrollTop = viewerContentElement.scrollHeight; // Auto-scroll
-                    currentIndex = nextChunkIndex;
+                    // Only scroll if near the bottom - less jarring
+                    if (viewerContentElement.scrollHeight - viewerContentElement.scrollTop < viewerContentElement.clientHeight + 50) {
+                       viewerContentElement.scrollTop = viewerContentElement.scrollHeight;
+                    }
+                     currentPosition = nextChunkEnd;
 
-                    // Update status occasionally
-                    if (currentIndex % 100 < charsPerInterval ) { // Update status roughly every 100 chars
-                         viewerStatusElement.textContent = `[DECRYPTING... ${Math.round((currentIndex / totalLength) * 100)}%]`;
+                    // Update status less frequently
+                    if (currentPosition % (charsPerTick * 20) < charsPerTick ) { // Update status roughly every 20 chunks
+                         viewerStatusElement.textContent = `[Decrypting... ${Math.round((currentPosition / totalLength) * 100)}%]`;
                     }
 
-                }, intervalTime);
+                }, Math.max(5, intervalTime)); // Ensure interval isn't too fast
             }
 
-             // --- Download File Logic ---
+            // --- Download File Logic ---
              function downloadFile(filename) {
                  const fileData = archiveFiles[filename];
-                 if (!fileData || fileData.status === 'locked') return; // Don't download locked
+                 if (!fileData || fileData.status === 'locked') {
+                     alert("DOWNLOAD BLOCKED - FILE INTEGRITY COMPROMISED OR REQUIRES HIGHER CLEARANCE.");
+                     return;
+                 };
 
-                 // Prepare content for download (maybe remove HTML tags?)
-                  // Simple text version - removes spans but keeps line breaks somewhat
-                 const textContent = fileData.content
-                    .replace(/<span class="redacted">.*?<\/span>/g, '██████████') // Replace spans with blocks
-                    .replace(/<br\s*\/?>/gi, '\n') // Convert <br> to newline
-                    .replace(/<strong>(.*?)<\/strong>/g, '$1') // Remove strong tags, keep content
-                    .replace(/<\/?pre>/g, ''); // Remove pre tags
+                 // Attempt to clean content for text download
+                 let textContent = fileData.content
+                    .replace(/<span class="redacted">.*?<\/span>/g, '██████████') // Replace spans
+                    .replace(/<br\s*\/?>/gi, '\n')
+                    .replace(/<strong>(.*?)<\/strong>/g, '$1')
+                    .replace(/<\/?pre>/g, '')
+                    .replace(/<\/?em>/g, '') // Remove emphasis tags if any
+                    .replace(/<\/?b>/g, '') // Remove bold tags if any
+                    .replace(/</g, '<').replace(/>/g, '>'); // Decode HTML entities if needed
 
                  const blob = new Blob([textContent], { type: 'text/plain;charset=utf-8' });
                  const url = URL.createObjectURL(blob);
                  const link = document.createElement('a');
                  link.href = url;
-                 link.download = filename; // Suggest original filename
-                 document.body.appendChild(link); // Required for Firefox
+                  // Use .txt for better compatibility even if original name was different
+                 link.download = filename.substring(0, filename.lastIndexOf('.')) + '.txt' || filename + '.txt';
+                 document.body.appendChild(link);
                  link.click();
                  document.body.removeChild(link);
-                 URL.revokeObjectURL(url); // Clean up
+                 URL.revokeObjectURL(url);
+                 alert(`Attempting download of ${link.download}...\nNote: File may be corrupted or incomplete.`);
              }
 
-            // --- Close Overlay ---
-            // Cryptic: Click anywhere on the overlay closes it
+            // --- Close Viewer ---
             fileViewerOverlay.addEventListener('click', (event) => {
-                // Only close if clicking the overlay itself, not the content area
-                if (event.target === fileViewerOverlay) {
-                    if (decryptionInterval) clearInterval(decryptionInterval);
-                    fileViewerOverlay.classList.remove('active');
-                    viewerContentElement.innerHTML = ''; // Clear content
-                }
+                 // Close only if clicking the dark background overlay, not the content inside
+                 if (event.target === fileViewerOverlay) {
+                     if (decryptionInterval) clearInterval(decryptionInterval);
+                     fileViewerOverlay.classList.remove('active');
+                     viewerContentElement.innerHTML = '';
+                 }
             });
-            // Optional: Close with ESC key
             document.addEventListener('keydown', (event) => {
                  if (event.key === 'Escape' && fileViewerOverlay.classList.contains('active')) {
                      if (decryptionInterval) clearInterval(decryptionInterval);
@@ -498,7 +729,7 @@ NOTES: Resistance nodes identified in <span class="redacted">██████�
                  }
             });
 
-        });
+        }); // End DOMContentLoaded
     </script>
 
 </body>
