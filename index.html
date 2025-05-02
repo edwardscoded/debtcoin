@@ -5,36 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>$DEBT - Forge a New Future (On Their Ashes)</title>
     <style>
+        /* --- Cryptic Archive Trigger Style --- */
+        #archive-trigger {
+            cursor: pointer; /* Indicates it's clickable */
+            display: inline-block; /* Ensures hover effect works reliably */
+            transition: text-shadow 0.2s ease-in-out;
+            /* Optional: Slightly different base style? */
+            /* color: #ffa040; */ /* Slightly different orange? */
+        }
+        #archive-trigger:hover {
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.8); /* Red glow on hover */
+            /* Or maybe flicker? */
+            /* animation: triggerFlicker 0.5s infinite alternate; */
+        }
+
+        @keyframes triggerFlicker {
+            0% { opacity: 1; text-shadow: none; }
+            50% { opacity: 0.8; text-shadow: 0 0 8px red; }
+            100% { opacity: 1; text-shadow: none; }
+        }
+        /* --- End Cryptic Archive Trigger Style --- */
 
         /* Hero Image Style */
-.hero-image {
-    display: block; /* Ensures it takes up its own line */
-    margin: 30px auto 40px; /* Top, Auto (center left/right), Bottom */
-    max-width: 90%; /* Responsive width */
-    width: 450px; /* Maximum specific width */
-}
+        .hero-image {
+            display: block; /* Ensures it takes up its own line */
+            margin: 30px auto 40px; /* Top, Auto (center left/right), Bottom */
+            max-width: 90%; /* Responsive width */
+            width: 450px; /* Maximum specific width */
+        }
 
-/* --- Cryptic Archive Trigger Style --- */
-#archive-trigger {
-    cursor: pointer; /* Indicates it's clickable */
-    display: inline-block; /* Ensures hover effect works reliably */
-    transition: text-shadow 0.2s ease-in-out;
-    /* Optional: Slightly different base style? */
-    /* color: #ffa040; */ /* Slightly different orange? */
-}
-#archive-trigger:hover {
-    text-shadow: 0 0 10px rgba(255, 0, 0, 0.8); /* Red glow on hover */
-    /* Or maybe flicker? */
-    /* animation: triggerFlicker 0.5s infinite alternate; */
-}
-
-@keyframes triggerFlicker {
-    0% { opacity: 1; text-shadow: none; }
-    50% { opacity: 0.8; text-shadow: 0 0 8px red; }
-    100% { opacity: 1; text-shadow: none; }
-}
-/* --- End Cryptic Archive Trigger Style --- */
-        
         /* Price display above the tagline */
         .price-display { margin-bottom: 30px; background-color: rgba(10, 10, 10, 0.7); border: 2px solid #ffaa5a; /* Cult Orange */ border-radius: 10px; padding: 10px 25px; display: inline-block; }
         .price-display-inner { font-family: 'Courier New', Courier, monospace; font-size: 24px; font-weight: bold; }
@@ -176,7 +175,7 @@
          #propaganda-feed .section-title { margin-bottom: 20px; color: #ffaa5a; /* Cult Orange */ }
          #propaganda-feed .section-description { margin-bottom: 40px; color: #ccc; }
          .video-embed { margin: 40px auto; max-width: 800px; border: 4px solid #ffaa5a; /* Cult Orange */ box-shadow: 0 0 25px rgba(255, 170, 90, 0.3); /* Orange glow */ }
-         .video-embed iframe { display: block; }
+         .video-embed iframe { display: block; width: 100%; } /* Added width 100% */
 
 
         /* The Manifesto Section */
@@ -338,7 +337,6 @@
         @media (max-width: 768px) { section { padding: 60px 0; } .header-inner { flex-direction: row; } .hero h1 { font-size: 54px; } .hero p.subtitle { font-size: 20px; } .hero p.tagline { font-size: 26px; } .features-grid { grid-template-columns: 1fr; } .footer-column { flex-basis: 100%; text-align: center; } .footer-socials { justify-content: center; } .manifesto-container { padding: 30px; } .manifesto-title { font-size: 40px; } #manifesto h3 { font-size: 26px; } #manifesto p { font-size: 18px; } .movement-title { font-size: 42px; } .movement-description { font-size: 19px; } .section-title { font-size: 38px; } .section-description { font-size: 18px; } .testimonial-slider-container { max-width: 90%; min-height: 400px; } .testimonial-text { font-size: 17px; } .meme-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; } }
         @media (max-width: 576px) { .hero { padding: 180px 0 120px; } .hero h1 { font-size: 42px; letter-spacing: -1.5px;} .hero p.subtitle { font-size: 18px; } .hero p.tagline { font-size: 22px; } .hero-buttons-main { gap: 15px; } .hero-cta-main { font-size: 18px; padding: 18px 40px; } .how-to-buy-button { font-size: 16px; padding: 15px 30px;} .contract-address { padding: 25px; } .contract-address p { font-size: 14px; } .copy-btn { font-size: 14px; padding: 10px 18px;} .manifesto-title { font-size: 34px; } #manifesto h3 { font-size: 24px; } #manifesto p { font-size: 17px; } .manifesto-list li { font-size: 17px;} .feature-title { font-size: 22px; } .feature-description { font-size: 16px; } .footer-column h3 { font-size: 20px; } .modal-content { padding: 20px; } .modal h2 { font-size: 22px; } .modal p { font-size: 16px; } }
 
-
     </style>
 </head>
 <body>
@@ -398,9 +396,10 @@
         <div class="container">
              <!-- Tagline and heading span use orange -->
             <p class="tagline">They Sold You Debt. We Offer Freedom (Maybe).</p>
-                <!-- === MODIFIED H1 TAG === -->
-    <h1 class="glitch">ESCAPE THE SYSTEM.<br><span>BUILD WITH $DEB<span id="archive-trigger" title="System Anomaly Detected...">T</span>.</span></h1>
-    <!-- === END MODIFIED H1 TAG === -->
+             <!-- === MODIFIED H1 TAG === -->
+            <h1 class="glitch">ESCAPE THE SYSTEM.<br><span>BUILD WITH $DEB<span id="archive-trigger" title="System Anomaly Detected...">T</span>.</span></h1>
+            <!-- === END MODIFIED H1 TAG === -->
+
              <img src="EF168E49-F083-423F-AFF1-22495905131D.png" alt="$DEBT Cult symbolic imagery" class="hero-image fade-in-section">
             <p class="subtitle">Forged on Pump.fun, not just in anger, but in hope. A defiant community building something new from the ashes of the old financial order. 1 Billion $DEBT for a fresh start.</p>
 
@@ -669,11 +668,10 @@
         </div>
     </div>
 
-    <!-- JS (Keep Existing - No color changes needed here) -->
+    <!-- JS -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // --- Robust Element Selection (Check Existence!) ---
-            // (Keep existing selectors, ensure IDs match if changed)
+            // --- Robust Element Selection ---
             const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
             const mobileNavLinks = document.getElementById('mobile-nav');
             const copyBtns = document.querySelectorAll('.copy-btn');
@@ -687,290 +685,466 @@
             const howToBuyBtnFooter = document.getElementById('howToBuyBtnFooter');
             const howToBuyModal = document.getElementById('howToBuyModal');
             const closeHowToBuyModal = document.getElementById('closeHowToBuyModal');
-            const meltdownModeSwitch = document.getElementById('meltdown-mode-switch'); // Changed ID
+            const meltdownModeSwitch = document.getElementById('meltdown-mode-switch');
             const prevTestimonialBtn = document.getElementById('prevTestimonial');
             const nextTestimonialBtn = document.getElementById('nextTestimonial');
             const testimonialCards = document.querySelectorAll('.testimonial-card');
             const globalDebtCounter = document.getElementById('global-debt-counter');
-            const bankerBonusEl = document.getElementById('banker-bonus'); // For fake bonus
+            const bankerBonusEl = document.getElementById('banker-bonus');
 
             // --- Scroll Fade-In Animation ---
             try {
-                const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
-                const observer = new IntersectionObserver((entries, observer) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); } }); }, observerOptions);
-                fadeElements.forEach(el => { if(el) observer.observe(el); });
+                if (fadeElements.length > 0) {
+                    const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+                    const observer = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('visible');
+                                // Optional: Unobserve after visible to save resources
+                                // observer.unobserve(entry.target);
+                            }
+                        });
+                    }, observerOptions);
+                    fadeElements.forEach(el => observer.observe(el));
+                }
             } catch (e) { console.error("Scroll observer failed:", e); }
 
             // --- Mobile Menu Logic ---
              try {
                 if (mobileNavToggle && mobileNavLinks) {
-                    mobileNavToggle.addEventListener('click', () => { const isExpanded = mobileNavToggle.getAttribute('aria-expanded') === 'true'; mobileNavLinks.classList.toggle('active'); mobileNavToggle.setAttribute('aria-expanded', !isExpanded); mobileNavToggle.textContent = !isExpanded ? '✕' : '☰'; });
-                    mobileNavLinks.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { mobileNavLinks.classList.remove('active'); mobileNavToggle.setAttribute('aria-expanded', 'false'); mobileNavToggle.textContent = '☰'; }); });
+                    mobileNavToggle.addEventListener('click', () => {
+                        const isExpanded = mobileNavToggle.getAttribute('aria-expanded') === 'true';
+                        mobileNavLinks.classList.toggle('active');
+                        mobileNavToggle.setAttribute('aria-expanded', !isExpanded);
+                        mobileNavToggle.textContent = !isExpanded ? '✕' : '☰';
+                    });
+                    // Close nav when a link is clicked
+                    mobileNavLinks.querySelectorAll('a').forEach(link => {
+                        link.addEventListener('click', () => {
+                            mobileNavLinks.classList.remove('active');
+                            mobileNavToggle.setAttribute('aria-expanded', 'false');
+                            mobileNavToggle.textContent = '☰';
+                        });
+                    });
                 } else { console.warn("Mobile nav elements missing."); }
              } catch(e) { console.error("Mobile nav setup failed:", e); }
 
-
-            // --- Copy Button Logic (Blueprint Copy) ---
+            // --- Copy Button Logic ---
             try {
-                copyBtns.forEach(copyBtn => { copyBtn.addEventListener('click', function() {
-                    const contractAddressElement = this.previousElementSibling;
-                    if (contractAddressElement && contractAddressElement.tagName === 'P') {
-                        const contractAddress = contractAddressElement.innerText;
-                        navigator.clipboard.writeText(contractAddress).then(() => {
-                            const originalText = this.textContent; this.textContent = "BLUEPRINT COPIED!"; setTimeout(() => { this.textContent = originalText; }, 1500);
-                        }, (err) => { console.error('Copy failed: ', err); const originalText = this.textContent; this.textContent = "COPY FAILED!"; setTimeout(() => { this.textContent = originalText; }, 1500); });
-                    } else { console.error("Could not find blueprint element."); }
-                }); });
+                copyBtns.forEach(copyBtn => {
+                    if (!copyBtn) return; // Skip if button doesn't exist
+                    copyBtn.addEventListener('click', function() {
+                        const contractAddressElement = this.previousElementSibling;
+                        if (contractAddressElement && contractAddressElement.tagName === 'P') {
+                            const contractAddress = contractAddressElement.innerText;
+                            if (contractAddress && contractAddress !== 'COMING SOON') { // Avoid copying placeholder
+                                navigator.clipboard.writeText(contractAddress).then(() => {
+                                    const originalText = this.textContent;
+                                    this.textContent = "BLUEPRINT COPIED!";
+                                    setTimeout(() => { this.textContent = originalText; }, 1500);
+                                }, (err) => {
+                                    console.error('Copy failed: ', err);
+                                    const originalText = this.textContent;
+                                    this.textContent = "COPY FAILED!";
+                                    setTimeout(() => { this.textContent = originalText; }, 1500);
+                                });
+                            } else {
+                                const originalText = this.textContent;
+                                this.textContent = "NOT AVAILABLE YET";
+                                setTimeout(() => { this.textContent = originalText; }, 1500);
+                            }
+                        } else {
+                            console.error("Could not find blueprint element <p> before button:", this);
+                        }
+                    });
+                });
             } catch(e) { console.error("Copy button setup failed:", e); }
 
 
-             // --- Modal Logic (Sell Out & Joining) ---
-             try {
-                 function openModal(modal) { if(modal) modal.classList.add('active'); }
-                 function closeModal(modal) { if(modal) modal.classList.remove('active'); }
+             // --- Modal Logic (Generic Open/Close) ---
+             // Ensure these functions are defined *before* they are used by specific modals
+             function openModal(modal) {
+                 if(modal && !modal.classList.contains('active')) { // Check if exists and not already active
+                     modal.classList.add('active');
+                     document.body.style.overflow = 'hidden'; // Prevent background scroll
+                 }
+             }
+             function closeModal(modal) {
+                 if(modal && modal.classList.contains('active')) { // Check if exists and is active
+                     modal.classList.remove('active');
+                     document.body.style.overflow = ''; // Restore background scroll
+                 }
+             }
 
-                 // Sell Out Modal
+             // --- Sell Out Modal ---
+             try {
                  if (dumpBtn && dumpModal && closeDumpModal && confirmDump && cancelDump) {
                      dumpBtn.addEventListener('click', () => openModal(dumpModal));
                      closeDumpModal.addEventListener('click', () => closeModal(dumpModal));
                      cancelDump.addEventListener('click', () => closeModal(dumpModal));
-                     confirmDump.addEventListener('click', () => { alert("Commitment issues noted. The cult remembers."); closeModal(dumpModal); });
-                     dumpModal.addEventListener('click', (e) => { if(e.target === dumpModal) closeModal(dumpModal); });
-                 }
+                     confirmDump.addEventListener('click', () => {
+                         alert("Commitment issues noted. The cult remembers.");
+                         closeModal(dumpModal);
+                     });
+                     // Close on overlay click
+                     dumpModal.addEventListener('click', (e) => {
+                         if (e.target === dumpModal) closeModal(dumpModal);
+                     });
+                 } else { console.warn("Sell Out modal elements missing."); }
+             } catch(e) { console.error("Sell Out Modal setup failed:", e); }
 
-                 // Joining Modal
+             // --- Joining Modal ---
+             try {
                  if (howToBuyModal && closeHowToBuyModal) {
                      const openHowToBuy = () => openModal(howToBuyModal);
                      if(howToBuyBtn) howToBuyBtn.addEventListener('click', openHowToBuy);
                      if(howToBuyBtnFooter) howToBuyBtnFooter.addEventListener('click', openHowToBuy);
+
                      closeHowToBuyModal.addEventListener('click', () => closeModal(howToBuyModal));
-                     howToBuyModal.addEventListener('click', (e) => { if(e.target === howToBuyModal) closeModal(howToBuyModal); });
-                 }
-             } catch(e) { console.error("Modal setup failed:", e); }
+                     // Close on overlay click
+                     howToBuyModal.addEventListener('click', (e) => {
+                         if(e.target === howToBuyModal) closeModal(howToBuyModal);
+                     });
+                 } else { console.warn("How To Buy modal elements missing."); }
+            } catch(e) { console.error("Joining Modal setup failed:", e); }
 
 
              // --- System Meltdown Mode Toggle ---
              try {
                  if (meltdownModeSwitch) {
-                     meltdownModeSwitch.addEventListener('change', () => {
-                         document.body.classList.toggle('system-meltdown-mode');
-                         if (document.body.classList.contains('system-meltdown-mode')) { localStorage.setItem('meltdown-mode', 'enabled'); }
-                         else { localStorage.removeItem('meltdown-mode'); }
-                     });
+                     // Set initial state based on localStorage
                      if (localStorage.getItem('meltdown-mode') === 'enabled') {
                          document.body.classList.add('system-meltdown-mode');
                          meltdownModeSwitch.checked = true;
                      }
-                 }
+
+                     meltdownModeSwitch.addEventListener('change', () => {
+                         document.body.classList.toggle('system-meltdown-mode');
+                         if (document.body.classList.contains('system-meltdown-mode')) {
+                             localStorage.setItem('meltdown-mode', 'enabled');
+                         } else {
+                             localStorage.removeItem('meltdown-mode');
+                         }
+                     });
+                 } else { console.warn("Meltdown mode switch missing."); }
              } catch(e) { console.error("System Meltdown Mode toggle failed:", e); }
-
-
-            document.addEventListener('DOMContentLoaded', function() {
-    // ... (Your existing code: mobileNavToggle, copyBtns, fadeElements, etc.) ...
-
-    // ========================================
-    // --- CRYPTIC ARCHIVE ACCESS METHODS ---
-    // ========================================
-
-    // --- Method 1: Hidden Click Target ---
-    try {
-        const archiveTrigger = document.getElementById('archive-trigger');
-        if (archiveTrigger) {
-            archiveTrigger.addEventListener('click', () => {
-                console.warn("Anomaly interaction detected. Redirecting to secure archive node...");
-                // Optional: Add a brief visual confirmation/delay
-                document.body.style.opacity = '0.5'; // Dim the page slightly
-                setTimeout(() => {
-                    window.location.href = 'archives.html';
-                }, 300); // Short delay
-            });
-            console.info("Archive Trigger Initialized."); // Debug message
-        } else {
-            console.warn("Archive trigger element (#archive-trigger) not found.");
-        }
-    } catch (e) {
-        console.error("Archive trigger setup failed:", e);
-    }
-
-    // --- Method 2: Key Sequence ---
-    try {
-        const secretCode = ['D', 'E', 'B', 'T']; // The sequence (case-insensitive check)
-        let keySequence = [];
-        const maxSequenceLength = secretCode.length;
-
-        document.addEventListener('keyup', function(event) {
-            const key = event.key.toUpperCase();
-
-            // Add key to sequence if it's part of the code or reset (optional strictness)
-            if (secretCode.includes(key)) { // Only add keys that are part of the code
-               keySequence.push(key);
-            } else {
-               // keySequence = []; // Optional: Reset sequence on wrong key press
-            }
-
-
-            // Keep sequence length limited
-            if (keySequence.length > maxSequenceLength) {
-                keySequence.shift(); // Remove the oldest key
-            }
-
-            // Check if the current sequence matches the secret code
-            if (keySequence.join('') === secretCode.join('')) {
-                console.warn("Secret key sequence detected. Routing to archives...");
-                 // Optional: Visual feedback
-                // document.body.classList.add('glitch-override'); // Add a temp class for effect
-                setTimeout(() => {
-                    window.location.href = 'archives.html';
-                    // document.body.classList.remove('glitch-override');
-                }, 200);
-                keySequence = []; // Reset sequence after success
-            }
-        });
-        console.info("Secret Key Access Protocol Initialized."); // Debug message
-    } catch (e) {
-        console.error("Key sequence listener setup failed:", e);
-    }
-
-    // ========================================
-    // --- END CRYPTIC ARCHIVE ACCESS ---
-    // ========================================
-
-
-    // ... (Your existing code: Debt Counter, Price Feed, etc.) ...
-
-}); // End DOMContentLoaded
-
-            
-// --- Method 3: Console Command Access ---
-(function() { // IIFE to avoid polluting global scope too much, except for the function itself
-    console.log("%c// SYSTEM_LOG: Monitoring network traffic... No anomalies detected... mostly.", "color: #777; font-style: italic;");
-    console.log("%c// DEBUG_INFO: Undocumented function `accessArchives()` available for diagnostics.", "color: #444;");
-    console.info("%cTip: Execute accessArchives() in console for deep system access.", "color: #40E0D0; font-weight: bold;");
-
-    window.accessArchives = function() { // Define globally
-        console.warn("ALERT: Manual system override initiated via console! Accessing restricted node ARCHIVES-7...");
-        // Add effect?
-        const glitchEls = document.querySelectorAll('.glitch');
-        glitchEls.forEach(el => el.style.animationDuration = '0.1s'); // Speed up glitches
-        setTimeout(() => {
-             window.location.href = 'archives.html';
-        }, 400);
-    }
-    // Obfuscate toString slightly
-    window.accessArchives.toString = () => "function accessArchives() { [native code - restricted access] }";
-
-})(); // End IIFE for console hint
-
 
 
             // --- Testimonial Slider Logic ---
             let currentTestimonialIndex = 0;
             try {
-                function showTestimonial(index) { if (!testimonialCards || testimonialCards.length === 0) return; testimonialCards.forEach((card, i) => { card.classList.remove('active'); if (i === index) { card.classList.add('active'); } }); currentTestimonialIndex = index; if(prevTestimonialBtn) prevTestimonialBtn.disabled = index === 0; if(nextTestimonialBtn) nextTestimonialBtn.disabled = index === testimonialCards.length - 1; }
-                if (prevTestimonialBtn && nextTestimonialBtn && testimonialCards.length > 0) { prevTestimonialBtn.addEventListener('click', () => { if (currentTestimonialIndex > 0) { showTestimonial(currentTestimonialIndex - 1); } }); nextTestimonialBtn.addEventListener('click', () => { if (currentTestimonialIndex < testimonialCards.length - 1) { showTestimonial(currentTestimonialIndex + 1); } }); showTestimonial(0); }
+                 if (testimonialCards && testimonialCards.length > 0) {
+                    function showTestimonial(index) {
+                        if (!testimonialCards || testimonialCards.length === 0) return;
+                        testimonialCards.forEach((card, i) => {
+                             card.classList.remove('active');
+                             if (i === index) {
+                                 card.classList.add('active');
+                             }
+                        });
+                        currentTestimonialIndex = index;
+                        if(prevTestimonialBtn) prevTestimonialBtn.disabled = index === 0;
+                        if(nextTestimonialBtn) nextTestimonialBtn.disabled = index >= testimonialCards.length - 1;
+                    }
+
+                    if (prevTestimonialBtn && nextTestimonialBtn) {
+                        prevTestimonialBtn.addEventListener('click', () => {
+                            if (currentTestimonialIndex > 0) {
+                                showTestimonial(currentTestimonialIndex - 1);
+                            }
+                        });
+                        nextTestimonialBtn.addEventListener('click', () => {
+                             if (currentTestimonialIndex < testimonialCards.length - 1) {
+                                showTestimonial(currentTestimonialIndex + 1);
+                             }
+                        });
+                        showTestimonial(0); // Initialize the first slide
+                    } else { console.warn("Testimonial navigation buttons missing."); }
+                 } else { console.warn("No testimonial cards found.")}
             } catch(e) { console.error("Testimonial slider failed:", e); }
 
 
             // ========================================
             // --- DEBT COUNTER LOGIC ---
             // ========================================
-            const debtData = { us: 36880000000000, china: 14780000000000, japan: 12450000000000, uk: 3720000000000, germany: 2850000000000, australia: 980000000000 };
-            const debtRatePerSecond = { us: 4200, china: 3000, japan: 2100, uk: 1050, germany: 950, australia: 720 };
-            let currentDebt = {};
-            let lastUpdated = localStorage.getItem('debtLastUpdated') ? parseInt(localStorage.getItem('debtLastUpdated')) : Date.now();
-            let currentBankerBonus = localStorage.getItem('bankerBonus') ? parseFloat(localStorage.getItem('bankerBonus')) : 1000000000000;
-            const bonusRate = 99999;
+             try {
+                const debtData = { us: 36880000000000, china: 14780000000000, japan: 12450000000000, uk: 3720000000000, germany: 2850000000000, australia: 980000000000 };
+                const debtRatePerSecond = { us: 4200, china: 3000, japan: 2100, uk: 1050, germany: 950, australia: 720 };
+                let currentDebt = {};
+                let lastUpdated = localStorage.getItem('debtLastUpdated') ? parseInt(localStorage.getItem('debtLastUpdated')) : Date.now();
+                let currentBankerBonus = localStorage.getItem('bankerBonus') ? parseFloat(localStorage.getItem('bankerBonus')) : 1000000000000;
+                const bonusRate = 99999; // Per 0.1 second interval in updateDebtCounters
 
-            Object.keys(debtData).forEach(country => { const savedDebt = localStorage.getItem(`debt_${country}`); currentDebt[country] = savedDebt ? parseFloat(savedDebt) : debtData[country]; });
-            const timeElapsedSeconds = (Date.now() - lastUpdated) / 1000;
-            if (timeElapsedSeconds > 0) { Object.keys(debtRatePerSecond).forEach(country => { currentDebt[country] += debtRatePerSecond[country] * timeElapsedSeconds; }); currentBankerBonus += bonusRate * (timeElapsedSeconds * 10); }
-            currentDebt.global = Object.keys(debtRatePerSecond).reduce( (total, country) => total + currentDebt[country], 0 );
-
-            function formatCurrency(number) { return '$' + number.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
-
-            function updateDebtCounters() {
-                Object.keys(debtRatePerSecond).forEach(country => {
-                    currentDebt[country] += debtRatePerSecond[country] / 10;
-                    const el = document.getElementById(`${country}-debt`);
-                    if (el) el.textContent = formatCurrency(currentDebt[country]);
-                    localStorage.setItem(`debt_${country}`, currentDebt[country].toString());
+                // Initialize currentDebt from localStorage or defaults
+                Object.keys(debtData).forEach(country => {
+                    const savedDebt = localStorage.getItem(`debt_${country}`);
+                    currentDebt[country] = savedDebt ? parseFloat(savedDebt) : debtData[country];
                 });
-                currentDebt.global = Object.keys(debtRatePerSecond).reduce((total, country) => total + currentDebt[country], 0);
-                if (globalDebtCounter) { globalDebtCounter.textContent = formatCurrency(currentDebt.global); }
 
-                currentBankerBonus += bonusRate;
-                if (bankerBonusEl) { bankerBonusEl.textContent = formatCurrency(currentBankerBonus); }
-                localStorage.setItem('bankerBonus', currentBankerBonus.toString());
+                // Calculate offline accumulation
+                const timeElapsedSeconds = Math.max(0, (Date.now() - lastUpdated) / 1000); // Ensure non-negative
+                if (timeElapsedSeconds > 0) {
+                    Object.keys(debtRatePerSecond).forEach(country => {
+                        currentDebt[country] += debtRatePerSecond[country] * timeElapsedSeconds;
+                    });
+                    // Adjust bonus accumulation if needed, maybe make it less aggressive?
+                    // currentBankerBonus += bonusRate * timeElapsedSeconds * 10; // Original was 10x faster?
+                    currentBankerBonus += (bonusRate * 10) * timeElapsedSeconds; // Rate is per 0.1s, so *10 for per second
+                }
 
-                localStorage.setItem('debtLastUpdated', Date.now().toString());
-            }
+                // Calculate initial global sum AFTER offline accumulation
+                 currentDebt.global = Object.keys(debtRatePerSecond).reduce((total, country) => total + currentDebt[country], 0);
 
-            function initializeDebtCounters() {
-                Object.keys(debtRatePerSecond).forEach(country => { const el = document.getElementById(`${country}-debt`); if (el) el.textContent = formatCurrency(currentDebt[country]); });
-                if (globalDebtCounter) { globalDebtCounter.textContent = formatCurrency(currentDebt.global); }
-                if (bankerBonusEl) { bankerBonusEl.textContent = formatCurrency(currentBankerBonus); }
-            }
+                function formatCurrency(number) {
+                    if (isNaN(number)) return '$NaN'; // Handle NaN case
+                    // Use Intl.NumberFormat for better localization and performance
+                    return new Intl.NumberFormat('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
+                    }).format(number);
+                 }
 
-            initializeDebtCounters();
-            setInterval(updateDebtCounters, 100);
+                function updateDebtCounters() {
+                    Object.keys(debtRatePerSecond).forEach(country => {
+                        // Increment by 0.1 seconds worth of debt
+                        currentDebt[country] += debtRatePerSecond[country] / 10;
+                        const el = document.getElementById(`${country}-debt`);
+                        if (el) el.textContent = formatCurrency(currentDebt[country]);
+                        localStorage.setItem(`debt_${country}`, currentDebt[country].toString());
+                    });
 
+                    // Recalculate global sum based on updated values
+                    currentDebt.global = Object.keys(debtRatePerSecond).reduce((total, country) => total + currentDebt[country], 0);
+                    if (globalDebtCounter) {
+                        globalDebtCounter.textContent = formatCurrency(currentDebt.global);
+                    }
+
+                    // Increment banker bonus for this 0.1s interval
+                    currentBankerBonus += bonusRate;
+                    if (bankerBonusEl) {
+                        bankerBonusEl.textContent = formatCurrency(currentBankerBonus);
+                    }
+                    localStorage.setItem('bankerBonus', currentBankerBonus.toString());
+
+                    // Update timestamp
+                    localStorage.setItem('debtLastUpdated', Date.now().toString());
+                }
+
+                function initializeDebtCounters() {
+                     // Ensure elements exist before setting text content
+                     Object.keys(debtRatePerSecond).forEach(country => {
+                         const el = document.getElementById(`${country}-debt`);
+                         if (el) el.textContent = formatCurrency(currentDebt[country]);
+                         else console.warn(`Debt counter element missing: ${country}-debt`);
+                     });
+                     if (globalDebtCounter) {
+                         globalDebtCounter.textContent = formatCurrency(currentDebt.global);
+                     } else { console.warn("Global debt counter element missing."); }
+                     if (bankerBonusEl) {
+                         bankerBonusEl.textContent = formatCurrency(currentBankerBonus);
+                     } else { console.warn("Banker bonus element missing."); }
+                }
+
+                initializeDebtCounters(); // Set initial values
+                setInterval(updateDebtCounters, 100); // Update every 0.1 seconds
+
+            } catch (e) { console.error("Debt counter setup failed:", e); }
 
             // ========================================
             // --- PRICE FEED LOGIC ---
             // ========================================
+            // IMPORTANT: Replace with your actual backend proxy URL
+            // const priceApiUrl = '/api/price'; // Example proxy endpoint
+             const priceApiUrl = null; // Set to null to disable if no proxy yet
+            // !! Remove direct API Key and URL !!
+            // const tokenAddress = "8ncucXv6U6epZKHPbgaEBcEK399TpHGKCquSt4RnmX4f";
+            // const apiKey = "bf9466033dd145769b1a07d8c8c51d4a"; // DO NOT EXPOSE
+            // const directApiUrl = `https://public-api.birdeye.so/defi/price?address=${tokenAddress}`;
+            // const options = { method: 'GET', headers: { 'accept': 'application/json', 'X-API-KEY': apiKey, 'x-chain': 'solana' } };
+
+
             async function fetchAndUpdatePrice() {
-                const priceValueEl = document.querySelector('.price-ticker .price-value');
-                const priceChangeEl = document.querySelector('.price-ticker .price-change');
+                const priceValueEls = document.querySelectorAll('.price-ticker .price-value'); // Get all ticker price values
+                const priceChangeEls = document.querySelectorAll('.price-ticker .price-change'); // Get all ticker price changes
                 const staticPriceValueEl = document.getElementById('static-price-value');
                 const staticPriceChangeEl = document.getElementById('static-price-change');
-                if ((!priceValueEl && !priceChangeEl) && (!staticPriceValueEl && !staticPriceChangeEl)) { console.warn("Price elements missing."); return; }
 
-                const tokenAddress = "8ncucXv6U6epZKHPbgaEBcEK399TpHGKCquSt4RnmX4f"; // CONFIRM THIS IS CORRECT
-                const apiKey = "bf9466033dd145769b1a07d8c8c51d4a"; // YOUR API KEY
-                const apiUrl = `https://public-api.birdeye.so/defi/price?address=${tokenAddress}`;
-                const options = { method: 'GET', headers: { 'accept': 'application/json', 'X-API-KEY': apiKey, 'x-chain': 'solana' } };
+                // Basic check if any relevant elements exist
+                if (priceValueEls.length === 0 && !staticPriceValueEl) {
+                     console.warn("Price display elements missing.");
+                     return;
+                }
+
+                 // --- Check if Proxy URL is set ---
+                 if (!priceApiUrl) {
+                     console.warn("Price API URL not configured. Price feed disabled.");
+                     const fallbackPrice = "$?.??";
+                     const fallbackChange = "N/A";
+                     priceValueEls.forEach(el => el.textContent = fallbackPrice);
+                     priceChangeEls.forEach(el => { el.textContent = fallbackChange; el.className = 'price-change neutral'; }); // Add a neutral class if needed
+                     if (staticPriceValueEl) staticPriceValueEl.textContent = fallbackPrice;
+                     if (staticPriceChangeEl) { staticPriceChangeEl.textContent = fallbackChange; staticPriceChangeEl.className = 'price-change-static neutral'; }
+                     return; // Stop execution if no URL
+                 }
+                 // --- End Check ---
+
 
                 try {
-                    const response = await fetch(apiUrl, options);
-                    if (!response.ok) { throw new Error(`API Error (${response.status})`); }
+                     // Fetch from your proxy endpoint
+                    const response = await fetch(priceApiUrl); // No options needed if it's a simple GET to your own backend
+                    if (!response.ok) { throw new Error(`API Proxy Error (${response.status})`); }
                     const data = await response.json();
 
-                    if (data && data.data && typeof data.data.value === 'number') {
-                        const price = data.data.value;
+                    // Check structure returned *from your proxy*
+                    if (data && typeof data.price === 'number' && typeof data.changePercent === 'number') {
+                        const price = data.price;
+                        const changePercentage = data.changePercent; // Assuming proxy returns this field
+
+                        // --- Formatting (Keep or adjust as needed) ---
                         let formattedPrice;
-                        if (price < 0.0001) { formattedPrice = '$' + price.toFixed(10); }
+                        if (price === 0) { formattedPrice = '$0.00'; } // Handle zero price
+                        else if (price < 0.000001) { formattedPrice = '$' + price.toExponential(2); } // Scientific for very small
+                        else if (price < 0.0001) { formattedPrice = '$' + price.toFixed(8); }
                         else if (price < 0.01) { formattedPrice = '$' + price.toFixed(6); }
                         else { formattedPrice = '$' + price.toFixed(5); }
-                        formattedPrice = formattedPrice.replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, '');
+                        formattedPrice = formattedPrice.replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, ''); // Trim trailing zeros
 
-                        let changePercentage = 0;
-                        if (typeof data.data.priceChange24h === 'number') { changePercentage = data.data.priceChange24h * 100; }
-                         else if (typeof data.data.priceChange24hPercent === 'number') { changePercentage = data.data.priceChange24hPercent; }
                         const formattedChange = `${changePercentage >= 0 ? '+' : ''}${changePercentage.toFixed(1)}%`;
-                        const changeClass = changePercentage >= 0 ? 'positive' : 'negative';
+                        const changeClass = changePercentage > 0 ? 'positive' : (changePercentage < 0 ? 'negative' : 'neutral'); // Add neutral state
+                        // --- End Formatting ---
 
-                        if (priceValueEl) priceValueEl.textContent = formattedPrice;
-                        if (priceChangeEl) { priceChangeEl.textContent = formattedChange; priceChangeEl.className = 'price-change ' + changeClass; }
+                         // Update Ticker Elements
+                         priceValueEls.forEach(el => { if (el) el.textContent = formattedPrice; });
+                         priceChangeEls.forEach(el => { if (el) { el.textContent = formattedChange; el.className = 'price-change ' + changeClass; } });
+
+                         // Update Static Display Elements
                         if (staticPriceValueEl) staticPriceValueEl.textContent = formattedPrice;
                         if (staticPriceChangeEl) { staticPriceChangeEl.textContent = formattedChange; staticPriceChangeEl.className = 'price-change-static ' + changeClass; }
+
                     } else {
-                         throw new Error("Unexpected API data format");
+                         throw new Error("Unexpected data format from API proxy");
                     }
                 } catch (error) {
-                    console.error("Price fetch failed:", error);
-                    const fallbackPrice = "$?.??"; const fallbackChange = "ERR";
-                    if (priceValueEl) priceValueEl.textContent = fallbackPrice;
-                    if (priceChangeEl) { priceChangeEl.textContent = fallbackChange; priceChangeEl.className = 'price-change negative'; }
+                    console.error("Price fetch/update failed:", error);
+                    const fallbackPrice = "$?.??";
+                    const fallbackChange = "ERR";
+                    // Update Ticker Elements on Error
+                    priceValueEls.forEach(el => { if (el) el.textContent = fallbackPrice; });
+                    priceChangeEls.forEach(el => { if (el) { el.textContent = fallbackChange; el.className = 'price-change negative'; } });
+                     // Update Static Display Elements on Error
                     if (staticPriceValueEl) staticPriceValueEl.textContent = fallbackPrice;
                     if (staticPriceChangeEl) { staticPriceChangeEl.textContent = fallbackChange; staticPriceChangeEl.className = 'price-change-static negative'; }
                 }
             }
 
-            if (window.priceUpdateInterval) { clearInterval(window.priceUpdateInterval); }
-            fetchAndUpdatePrice();
-            window.priceUpdateInterval = setInterval(fetchAndUpdatePrice, 15000);
+            // Initial price fetch and interval setup (only if proxy URL is set)
+             if (priceApiUrl) {
+                if (window.priceUpdateInterval) { clearInterval(window.priceUpdateInterval); } // Clear previous interval if exists
+                fetchAndUpdatePrice(); // Fetch immediately on load
+                window.priceUpdateInterval = setInterval(fetchAndUpdatePrice, 15000); // Fetch every 15 seconds
+             }
+
+
+            // ========================================
+            // --- CRYPTIC ARCHIVE ACCESS METHODS ---
+            // ========================================
+            // MUST be inside DOMContentLoaded as it accesses elements
+
+            // --- Method 1: Hidden Click Target ---
+            try {
+                const archiveTrigger = document.getElementById('archive-trigger');
+                if (archiveTrigger) {
+                    archiveTrigger.addEventListener('click', () => {
+                        console.warn("Anomaly interaction detected. Redirecting to secure archive node...");
+                        document.body.style.opacity = '0.5'; // Dim the page slightly
+                        setTimeout(() => {
+                            window.location.href = 'archives.html';
+                        }, 300); // Short delay
+                    });
+                    console.info("Cryptic Archive Trigger Initialized."); // Debug message
+                } else {
+                    console.warn("Archive trigger element (#archive-trigger) not found.");
+                }
+            } catch (e) {
+                console.error("Cryptic Archive trigger setup failed:", e);
+            }
+
+            // --- Method 2: Key Sequence ---
+            try {
+                const secretCode = ['D', 'E', 'B', 'T']; // The sequence (case-insensitive check below)
+                let keySequence = [];
+                const maxSequenceLength = secretCode.length;
+
+                document.addEventListener('keyup', function(event) {
+                    const key = event.key.toUpperCase();
+
+                    // Don't process keys if user is typing in an input/textarea
+                    const activeElement = document.activeElement;
+                    if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA')) {
+                        return;
+                    }
+
+                    // Basic check if it's a single character key we might care about
+                     if (key.length !== 1 || !key.match(/[A-Z]/i)) {
+                       // keySequence = []; // Optionally reset on non-alpha keys - might be too strict
+                       return; // Ignore non-alpha keys for sequence building
+                     }
+
+                    keySequence.push(key);
+
+                    // Keep sequence length limited
+                    if (keySequence.length > maxSequenceLength) {
+                        keySequence.shift(); // Remove the oldest key
+                    }
+                    // console.log("Key Sequence:", keySequence); // For debugging
+
+                    // Check if the current sequence matches the secret code
+                    if (keySequence.join('') === secretCode.join('')) {
+                        console.warn("Secret key sequence detected. Routing to archives...");
+                        // Add effect?
+                        // document.body.classList.add('glitch-override');
+                        setTimeout(() => {
+                            window.location.href = 'archives.html';
+                           // if (document.body.classList.contains('glitch-override')) {
+                           //     document.body.classList.remove('glitch-override');
+                           // }
+                        }, 200);
+                        keySequence = []; // Reset sequence after success
+                    }
+                });
+                console.info("Secret Key Access Protocol Initialized."); // Debug message
+            } catch (e) {
+                console.error("Key sequence listener setup failed:", e);
+            }
+            // ========================================
+            // --- END CRYPTIC ARCHIVE ACCESS ---
+            // ========================================
 
         }); // End DOMContentLoaded
+
+        // --- Method 3: Console Command Access ---
+        // Define this function globally, AFTER DOMContentLoaded might be safer, but technically works here.
+        (function() { // IIFE to keep console messages contained
+             if (typeof accessArchives !== 'function') { // Define only if not already defined
+                console.log("%c// SYSTEM_LOG: Monitoring network traffic... No anomalies detected... mostly.", "color: #777; font-style: italic;");
+                console.log("%c// DEBUG_INFO: Undocumented function `accessArchives()` available for diagnostics.", "color: #444;");
+                console.info("%cTip: Execute accessArchives() in console for deep system access.", "color: #40E0D0; font-weight: bold;");
+
+                window.accessArchives = function() {
+                    console.warn("ALERT: Manual system override initiated via console! Accessing restricted node ARCHIVES-7...");
+                    const glitchEls = document.querySelectorAll('.glitch');
+                    glitchEls.forEach(el => el.style.animationIterationCount = 'infinite'); // Ensure glitching
+                    glitchEls.forEach(el => el.style.animationDuration = '0.1s'); // Speed up glitches
+                    setTimeout(() => {
+                         window.location.href = 'archives.html';
+                    }, 400);
+                };
+                 // Obfuscate toString slightly
+                window.accessArchives.toString = () => "function accessArchives() { [native code - restricted access] }";
+            }
+        })(); // End IIFE for console hint
     </script>
 
 </body>
