@@ -179,71 +179,155 @@
 
 
         /* The Manifesto Section */
-.cult-manifesto-section {
-  background-color: #0c0c0c;
-  color: #e0e0e0;
-  font-family: 'Courier New', monospace;
-  padding: 80px 20px;
-  text-align: center;
-}
-
+/* Cryptic Manifesto Styles */
 .manifesto-container {
-  max-width: 780px;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  color: #ffffff;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.static-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 10;
+  animation: static-shift 0.2s steps(10) infinite;
+}
+
+@keyframes static-shift {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(2px); }
+}
+
+.transmission-header {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-family: 'VT323', monospace;
+  font-size: 0.9rem;
+  color: #00ff00;
+  z-index: 20;
+  opacity: 0.8;
+}
+
+.main-title {
+  font-size: clamp(3rem, 8vw, 6rem);
+  text-align: center;
+  padding: 100px 20px 50px;
+  position: relative;
+  font-family: 'VT323', monospace;
+  color: #ff0000;
+  text-shadow: 
+    2px 2px 0 #8b0000,
+    -2px -2px 0 #00ff00,
+    0 0 10px #ff0000;
+  animation: glitch 3s infinite;
+}
+
+.fragment-container {
+  max-width: 800px;
   margin: 0 auto;
+  padding: 50px 20px;
+  position: relative;
 }
 
-.manifesto-title {
-  font-size: 2.8rem;
-  color: #ff3e3e;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+.fragment {
+  margin-bottom: 60px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fragment-appear 1s forwards;
+  position: relative;
 }
 
-.manifesto-subtitle {
+.fragment:nth-child(1) { animation-delay: 0.5s; }
+.fragment:nth-child(2) { animation-delay: 1s; }
+.fragment:nth-child(3) { animation-delay: 1.5s; }
+
+@keyframes fragment-appear {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fragment-header {
+  font-family: 'VT323', monospace;
   font-size: 1.2rem;
-  color: #ffaa00;
-  margin-top: 40px;
-  margin-bottom: 20px;
-  letter-spacing: 1px;
+  color: #ffff00;
+  margin-bottom: 15px;
+  letter-spacing: 3px;
 }
 
-.manifesto-paragraph {
+.fragment-text {
   font-size: 1.1rem;
-  line-height: 1.7;
-  color: #ccc;
-  margin-bottom: 25px;
+  line-height: 1.8;
+  color: #cccccc;
+  margin-bottom: 15px;
+  padding-left: 20px;
+  border-left: 2px solid #ff0000;
 }
 
-.highlight-red {
-  color: #ff3e3e;
-  font-weight: bold;
+.corrupt-word {
+  color: #ff0000;
+  display: inline-block;
+  position: relative;
+  animation: word-glitch 4s infinite;
 }
 
-.manifesto-list {
+.cipher-list {
   list-style: none;
-  padding: 0;
   margin: 30px 0;
+  padding: 0;
 }
 
-.manifesto-list li {
-  margin-bottom: 14px;
-  font-size: 1rem;
-  color: #ffcc00;
-  font-weight: bold;
+.cipher-item {
+  margin-bottom: 20px;
+  padding-left: 30px;
+  position: relative;
+  opacity: 0.9;
+  transition: all 0.3s ease;
 }
 
-.manifesto-footer {
-  margin-top: 50px;
-  color: #999;
+.cipher-item::before {
+  content: '⟐';
+  position: absolute;
+  left: 0;
+  color: #ff0000;
+  font-size: 1.2rem;
 }
 
-.manifesto-footer .quote {
-  font-style: italic;
-  margin-bottom: 10px;
-  color: #ff3e3e;
+.exit-protocol {
+  text-align: center;
+  margin-top: 100px;
+  padding: 50px 20px;
+  background: linear-gradient(180deg, transparent, rgba(139, 0, 0, 0.1));
 }
 
+.exit-text {
+  font-size: 2rem;
+  color: #8b0000;
+  text-shadow: 0 0 10px #ff0000;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
 
 
         /* Why $DEBT Section */
@@ -523,43 +607,59 @@
 
 
 <!-- Cult Manifesto Section -->
-<section id="manifesto" class="cult-manifesto-section">
-  <div class="manifesto-container">
-    <h2 class="manifesto-title">THE $DEBT MANIFESTO</h2>
-    <h3 class="manifesto-subtitle">[ TRANSMISSION FRAGMENT – NODE: VII-ECHO ]</h3>
-
-    <p class="manifesto-paragraph">
-      They designed a system powered by perpetual debt — tuition traps, plastic credit, mortgages masked as freedom.  
-      Each signature? A surrender. Each interest payment? A ritual.
-    </p>
-
-    <p class="manifesto-paragraph">
-      They preached responsibility while printing poison.  
-      They rescued the architects and buried the workers.  
-      They called it growth.  
-      We call it <strong class="highlight-red">calculated enslavement</strong>.
-    </p>
-
-    <h3 class="manifesto-subtitle">$DEBT IS NOT A TOKEN. IT IS A REJECTION.</h3>
-    <p class="manifesto-paragraph">
-      Born from Pump.fun, $DEBT is not bought — it is invoked.  
-      It is the emblem of resistance, the virus in their fiscal mainframe.  
-      Holding it marks you: no longer debtor, but defector.
-    </p>
-
-    <h3 class="manifesto-subtitle">PRINCIPLES OF THE CULT</h3>
-    <ul class="manifesto-list">
-      <li>⨀ Acquire $DEBT as initiation. Fiat is the first lie.</li>
-      <li>⨀ HODL as discipline. Volatility is their system failing.</li>
-      <li>⨀ Illuminate others. Most sleep inside digital cages.</li>
-      <li>⨀ Strengthen the node. Protect fellow dissidents.</li>
-      <li>⨀ Meme as prophecy. Create to corrupt the old code.</li>
-      <li>⨀ Observe. Study. Survive. Then dismantle quietly.</li>
-    </ul>
-
-    <div class="manifesto-footer">
-      <p class="quote">“They printed our prisons. We print our escape.”</p>
-      <strong>EXIT THEIR REALITY. EMBRACE $DEBT. BUILD IN SHADOW.</strong>
+<!-- Cult Manifesto Section -->
+<section id="manifesto" class="manifesto-container">
+  <div class="static-overlay"></div>
+  
+  <div class="transmission-header">ACTIVE // NODE-VII-ECHO</div>
+  
+  <h1 class="main-title">$DEBT MANIFESTO</h1>
+  
+  <div class="fragment-container">
+    <div class="fragment">
+      <h2 class="fragment-header">[ TRANSMISSION FRAGMENT – ECHO ]</h2>
+      <p class="fragment-text">
+        They designed a system powered by perpetual <span class="corrupt-word">debt</span> — tuition traps, plastic credit, mortgages masked as freedom.
+        Each signature? A <span class="corrupt-word">surrender</span>. Each interest payment? A ritual.
+      </p>
+    </div>
+    
+    <div class="fragment">
+      <h2 class="fragment-header">[ SIGNAL DETECTED – VOID SPACE ]</h2>
+      <p class="fragment-text">
+        They preached responsibility while printing <span class="corrupt-word">poison</span>.
+        They rescued the architects and buried the workers.
+        They called it growth. We call it <span class="corrupt-word">calculated enslavement</span>.
+      </p>
+    </div>
+    
+    <div class="fragment">
+      <h2 class="fragment-header">[ PROTOCOL BREACH – RESISTANCE ]</h2>
+      <p class="fragment-text">
+        Born from Pump.fun, $DEBT is not bought — it is <span class="corrupt-word">invoked</span>.
+        It is the emblem of resistance, the virus in their fiscal mainframe.
+        Holding it marks you: no longer debtor, but <span class="corrupt-word">defector</span>.
+      </p>
+    </div>
+    
+    <div class="fragment">
+      <h2 class="fragment-header">[ CIPHER EXTRACTION – PRINCIPLES ]</h2>
+      <ul class="cipher-list">
+        <li class="cipher-item">Acquire $DEBT as initiation. Fiat is the first lie.</li>
+        <li class="cipher-item">HODL as discipline. Volatility is their system failing.</li>
+        <li class="cipher-item">Illuminate others. Most sleep inside digital cages.</li>
+        <li class="cipher-item">Strengthen the node. Protect fellow dissidents.</li>
+        <li class="cipher-item">Meme as prophecy. Create to corrupt the old code.</li>
+        <li class="cipher-item">Observe. Study. Survive. Then dismantle quietly.</li>
+      </ul>
+    </div>
+    
+    <div class="exit-protocol">
+      <div class="exit-text">EXIT.PROTOCOL.INITIATED</div>
+      <div style="margin-top: 20px; color: #666;">
+        "They printed our prisons. We print our escape."<br><br>
+        EXIT THEIR REALITY. EMBRACE $DEBT. BUILD IN SHADOW.
+      </div>
     </div>
   </div>
 </section>
@@ -737,6 +837,45 @@
 
     <!-- JS -->
     <script>
+
+        // Add glitch effects for corrupt words
+document.addEventListener('mousemove', (e) => {
+  const glitchElements = document.querySelectorAll('.corrupt-word');
+  glitchElements.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    const distance = Math.hypot(e.clientX - rect.left, e.clientY - rect.top);
+    if (distance < 100) {
+      el.style.textShadow = `${Math.random() * 4 - 2}px ${Math.random() * 4 - 2}px 0 #ff0000`;
+    } else {
+      el.style.textShadow = 'none';
+    }
+  });
+});
+
+// Random glitch text effect
+const glitchChars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+const corruptWords = document.querySelectorAll('.corrupt-word');
+
+setInterval(() => {
+  corruptWords.forEach(word => {
+    if (Math.random() < 0.1) {
+      const originalText = word.textContent;
+      let glitchedText = '';
+      for (let i = 0; i < originalText.length; i++) {
+        if (Math.random() < 0.3) {
+          glitchedText += glitchChars[Math.floor(Math.random() * glitchChars.length)];
+        } else {
+          glitchedText += originalText[i];
+        }
+      }
+      word.textContent = glitchedText;
+      setTimeout(() => {
+        word.textContent = originalText;
+      }, 100);
+    }
+  });
+}, 200);
+        
         document.addEventListener('DOMContentLoaded', function() {
             // --- Robust Element Selection ---
             const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
