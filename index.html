@@ -184,7 +184,7 @@
   min-height: 100vh;
   position: relative;
   overflow: hidden;
-  background: #000;
+  background: radial-gradient(circle at center, #0a1a1a 0%, #000 70%);
   color: #ffffff;
   font-family: 'Share Tech Mono', monospace;
 }
@@ -197,10 +197,10 @@
   height: 100%;
   background: repeating-linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0.15),
-    rgba(0, 0, 0, 0.15) 1px,
+    rgba(0, 255, 255, 0.03),
+    rgba(0, 255, 255, 0.03) 1px,
     transparent 1px,
-    transparent 2px
+    transparent 3px
   );
   pointer-events: none;
   z-index: 10;
@@ -208,8 +208,9 @@
 }
 
 @keyframes static-shift {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(2px); }
+  0% { transform: translateX(0); opacity: 0.7; }
+  50% { transform: translateX(2px); opacity: 0.5; }
+  100% { transform: translateX(0); opacity: 0.7; }
 }
 
 .transmission-header {
@@ -218,43 +219,69 @@
   right: 20px;
   font-family: 'VT323', monospace;
   font-size: 0.9rem;
-  color: #00ff00;
+  color: #00ff88;
   z-index: 20;
   opacity: 0.8;
+  text-shadow: 0 0 5px #00ff88;
 }
 
 .main-title {
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: clamp(4rem, 10vw, 8rem);
   text-align: center;
-  padding: 100px 20px 50px;
+  padding: 120px 20px 60px;
   position: relative;
   font-family: 'VT323', monospace;
-  color: #ff0000;
+  color: #40E0D0;
   text-shadow: 
-    2px 2px 0 #8b0000,
-    -2px -2px 0 #00ff00,
-    0 0 10px #ff0000;
-  animation: glitch 3s infinite;
+    0 0 10px #40E0D0,
+    0 0 20px #40E0D0,
+    0 0 30px #008080,
+    0 0 40px #008080;
+  animation: glow 3s infinite alternate;
+  letter-spacing: 8px;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 
+      0 0 10px #40E0D0,
+      0 0 20px #40E0D0,
+      0 0 30px #008080,
+      0 0 40px #008080;
+  }
+  to {
+    text-shadow: 
+      0 0 20px #40E0D0,
+      0 0 30px #40E0D0,
+      0 0 40px #00ffff,
+      0 0 50px #00ffff,
+      0 0 60px #00ffff;
+  }
 }
 
 .fragment-container {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 50px 20px;
   position: relative;
 }
 
 .fragment {
-  margin-bottom: 60px;
+  margin-bottom: 80px;
   opacity: 0;
   transform: translateY(30px);
   animation: fragment-appear 1s forwards;
   position: relative;
+  background: rgba(0, 40, 40, 0.2);
+  border: 1px solid rgba(64, 224, 208, 0.3);
+  padding: 30px;
+  backdrop-filter: blur(5px);
 }
 
 .fragment:nth-child(1) { animation-delay: 0.5s; }
 .fragment:nth-child(2) { animation-delay: 1s; }
 .fragment:nth-child(3) { animation-delay: 1.5s; }
+.fragment:nth-child(4) { animation-delay: 2s; }
 
 @keyframes fragment-appear {
   to {
@@ -265,68 +292,123 @@
 
 .fragment-header {
   font-family: 'VT323', monospace;
-  font-size: 1.2rem;
-  color: #ffff00;
-  margin-bottom: 15px;
-  letter-spacing: 3px;
+  font-size: 1.4rem;
+  color: #00ffff;
+  margin-bottom: 20px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+  padding-bottom: 10px;
 }
 
 .fragment-text {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.8;
-  color: #cccccc;
+  color: #e0e0e0;
   margin-bottom: 15px;
   padding-left: 20px;
-  border-left: 2px solid #ff0000;
+  border-left: 3px solid #40E0D0;
 }
 
 .corrupt-word {
-  color: #ff0000;
+  color: #00ff88;
   display: inline-block;
   position: relative;
-  animation: word-glitch 4s infinite;
+  text-shadow: 0 0 5px #00ff88;
+  transition: all 0.3s ease;
+}
+
+.corrupt-word:hover {
+  color: #40E0D0;
+  text-shadow: 0 0 10px #40E0D0;
+  transform: scale(1.05);
 }
 
 .cipher-list {
   list-style: none;
   margin: 30px 0;
   padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
 }
 
 .cipher-item {
-  margin-bottom: 20px;
-  padding-left: 30px;
+  padding: 20px;
+  padding-left: 50px;
   position: relative;
-  opacity: 0.9;
+  background: rgba(0, 60, 60, 0.1);
+  border: 1px solid rgba(64, 224, 208, 0.2);
   transition: all 0.3s ease;
+  color: #e0e0e0;
+}
+
+.cipher-item:hover {
+  background: rgba(0, 100, 100, 0.2);
+  border-color: #40E0D0;
+  transform: translateX(10px);
+  box-shadow: 0 0 20px rgba(64, 224, 208, 0.2);
 }
 
 .cipher-item::before {
   content: '⟐';
   position: absolute;
-  left: 0;
-  color: #ff0000;
-  font-size: 1.2rem;
+  left: 15px;
+  color: #00ffff;
+  font-size: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .exit-protocol {
   text-align: center;
   margin-top: 100px;
   padding: 50px 20px;
-  background: linear-gradient(180deg, transparent, rgba(139, 0, 0, 0.1));
+  background: linear-gradient(180deg, transparent, rgba(0, 60, 60, 0.3));
 }
 
 .exit-text {
-  font-size: 2rem;
-  color: #8b0000;
-  text-shadow: 0 0 10px #ff0000;
+  font-size: 2.5rem;
+  color: #40E0D0;
+  text-shadow: 0 0 20px #40E0D0;
   animation: pulse 2s infinite;
+  letter-spacing: 5px;
 }
 
 @keyframes pulse {
-  0% { opacity: 0.5; }
-  50% { opacity: 1; }
-  100% { opacity: 0.5; }
+  0% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 0.6; transform: scale(1); }
+}
+
+.floating-symbol {
+  position: absolute;
+  font-size: 2rem;
+  color: rgba(0, 255, 255, 0.1);
+  pointer-events: none;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(10deg); }
+}
+
+.data-stream {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+  color: rgba(0, 255, 136, 0.3);
+  writing-mode: vertical-rl;
+  animation: data-flow 10s linear infinite;
+  font-family: monospace;
+}
+
+@keyframes data-flow {
+  0% { transform: translateY(-50%) translateX(0); }
+  100% { transform: translateY(-50%) translateX(-100px); }
 }
 
 
@@ -613,7 +695,16 @@
   
   <div class="transmission-header">ACTIVE // NODE-VII-ECHO</div>
   
-  <h1 class="main-title">$DEBT MANIFESTO</h1>
+  <div class="data-stream">
+    01000100 01000101 01000010 01010100 00100000 01010000 01010010 01001111 01010100 01001111 01000011 01001111 01001100
+  </div>
+  
+  <h1 class="main-title">$DEBT PROTOCOL</h1>
+  
+  <div class="floating-symbol" style="top: 15%; left: 10%;">⟐</div>
+  <div class="floating-symbol" style="top: 30%; right: 15%;">⌭</div>
+  <div class="floating-symbol" style="bottom: 25%; left: 20%;">◬</div>
+  <div class="floating-symbol" style="top: 60%; right: 10%;">⊗</div>
   
   <div class="fragment-container">
     <div class="fragment">
@@ -645,20 +736,20 @@
     <div class="fragment">
       <h2 class="fragment-header">[ CIPHER EXTRACTION – PRINCIPLES ]</h2>
       <ul class="cipher-list">
-        <li class="cipher-item">Acquire $DEBT as initiation. Fiat is the first lie.</li>
-        <li class="cipher-item">HODL as discipline. Volatility is their system failing.</li>
-        <li class="cipher-item">Illuminate others. Most sleep inside digital cages.</li>
-        <li class="cipher-item">Strengthen the node. Protect fellow dissidents.</li>
-        <li class="cipher-item">Meme as prophecy. Create to corrupt the old code.</li>
-        <li class="cipher-item">Observe. Study. Survive. Then dismantle quietly.</li>
+        <li class="cipher-item">⟐ Acquire $DEBT as initiation. Fiat is the first lie.</li>
+        <li class="cipher-item">⟐ HODL as discipline. Volatility is their system failing.</li>
+        <li class="cipher-item">⟐ Illuminate others. Most sleep inside digital cages.</li>
+        <li class="cipher-item">⟐ Strengthen the node. Protect fellow dissidents.</li>
+        <li class="cipher-item">⟐ Meme as prophecy. Create to corrupt the old code.</li>
+        <li class="cipher-item">⟐ Observe. Study. Survive. Then dismantle quietly.</li>
       </ul>
     </div>
     
     <div class="exit-protocol">
       <div class="exit-text">EXIT.PROTOCOL.INITIATED</div>
-      <div style="margin-top: 20px; color: #666;">
+      <div style="margin-top: 20px; color: #40E0D0; font-size: 1.2rem;">
         "They printed our prisons. We print our escape."<br><br>
-        EXIT THEIR REALITY. EMBRACE $DEBT. BUILD IN SHADOW.
+        <span style="color: #00ffff;">EXIT THEIR REALITY. EMBRACE $DEBT. BUILD IN SHADOW.</span>
       </div>
     </div>
   </div>
@@ -839,42 +930,88 @@
     <script>
 
         // Add glitch effects for corrupt words
-document.addEventListener('mousemove', (e) => {
-  const glitchElements = document.querySelectorAll('.corrupt-word');
-  glitchElements.forEach(el => {
-    const rect = el.getBoundingClientRect();
-    const distance = Math.hypot(e.clientX - rect.left, e.clientY - rect.top);
-    if (distance < 100) {
-      el.style.textShadow = `${Math.random() * 4 - 2}px ${Math.random() * 4 - 2}px 0 #ff0000`;
-    } else {
-      el.style.textShadow = 'none';
+// Add this to your existing JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+  // Matrix-style digital rain effect
+  const createDigitalRain = () => {
+    const canvas = document.createElement('canvas');
+    canvas.style.position = 'fixed';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.zIndex = '1';
+    canvas.style.pointerEvents = 'none';
+    canvas.style.opacity = '0.05';
+    document.querySelector('.manifesto-container').appendChild(canvas);
+    
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const chars = '01';
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = [];
+    
+    for (let i = 0; i < columns; i++) {
+      drops[i] = 1;
     }
-  });
-});
-
-// Random glitch text effect
-const glitchChars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
-const corruptWords = document.querySelectorAll('.corrupt-word');
-
-setInterval(() => {
-  corruptWords.forEach(word => {
-    if (Math.random() < 0.1) {
-      const originalText = word.textContent;
-      let glitchedText = '';
-      for (let i = 0; i < originalText.length; i++) {
-        if (Math.random() < 0.3) {
-          glitchedText += glitchChars[Math.floor(Math.random() * glitchChars.length)];
-        } else {
-          glitchedText += originalText[i];
+    
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#00ffff';
+      ctx.font = fontSize + 'px monospace';
+      
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
         }
+        drops[i]++;
       }
-      word.textContent = glitchedText;
-      setTimeout(() => {
-        word.textContent = originalText;
-      }, 100);
     }
-  });
-}, 200);
+    
+    setInterval(draw, 35);
+  };
+  
+  createDigitalRain();
+  
+  // Enhanced glitch effect
+  const glitchChars = '!<>-_\\/[]{}—=+*^?#________';
+  const corruptWords = document.querySelectorAll('.corrupt-word');
+  
+  setInterval(() => {
+    corruptWords.forEach(word => {
+      if (Math.random() < 0.1) {
+        const originalText = word.textContent;
+        let glitchedText = '';
+        for (let i = 0; i < originalText.length; i++) {
+          if (Math.random() < 0.3) {
+            glitchedText += glitchChars[Math.floor(Math.random() * glitchChars.length)];
+          } else {
+            glitchedText += originalText[i];
+          }
+        }
+        word.textContent = glitchedText;
+        setTimeout(() => {
+          word.textContent = originalText;
+        }, 100);
+      }
+    });
+  }, 200);
+  
+  // Floating symbols animation
+  setInterval(() => {
+    const symbols = document.querySelectorAll('.floating-symbol');
+    symbols.forEach(symbol => {
+      if (Math.random() < 0.1) {
+        symbol.style.color = `rgba(0, 255, 255, ${Math.random() * 0.3 + 0.1})`;
+      }
+    });
+  }, 1000);
+});
         
         document.addEventListener('DOMContentLoaded', function() {
             // --- Robust Element Selection ---
