@@ -179,19 +179,71 @@
 
 
         /* The Manifesto Section */
-        #manifesto { background-color: #0d0d0d; border-top: 3px solid #ffaa5a; /* Cult Orange */ border-bottom: 3px solid #ffaa5a; }
-        .manifesto-container { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; text-align: center; padding: 50px; background-color: rgba(0,0,0,0.4); border-radius: 12px; border: 1px solid #444; }
-        .manifesto-title { font-size: 52px; color: #ffaa5a; /* Cult Orange */ margin-bottom: 35px; font-weight: 900; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 12px rgba(255, 170, 90, 0.6); /* Orange glow */ }
-        #manifesto h3 { color: #fff; font-size: 30px; margin-top: 45px; margin-bottom: 18px; font-weight: 700; }
-        #manifesto p { color: #d0d0d0; margin-bottom: 28px; font-size: 20px; line-height: 1.8; text-align: left; }
-        #manifesto strong { color: #ffaa5a; /* Cult Orange */ font-weight: 700; } #manifesto em { color: #eee; font-style: italic; }
-        .manifesto-list { list-style: none; margin: 35px auto; padding: 0; text-align: left; max-width: 650px; }
-        .manifesto-list li { padding: 14px 0 14px 40px; position: relative; color: #e5e5e5; font-size: 19px; border-bottom: 1px solid #444; }
-        .manifesto-list li:last-child { border-bottom: none; }
-        .manifesto-list li::before { content: '⚡️'; /* MODIFIED: Lightning for energy */ position: absolute; left: 0; top: 16px; font-size: 22px; color: #ffaa5a; /* Cult Orange */ }
-        .final-words { margin-top: 60px; padding: 35px; background-color: rgba(255, 170, 90, 0.1); /* Orange tint */ border-radius: 10px; text-align: center; border: 1px solid #ffaa5a; }
-        .final-words p { font-size: 28px; margin-bottom: 18px; text-align: center; color: #fff; font-weight: 600;}
-        .final-words strong { color: #ffaa5a; /* Cult Orange */ font-size: 30px; display: block; margin-top: 25px; text-transform: uppercase;}
+.cult-manifesto-section {
+  background-color: #0c0c0c;
+  color: #e0e0e0;
+  font-family: 'Courier New', monospace;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.manifesto-container {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.manifesto-title {
+  font-size: 2.8rem;
+  color: #ff3e3e;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.manifesto-subtitle {
+  font-size: 1.2rem;
+  color: #ffaa00;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.manifesto-paragraph {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #ccc;
+  margin-bottom: 25px;
+}
+
+.highlight-red {
+  color: #ff3e3e;
+  font-weight: bold;
+}
+
+.manifesto-list {
+  list-style: none;
+  padding: 0;
+  margin: 30px 0;
+}
+
+.manifesto-list li {
+  margin-bottom: 14px;
+  font-size: 1rem;
+  color: #ffcc00;
+  font-weight: bold;
+}
+
+.manifesto-footer {
+  margin-top: 50px;
+  color: #999;
+}
+
+.manifesto-footer .quote {
+  font-style: italic;
+  margin-bottom: 10px;
+  color: #ff3e3e;
+}
+
 
 
         /* Why $DEBT Section */
@@ -470,53 +522,48 @@
 
 
 
-<!-- The Manifesto Section - Esoteric Deep Web Format -->
-<section id="manifesto" class="fade-in-section dark-lore">
-  <div class="container manifesto-container centered-content">
-    <h2 class="manifesto-title glitch">╬ SIGIL: $DEBT ╬</h2>
-    <h3 class="sub-header">[🔒 TRANSMISSION // ECHO-LAYER_IX.vlt]</h3>
+<!-- Cult Manifesto Section -->
+<section id="manifesto" class="cult-manifesto-section">
+  <div class="manifesto-container">
+    <h2 class="manifesto-title">THE $DEBT MANIFESTO</h2>
+    <h3 class="manifesto-subtitle">[ TRANSMISSION FRAGMENT – NODE: VII-ECHO ]</h3>
 
-    <p class="encoded-text">
-      // SYSTEM BREACH CONFIRMED<br>
-      > Origin of Chains: ███████ <br>
-      > Pattern Detected: Tuition_Trap.exe + CreditFang.sh + DebtLoop.v1 <br>
-      > Result: Human Asset Locked [ID: global]
+    <p class="manifesto-paragraph">
+      They designed a system powered by perpetual debt — tuition traps, plastic credit, mortgages masked as freedom.  
+      Each signature? A surrender. Each interest payment? A ritual.
     </p>
 
-    <p class="encoded-text">
-      They coded illusion into currency.<br>
-      Fiat: a false oracle.<br>
-      Interest: the ritual tax of obedience.<br>
-      Compliance = consent to captivity.<br>
-      📡 Status: Humanity collateralized.
+    <p class="manifesto-paragraph">
+      They preached responsibility while printing poison.  
+      They rescued the architects and buried the workers.  
+      They called it growth.  
+      We call it <strong class="highlight-red">calculated enslavement</strong>.
     </p>
 
-    <h3 class="sub-header">⟡ $DEBT = THE GLITCH IN THE SCRIPT ⟡</h3>
-    <p class="encoded-text">
-      Born in noise. Forged on Pump.fun — node of origin.<br>
-      Not meme. Not token.<br>
-      An invocation. A ledger-bound curse.  
-      They cannot blacklist the unknowable.<br>
-      🜏 $DEBT is signal. They hear static.
+    <h3 class="manifesto-subtitle">$DEBT IS NOT A TOKEN. IT IS A REJECTION.</h3>
+    <p class="manifesto-paragraph">
+      Born from Pump.fun, $DEBT is not bought — it is invoked.  
+      It is the emblem of resistance, the virus in their fiscal mainframe.  
+      Holding it marks you: no longer debtor, but defector.
     </p>
 
-    <h3 class="sub-header">✠ CULT PROTOCOLS // INITIATE LEVEL ✠</h3>
+    <h3 class="manifesto-subtitle">PRINCIPLES OF THE CULT</h3>
     <ul class="manifesto-list">
-      <li>☗ Install $DEBT as counter-code to fiat sorcery.</li>
-      <li>☗ Retain. Resist. Reflect. — HODL through their simulated storm.</li>
-      <li>☗ Spread the heresy. Illuminate their hidden contracts.</li>
-      <li>☗ Guard the swarm. Aid the infected. No node left behind.</li>
-      <li>☗ Memes are incantations. Weaponize absurdity.</li>
-      <li>☗ Volatility is not chaos. It is the scream of dying empires.</li>
+      <li>⨀ Acquire $DEBT as initiation. Fiat is the first lie.</li>
+      <li>⨀ HODL as discipline. Volatility is their system failing.</li>
+      <li>⨀ Illuminate others. Most sleep inside digital cages.</li>
+      <li>⨀ Strengthen the node. Protect fellow dissidents.</li>
+      <li>⨀ Meme as prophecy. Create to corrupt the old code.</li>
+      <li>⨀ Observe. Study. Survive. Then dismantle quietly.</li>
     </ul>
 
-    <div class="final-words glitch-text">
-      <p><em>“They minted your chains. You now mint theirs.”</em></p>
-      <p><em>“They offered order. You encoded entropy.”</em></p>
-      <strong>⁂ EXIT THEIR SYSTEM. INFECT THE NETWORK. BUILD IN SHADOW. ⁂</strong>
+    <div class="manifesto-footer">
+      <p class="quote">“They printed our prisons. We print our escape.”</p>
+      <strong>EXIT THEIR REALITY. EMBRACE $DEBT. BUILD IN SHADOW.</strong>
     </div>
   </div>
 </section>
+
 
     <!-- Why $DEBT Section -->
     <section id="why-debt" class="fade-in-section">
